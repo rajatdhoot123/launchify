@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Hero() {
   return (
     <>
-          <section className="w-full container py-12 md:py-24 mx-auto">
+      <section className="w-full container py-12 md:py-24 mx-auto">
         <div className="px-4 md:px-6">
           <div className="flex flex-col items-center space-y-4 text-center">
             <div className="space-y-2">
@@ -27,7 +27,7 @@ export default function Hero() {
                 Get Started
               </Link>
               <Link
-                className="inline-flex h-9 items-center justify-center rounded-md border border-zinc-200 border-zinc-200 bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50 dark:border-zinc-800 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:ring-zinc-300"
+                className="inline-flex h-9 items-center justify-center rounded-md border  bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50 "
                 href="#"
               >
                 Button

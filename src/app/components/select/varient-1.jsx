@@ -7,7 +7,7 @@ import {
   SelectTrigger,
 } from "@radix-ui/themes";
 
-const SelectComponent = ({ setState, item_key }) => {
+const SelectComponent = ({ setState, item_key, list }) => {
   return (
     <SelectRoot
       onValueChange={(val) =>
@@ -19,11 +19,14 @@ const SelectComponent = ({ setState, item_key }) => {
       <SelectTrigger className="w-full" />
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Select Navbar</SelectLabel>
-          <SelectItem value="varient-1">Varient 1</SelectItem>
-          <SelectItem value="varient-2">Varient 2</SelectItem>
-          <SelectItem value="varient-3">Varient 3</SelectItem>
-          <SelectItem value="varient-4">Varient 4</SelectItem>
+          <SelectLabel>
+            Select &nbsp;<span className="capitalize">{item_key}</span>
+          </SelectLabel>
+          {list.map((li, index) => (
+            <SelectItem key={li} value={li}>
+              {`Varient ${index + 1}`}
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </SelectRoot>

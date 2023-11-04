@@ -49,22 +49,22 @@ const Navbar = () => {
             <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
               <li>
                 <a className="md:p-4 py-3 px-0 block" href="#">
-                  AboutUs
+                  Link 1
                 </a>
               </li>
               <li>
                 <a className="md:p-4 py-3 px-0 block" href="#">
-                  Treatments
+                  Link 2
                 </a>
               </li>
               <li>
                 <a className="md:p-4 py-3 px-0 block" href="#">
-                  Blog
+                  Link 3
                 </a>
               </li>
               <li>
                 <a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">
-                  Contact Us
+                  Link 4
                 </a>
               </li>
             </ul>

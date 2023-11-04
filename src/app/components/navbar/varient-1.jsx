@@ -2,7 +2,7 @@ const Navbar = () => (
   <header className="lg:px-16 px-8 bg-white flex flex-wrap items-center py-4 shadow-md">
     <div className="flex-1 flex justify-between items-center">
       <a href="#" className="text-xl">
-        DentalPro
+        Logo
       </a>
     </div>
 
@@ -27,22 +27,22 @@ const Navbar = () => (
         <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
           <li>
             <a className="md:p-4 py-3 px-0 block" href="#">
-              AboutUs
+              Link1
             </a>
           </li>
           <li>
             <a className="md:p-4 py-3 px-0 block" href="#">
-              Treatments
+              Link2
             </a>
           </li>
           <li>
             <a className="md:p-4 py-3 px-0 block" href="#">
-              Blog
+              Link3
             </a>
           </li>
           <li>
             <a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">
-              Contact Us
+              Link4
             </a>
           </li>
         </ul>

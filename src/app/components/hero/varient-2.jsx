@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-        <section className="w-full container py-12 md:py-24 mx-auto">
+    <section className="w-full container py-12 md:py-24 mx-auto">
       <div className="px-4 md:px-6">
         <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
           <img
@@ -29,7 +29,7 @@ const Hero = () => {
                 Get Started
               </a>
               <a
-                className="inline-flex h-10 items-center justify-center rounded-md border border-zinc-200 border-zinc-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50 dark:border-zinc-800 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:ring-zinc-300"
+                className="inline-flex h-10 items-center justify-center rounded-md border  bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:pointer-events-none disabled:opacity-50 "
                 href="#"
               >
                 Contact Sales

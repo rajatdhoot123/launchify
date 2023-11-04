@@ -9,6 +9,7 @@ import Hero4 from "@/app/components/hero/varient-4";
 import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
+import Pricing4 from "@/app/components/pricing/varient-4";
 import Select from "@/app/components/select/varient-1";
 import { useState } from "react";
 
@@ -29,6 +30,7 @@ const PRICING = {
   "varient-1": <Pricing1 />,
   "varient-2": <Pricing2 />,
   "varient-3": <Pricing3 />,
+  "varient-4": <Pricing4 />,
 };
 
 export default function Home() {
@@ -41,9 +43,30 @@ export default function Home() {
     <>
       <div className="flex h-screen">
         <div className="w-3/12 h-full bg-white shadow-lg p-5 space-y-6">
-          <Select setState={setState} item_key="navbar" />
-          <Select setState={setState} item_key="hero" />
-          <Select setState={setState} item_key="pricing" />
+          <div className="space-y-2">
+            <div className="text-sm font-bold">Select Navbar</div>
+            <Select
+              list={Object.keys(NAVBAR)}
+              setState={setState}
+              item_key="navbar"
+            />
+          </div>
+          <div className="space-y-2">
+            <div className="text-sm font-bold">Select Hero</div>
+            <Select
+              list={Object.keys(HERO)}
+              setState={setState}
+              item_key="hero"
+            />
+          </div>
+          <div className="space-y-2">
+            <div className="text-sm font-bold">Select Pricing</div>
+            <Select
+              list={Object.keys(PRICING)}
+              setState={setState}
+              item_key="pricing"
+            />
+          </div>
         </div>
         <div className="w-full overflow-scroll">
           {NAVBAR[state.navbar]}
