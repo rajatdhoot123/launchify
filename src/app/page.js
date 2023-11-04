@@ -42,30 +42,35 @@ export default function Home() {
   return (
     <>
       <div className="flex h-screen">
-        <div className="w-3/12 h-full bg-white shadow-lg p-5 space-y-6">
-          <div className="space-y-2">
-            <div className="text-sm font-bold">Select Navbar</div>
-            <Select
-              list={Object.keys(NAVBAR)}
-              setState={setState}
-              item_key="navbar"
-            />
+        <div className="w-3/12 h-full bg-white shadow-lg p-5 space-y-6 flex flex-col justify-between">
+          <div>
+            <div className="space-y-2">
+              <div className="text-sm font-bold">Select Navbar</div>
+              <Select
+                list={Object.keys(NAVBAR)}
+                setState={setState}
+                item_key="navbar"
+              />
+            </div>
+            <div className="space-y-2">
+              <div className="text-sm font-bold">Select Hero</div>
+              <Select
+                list={Object.keys(HERO)}
+                setState={setState}
+                item_key="hero"
+              />
+            </div>
+            <div className="space-y-2">
+              <div className="text-sm font-bold">Select Pricing</div>
+              <Select
+                list={Object.keys(PRICING)}
+                setState={setState}
+                item_key="pricing"
+              />
+            </div>
           </div>
-          <div className="space-y-2">
-            <div className="text-sm font-bold">Select Hero</div>
-            <Select
-              list={Object.keys(HERO)}
-              setState={setState}
-              item_key="hero"
-            />
-          </div>
-          <div className="space-y-2">
-            <div className="text-sm font-bold">Select Pricing</div>
-            <Select
-              list={Object.keys(PRICING)}
-              setState={setState}
-              item_key="pricing"
-            />
+          <div className="text-center">
+            <button className="font-bold bg-blue-500 w-full text-white p-2 rounded-lg">Export</button>
           </div>
         </div>
         <div className="w-full overflow-scroll">
