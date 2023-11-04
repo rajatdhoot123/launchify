@@ -8,6 +8,7 @@ import Hero3 from "@/app/components/hero/varient-3";
 import Hero4 from "@/app/components/hero/varient-4";
 import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
+import Pricing3 from "@/app/components/pricing/varient-3";
 import Select from "@/app/components/select/varient-1";
 import { useState } from "react";
 
@@ -27,6 +28,7 @@ const HERO = {
 const PRICING = {
   "varient-1": <Pricing1 />,
   "varient-2": <Pricing2 />,
+  "varient-3": <Pricing3 />,
 };
 
 export default function Home() {
