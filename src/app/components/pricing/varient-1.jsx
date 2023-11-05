@@ -27,7 +27,7 @@ const Pricing = () => (
           />
           <label
             className="block peer-checked:shadow-[0_-3px_0px_0px_rgba(90,103,216,1)]"
-            for="free"
+            htmlFor="free"
           >
             <div className=" border md:border-r-0 border-solid rounded md:rounded-r-none">
               <div className=" p-4 md:py-6 border-b border-solid">
@@ -60,7 +60,7 @@ const Pricing = () => (
           />
           <label
             className="block peer-checked:shadow-[0_-3px_0px_0px_rgba(90,103,216,1)]"
-            for="starter"
+            htmlFor="starter"
           >
             <div className=" border md:border-r-0 border-solid rounded md:rounded-r-none md:rounded-tl-none relative">
               <div className=" p-4 md:py-6 border-b border-solid">
@@ -95,7 +95,7 @@ const Pricing = () => (
           />
           <label
             className="block peer-checked:shadow-[0_-3px_0px_0px_rgba(90,103,216,1)]"
-            for="pro"
+            htmlFor="pro"
           >
             <div className=" border md:border-r-0 border-solid rounded md:rounded-r-none md:rounded-tl-none">
               <div className=" p-4 md:py-6 border-b border-solid">
@@ -131,7 +131,7 @@ const Pricing = () => (
           />
           <label
             className="block peer-checked:shadow-[0_-3px_0px_0px_rgba(90,103,216,1)]"
-            for="premium"
+            htmlFor="premium"
           >
             <div className=" border border-solid rounded md:rounded-tl-none">
               <div className=" p-4 md:py-6 border-b border-solid">

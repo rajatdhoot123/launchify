@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@radix-ui/themes": "^2.0.0",
+    "adm-zip": "^0.5.10",
     "next": "14.0.1",
+    "original-fs": "^1.2.0",
     "react": "^18",
     "react-dom": "^18"
   },

@@ -11,6 +11,7 @@ import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
 import Select from "@/app/components/select/varient-1";
+import { exportAction } from "@/app/handle_export/route";
 import { useState } from "react";
 
 const NAVBAR = {
@@ -39,6 +40,17 @@ export default function Home() {
     hero: "varient-1",
     pricing: "varient-1",
   });
+
+  const handleExport = async () => {
+    const response = await fetch("/handle_export", { method: "POST" });
+    const res_blob = await response.blob();
+    const url = window.URL.createObjectURL(res_blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "zip_file";
+    link.click();
+    window.URL.revokeObjectURL(url);
+  };
   return (
     <>
       <div className="flex h-screen">
@@ -70,7 +82,12 @@ export default function Home() {
             </div>
           </div>
           <div className="text-center">
-            <button className="font-bold bg-blue-500 w-full text-white p-2 rounded-lg">Export</button>
+            <button
+              onClick={handleExport}
+              className="font-bold bg-blue-500 w-full text-white p-2 rounded-lg"
+            >
+              Export
+            </button>
           </div>
         </div>
         <div className="w-full overflow-scroll">
