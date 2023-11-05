@@ -1,22 +1,16 @@
 "use server";
-import fs from "fs";
 import AdmZip from "adm-zip";
 import { NextResponse } from "next/server";
 import path from "path";
 
 export async function POST() {
-  const folder_path = path.join(process.cwd());
+  const ui_components = path.join(process.cwd(), "uicomponents");
 
-  var zip = new AdmZip();
+  const zip = new AdmZip();
 
-  zip.addLocalFolder(folder_path, undefined, (fname) => {
-    if (fname.startsWith("node_modules")) {
-      return false;
-    }
-    return true;
-  });
+  zip.addLocalFolder(ui_components);
 
-  var zipFileContents = zip.toBuffer();
+  const zipFileContents = zip.toBuffer();
   const fileName = "uploads.zip";
   const fileType = "application/zip";
 

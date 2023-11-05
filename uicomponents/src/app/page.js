@@ -47,7 +47,7 @@ export default function Home() {
     const url = window.URL.createObjectURL(res_blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "uicomponents";
+    link.download = "zip_file";
     link.click();
     window.URL.revokeObjectURL(url);
   };
