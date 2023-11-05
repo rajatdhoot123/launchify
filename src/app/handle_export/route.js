@@ -19,8 +19,8 @@ export async function POST(req) {
   zip.addFile(
     "src/app/page.js",
     Buffer.from(`import Navbar from "@/app/components/navbar/${nav_varient}";
-    import Hero from "@/app/components/hero/${hero_varient}";
-    import Pricing from "@/app/components/pricing/${pricing_varient}";
+import Hero from "@/app/components/hero/${hero_varient}";
+import Pricing from "@/app/components/pricing/${pricing_varient}";
     
     export default function Home() {
       return (
@@ -36,6 +36,31 @@ export async function POST(req) {
 `),
     "utf8"
   );
+
+  const files_to_delete = [];
+
+  zip.getEntries().forEach(function (entry) {
+    const entryName = entry.entryName;
+    if (!entry.isDirectory) {
+      if (entryName.includes("/hero/")) {
+        if (!entryName.includes(hero_varient)) {
+          files_to_delete.push(entry);
+        }
+      } else if (entryName.includes("/navbar/")) {
+        if (!entryName.includes(nav_varient)) {
+          files_to_delete.push(entry);
+        }
+      } else if (entryName.includes("/pricing/")) {
+        if (!entryName.includes(pricing_varient)) {
+          files_to_delete.push(entry);
+        }
+      }
+    }
+  });
+
+  files_to_delete.forEach((file) => {
+    zip.deleteFile(file);
+  });
 
   const zipFileContents = zip.toBuffer();
   const fileName = "uploads.zip";
