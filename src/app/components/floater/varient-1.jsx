@@ -13,6 +13,26 @@ import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
 import { useRouter, useSearchParams } from "next/navigation";
 
+const FloterIcon = ({ className }) => (
+  <svg
+    className={className}
+    stroke="currentColor"
+    fill="none"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    height="1em"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+    <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+    <path d="M16 5l3 3"></path>
+  </svg>
+);
+
 const CloseIcon = ({ className }) => (
   <svg
     className={className}
@@ -74,9 +94,9 @@ const Floater = ({ setState, state }) => {
     return (
       <button
         onClick={() => router.replace("/")}
-        className="z-20 bottom-10 fixed right-10 bg-red-400 p-5 rounded-full h-24 w-24 text-xs font-bold text-white"
+        className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-[#F53855]"
       >
-        Modify
+        <FloterIcon className="text-white text-xl md:text-2xl" />
       </button>
     );
   }
@@ -117,7 +137,7 @@ const Floater = ({ setState, state }) => {
       <div className="text-center">
         <button
           onClick={handleExport}
-          className="font-bold bg-blue-500 w-full text-white p-2 rounded-lg"
+          className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg"
         >
           Export
         </button>

@@ -14,10 +14,8 @@ export const metadata = {
   description:
     "Get started quickly with our UI components for Tailwind and Next.js. Streamline your web development and build stunning applications with our pre-configured templates.",
   openGraph: {
-    title: {
-      default:
-        "Tailwind and Next.js UI Components for Speedy Web Development - UIWidgets.store",
-    },
+    title:
+      "Tailwind and Next.js UI Components for Speedy Web Development - UIWidgets.store",
     description:
       "Supercharge your web development with our Tailwind and Next.js UI components. Create responsive and stylish web applications faster and more efficiently.",
   },
@@ -32,7 +30,6 @@ export const viewport = {
   ],
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
 };
 
 export default function RootLayout({ children }) {
