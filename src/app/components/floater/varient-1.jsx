@@ -90,6 +90,7 @@ const Floater = ({ setState, state }) => {
             <Fragment key={key}>
               <div className="text-sm font-bold">{title}</div>
               <Select
+                state={state}
                 title={title}
                 list={Object.keys(varients)}
                 setState={setState}

@@ -15,10 +15,12 @@ export default function Home() {
   return (
     <>
       <Floater state={state} setState={setState} />
-      {NAVBAR[state.nav_varient]}
-      {HERO[state.hero_varient]}
-      {PRICING[state.pricing_varient]}
-      {TESTIMONIALS[state.testimonials_varient]}
+      <secion id="nav_varient">{NAVBAR[state.nav_varient]}</secion>
+      <section id="hero_varient">{HERO[state.hero_varient]}</section>
+      <section id="pricing_varient">{PRICING[state.pricing_varient]}</section>
+      <section id="testimonials_varient">
+        {TESTIMONIALS[state.testimonials_varient]}
+      </section>
     </>
   );
 }

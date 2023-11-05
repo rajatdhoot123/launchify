@@ -3,6 +3,7 @@ import AdmZip from "adm-zip";
 import { NextResponse } from "next/server";
 import path from "path";
 import generateLayout from "../utils/generateLayout";
+import generateRootPage from "../utils/generateRootPage";
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
@@ -12,6 +13,8 @@ export async function POST(req) {
     nav_varient = "varient-1",
     hero_varient = "varient-1",
     pricing_varient = "varient-1",
+    testimonials_varient = "varient-1",
+    sequence = [],
     ga_id = "",
   } = body;
   const zip = new AdmZip();
@@ -22,22 +25,15 @@ export async function POST(req) {
 
   zip.addFile(
     "src/app/page.js",
-    Buffer.from(`import Navbar from "@/app/components/navbar/${nav_varient}";
-import Hero from "@/app/components/hero/${hero_varient}";
-import Pricing from "@/app/components/pricing/${pricing_varient}";
-
-export default function Home() {
-      return (
-        <>
-          <div className="w-full overflow-scroll">
-            <Navbar />
-            <Hero />
-            <Pricing />
-          </div>
-        </>
-      );
-    }
-`),
+    Buffer.from(
+      generateRootPage({
+        sequence,
+        testimonials_varient,
+        nav_varient,
+        pricing_varient,
+        hero_varient,
+      })
+    ),
     "utf8"
   );
 
@@ -63,6 +59,10 @@ ${ga_id && `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}`}
         }
       } else if (entryName.includes("/pricing/")) {
         if (!entryName.includes(pricing_varient)) {
+          files_to_delete.push(entry);
+        }
+      } else if (entryName.includes("/testimonials/")) {
+        if (!entryName.includes(testimonials_varient)) {
           files_to_delete.push(entry);
         }
       }

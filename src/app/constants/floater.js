@@ -37,7 +37,6 @@ export const TESTIMONIALS = {
   "varient-1": <Testimonials1 />,
   "varient-2": <Testimonials2 />,
   "varient-3": <Testimonials3 />,
-  "varient-4": <Testimonials1 />,
 };
 
 export const FLOATER_SELECT = [
