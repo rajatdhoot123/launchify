@@ -3,7 +3,7 @@ const Button = () => <button>Button</button>;
 export default function Pricing() {
   return (
     <section>
-      <div className="container px-4 md:px-6">
+      <div className="container px-4 md:px-6 mx-auto">
         <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
           <div className="flex flex-col p-6 bg-white shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
             <div>
