@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <>
-      <Floater setState={setState} />
+      <Floater state={state} setState={setState} />
       {NAVBAR[state.navbar]}
       {HERO[state.hero]}
       {PRICING[state.pricing]}
