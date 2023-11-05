@@ -11,7 +11,6 @@ import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
 import Select from "@/app/components/select/varient-1";
-import { exportAction } from "@/app/handle_export/route";
 import { useState } from "react";
 
 const NAVBAR = {
@@ -42,7 +41,14 @@ export default function Home() {
   });
 
   const handleExport = async () => {
-    const response = await fetch("/handle_export", { method: "POST" });
+    const response = await fetch("/handle_export", {
+      method: "POST",
+      body: JSON.stringify({
+        nav_varient: state.navbar,
+        pricing_varient: state.pricing,
+        hero_varient: state.hero,
+      }),
+    });
     const res_blob = await response.blob();
     const url = window.URL.createObjectURL(res_blob);
     const link = document.createElement("a");

@@ -3,12 +3,39 @@ import AdmZip from "adm-zip";
 import { NextResponse } from "next/server";
 import path from "path";
 
-export async function POST() {
+export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
+  const body = await req.json();
 
+  const {
+    nav_varient = "varient-1",
+    hero_varient = "varient-1",
+    pricing_varient = "varient-1",
+  } = body;
   const zip = new AdmZip();
 
   zip.addLocalFolder(ui_components);
+
+  zip.addFile(
+    "src/app/page.js",
+    Buffer.from(`import Navbar from "@/app/components/navbar/${nav_varient}";
+    import Hero from "@/app/components/hero/${hero_varient}";
+    import Pricing from "@/app/components/pricing/${pricing_varient}";
+    
+    export default function Home() {
+      return (
+        <>
+          <div className="w-full overflow-scroll">
+            <Navbar />
+            <Hero />
+            <Pricing />
+          </div>
+        </>
+      );
+    }
+`),
+    "utf8"
+  );
 
   const zipFileContents = zip.toBuffer();
   const fileName = "uploads.zip";
