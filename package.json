@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap && node post-build.js"
   },
   "dependencies": {
     "@radix-ui/themes": "^2.0.0",
     "adm-zip": "^0.5.10",
     "next": "^14.0.1",
+    "next-sitemap": "^4.2.3",
     "original-fs": "^1.2.0",
     "react": "^18",
     "react-dom": "^18"
