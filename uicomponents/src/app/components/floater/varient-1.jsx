@@ -12,7 +12,6 @@ import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -90,14 +89,6 @@ const Floater = ({ setState, state }) => {
     link.click();
     window.URL.revokeObjectURL(url);
   };
-
-  useEffect(() => {
-    if (typeof navigator !== "undefined") {
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        router.replace("/?floater=true");
-      }
-    }
-  }, [router]);
 
   if (searchParams.get("floater")) {
     return (
