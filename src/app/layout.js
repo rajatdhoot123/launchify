@@ -7,6 +7,7 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL("https://www.uiwidgets.store"),
   title: {
     default:
       "Tailwind and Next.js UI Components for Speedy Web Development - UIWidgets.store",

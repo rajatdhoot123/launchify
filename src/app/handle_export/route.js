@@ -65,9 +65,10 @@ ${ga_id && `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}`}
         if (!entryName.includes(pricing_varient)) {
           files_to_delete.push(entry);
         }
-      } else if (entryName.includes("/floater/")) {
-        files_to_delete.push(entry);
       }
+    }
+    if (entryName.includes("handle_export") || entryName.includes("floater")) {
+      files_to_delete.push(entry);
     }
   });
 

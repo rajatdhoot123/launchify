@@ -3,7 +3,7 @@ import Select from "@/app/components/select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Fragment, useEffect } from "react";
 import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
-import { FLOATER_SELECT } from "@/app/constants/Floater";
+import { FLOATER_SELECT } from "@/app/constants/floater";
 
 const FloterIcon = ({ className }) => (
   <svg
