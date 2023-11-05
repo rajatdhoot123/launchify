@@ -9,6 +9,9 @@ import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
+import Testimonials1 from "@/app/components/testimonials/varient-1";
+import Testimonials2 from "@/app/components/testimonials/varient-2";
+import Testimonials3 from "@/app/components/testimonials/varient-3";
 
 export const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -30,8 +33,20 @@ export const PRICING = {
   "varient-4": <Pricing4 />,
 };
 
+export const TESTIMONIALS = {
+  "varient-1": <Testimonials1 />,
+  "varient-2": <Testimonials2 />,
+  "varient-3": <Testimonials3 />,
+  "varient-4": <Testimonials1 />,
+};
+
 export const FLOATER_SELECT = [
   { key: "nav_varient", varients: NAVBAR, title: "Select Nabar" },
   { key: "hero_varient", varients: HERO, title: "Select Hero" },
   { key: "pricing_varient", varients: PRICING, title: "Select Pricing" },
+  {
+    key: "testimonials_varient",
+    varients: TESTIMONIALS,
+    title: "Select Testimonials",
+  },
 ];
