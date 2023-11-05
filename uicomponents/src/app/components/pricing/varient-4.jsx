@@ -1,6 +1,6 @@
 const Pricing = () => {
   return (
-    <div className="container p-5">
+    <div className="container p-5 w-full mx-auto">
       <div className="grid grid-cols-3 mt-5 gap-6">
         <div>
           <div className="border h-full rounded-md">
