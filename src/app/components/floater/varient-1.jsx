@@ -69,7 +69,7 @@ const Floater = ({ setState, state }) => {
   if (searchParams.get("floater")) {
     return (
       <button
-        onClick={() => router.replace("/")}
+        onClick={() => router.replace("/", { scroll: false })}
         className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-[#F53855]"
       >
         <FloterIcon className="text-white text-xl md:text-2xl" />
@@ -80,7 +80,7 @@ const Floater = ({ setState, state }) => {
     <div className="z-20 fixed md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
       <button
         className="right-4 absolute cursor-pointer"
-        onClick={() => router.replace("/?floater=true")}
+        onClick={() => router.replace("/?floater=true", { scroll: false })}
       >
         <CloseIcon />
       </button>

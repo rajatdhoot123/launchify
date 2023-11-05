@@ -1,17 +1,9 @@
 "use client";
 import Select from "@/app/components/select/varient-1";
-import Navbar1 from "@/app/components/navbar/varient-1";
-import Navbar2 from "@/app/components/navbar/varient-2";
-import Navbar3 from "@/app/components/navbar/varient-3";
-import Hero1 from "@/app/components/hero/varient-1";
-import Hero2 from "@/app/components/hero/varient-2";
-import Hero3 from "@/app/components/hero/varient-3";
-import Hero4 from "@/app/components/hero/varient-4";
-import Pricing1 from "@/app/components/pricing/varient-1";
-import Pricing2 from "@/app/components/pricing/varient-2";
-import Pricing3 from "@/app/components/pricing/varient-3";
-import Pricing4 from "@/app/components/pricing/varient-4";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Fragment, useEffect } from "react";
+import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { FLOATER_SELECT } from "@/app/constants/Floater";
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -48,26 +40,6 @@ const CloseIcon = ({ className }) => (
   </svg>
 );
 
-const NAVBAR = {
-  "varient-1": <Navbar1 />,
-  "varient-2": <Navbar2 />,
-  "varient-3": <Navbar3 />,
-};
-
-const HERO = {
-  "varient-1": <Hero1 />,
-  "varient-2": <Hero2 />,
-  "varient-3": <Hero3 />,
-  "varient-4": <Hero4 />,
-};
-
-const PRICING = {
-  "varient-1": <Pricing1 />,
-  "varient-2": <Pricing2 />,
-  "varient-3": <Pricing3 />,
-  "varient-4": <Pricing4 />,
-};
-
 const Floater = ({ setState, state }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -75,11 +47,7 @@ const Floater = ({ setState, state }) => {
   const handleExport = async () => {
     const response = await fetch("/handle_export", {
       method: "POST",
-      body: JSON.stringify({
-        nav_varient: state.navbar,
-        pricing_varient: state.pricing,
-        hero_varient: state.hero,
-      }),
+      body: JSON.stringify(state),
     });
     const res_blob = await response.blob();
     const url = window.URL.createObjectURL(res_blob);
@@ -90,10 +58,18 @@ const Floater = ({ setState, state }) => {
     window.URL.revokeObjectURL(url);
   };
 
+  useEffect(() => {
+    if (typeof navigator !== "undefined") {
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        router.replace("/?floater=true");
+      }
+    }
+  }, [router]);
+
   if (searchParams.get("floater")) {
     return (
       <button
-        onClick={() => router.replace("/")}
+        onClick={() => router.replace("/", { scroll: false })}
         className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-[#F53855]"
       >
         <FloterIcon className="text-white text-xl md:text-2xl" />
@@ -104,34 +80,35 @@ const Floater = ({ setState, state }) => {
     <div className="z-20 fixed md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
       <button
         className="right-4 absolute cursor-pointer"
-        onClick={() => router.replace("/?floater=true")}
+        onClick={() => router.replace("/?floater=true", { scroll: false })}
       >
         <CloseIcon />
       </button>
-      <div>
+      <div className="flex-1 space-y-4">
         <div className="space-y-2">
-          <div className="text-sm font-bold">Select Navbar</div>
-          <Select
-            list={Object.keys(NAVBAR)}
-            setState={setState}
-            item_key="navbar"
-          />
+          {FLOATER_SELECT.map(({ key, varients, title }) => (
+            <Fragment key={key}>
+              <div className="text-sm font-bold">{title}</div>
+              <Select
+                title={title}
+                list={Object.keys(varients)}
+                setState={setState}
+                item_key={key}
+              />
+            </Fragment>
+          ))}
         </div>
         <div className="space-y-2">
-          <div className="text-sm font-bold">Select Hero</div>
-          <Select
-            list={Object.keys(HERO)}
-            setState={setState}
-            item_key="hero"
-          />
-        </div>
-        <div className="space-y-2">
-          <div className="text-sm font-bold">Select Pricing</div>
-          <Select
-            list={Object.keys(PRICING)}
-            setState={setState}
-            item_key="pricing"
-          />
+          <div className="text-sm font-bold">Google Analytics</div>
+          <TextFieldRoot>
+            <TextFieldInput
+              onChange={(e) =>
+                setState((prev) => ({ ...prev, ga_id: e.target.value }))
+              }
+              value={state.ga_id}
+              placeholder="Enter GA Id"
+            />
+          </TextFieldRoot>
         </div>
       </div>
       <div className="text-center">
