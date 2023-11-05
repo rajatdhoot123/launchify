@@ -11,7 +11,6 @@ import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
-import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const CloseIcon = ({ className }) => (

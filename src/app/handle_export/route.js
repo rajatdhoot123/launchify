@@ -54,6 +54,8 @@ import Pricing from "@/app/components/pricing/${pricing_varient}";
         if (!entryName.includes(pricing_varient)) {
           files_to_delete.push(entry);
         }
+      } else if (entryName.includes("/floater/")) {
+        files_to_delete.push(entry);
       }
     }
   });

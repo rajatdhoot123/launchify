@@ -14,6 +14,7 @@ export const metadata = {
   description:
     "Get started quickly with our UI components for Tailwind and Next.js. Streamline your web development and build stunning applications with our pre-configured templates.",
   openGraph: {
+    images: ["/opengraph-image.jpeg"],
     title: {
       default:
         "Tailwind and Next.js UI Components for Speedy Web Development - UIWidgets.store",
