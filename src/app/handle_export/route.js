@@ -2,6 +2,7 @@
 import AdmZip from "adm-zip";
 import { NextResponse } from "next/server";
 import path from "path";
+import generateLayout from "../utils/generateLayout";
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
@@ -11,18 +12,21 @@ export async function POST(req) {
     nav_varient = "varient-1",
     hero_varient = "varient-1",
     pricing_varient = "varient-1",
+    ga_id = "",
   } = body;
   const zip = new AdmZip();
 
   zip.addLocalFolder(ui_components);
+
+  zip.addFile("src/app/layout.js", Buffer.from(generateLayout({ ga_id })));
 
   zip.addFile(
     "src/app/page.js",
     Buffer.from(`import Navbar from "@/app/components/navbar/${nav_varient}";
 import Hero from "@/app/components/hero/${hero_varient}";
 import Pricing from "@/app/components/pricing/${pricing_varient}";
-    
-    export default function Home() {
+
+export default function Home() {
       return (
         <>
           <div className="w-full overflow-scroll">
@@ -35,6 +39,13 @@ import Pricing from "@/app/components/pricing/${pricing_varient}";
     }
 `),
     "utf8"
+  );
+
+  zip.addFile(
+    ".env.local",
+    Buffer.from(`
+${ga_id && `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}`}
+    `)
   );
 
   const files_to_delete = [];

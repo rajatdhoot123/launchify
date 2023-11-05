@@ -35,17 +35,18 @@ const PRICING = {
 
 export default function Home() {
   const [state, setState] = useState({
-    navbar: "varient-1",
-    hero: "varient-1",
-    pricing: "varient-1",
+    nav_varient: "varient-1",
+    hero_varient: "varient-1",
+    pricing_varient: "varient-1",
+    ga_id: "",
   });
 
   return (
     <>
       <Floater state={state} setState={setState} />
-      {NAVBAR[state.navbar]}
-      {HERO[state.hero]}
-      {PRICING[state.pricing]}
+      {NAVBAR[state.nav_varient]}
+      {HERO[state.hero_varient]}
+      {PRICING[state.pricing_varient]}
     </>
   );
 }

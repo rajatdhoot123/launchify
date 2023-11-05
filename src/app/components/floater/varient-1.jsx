@@ -13,6 +13,7 @@ import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -76,11 +77,7 @@ const Floater = ({ setState, state }) => {
   const handleExport = async () => {
     const response = await fetch("/handle_export", {
       method: "POST",
-      body: JSON.stringify({
-        nav_varient: state.navbar,
-        pricing_varient: state.pricing,
-        hero_varient: state.hero,
-      }),
+      body: JSON.stringify(state),
     });
     const res_blob = await response.blob();
     const url = window.URL.createObjectURL(res_blob);
@@ -117,13 +114,13 @@ const Floater = ({ setState, state }) => {
       >
         <CloseIcon />
       </button>
-      <div>
+      <div className="flex-1 space-y-4">
         <div className="space-y-2">
           <div className="text-sm font-bold">Select Navbar</div>
           <Select
             list={Object.keys(NAVBAR)}
             setState={setState}
-            item_key="navbar"
+            item_key="nav_varient"
           />
         </div>
         <div className="space-y-2">
@@ -131,7 +128,7 @@ const Floater = ({ setState, state }) => {
           <Select
             list={Object.keys(HERO)}
             setState={setState}
-            item_key="hero"
+            item_key="hero_varient"
           />
         </div>
         <div className="space-y-2">
@@ -139,8 +136,20 @@ const Floater = ({ setState, state }) => {
           <Select
             list={Object.keys(PRICING)}
             setState={setState}
-            item_key="pricing"
+            item_key="pricing_varient"
           />
+        </div>
+        <div className="space-y-2">
+          <div className="text-sm font-bold">Google Analytics</div>
+          <TextFieldRoot>
+            <TextFieldInput
+              onChange={(e) =>
+                setState((prev) => ({ ...prev, ga_id: e.target.value }))
+              }
+              value={state.ga_id}
+              placeholder="Enter GA Id"
+            />
+          </TextFieldRoot>
         </div>
       </div>
       <div className="text-center">
