@@ -10,7 +10,7 @@ import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
-import Select from "@/app/components/select/varient-1";
+import Floater from "@/app/components/floater/varient-1";
 import { useState } from "react";
 
 const NAVBAR = {
@@ -40,68 +40,12 @@ export default function Home() {
     pricing: "varient-1",
   });
 
-  const handleExport = async () => {
-    const response = await fetch("/handle_export", {
-      method: "POST",
-      body: JSON.stringify({
-        nav_varient: state.navbar,
-        pricing_varient: state.pricing,
-        hero_varient: state.hero,
-      }),
-    });
-    const res_blob = await response.blob();
-    const url = window.URL.createObjectURL(res_blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "uicomponents";
-    link.click();
-    window.URL.revokeObjectURL(url);
-  };
   return (
     <>
-      <div className="flex h-screen">
-        <div className="w-3/12 h-full bg-white shadow-lg p-5 space-y-6 flex flex-col justify-between">
-          <div>
-            <div className="space-y-2">
-              <div className="text-sm font-bold">Select Navbar</div>
-              <Select
-                list={Object.keys(NAVBAR)}
-                setState={setState}
-                item_key="navbar"
-              />
-            </div>
-            <div className="space-y-2">
-              <div className="text-sm font-bold">Select Hero</div>
-              <Select
-                list={Object.keys(HERO)}
-                setState={setState}
-                item_key="hero"
-              />
-            </div>
-            <div className="space-y-2">
-              <div className="text-sm font-bold">Select Pricing</div>
-              <Select
-                list={Object.keys(PRICING)}
-                setState={setState}
-                item_key="pricing"
-              />
-            </div>
-          </div>
-          <div className="text-center">
-            <button
-              onClick={handleExport}
-              className="font-bold bg-blue-500 w-full text-white p-2 rounded-lg"
-            >
-              Export
-            </button>
-          </div>
-        </div>
-        <div className="w-full overflow-scroll">
-          {NAVBAR[state.navbar]}
-          {HERO[state.hero]}
-          {PRICING[state.pricing]}
-        </div>
-      </div>
+      <Floater setState={setState} />
+      {NAVBAR[state.navbar]}
+      {HERO[state.hero]}
+      {PRICING[state.pricing]}
     </>
   );
 }
