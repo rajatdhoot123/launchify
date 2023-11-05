@@ -22,7 +22,7 @@ const NavBar = () => {
                   height="12"
                   width="12"
                   className="h-6 w-auto sm:h-8"
-                  src="/vercel.svg"
+                  src="/logo.png"
                   alt=""
                 />
               </a>

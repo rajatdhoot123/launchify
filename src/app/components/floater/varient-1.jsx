@@ -1,19 +1,9 @@
 "use client";
 import Select from "@/app/components/select/varient-1";
-import Navbar1 from "@/app/components/navbar/varient-1";
-import Navbar2 from "@/app/components/navbar/varient-2";
-import Navbar3 from "@/app/components/navbar/varient-3";
-import Hero1 from "@/app/components/hero/varient-1";
-import Hero2 from "@/app/components/hero/varient-2";
-import Hero3 from "@/app/components/hero/varient-3";
-import Hero4 from "@/app/components/hero/varient-4";
-import Pricing1 from "@/app/components/pricing/varient-1";
-import Pricing2 from "@/app/components/pricing/varient-2";
-import Pricing3 from "@/app/components/pricing/varient-3";
-import Pricing4 from "@/app/components/pricing/varient-4";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { FLOATER_SELECT } from "@/app/constants/Floater";
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -49,26 +39,6 @@ const CloseIcon = ({ className }) => (
     <path fill="none" strokeWidth="2" d="M3,3 L21,21 M3,21 L21,3"></path>
   </svg>
 );
-
-const NAVBAR = {
-  "varient-1": <Navbar1 />,
-  "varient-2": <Navbar2 />,
-  "varient-3": <Navbar3 />,
-};
-
-const HERO = {
-  "varient-1": <Hero1 />,
-  "varient-2": <Hero2 />,
-  "varient-3": <Hero3 />,
-  "varient-4": <Hero4 />,
-};
-
-const PRICING = {
-  "varient-1": <Pricing1 />,
-  "varient-2": <Pricing2 />,
-  "varient-3": <Pricing3 />,
-  "varient-4": <Pricing4 />,
-};
 
 const Floater = ({ setState, state }) => {
   const searchParams = useSearchParams();
@@ -116,28 +86,17 @@ const Floater = ({ setState, state }) => {
       </button>
       <div className="flex-1 space-y-4">
         <div className="space-y-2">
-          <div className="text-sm font-bold">Select Navbar</div>
-          <Select
-            list={Object.keys(NAVBAR)}
-            setState={setState}
-            item_key="nav_varient"
-          />
-        </div>
-        <div className="space-y-2">
-          <div className="text-sm font-bold">Select Hero</div>
-          <Select
-            list={Object.keys(HERO)}
-            setState={setState}
-            item_key="hero_varient"
-          />
-        </div>
-        <div className="space-y-2">
-          <div className="text-sm font-bold">Select Pricing</div>
-          <Select
-            list={Object.keys(PRICING)}
-            setState={setState}
-            item_key="pricing_varient"
-          />
+          {FLOATER_SELECT.map(({ key, varients, title }) => (
+            <Fragment key={key}>
+              <div className="text-sm font-bold">{title}</div>
+              <Select
+                title={title}
+                list={Object.keys(varients)}
+                setState={setState}
+                item_key={key}
+              />
+            </Fragment>
+          ))}
         </div>
         <div className="space-y-2">
           <div className="text-sm font-bold">Google Analytics</div>

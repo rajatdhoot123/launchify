@@ -7,7 +7,7 @@ import {
   SelectTrigger,
 } from "@radix-ui/themes";
 
-const SelectComponent = ({ setState, item_key, list }) => {
+const SelectComponent = ({ setState, item_key, list, title }) => {
   return (
     <SelectRoot
       onValueChange={(val) =>
@@ -19,9 +19,7 @@ const SelectComponent = ({ setState, item_key, list }) => {
       <SelectTrigger className="w-full" />
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>
-            Select &nbsp;<span className="capitalize">{item_key}</span>
-          </SelectLabel>
+          <SelectLabel>{title}</SelectLabel>
           {list.map((li, index) => (
             <SelectItem key={li} value={li}>
               {`Varient ${index + 1}`}
