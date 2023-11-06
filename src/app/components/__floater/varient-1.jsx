@@ -1,9 +1,9 @@
 "use client";
-import Select from "@/app/components/select/varient-1";
+import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Fragment, useEffect } from "react";
 import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
-import { FLOATER_SELECT } from "@/app/constants/floater";
+import { FLOATER_SELECT } from "@/app/constants__/floater";
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -46,7 +46,7 @@ const Floater = ({ setState, state }) => {
 
   const handleExport = async () => {
     const { ga_id, ...components } = state;
-    const response = await fetch("/only_in_ui_components/handle_export", {
+    const response = await fetch("/handle_export__", {
       method: "POST",
       body: JSON.stringify({ ga_id, components }),
     });

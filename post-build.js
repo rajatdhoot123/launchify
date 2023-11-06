@@ -1,12 +1,11 @@
 const fs = require("fs");
+const path = require("path");
 
-const IGNORE_FILES = [
-  "src/app/components/select",
-  "src/app/components/floater",
-  "src/app/only_in_ui_components",
-];
-
-fs.cpSync("src/app/components", "uicomponents/src/app/components", {
-  filter: (file) => (IGNORE_FILES.includes(file) ? false : true),
-  recursive: true,
-});
+fs.cpSync(
+  path.join(process.cwd(), "src"),
+  path.join(process.cwd(), "uicomponents", "src"),
+  {
+    filter: (file) => (file.includes("__") ? false : true),
+    recursive: true,
+  }
+);

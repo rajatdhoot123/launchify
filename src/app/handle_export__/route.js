@@ -2,8 +2,8 @@
 import AdmZip from "adm-zip";
 import { NextResponse } from "next/server";
 import path from "path";
-import generateLayout from "../../utils/generateLayout";
-import generateRootPage from "../../utils/generateRootPage";
+import generateLayout from "../utils__/generateLayout";
+import generateRootPage from "../utils__/generateRootPage";
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
@@ -23,7 +23,7 @@ export async function POST(req) {
       }
       return false;
     }
-    if (file.includes("only_in_ui_components")) {
+    if (file.includes("__")) {
       return false;
     }
     return true;
