@@ -9,9 +9,13 @@ import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
+import Pricing5 from "@/app/components/pricing/varient-5";
 import Testimonials1 from "@/app/components/testimonials/varient-1";
 import Testimonials2 from "@/app/components/testimonials/varient-2";
 import Testimonials3 from "@/app/components/testimonials/varient-3";
+import Table1 from "@/app/components/table/varient-1";
+import Table2 from "@/app/components/table/varient-2";
+import Table3 from "@/app/components/table/varient-3";
 
 export const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -31,12 +35,19 @@ export const PRICING = {
   "varient-2": <Pricing2 />,
   "varient-3": <Pricing3 />,
   "varient-4": <Pricing4 />,
+  "varient-5": <Pricing5 />,
 };
 
 export const TESTIMONIALS = {
   "varient-1": <Testimonials1 />,
   "varient-2": <Testimonials2 />,
   "varient-3": <Testimonials3 />,
+};
+
+export const TABLE = {
+  "varient-1": <Table1 />,
+  "varient-2": <Table2 />,
+  "varient-3": <Table3 />,
 };
 
 export const FLOATER_SELECT = [
@@ -47,5 +58,10 @@ export const FLOATER_SELECT = [
     key: "testimonials_varient",
     varients: TESTIMONIALS,
     title: "Select Testimonials",
+  },
+  {
+    key: "table_varient",
+    varients: TABLE,
+    title: "Select Table",
   },
 ];
