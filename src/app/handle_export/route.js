@@ -15,6 +15,8 @@ export async function POST(req) {
     pricing_varient = "varient-1",
     testimonials_varient = "varient-1",
     table_varient = "varient-1",
+    accordion_varient = "varient-1",
+    card_varient = "varient-1",
     sequence = [],
     ga_id = "",
   } = body;
@@ -34,6 +36,7 @@ export async function POST(req) {
         pricing_varient,
         hero_varient,
         table_varient,
+        card_varient,
       })
     ),
     "utf8"
@@ -69,6 +72,14 @@ ${ga_id && `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}`}
         }
       } else if (entryName.includes("/table/")) {
         if (!entryName.includes(table_varient)) {
+          files_to_delete.push(entry);
+        }
+      } else if (entryName.includes("/accordion/")) {
+        if (!entryName.includes(accordion_varient)) {
+          files_to_delete.push(entry);
+        }
+      } else if (entryName.includes("/cards/")) {
+        if (!entryName.includes(card_varient)) {
           files_to_delete.push(entry);
         }
       }

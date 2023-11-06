@@ -16,6 +16,8 @@ import Testimonials3 from "@/app/components/testimonials/varient-3";
 import Table1 from "@/app/components/table/varient-1";
 import Table2 from "@/app/components/table/varient-2";
 import Table3 from "@/app/components/table/varient-3";
+import Accordion1 from "@/app/components/accordion/varient-1";
+import Card1 from "@/app/components/cards/varient-1";
 
 export const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -50,6 +52,14 @@ export const TABLE = {
   "varient-3": <Table3 />,
 };
 
+export const ACCORDION = {
+  "varient-1": <Accordion1 />,
+};
+
+export const CARDS = {
+  "varient-1": <Card1 />,
+};
+
 export const FLOATER_SELECT = [
   { key: "nav_varient", varients: NAVBAR, title: "Select Nabar" },
   { key: "hero_varient", varients: HERO, title: "Select Hero" },
@@ -63,5 +73,15 @@ export const FLOATER_SELECT = [
     key: "table_varient",
     varients: TABLE,
     title: "Select Table",
+  },
+  // {
+  //   key: "accordion_varient",
+  //   varients: ACCORDION,
+  //   title: "Select Accordion",
+  // },
+  {
+    key: "card_varient",
+    varients: ACCORDION,
+    title: "Select Card",
   },
 ];
