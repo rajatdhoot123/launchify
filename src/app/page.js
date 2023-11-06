@@ -20,7 +20,7 @@ export default function Home() {
     table: "varient-1",
     accordion: "varient-1",
     cards: "varient-1",
-    "random-cards": "varient-1",
+    "randomcards": "varient-1",
     ga_id: "",
   });
 
@@ -37,7 +37,7 @@ export default function Home() {
           {ACCORDION[state.accordion]}
         </section> */}
         <section id="cards">{CARDS[state.cards]}</section>
-        <section id="random-cards">{RANDOMCARD[state["random-cards"]]}</section>
+        <section id="randomcards">{RANDOMCARD[state["randomcards"]]}</section>
       </div>
     </>
   );

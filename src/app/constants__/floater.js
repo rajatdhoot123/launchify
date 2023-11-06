@@ -28,8 +28,8 @@ import Card8 from "@/app/components/cards/varient-8";
 import Card9 from "@/app/components/cards/varient-9";
 import Card10 from "@/app/components/cards/varient-10";
 import Card11 from "@/app/components/cards/varient-11";
-import RandomCard1 from "@/app/components/random-cards/varient-1";
-import RandomCard2 from "@/app/components/random-cards/varient-2";
+import RandomCard1 from "@/app/components/randomcards/varient-1";
+import RandomCard2 from "@/app/components/randomcards/varient-2";
 
 export const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -112,7 +112,7 @@ export const FLOATER_SELECT = [
     title: "Select Card",
   },
   {
-    key: "random-cards",
+    key: "randomcards",
     varients: RANDOMCARD,
     title: "Select Random Card",
   },
