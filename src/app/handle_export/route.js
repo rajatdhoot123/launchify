@@ -10,13 +10,13 @@ export async function POST(req) {
   const body = await req.json();
 
   const {
-    nav_varient = "varient-1",
-    hero_varient = "varient-1",
-    pricing_varient = "varient-1",
-    testimonials_varient = "varient-1",
-    table_varient = "varient-1",
-    accordion_varient = "varient-1",
-    card_varient = "varient-1",
+    navbar = "varient-1",
+    hero = "varient-1",
+    pricing = "varient-1",
+    testimonials = "varient-1",
+    table = "varient-1",
+    accordion = "varient-1",
+    cards = "varient-1",
     random_varient = "varient-1",
     sequence = [],
     ga_id = "",
@@ -32,12 +32,12 @@ export async function POST(req) {
     Buffer.from(
       generateRootPage({
         sequence,
-        testimonials_varient,
-        nav_varient,
-        pricing_varient,
-        hero_varient,
-        table_varient,
-        card_varient,
+        testimonials,
+        navbar,
+        pricing,
+        hero,
+        table,
+        cards,
         random_varient,
       })
     ),
@@ -57,31 +57,31 @@ ${ga_id && `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}`}
     const entryName = entry.entryName;
     if (!entry.isDirectory) {
       if (entryName.includes("/hero/")) {
-        if (!entryName.includes(hero_varient)) {
+        if (!entryName.includes(hero)) {
           files_to_delete.push(entry);
         }
       } else if (entryName.includes("/navbar/")) {
-        if (!entryName.includes(nav_varient)) {
+        if (!entryName.includes(navbar)) {
           files_to_delete.push(entry);
         }
       } else if (entryName.includes("/pricing/")) {
-        if (!entryName.includes(pricing_varient)) {
+        if (!entryName.includes(pricing)) {
           files_to_delete.push(entry);
         }
       } else if (entryName.includes("/testimonials/")) {
-        if (!entryName.includes(testimonials_varient)) {
+        if (!entryName.includes(testimonials)) {
           files_to_delete.push(entry);
         }
       } else if (entryName.includes("/table/")) {
-        if (!entryName.includes(table_varient)) {
+        if (!entryName.includes(table)) {
           files_to_delete.push(entry);
         }
       } else if (entryName.includes("/accordion/")) {
-        if (!entryName.includes(accordion_varient)) {
+        if (!entryName.includes(accordion)) {
           files_to_delete.push(entry);
         }
       } else if (entryName.includes("/cards/")) {
-        if (!entryName.includes(card_varient)) {
+        if (!entryName.includes(cards)) {
           files_to_delete.push(entry);
         }
       } else if (entryName.includes("/random-cards/")) {
