@@ -24,14 +24,14 @@ const Accordion = () => {
                 <path
                   d="M2.62421 7.86L13.6242 7.85999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
                 <path
                   d="M8.12421 13.36V2.35999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
               </svg>
               <svg
@@ -45,8 +45,8 @@ const Accordion = () => {
                 <path
                   d="M2.62421 7.86L13.6242 7.85999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
               </svg>
               Accordion #1
@@ -82,14 +82,14 @@ const Accordion = () => {
                 <path
                   d="M2.62421 7.86L13.6242 7.85999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
                 <path
                   d="M8.12421 13.36V2.35999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
               </svg>
               <svg
@@ -103,8 +103,8 @@ const Accordion = () => {
                 <path
                   d="M2.62421 7.86L13.6242 7.85999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
               </svg>
               Accordion #2
@@ -140,14 +140,14 @@ const Accordion = () => {
                 <path
                   d="M2.62421 7.86L13.6242 7.85999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
                 <path
                   d="M8.12421 13.36V2.35999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
               </svg>
               <svg
@@ -161,8 +161,8 @@ const Accordion = () => {
                 <path
                   d="M2.62421 7.86L13.6242 7.85999"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
                 ></path>
               </svg>
               Accordion #3

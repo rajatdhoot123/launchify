@@ -7,6 +7,7 @@ import {
   HERO,
   NAVBAR,
   PRICING,
+  RANDOMCARD,
   TABLE,
   TESTIMONIALS,
 } from "@/app/constants/floater";
@@ -20,6 +21,7 @@ export default function Home() {
     table_varient: "varient-1",
     accordion_varient: "varient-1",
     card_varient: "varient-1",
+    random_varient: "varient-1",
     ga_id: "",
   });
 
@@ -38,6 +40,9 @@ export default function Home() {
           {ACCORDION[state.accordion_varient]}
         </section> */}
         <section id="card_varient">{CARDS[state.card_varient]}</section>
+        <section id="random_varient">
+          {RANDOMCARD[state.random_varient]}
+        </section>
       </div>
     </>
   );

@@ -17,6 +17,7 @@ export async function POST(req) {
     table_varient = "varient-1",
     accordion_varient = "varient-1",
     card_varient = "varient-1",
+    random_varient = "varient-1",
     sequence = [],
     ga_id = "",
   } = body;
@@ -37,6 +38,7 @@ export async function POST(req) {
         hero_varient,
         table_varient,
         card_varient,
+        random_varient,
       })
     ),
     "utf8"
@@ -80,6 +82,10 @@ ${ga_id && `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}`}
         }
       } else if (entryName.includes("/cards/")) {
         if (!entryName.includes(card_varient)) {
+          files_to_delete.push(entry);
+        }
+      } else if (entryName.includes("/random-cards/")) {
+        if (!entryName.includes(random_varient)) {
           files_to_delete.push(entry);
         }
       }

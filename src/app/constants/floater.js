@@ -18,6 +18,18 @@ import Table2 from "@/app/components/table/varient-2";
 import Table3 from "@/app/components/table/varient-3";
 import Accordion1 from "@/app/components/accordion/varient-1";
 import Card1 from "@/app/components/cards/varient-1";
+import Card2 from "@/app/components/cards/varient-2";
+import Card3 from "@/app/components/cards/varient-3";
+import Card4 from "@/app/components/cards/varient-4";
+import Card5 from "@/app/components/cards/varient-5";
+import Card6 from "@/app/components/cards/varient-6";
+import Card7 from "@/app/components/cards/varient-7";
+import Card8 from "@/app/components/cards/varient-8";
+import Card9 from "@/app/components/cards/varient-9";
+import Card10 from "@/app/components/cards/varient-10";
+import Card11 from "@/app/components/cards/varient-11";
+import RandomCard1 from "@/app/components/random-cards/varient-1";
+import RandomCard2 from "@/app/components/random-cards/varient-2";
 
 export const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -56,8 +68,23 @@ export const ACCORDION = {
   "varient-1": <Accordion1 />,
 };
 
+export const RANDOMCARD = {
+  "varient-1": <RandomCard1 />,
+  "varient-2": <RandomCard2 />,
+};
+
 export const CARDS = {
   "varient-1": <Card1 />,
+  "varient-2": <Card2 />,
+  "varient-3": <Card3 />,
+  "varient-4": <Card4 />,
+  "varient-5": <Card5 />,
+  "varient-6": <Card6 />,
+  "varient-7": <Card7 />,
+  "varient-8": <Card8 />,
+  "varient-9": <Card9 />,
+  "varient-10": <Card10 />,
+  "varient-11": <Card11 />,
 };
 
 export const FLOATER_SELECT = [
@@ -81,7 +108,12 @@ export const FLOATER_SELECT = [
   // },
   {
     key: "card_varient",
-    varients: ACCORDION,
+    varients: CARDS,
     title: "Select Card",
+  },
+  {
+    key: "random_varient",
+    varients: RANDOMCARD,
+    title: "Select Random Card",
   },
 ];
