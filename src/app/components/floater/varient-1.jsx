@@ -45,9 +45,10 @@ const Floater = ({ setState, state }) => {
   const router = useRouter();
 
   const handleExport = async () => {
-    const response = await fetch("/handle_export", {
+    const { ga_id, ...components } = state;
+    const response = await fetch("/only_in_ui_components/handle_export", {
       method: "POST",
-      body: JSON.stringify(state),
+      body: JSON.stringify({ ga_id, components }),
     });
     const res_blob = await response.blob();
     const url = window.URL.createObjectURL(res_blob);

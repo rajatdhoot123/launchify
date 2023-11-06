@@ -3,6 +3,7 @@ const fs = require("fs");
 const IGNORE_FILES = [
   "src/app/components/select",
   "src/app/components/floater",
+  "src/app/only_in_ui_components",
 ];
 
 fs.cpSync("src/app/components", "uicomponents/src/app/components", {

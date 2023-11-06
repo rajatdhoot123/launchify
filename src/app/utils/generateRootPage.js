@@ -1,33 +1,23 @@
-const generateRootPage = ({
-  sequence,
-  navbar,
-  hero,
-  pricing,
-  testimonials,
-  table,
-  cards,
-  random_varient,
-}) => {
-  return `import Navbar from "@/app/components/navbar/${navbar}";
-import Hero from "@/app/components/hero/${hero}";
-import Pricing from "@/app/components/pricing/${pricing}";
-import Testinomial from "@/app/components/testimonials/${testimonials}";
-import Table from "@/app/components/table/${table}";
-import Card from "@/app/components/cards/${cards}";
-import RandomCard from "@/app/components/random-cards/${random_varient}";
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
+const generateRootPage = (comp) => {
+  return `
+
+${Object.entries(comp).reduce((acc, [key, varient]) => {
+  return `${acc} \n import ${capitalizeFirstLetter(
+    key
+  )} from "@/app/components/${key}/${varient}";`;
+}, "")}
 
 export default function Home() {
       return (
         <>
           <div className="w-full overflow-scroll">
-            <Navbar />
-            <Hero />
-            <Pricing />
-            <Testinomial />
-            <Table />
-            <Card />
-            <RandomCard />
+          ${Object.entries(comp).reduce((acc, [key]) => {
+            return `${acc} \n <${capitalizeFirstLetter(key)} />`;
+          }, "")}
           </div>
         </>
       );

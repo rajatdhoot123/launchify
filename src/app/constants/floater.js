@@ -112,7 +112,7 @@ export const FLOATER_SELECT = [
     title: "Select Card",
   },
   {
-    key: "random_varient",
+    key: "random-cards",
     varients: RANDOMCARD,
     title: "Select Random Card",
   },

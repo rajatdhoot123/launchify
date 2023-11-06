@@ -20,7 +20,7 @@ export default function Home() {
     table: "varient-1",
     accordion: "varient-1",
     cards: "varient-1",
-    random_varient: "varient-1",
+    "random-cards": "varient-1",
     ga_id: "",
   });
 
@@ -31,17 +31,13 @@ export default function Home() {
         <secion id="navbar">{NAVBAR[state.navbar]}</secion>
         <section id="hero">{HERO[state.hero]}</section>
         <section id="pricing">{PRICING[state.pricing]}</section>
-        <section id="testimonials">
-          {TESTIMONIALS[state.testimonials]}
-        </section>
+        <section id="testimonials">{TESTIMONIALS[state.testimonials]}</section>
         <section id="table">{TABLE[state.table]}</section>
         {/* <section id="accordion">
           {ACCORDION[state.accordion]}
         </section> */}
         <section id="cards">{CARDS[state.cards]}</section>
-        <section id="random_varient">
-          {RANDOMCARD[state.random_varient]}
-        </section>
+        <section id="random-cards">{RANDOMCARD[state["random-cards"]]}</section>
       </div>
     </>
   );
