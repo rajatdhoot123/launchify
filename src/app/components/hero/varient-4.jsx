@@ -33,7 +33,7 @@ const Hero = () => {
           alt="Hero"
           className="mx-auto aspect-[3/1] overflow-hidden rounded-t-xl object-cover"
           height="300"
-          src="/hero.jpg"
+          src="https://placekitten.com/g/800/500"
           width="1270"
         />
       </div>
