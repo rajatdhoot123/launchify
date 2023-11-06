@@ -13,8 +13,8 @@ export async function POST(req) {
   const { components, ga_id = "" } = body;
   const zip = new AdmZip();
 
-  const file_to_add = Object.entries(components).map(([key, varient]) => {
-    return `src/app/components/${key}/${varient}.jsx`;
+  const file_to_add = components.map(({ name, varient }) => {
+    return `src/app/components/${name}/${varient}.jsx`;
   });
 
   zip.addLocalFolder(ui_components, "", (file) => {
@@ -33,7 +33,7 @@ export async function POST(req) {
   zip.addFile(
     "src/app/layout.js",
     Buffer.from(
-      await prettier.format(generateLayout({ ga_id }, { parser: "babel" }), {
+      await prettier.format(generateLayout({ ga_id }), {
         parser: "babel",
       })
     )
@@ -42,12 +42,9 @@ export async function POST(req) {
   zip.addFile(
     "src/app/page.js",
     Buffer.from(
-      await prettier.format(
-        generateRootPage({ ...components }, { parser: "babel" }),
-        {
-          parser: "babel",
-        }
-      )
+      await prettier.format(generateRootPage({ components }), {
+        parser: "babel",
+      })
     ),
     "utf8"
   );

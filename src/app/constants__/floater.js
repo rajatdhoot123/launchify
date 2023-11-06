@@ -88,32 +88,41 @@ export const CARDS = {
 };
 
 export const FLOATER_SELECT = [
-  { key: "navbar", varients: NAVBAR, title: "Select Nabar" },
-  { key: "hero", varients: HERO, title: "Select Hero" },
-  { key: "pricing", varients: PRICING, title: "Select Pricing" },
+  {
+    key: "navbar",
+    varients: NAVBAR,
+    title: "Select Nabar",
+    selected: "varient-1",
+  },
+  { key: "hero", varients: HERO, title: "Select Hero", selected: "varient-1" },
+  {
+    key: "pricing",
+    varients: PRICING,
+    title: "Select Pricing",
+    selected: "varient-1",
+  },
   {
     key: "testimonials",
     varients: TESTIMONIALS,
     title: "Select Testimonials",
+    selected: "varient-1",
   },
   {
     key: "table",
     varients: TABLE,
     title: "Select Table",
+    selected: "varient-1",
   },
-  // {
-  //   key: "accordion",
-  //   varients: ACCORDION,
-  //   title: "Select Accordion",
-  // },
   {
     key: "cards",
     varients: CARDS,
     title: "Select Card",
+    selected: "varient-1",
   },
   {
     key: "randomcards",
     varients: RANDOMCARD,
     title: "Select Random Card",
+    selected: "varient-1",
   },
 ];

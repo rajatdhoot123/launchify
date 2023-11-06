@@ -3,7 +3,6 @@ import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Fragment, useEffect } from "react";
 import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
-import { FLOATER_SELECT } from "@/app/constants__/floater";
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -40,15 +39,20 @@ const CloseIcon = ({ className }) => (
   </svg>
 );
 
-const Floater = ({ setState, state }) => {
+const Floater = ({ setState, components = [], ga_id }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const handleExport = async () => {
-    const { ga_id, ...components } = state;
     const response = await fetch("/handle_export__", {
       method: "POST",
-      body: JSON.stringify({ ga_id, components }),
+      body: JSON.stringify({
+        ga_id,
+        components: components.map(({ selected, key }) => ({
+          name: key,
+          varient: selected,
+        })),
+      }),
     });
     const res_blob = await response.blob();
     const url = window.URL.createObjectURL(res_blob);
@@ -77,6 +81,22 @@ const Floater = ({ setState, state }) => {
       </button>
     );
   }
+
+  const handleChange = (value, index, key) => {
+    setState((prev) => ({
+      ...prev,
+      components: prev.components.map((comp, findex) =>
+        findex === index ? { ...comp, selected: value } : comp
+      ),
+    }));
+
+    router.push(`#${key}`);
+    if (typeof navigator !== "undefined") {
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        router.replace("/?floater=true");
+      }
+    }
+  };
   return (
     <div className="z-20 fixed md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
       <button
@@ -87,15 +107,14 @@ const Floater = ({ setState, state }) => {
       </button>
       <div className="flex-1 space-y-4">
         <div className="space-y-2">
-          {FLOATER_SELECT.map(({ key, varients, title }) => (
+          {components.map(({ key, varients, title, selected }, index) => (
             <Fragment key={key}>
               <div className="text-sm font-bold">{title}</div>
               <Select
-                state={state}
+                handleChange={(val) => handleChange(val, index, key)}
+                value={selected}
                 title={title}
                 list={Object.keys(varients)}
-                setState={setState}
-                item_key={key}
               />
             </Fragment>
           ))}
@@ -107,7 +126,7 @@ const Floater = ({ setState, state }) => {
               onChange={(e) =>
                 setState((prev) => ({ ...prev, ga_id: e.target.value }))
               }
-              value={state.ga_id}
+              value={ga_id}
               placeholder="Enter GA Id"
             />
           </TextFieldRoot>

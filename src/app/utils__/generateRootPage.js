@@ -2,21 +2,21 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const generateRootPage = (comp) => {
+const generateRootPage = ({ components }) => {
   return `
 
-${Object.entries(comp).reduce((acc, [key, varient]) => {
+${components.reduce((acc, { name, varient }) => {
   return `${acc} \n import ${capitalizeFirstLetter(
-    key
-  )} from "@/app/components/${key}/${varient}";`;
+    name
+  )} from "@/app/components/${name}/${varient}";`;
 }, "")}
 
 export default function Home() {
       return (
         <>
           <div className="w-full overflow-scroll">
-          ${Object.entries(comp).reduce((acc, [key]) => {
-            return `${acc} \n <${capitalizeFirstLetter(key)} />`;
+          ${components.reduce((acc, { name }) => {
+            return `${acc} \n <${capitalizeFirstLetter(name)} />`;
           }, "")}
           </div>
         </>

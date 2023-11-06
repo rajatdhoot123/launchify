@@ -8,21 +8,13 @@ import {
 } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 
-const SelectComponent = ({ setState, item_key, list, title, state }) => {
+const SelectComponent = ({ list, title, value, handleChange }) => {
   const router = useRouter();
   return (
     <SelectRoot
-      onValueChange={(val) => {
-        setState((prev) => ({ ...prev, [item_key]: val }));
-        router.push(`#${item_key}`);
-        if (typeof navigator !== "undefined") {
-          if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-            router.replace("/?floater=true");
-          }
-        }
-      }}
+      onValueChange={handleChange}
       className="w-full"
-      defaultValue={state[item_key]}
+      defaultValue={value}
     >
       <SelectTrigger className="w-full" />
       <SelectContent>
