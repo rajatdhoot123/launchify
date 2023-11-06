@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import path from "path";
 import generateLayout from "../utils__/generateLayout";
 import generateRootPage from "../utils__/generateRootPage";
+import * as prettier from "prettier";
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
@@ -29,11 +30,25 @@ export async function POST(req) {
     return true;
   });
 
-  zip.addFile("src/app/layout.js", Buffer.from(generateLayout({ ga_id })));
+  zip.addFile(
+    "src/app/layout.js",
+    Buffer.from(
+      await prettier.format(generateLayout({ ga_id }, { parser: "babel" }), {
+        parser: "babel",
+      })
+    )
+  );
 
   zip.addFile(
     "src/app/page.js",
-    Buffer.from(generateRootPage({ ...components })),
+    Buffer.from(
+      await prettier.format(
+        generateRootPage({ ...components }, { parser: "babel" }),
+        {
+          parser: "babel",
+        }
+      )
+    ),
     "utf8"
   );
 
