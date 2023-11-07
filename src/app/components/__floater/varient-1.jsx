@@ -1,9 +1,10 @@
 "use client";
 import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Fragment, useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
 import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
+import { logEvent } from "@/app/utils__/events";
 
 const ItemType = "ITEM";
 
@@ -87,6 +88,7 @@ const Floater = ({ setState, components = [], ga_id }) => {
   const router = useRouter();
 
   const handleExport = async () => {
+    logEvent("export_clicked");
     const response = await fetch("/handle_export__", {
       method: "POST",
       body: JSON.stringify({
