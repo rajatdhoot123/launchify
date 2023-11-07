@@ -1,23 +1,23 @@
 const Footer = () => {
   return (
-    <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div>
-          <img src="/logo.png" class="mr-5 h-6 sm:h-9" alt="logo" />
-          <p class="max-w-xs mt-4 text-sm text-gray-600">
+          <img src="/logo.png" className="mr-5 h-6 sm:h-9" alt="logo" />
+          <p className="max-w-xs mt-4 text-sm text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
             accusantium.
           </p>
-          <div class="flex mt-8 space-x-6 text-gray-600">
+          <div className="flex mt-8 space-x-6 text-gray-600">
             <a
-              class="hover:opacity-75"
+              className="hover:opacity-75"
               href=""
               target="_blank"
               rel="noreferrer"
             >
-              <span class="sr-only"> Facebook </span>
+              <span className="sr-only"> Facebook </span>
               <svg
-                class="w-6 h-6"
+                className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -30,14 +30,14 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              class="hover:opacity-75"
+              className="hover:opacity-75"
               href=""
               target="_blank"
               rel="noreferrer"
             >
-              <span class="sr-only"> Instagram </span>
+              <span className="sr-only"> Instagram </span>
               <svg
-                class="w-6 h-6"
+                className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -50,14 +50,14 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              class="hover:opacity-75"
+              className="hover:opacity-75"
               href=""
               target="_blank"
               rel="noreferrer"
             >
-              <span class="sr-only"> Twitter </span>
+              <span className="sr-only"> Twitter </span>
               <svg
-                class="w-6 h-6"
+                className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -66,14 +66,14 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              class="hover:opacity-75"
+              className="hover:opacity-75"
               href=""
               target="_blank"
               rel="noreferrer"
             >
-              <span class="sr-only"> GitHub </span>
+              <span className="sr-only"> GitHub </span>
               <svg
-                class="w-6 h-6"
+                className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -86,14 +86,14 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              class="hover:opacity-75"
+              className="hover:opacity-75"
               href=""
               target="_blank"
               rel="noreferrer"
             >
-              <span class="sr-only"> Dribbble </span>
+              <span className="sr-only"> Dribbble </span>
               <svg
-                class="w-6 h-6"
+                className="w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -107,86 +107,86 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div class="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p class="font-medium">Company</p>
-            <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-              <a class="hover:opacity-75" href="" target="_blank">
+            <p className="font-medium">Company</p>
+            <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 About{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Meet the Team{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 History{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Careers{" "}
               </a>
             </nav>
           </div>
           <div>
-            <p class="font-medium">Services</p>
-            <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-              <a class="hover:opacity-75" href="" target="_blank">
+            <p className="font-medium">Services</p>
+            <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 1on1 Coaching{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Company Review{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Accounts Review{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 HR Consulting{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 SEO Optimisation{" "}
               </a>
             </nav>
           </div>
           <div>
-            <p class="font-medium">Helpful Links</p>
-            <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-              <a class="hover:opacity-75" href="" target="_blank">
+            <p className="font-medium">Helpful Links</p>
+            <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Contact{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 FAQs{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Live Chat{" "}
               </a>
             </nav>
           </div>
           <div>
-            <p class="font-medium">Legal</p>
-            <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-              <a class="hover:opacity-75" href="" target="_blank">
+            <p className="font-medium">Legal</p>
+            <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Privacy Policy{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Terms &amp; Conditions{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Returns Policy{" "}
               </a>
-              <a class="hover:opacity-75" href="" target="_blank">
+              <a className="hover:opacity-75" href="" target="_blank">
                 {" "}
                 Accessibility{" "}
               </a>
@@ -194,7 +194,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p class="mt-8 text-xs text-gray-800">© 2022 Comany Name</p>
+      <p className="mt-8 text-xs text-gray-800">© 2022 Comany Name</p>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Hero1 from "@/app/components/hero/varient-1";
 import Hero2 from "@/app/components/hero/varient-2";
 import Hero3 from "@/app/components/hero/varient-3";
 import Hero4 from "@/app/components/hero/varient-4";
+import Hero5 from "@/app/components/hero/varient-5";
 import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
@@ -34,6 +35,7 @@ import Footer1 from "@/app/components/footer/varient-1";
 import Footer2 from "@/app/components/footer/varient-2";
 import Footer3 from "@/app/components/footer/varient-3";
 import Footer4 from "@/app/components/footer/varient-4";
+import CommingSoon1 from "@/app/components/commingsoon/varient-1";
 
 const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -46,6 +48,7 @@ const HERO = {
   "varient-2": <Hero2 />,
   "varient-3": <Hero3 />,
   "varient-4": <Hero4 />,
+  "varient-5": <Hero5 />,
 };
 
 const PRICING = {
@@ -98,6 +101,10 @@ const CARDS = {
   "varient-11": <Card11 />,
 };
 
+const COMMING_SOON = {
+  "varient-1": <CommingSoon1 />,
+};
+
 export const FLOATER_SELECT = [
   {
     item_id: "navbar",
@@ -133,6 +140,12 @@ export const FLOATER_SELECT = [
     item_id: "cards",
     varients: CARDS,
     title: "Select Card",
+    selected: "varient-1",
+  },
+  {
+    item_id: "commingsoon",
+    varients: COMMING_SOON,
+    title: "Select Commingsoon",
     selected: "varient-1",
   },
   {
