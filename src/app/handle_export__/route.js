@@ -13,8 +13,8 @@ export async function POST(req) {
   const { components, ga_id = "" } = body;
   const zip = new AdmZip();
 
-  const file_to_add = components.map(({ name, varient }) => {
-    return `src/app/components/${name}/${varient}.jsx`;
+  const file_to_add = components.map(({ item_id, varient }) => {
+    return `src/app/components/${item_id}/${varient}.jsx`;
   });
 
   zip.addLocalFolder(ui_components, "", (file) => {

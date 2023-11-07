@@ -5,18 +5,18 @@ function capitalizeFirstLetter(string) {
 const generateRootPage = ({ components }) => {
   return `
 
-${components.reduce((acc, { name, varient }) => {
+${components.reduce((acc, { item_id, varient }) => {
   return `${acc} \n import ${capitalizeFirstLetter(
-    name
-  )} from "@/app/components/${name}/${varient}";`;
+    item_id
+  )} from "@/app/components/${item_id}/${varient}";`;
 }, "")}
 
 export default function Home() {
       return (
         <>
           <div className="w-full overflow-scroll">
-          ${components.reduce((acc, { name }) => {
-            return `${acc} \n <${capitalizeFirstLetter(name)} />`;
+          ${components.reduce((acc, { item_id }) => {
+            return `${acc} \n <${capitalizeFirstLetter(item_id)} />`;
           }, "")}
           </div>
         </>
