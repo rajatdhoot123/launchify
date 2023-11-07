@@ -88,7 +88,7 @@ const Floater = ({ setState, components = [], ga_id }) => {
   const router = useRouter();
 
   const handleExport = async () => {
-    logEvent("export_clicked");
+    logEvent("export_clicked", { event_name: "export_clicked" });
     const response = await fetch("/handle_export__", {
       method: "POST",
       body: JSON.stringify({
