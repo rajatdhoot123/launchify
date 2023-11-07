@@ -32,7 +32,10 @@ const ListCard = ({
   });
 
   return (
-    <div ref={(node) => ref(drop(node))} className="p-2 border border-gray-200 rounded-md">
+    <div
+      ref={(node) => ref(drop(node))}
+      className="p-2 border border-gray-200 rounded-md cursor-move space-y-2"
+    >
       <div className="text-sm font-bold">{title}</div>
       <Select
         handleChange={(val) => handleChange(val, index, item_id)}
