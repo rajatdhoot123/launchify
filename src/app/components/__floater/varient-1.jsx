@@ -1,8 +1,48 @@
 "use client";
 import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Fragment, useEffect } from "react";
+import { Fragment, useCallback, useEffect, useRef } from "react";
 import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { useDrag, useDrop } from "react-dnd";
+
+const ItemType = "ITEM";
+
+const ListCard = ({
+  moveItem,
+  selected,
+  title,
+  item_id,
+  varients,
+  index,
+  handleChange,
+}) => {
+  const [, ref] = useDrag({
+    type: ItemType,
+    item: { index },
+  });
+
+  const [, drop] = useDrop({
+    accept: ItemType,
+    drop: (draggedItem) => {
+      if (draggedItem.index !== index) {
+        moveItem(draggedItem.index, index);
+        draggedItem.index = index;
+      }
+    },
+  });
+
+  return (
+    <div ref={(node) => ref(drop(node))} className="p-2 border border-gray-200 rounded-md">
+      <div className="text-sm font-bold">{title}</div>
+      <Select
+        handleChange={(val) => handleChange(val, index, item_id)}
+        value={selected}
+        title={title}
+        list={Object.keys(varients)}
+      />
+    </div>
+  );
+};
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -48,8 +88,8 @@ const Floater = ({ setState, components = [], ga_id }) => {
       method: "POST",
       body: JSON.stringify({
         ga_id,
-        components: components.map(({ selected, key }) => ({
-          name: key,
+        components: components.map(({ selected, item_id }) => ({
+          item_id,
           varient: selected,
         })),
       }),
@@ -71,6 +111,51 @@ const Floater = ({ setState, components = [], ga_id }) => {
     }
   }, [router]);
 
+  const moveItem = useCallback(
+    (dragIndex, dropIndex) => {
+      setState((prevState) => {
+        const newState = [...prevState.components]; // Create a copy of the current state
+        const [movedItem] = newState.splice(dragIndex, 1); // Remove the item at dragIndex
+        newState.splice(dropIndex, 0, movedItem); // Insert the item at dropIndex
+        return { ...prevState, components: newState }; // Update the state with the reordered array
+      });
+    },
+    [setState]
+  );
+
+  const handleChange = useCallback(
+    (value, index, item_id) => {
+      setState((prev) => ({
+        ...prev,
+        components: prev.components.map((comp, findex) =>
+          findex === index ? { ...comp, selected: value } : comp
+        ),
+      }));
+
+      router.push(`#${item_id}`);
+      if (typeof navigator !== "undefined") {
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+          router.replace("/?floater=true");
+        }
+      }
+    },
+    [router, setState]
+  );
+
+  const renderList = useCallback(
+    (props, index) => {
+      return (
+        <ListCard
+          handleChange={handleChange}
+          index={index}
+          moveItem={moveItem}
+          {...props}
+        />
+      );
+    },
+    [handleChange, moveItem]
+  );
+
   if (searchParams.get("floater")) {
     return (
       <button
@@ -82,21 +167,6 @@ const Floater = ({ setState, components = [], ga_id }) => {
     );
   }
 
-  const handleChange = (value, index, key) => {
-    setState((prev) => ({
-      ...prev,
-      components: prev.components.map((comp, findex) =>
-        findex === index ? { ...comp, selected: value } : comp
-      ),
-    }));
-
-    router.push(`#${key}`);
-    if (typeof navigator !== "undefined") {
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        router.replace("/?floater=true");
-      }
-    }
-  };
   return (
     <div className="z-20 fixed md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
       <button
@@ -105,19 +175,11 @@ const Floater = ({ setState, components = [], ga_id }) => {
       >
         <CloseIcon />
       </button>
-      <div className="flex-1 space-y-4">
+      <div className="flex-1 space-y-4 overflow-y-scroll">
         <div className="space-y-2">
-          {components.map(({ key, varients, title, selected }, index) => (
-            <Fragment key={key}>
-              <div className="text-sm font-bold">{title}</div>
-              <Select
-                handleChange={(val) => handleChange(val, index, key)}
-                value={selected}
-                title={title}
-                list={Object.keys(varients)}
-              />
-            </Fragment>
-          ))}
+          {components.map(({ item_id, varients, title, selected }, index) => {
+            return renderList({ item_id, varients, title, selected }, index);
+          })}
         </div>
         <div className="space-y-2">
           <div className="text-sm font-bold">Google Analytics</div>

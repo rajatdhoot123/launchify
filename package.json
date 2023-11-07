@@ -16,6 +16,8 @@
     "next-sitemap": "^4.2.3",
     "original-fs": "^1.2.0",
     "react": "^18",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18"
   },
   "devDependencies": {

@@ -2,6 +2,8 @@
 import Floater from "@/app/components/__floater/varient-1";
 import { useState } from "react";
 import { FLOATER_SELECT } from "@/app/constants__/floater";
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 export default function Home() {
   const [state, setState] = useState({
@@ -11,11 +13,13 @@ export default function Home() {
 
   return (
     <>
-      <Floater
-        ga_id={state.ga_id}
-        components={state.components}
-        setState={setState}
-      />
+      <DndProvider backend={HTML5Backend}>
+        <Floater
+          ga_id={state.ga_id}
+          components={state.components}
+          setState={setState}
+        />
+      </DndProvider>
       <div className="space-y-12">
         {state.components.map((comp) => {
           return (
