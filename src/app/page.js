@@ -2,8 +2,8 @@
 import Floater from "@/app/components/__floater/varient-1";
 import { useState } from "react";
 import { FLOATER_SELECT } from "@/app/constants__/floater";
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function Home() {
   const [state, setState] = useState({
@@ -20,12 +20,12 @@ export default function Home() {
           setState={setState}
         />
       </DndProvider>
-      <div className="space-y-12">
+      <div className="space-y-16">
         {state.components.map((comp) => {
           return (
-            <secion key={comp.key} id={comp.key}>
+            <section key={comp.item_id} id={comp.item_id}>
               {comp.varients[comp.selected]}
-            </secion>
+            </section>
           );
         })}
       </div>

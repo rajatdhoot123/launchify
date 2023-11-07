@@ -30,21 +30,25 @@ import Card10 from "@/app/components/cards/varient-10";
 import Card11 from "@/app/components/cards/varient-11";
 import RandomCard1 from "@/app/components/randomcards/varient-1";
 import RandomCard2 from "@/app/components/randomcards/varient-2";
+import Footer1 from "@/app/components/footer/varient-1";
+import Footer2 from "@/app/components/footer/varient-2";
+import Footer3 from "@/app/components/footer/varient-3";
+import Footer4 from "@/app/components/footer/varient-4";
 
-export const NAVBAR = {
+const NAVBAR = {
   "varient-1": <Navbar1 />,
   "varient-2": <Navbar2 />,
   "varient-3": <Navbar3 />,
 };
 
-export const HERO = {
+const HERO = {
   "varient-1": <Hero1 />,
   "varient-2": <Hero2 />,
   "varient-3": <Hero3 />,
   "varient-4": <Hero4 />,
 };
 
-export const PRICING = {
+const PRICING = {
   "varient-1": <Pricing1 />,
   "varient-2": <Pricing2 />,
   "varient-3": <Pricing3 />,
@@ -52,28 +56,35 @@ export const PRICING = {
   "varient-5": <Pricing5 />,
 };
 
-export const TESTIMONIALS = {
+const TESTIMONIALS = {
   "varient-1": <Testimonials1 />,
   "varient-2": <Testimonials2 />,
   "varient-3": <Testimonials3 />,
 };
 
-export const TABLE = {
+const TABLE = {
   "varient-1": <Table1 />,
   "varient-2": <Table2 />,
   "varient-3": <Table3 />,
 };
 
-export const ACCORDION = {
+const ACCORDION = {
   "varient-1": <Accordion1 />,
 };
 
-export const RANDOMCARD = {
+const RANDOMCARD = {
   "varient-1": <RandomCard1 />,
   "varient-2": <RandomCard2 />,
 };
 
-export const CARDS = {
+const FOOTER = {
+  "varient-1": <Footer1 />,
+  "varient-2": <Footer2 />,
+  "varient-3": <Footer3 />,
+  "varient-4": <Footer4 />,
+};
+
+const CARDS = {
   "varient-1": <Card1 />,
   "varient-2": <Card2 />,
   "varient-3": <Card3 />,
@@ -128,6 +139,12 @@ export const FLOATER_SELECT = [
     item_id: "randomcards",
     varients: RANDOMCARD,
     title: "Select Random Card",
+    selected: "varient-1",
+  },
+  {
+    item_id: "footer",
+    varients: FOOTER,
+    title: "Select Footer",
     selected: "varient-1",
   },
 ];
