@@ -36,6 +36,7 @@ import Footer2 from "@/app/components/footer/varient-2";
 import Footer3 from "@/app/components/footer/varient-3";
 import Footer4 from "@/app/components/footer/varient-4";
 import CommingSoon1 from "@/app/components/commingsoon/varient-1";
+import ProductLaunch1 from "@/app/components/productlaunch/varient-1";
 
 const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -63,6 +64,10 @@ const TESTIMONIALS = {
   "varient-1": <Testimonials1 />,
   "varient-2": <Testimonials2 />,
   "varient-3": <Testimonials3 />,
+};
+
+const PRODUCT_LAUNCH = {
+  "varient-1": <ProductLaunch1 />,
 };
 
 const TABLE = {
@@ -128,6 +133,12 @@ export const FLOATER_SELECT = [
     item_id: "testimonials",
     varients: TESTIMONIALS,
     title: "Select Testimonials",
+    selected: "varient-1",
+  },
+  {
+    item_id: "productlaunch",
+    varients: PRODUCT_LAUNCH,
+    title: "Select Product Launch",
     selected: "varient-1",
   },
   {
