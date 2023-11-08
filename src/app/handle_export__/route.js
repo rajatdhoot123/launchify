@@ -27,10 +27,6 @@ export async function POST(req) {
     if (file.includes("__")) {
       return false;
     }
-
-    if (file.includes("api")) {
-      return false;
-    }
     return true;
   });
 
