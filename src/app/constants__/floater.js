@@ -129,6 +129,19 @@ const LOGIN = {
   "varient-2": <Login2 />,
 };
 
+export const PREMIUM_FEATURES = [
+  {
+    item_id: "next_auth",
+    selected: false,
+    title: "Next Auth",
+  },
+  {
+    item_id: "database",
+    selected: false,
+    title: "Database (Drizzle ORM)",
+  },
+];
+
 export const FLOATER_SELECT = [
   {
     item_id: "navbar",

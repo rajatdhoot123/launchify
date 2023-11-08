@@ -99,7 +99,7 @@ const CloseIcon = ({ className }) => (
   </svg>
 );
 
-const Floater = ({ setState, components = [], ga_id, next_auth }) => {
+const Floater = ({ setState, components = [], ga_id, premium_features }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -223,34 +223,50 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
         <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
           <div className="flex items-center justify-between">
             <div className="font-bold text-sm">PRO Features</div>
-            <a href="https://boilercode.app" target="_blank" className="font-bold text-sm my-2 bg-red-300 p-2 rounded-md">Boilercode App</a>
+            <a
+              href="https://boilercode.app"
+              target="_blank"
+              className="font-bold text-sm my-2 bg-red-300 p-2 rounded-md"
+            >
+              Boilercode App
+            </a>
           </div>
 
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center mb-4">
-              <input
-                disabled={is_disabled}
-                onChange={(e) => {
-                  console.log(e.target.value);
-                  setState((prev) => ({
-                    ...prev,
-                    next_auth: e.target.value === "true" ? false : true,
-                  }));
-                }}
-                type="checkbox"
-                value={next_auth}
-                checked={next_auth}
-                className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                  is_disabled ? "bg-gray-300" : "bg-gray-100"
-                }`}
-              />
-              <label
-                for="default-checkbox"
-                className="ml-2 text-sm font-medium text-gray-900"
-              >
-                Next Auth
-              </label>
-            </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {premium_features.map((feature, index) => (
+              <div className="flex flex-shrink-0 items-center" key={feature.item_id}>
+                <input
+                  disabled={is_disabled}
+                  onChange={(e) => {
+                    setState((prev) => ({
+                      ...prev,
+                      premium_features: prev.premium_features.map(
+                        (feature, findex) =>
+                          findex === index
+                            ? {
+                                ...feature,
+                                selected:
+                                  e.target.value === "true" ? false : true,
+                              }
+                            : feature
+                      ),
+                    }));
+                  }}
+                  type="checkbox"
+                  value={feature.selected}
+                  checked={feature.selected}
+                  className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
+                    is_disabled ? "bg-gray-300" : "bg-gray-100"
+                  }`}
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900"
+                >
+                  {feature.title}
+                </label>
+              </div>
+            ))}
           </div>
         </div>
       </div>
