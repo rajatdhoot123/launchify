@@ -1,11 +1,11 @@
 const Login = () => {
   return (
     <div
-      className="w-full h-screen flex items-center justify-center bg-gradient-to-r from-blue-200 to-green-200 dark:from-gray-800 dark:to-gray-900"
+      className="w-full h-screen flex items-center justify-center bg-gradient-to-r from-blue-200 to-green-200 "
       data-id="1"
     >
       <div
-        className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full overflow-hidden relative"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full overflow-hidden relative"
         data-id="2"
       >
         <h1 className="text-2xl font-bold text-center mb-5" data-id="4">
