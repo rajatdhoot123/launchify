@@ -40,6 +40,8 @@ import ProductLaunch1 from "@/app/components/productlaunch/varient-1";
 import Animated1 from "@/app/components/animatedcards/varient-1";
 import Contactus1 from "@/app/components/contactus/varient-1";
 import Contactus2 from "@/app/components/contactus/varient-2";
+import Login1 from "@/app/components/login/varient-1";
+import Login2 from "@/app/components/login/varient-2";
 
 const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -122,6 +124,11 @@ const CONTACT_US = {
   "varient-2": <Contactus2 />,
 };
 
+const LOGIN = {
+  "varient-1": <Login1 />,
+  "varient-2": <Login2 />,
+};
+
 export const FLOATER_SELECT = [
   {
     item_id: "navbar",
@@ -139,6 +146,12 @@ export const FLOATER_SELECT = [
     item_id: "pricing",
     varients: PRICING,
     title: "Select Pricing",
+    selected: "varient-1",
+  },
+  {
+    item_id: "login",
+    varients: LOGIN,
+    title: "Select Login",
     selected: "varient-1",
   },
   {

@@ -215,7 +215,7 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
           </TextFieldRoot>
         </div>
         <div className="flex items-center space-x-2">
-          <div class="flex items-center mb-4">
+          <div className="flex items-center mb-4">
             <input
               onChange={(e) => {
                 console.log(e.target.value);
@@ -227,11 +227,11 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
               type="checkbox"
               value={next_auth}
               checked={next_auth}
-              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded    "
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded    "
             />
             <label
               for="default-checkbox"
-              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
               Next Auth
             </label>
