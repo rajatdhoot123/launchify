@@ -73,7 +73,7 @@ const Navbar = () => {
         <button className="p-2 rounded-lg text-black font-bold">Button</button>
       </nav>
       <div
-        className={`z-20 md:hidden fixed inset-0 bg-white h-screen w-full md:w-96 transform transition-all ease-in-out duration-500 ${
+        className={`z-20 md:hidden fixed inset-0 bg-white w-full md:w-96 transform transition-all ease-in-out duration-500 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

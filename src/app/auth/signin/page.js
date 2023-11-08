@@ -23,7 +23,7 @@ export default async function SignIn() {
 
   return (
     <div
-      className="w-full h-screen flex items-center justify-center bg-gradient-to-r from-blue-200 to-green-200"
+      className="w-full min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-200 to-green-200"
       data-id="1"
     >
       <div
