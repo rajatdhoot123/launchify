@@ -246,7 +246,7 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
               />
               <label
                 for="default-checkbox"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="ml-2 text-sm font-medium text-gray-900"
               >
                 Next Auth
               </label>
