@@ -7,12 +7,3 @@
     scroll-behavior: smooth;
   }
 }
-
-.rt-CheckboxRoot {
-  [type="button"],
-  [type="reset"],
-  [type="submit"],
-  button {
-    background-color: var(--accent-12);
-  }
-}

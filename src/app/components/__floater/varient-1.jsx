@@ -2,13 +2,7 @@
 import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
-import {
-  Checkbox,
-  Flex,
-  Text,
-  TextFieldInput,
-  TextFieldRoot,
-} from "@radix-ui/themes";
+import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 
@@ -202,7 +196,7 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
       >
         <CloseIcon />
       </button>
-      <div className="flex-1 space-y-4 overflow-y-scroll">
+      <div className="flex-1 space-y-4 overflow-y-scroll py-2">
         <div className="space-y-2">
           {components.map(({ item_id, varients, title, selected }, index) => {
             return renderList({ item_id, varients, title, selected }, index);
@@ -221,19 +215,27 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
           </TextFieldRoot>
         </div>
         <div className="flex items-center space-x-2">
-          <Text as="label" size="2">
-            <Flex gap="2">
-              <Checkbox
-                color="indigo"
-                highContrast
-                onCheckedChange={(e) =>
-                  setState((prev) => ({ ...prev, next_auth: e }))
-                }
-                checked={next_auth}
-              />
+          <div class="flex items-center mb-4">
+            <input
+              onChange={(e) => {
+                console.log(e.target.value);
+                setState((prev) => ({
+                  ...prev,
+                  next_auth: e.target.value === "true" ? false : true,
+                }));
+              }}
+              type="checkbox"
+              value={next_auth}
+              checked={next_auth}
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded    "
+            />
+            <label
+              for="default-checkbox"
+              class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
               Next Auth
-            </Flex>
-          </Text>
+            </label>
+          </div>
         </div>
       </div>
       <div className="text-center">

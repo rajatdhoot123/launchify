@@ -1,8 +1,9 @@
-const generateLayout = ({ ga_id = "" }) => {
+const generateLayout = ({ ga_id = "", next_auth }) => {
   return `
 import { Inter } from "next/font/google";
 import "./globals.css";
 ${ga_id && `import Script from "next/script"`}
+${next_auth && `import NextAuthProvider from "@/app/nextauth/provider"`}
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +34,13 @@ export default function RootLayout({ children }) {
     `
         : ""
     }
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      ${
+        next_auth
+          ? "<NextAuthProvider>{children}</NextAuthProvider>"
+          : "{children}"
+      }
+      </body>
     </html>
       );
 }    

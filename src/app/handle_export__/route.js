@@ -6,11 +6,33 @@ import generateLayout from "../utils__/generateLayout";
 import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 
+const DATABASE_FILES = [
+  "src/lib/database/db.js",
+  "src/lib/database/schema.js",
+  "src/lib/database",
+  "drizzle.config.js",
+];
+
+const NEXT_AUTH_FILES = [
+  "src/app/auth/EmailSignIn.js",
+  "src/app/auth/GoogleSignIn.js",
+  "src/app/auth/LoginButton.js",
+  "src/app/auth/authenticated/page.js",
+  "src/app/auth/authenticated",
+  "src/app/auth/signin/page.js",
+  "src/app/auth/signin",
+  "src/app/auth",
+  "src/app/nextauth/provider.js",
+  "src/app/nextauth",
+  "src/app/api/auth/[...nextauth]/route.ts",
+  "src/app/api/auth/[...nextauth]",
+];
+
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const body = await req.json();
 
-  const { components, ga_id = "", next_auth } = body;
+  const { components, ga_id = "", next_auth, database } = body;
   const zip = new AdmZip();
 
   const file_to_add = components.map(({ item_id, varient }) => {
@@ -18,6 +40,18 @@ export async function POST(req) {
   });
 
   zip.addLocalFolder(ui_components, "", (file) => {
+    if (DATABASE_FILES.includes(file)) {
+      if (next_auth === true || database === true) {
+        return true;
+      }
+      return false;
+    }
+    if (NEXT_AUTH_FILES.includes(file)) {
+      if (next_auth === true) {
+        return true;
+      }
+      return false;
+    }
     if (file.startsWith("src/app/components")) {
       if (file_to_add.includes(file)) {
         return true;
@@ -31,19 +65,13 @@ export async function POST(req) {
     if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
       return false;
     }
-    if (file.includes("auth")) {
-      if (next_auth === true) {
-        return true;
-      }
-      return false;
-    }
     return true;
   });
 
   zip.addFile(
     "src/app/layout.js",
     Buffer.from(
-      await prettier.format(generateLayout({ ga_id }), {
+      await prettier.format(generateLayout({ ga_id, next_auth }), {
         parser: "babel",
       })
     )
