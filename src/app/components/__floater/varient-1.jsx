@@ -110,7 +110,7 @@ const Floater = ({ setState, components = [], ga_id, premium_features }) => {
       method: "POST",
       body: JSON.stringify({
         ga_id,
-        next_auth,
+        premium_features,
         components: components.map(({ selected, item_id }) => ({
           item_id,
           varient: selected,

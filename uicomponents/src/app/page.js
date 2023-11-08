@@ -1,7 +1,7 @@
 "use client";
 import Floater from "@/app/components/__floater/varient-1";
 import { useState } from "react";
-import { FLOATER_SELECT } from "@/app/constants__/floater";
+import { FLOATER_SELECT, PREMIUM_FEATURES } from "@/app/constants__/floater";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -9,14 +9,14 @@ export default function Home() {
   const [state, setState] = useState({
     components: FLOATER_SELECT,
     ga_id: "",
-    next_auth: false,
+    premium_features: PREMIUM_FEATURES,
   });
 
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <Floater
-          next_auth={state.next_auth}
+          premium_features={state.premium_features}
           ga_id={state.ga_id}
           components={state.components}
           setState={setState}

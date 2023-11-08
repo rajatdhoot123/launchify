@@ -32,22 +32,29 @@ export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const body = await req.json();
 
-  const { components, ga_id = "", next_auth, database } = body;
+  const { components, ga_id = "", premium_features } = body;
   const zip = new AdmZip();
 
+  const is_next_auth = premium_features.find(
+    ({ item_id }) => item_id === "next_auth"
+  )?.selected;
+
+  const is_database = premium_features.find(
+    ({ item_id }) => item_id === "database"
+  )?.selected;
   const file_to_add = components.map(({ item_id, varient }) => {
     return `src/app/components/${item_id}/${varient}.jsx`;
   });
 
   zip.addLocalFolder(ui_components, "", (file) => {
     if (DATABASE_FILES.includes(file)) {
-      if (next_auth === true || database === true) {
+      if (is_database || is_next_auth) {
         return true;
       }
       return false;
     }
     if (NEXT_AUTH_FILES.includes(file)) {
-      if (next_auth === true) {
+      if (is_next_auth) {
         return true;
       }
       return false;
@@ -71,9 +78,12 @@ export async function POST(req) {
   zip.addFile(
     "src/app/layout.js",
     Buffer.from(
-      await prettier.format(generateLayout({ ga_id, next_auth }), {
-        parser: "babel",
-      })
+      await prettier.format(
+        generateLayout({ ga_id, next_auth: is_next_auth }),
+        {
+          parser: "babel",
+        }
+      )
     )
   );
 
