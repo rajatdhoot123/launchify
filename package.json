@@ -23,6 +23,7 @@
     "next": "^14.0.1",
     "next-auth": "^4.24.4",
     "next-sitemap": "^4.2.3",
+    "nodemailer": "^6.9.7",
     "original-fs": "^1.2.0",
     "postgres": "^3.4.3",
     "react": "^18",
