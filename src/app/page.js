@@ -9,12 +9,14 @@ export default function Home() {
   const [state, setState] = useState({
     components: FLOATER_SELECT,
     ga_id: "",
+    next_auth: false,
   });
 
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <Floater
+          next_auth={state.next_auth}
           ga_id={state.ga_id}
           components={state.components}
           setState={setState}

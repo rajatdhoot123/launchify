@@ -2,7 +2,7 @@
 import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
-import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { Checkbox, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 
@@ -98,7 +98,7 @@ const CloseIcon = ({ className }) => (
   </svg>
 );
 
-const Floater = ({ setState, components = [], ga_id }) => {
+const Floater = ({ setState, components = [], ga_id, next_auth }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -108,6 +108,7 @@ const Floater = ({ setState, components = [], ga_id }) => {
       method: "POST",
       body: JSON.stringify({
         ga_id,
+        next_auth,
         components: components.map(({ selected, item_id }) => ({
           item_id,
           varient: selected,
@@ -212,6 +213,15 @@ const Floater = ({ setState, components = [], ga_id }) => {
               placeholder="Enter GA Id"
             />
           </TextFieldRoot>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Checkbox
+            onCheckedChange={(e) =>
+              setState((prev) => ({ ...prev, next_auth: e }))
+            }
+            checked={next_auth}
+          />
+          <div className="text-sm font-bold">Next Auth</div>
         </div>
       </div>
       <div className="text-center">
