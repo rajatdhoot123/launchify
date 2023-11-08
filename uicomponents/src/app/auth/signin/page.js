@@ -6,7 +6,7 @@ async function getProviders() {
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/providers`);
 
   if (!res.ok) {
-    console.log(res)
+    console.log(res);
     throw new Error("Failed to fetch providers");
   }
 
@@ -14,8 +14,16 @@ async function getProviders() {
 }
 
 export default async function SignIn() {
-  const resp = (await getProviders()) || {};
+  let resp;
+  try {
+    resp = (await getProviders()) || {};
+  } catch (err) {
+    console.log(err);
+  }
 
+  if (!resp) {
+    return null;
+  }
   return (
     <div className="flex  min-h-[500px] flex-col items-center justify-center bg-gray-100">
       <h1 className="mb-4 text-3xl font-semibold">Sign In</h1>

@@ -2,7 +2,13 @@
 import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
-import { Checkbox, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import {
+  Checkbox,
+  Flex,
+  Text,
+  TextFieldInput,
+  TextFieldRoot,
+} from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 
@@ -215,13 +221,17 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
           </TextFieldRoot>
         </div>
         <div className="flex items-center space-x-2">
-          <Checkbox
-            onCheckedChange={(e) =>
-              setState((prev) => ({ ...prev, next_auth: e }))
-            }
-            checked={next_auth}
-          />
-          <div className="text-sm font-bold">Next Auth</div>
+          <Text as="label" size="2">
+            <Flex gap="2">
+              <Checkbox
+                onCheckedChange={(e) =>
+                  setState((prev) => ({ ...prev, next_auth: e }))
+                }
+                checked={next_auth}
+              />
+              Next Auth
+            </Flex>
+          </Text>
         </div>
       </div>
       <div className="text-center">
