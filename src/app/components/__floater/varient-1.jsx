@@ -224,6 +224,8 @@ const Floater = ({ setState, components = [], ga_id, next_auth }) => {
           <Text as="label" size="2">
             <Flex gap="2">
               <Checkbox
+                color="indigo"
+                highContrast
                 onCheckedChange={(e) =>
                   setState((prev) => ({ ...prev, next_auth: e }))
                 }
