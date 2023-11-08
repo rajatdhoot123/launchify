@@ -3,6 +3,7 @@ import "./globals.css";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import Script from "next/script";
+import NextAuthProvider from "@/app/nextauth/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,7 +53,9 @@ export default function RootLayout({ children }) {
         </>
       )}
       <body className={inter.className}>
-        <Theme>{children}</Theme>
+        <Theme>
+          <NextAuthProvider>{children}</NextAuthProvider>
+        </Theme>
       </body>
     </html>
   );

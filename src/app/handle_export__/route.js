@@ -10,7 +10,7 @@ export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const body = await req.json();
 
-  const { components, ga_id = "" } = body;
+  const { components, ga_id = "", next_auth } = body;
   const zip = new AdmZip();
 
   const file_to_add = components.map(({ item_id, varient }) => {
@@ -25,6 +25,16 @@ export async function POST(req) {
       return false;
     }
     if (file.includes("__")) {
+      return false;
+    }
+
+    if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
+      return false;
+    }
+    if (file.includes("auth")) {
+      if (next_auth === true) {
+        return true;
+      }
       return false;
     }
     return true;
