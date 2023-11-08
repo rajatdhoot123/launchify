@@ -32,7 +32,7 @@ export const AUTH_OPTIONS = {
       return true;
     },
     async redirect({ baseUrl }) {
-      return `${baseUrl}`;
+      return `${baseUrl}/auth/authenticated`;
     },
   },
 };

@@ -28,6 +28,9 @@ export async function POST(req) {
       return false;
     }
 
+    if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
+      return false;
+    }
     if (file.includes("auth")) {
       if (next_auth === true) {
         return true;
