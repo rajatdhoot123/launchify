@@ -37,6 +37,9 @@ import Footer3 from "@/app/components/footer/varient-3";
 import Footer4 from "@/app/components/footer/varient-4";
 import CommingSoon1 from "@/app/components/commingsoon/varient-1";
 import ProductLaunch1 from "@/app/components/productlaunch/varient-1";
+import Animated1 from "@/app/components/animatedcards/varient-1";
+import Contactus1 from "@/app/components/contactus/varient-1";
+import Contactus2 from "@/app/components/contactus/varient-2";
 
 const NAVBAR = {
   "varient-1": <Navbar1 />,
@@ -110,6 +113,15 @@ const COMMING_SOON = {
   "varient-1": <CommingSoon1 />,
 };
 
+const ANIMATED_CARDS = {
+  "varient-1": <Animated1 />,
+};
+
+const CONTACT_US = {
+  "varient-1": <Contactus1 />,
+  "varient-2": <Contactus2 />,
+};
+
 export const FLOATER_SELECT = [
   {
     item_id: "navbar",
@@ -160,6 +172,12 @@ export const FLOATER_SELECT = [
     selected: "varient-1",
   },
   {
+    item_id: "contactus",
+    varients: CONTACT_US,
+    title: "Select Contact Us",
+    selected: "varient-1",
+  },
+  {
     item_id: "randomcards",
     varients: RANDOMCARD,
     title: "Select Random Card",
@@ -169,6 +187,12 @@ export const FLOATER_SELECT = [
     item_id: "footer",
     varients: FOOTER,
     title: "Select Footer",
+    selected: "varient-1",
+  },
+  {
+    item_id: "animatedcards",
+    varients: ANIMATED_CARDS,
+    title: "Select Animated",
     selected: "varient-1",
   },
 ];
