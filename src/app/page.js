@@ -10,12 +10,14 @@ export default function Home() {
     components: FLOATER_SELECT,
     ga_id: "",
     premium_features: PREMIUM_FEATURES,
+    crisp_id: "",
   });
 
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <Floater
+          crisp_id={state.crisp_id}
           premium_features={state.premium_features}
           ga_id={state.ga_id}
           components={state.components}

@@ -99,7 +99,13 @@ const CloseIcon = ({ className }) => (
   </svg>
 );
 
-const Floater = ({ setState, components = [], ga_id, premium_features }) => {
+const Floater = ({
+  setState,
+  components = [],
+  ga_id,
+  premium_features,
+  crisp_id,
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -110,6 +116,7 @@ const Floater = ({ setState, components = [], ga_id, premium_features }) => {
       method: "POST",
       body: JSON.stringify({
         ga_id,
+        crisp_id,
         premium_features,
         components: components.map(({ selected, item_id }) => ({
           item_id,
@@ -220,6 +227,18 @@ const Floater = ({ setState, components = [], ga_id, premium_features }) => {
             />
           </TextFieldRoot>
         </div>
+        <div className="space-y-2">
+          <div className="text-sm font-bold">Crisp Support</div>
+          <TextFieldRoot>
+            <TextFieldInput
+              onChange={(e) =>
+                setState((prev) => ({ ...prev, crisp_id: e.target.value }))
+              }
+              value={crisp_id}
+              placeholder="Enter GA Id"
+            />
+          </TextFieldRoot>
+        </div>
         <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
           <div className="flex items-center justify-between">
             <div className="font-bold text-sm">PRO Features</div>
@@ -234,7 +253,10 @@ const Floater = ({ setState, components = [], ga_id, premium_features }) => {
 
           <div className="flex flex-wrap items-center gap-2">
             {premium_features.map((feature, index) => (
-              <div className="flex flex-shrink-0 items-center" key={feature.item_id}>
+              <div
+                className="flex flex-shrink-0 items-center"
+                key={feature.item_id}
+              >
                 <input
                   disabled={is_disabled}
                   onChange={(e) => {

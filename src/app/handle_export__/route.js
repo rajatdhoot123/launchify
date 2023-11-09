@@ -32,7 +32,7 @@ export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const body = await req.json();
 
-  const { components, ga_id = "", premium_features } = body;
+  const { components, ga_id = "", crisp_id = "", premium_features } = body;
   const zip = new AdmZip();
 
   const is_next_auth = premium_features.find(
@@ -79,7 +79,7 @@ export async function POST(req) {
     "src/app/layout.js",
     Buffer.from(
       await prettier.format(
-        generateLayout({ ga_id, next_auth: is_next_auth }),
+        generateLayout({ ga_id, next_auth: is_next_auth, crisp_id }),
         {
           parser: "babel",
         }
@@ -100,8 +100,9 @@ export async function POST(req) {
   zip.addFile(
     ".env.local",
     Buffer.from(`
-${ga_id && `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}`}
-    `)
+${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
+${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
+`)
   );
 
   const zipFileContents = zip.toBuffer();
