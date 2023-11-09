@@ -215,6 +215,7 @@ const Floater = ({
             return renderList({ item_id, varients, title, selected }, index);
           })}
         </div>
+
         <div className="space-y-2">
           <div className="text-sm font-bold">Google Analytics</div>
           <TextFieldRoot>
@@ -235,15 +236,29 @@ const Floater = ({
                 setState((prev) => ({ ...prev, crisp_id: e.target.value }))
               }
               value={crisp_id}
-              placeholder="Enter GA Id"
+              placeholder="Enter Crisp Id"
             />
           </TextFieldRoot>
+        </div>
+        <div className="flex items-center">
+          <input
+            readOnly
+            checked={true}
+            type="checkbox"
+            className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
+          />
+          <label
+            for="default-checkbox"
+            className="ml-2 text-sm font-medium text-gray-900"
+          >
+            Sitemap (SEO)
+          </label>
         </div>
         <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
           <div className="flex items-center justify-between">
             <div className="font-bold text-sm">PRO Features</div>
             <a
-              href="https://boilercode.app"
+              href="https://boilercode.app?utm_source=uiwidgets"
               target="_blank"
               className="font-bold text-sm my-2 bg-red-300 p-2 rounded-md"
             >
