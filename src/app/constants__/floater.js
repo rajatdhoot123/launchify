@@ -17,7 +17,6 @@ import Testimonials3 from "@/app/components/testimonials/varient-3";
 import Table1 from "@/app/components/table/varient-1";
 import Table2 from "@/app/components/table/varient-2";
 import Table3 from "@/app/components/table/varient-3";
-import Accordion1 from "@/app/components/accordion/varient-1";
 import Card1 from "@/app/components/cards/varient-1";
 import Card2 from "@/app/components/cards/varient-2";
 import Card3 from "@/app/components/cards/varient-3";
@@ -79,10 +78,6 @@ const TABLE = {
   "varient-1": <Table1 />,
   "varient-2": <Table2 />,
   "varient-3": <Table3 />,
-};
-
-const ACCORDION = {
-  "varient-1": <Accordion1 />,
 };
 
 const RANDOMCARD = {

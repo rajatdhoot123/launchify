@@ -2,9 +2,10 @@
 import Select from "@/app/components/__select/varient-1";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
-import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { Separator, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
+import Collapsible from "@/app/components/__accordion/varient-1";
 import { useSession } from "next-auth/react";
 
 const ItemType = "ITEM";
@@ -37,7 +38,7 @@ const ListCard = ({
     <div
       key={item_id}
       ref={(node) => ref(drop(node))}
-      className="p-2 border border-gray-200 rounded-md cursor-move space-y-2"
+      className="rounded-md cursor-move space-y-2"
     >
       <div className="flex items-center">
         <svg
@@ -52,7 +53,7 @@ const ListCard = ({
           <path fill="none" d="M0 0h24v24H0V0z"></path>
           <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
         </svg>
-        <div className="text-sm font-bold">{title}</div>
+        <div className="text-sm font-semibold">{title}</div>
       </div>
       <Select
         handleChange={(val) => handleChange(val, index, item_id)}
@@ -210,50 +211,6 @@ const Floater = ({
         <CloseIcon />
       </button>
       <div className="flex-1 space-y-4 overflow-y-scroll py-2">
-        <div className="space-y-2">
-          {components.map(({ item_id, varients, title, selected }, index) => {
-            return renderList({ item_id, varients, title, selected }, index);
-          })}
-        </div>
-
-        <div className="space-y-2">
-          <div className="text-sm font-bold">Google Analytics</div>
-          <TextFieldRoot>
-            <TextFieldInput
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, ga_id: e.target.value }))
-              }
-              value={ga_id}
-              placeholder="Enter GA Id"
-            />
-          </TextFieldRoot>
-        </div>
-        <div className="space-y-2">
-          <div className="text-sm font-bold">Crisp Support</div>
-          <TextFieldRoot>
-            <TextFieldInput
-              onChange={(e) =>
-                setState((prev) => ({ ...prev, crisp_id: e.target.value }))
-              }
-              value={crisp_id}
-              placeholder="Enter Crisp Id"
-            />
-          </TextFieldRoot>
-        </div>
-        <div className="flex items-center">
-          <input
-            readOnly
-            checked={true}
-            type="checkbox"
-            className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
-          />
-          <label
-            for="default-checkbox"
-            className="ml-2 text-sm font-medium text-gray-900"
-          >
-            Sitemap (SEO)
-          </label>
-        </div>
         <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
           <div className="flex items-center justify-between">
             <div className="font-bold text-sm">PRO Features</div>
@@ -265,7 +222,7 @@ const Floater = ({
               Boilercode App
             </a>
           </div>
-
+          <Separator mb="3" size="4" />
           <div className="flex flex-wrap items-center gap-2">
             {premium_features.map((feature, index) => (
               <div
@@ -305,6 +262,81 @@ const Floater = ({
               </div>
             ))}
           </div>
+        </div>
+        <div className="border border-gray-200 p-2 rounded-md">
+          <Collapsible
+            isOpen={true}
+            title={
+              <div className="w-full text-left font-bold">
+                <span className="">Components</span>
+              </div>
+            }
+          >
+            <div className="space-y-4 mt-5">
+              {components.map(
+                ({ item_id, varients, title, selected }, index) => {
+                  return renderList(
+                    { item_id, varients, title, selected },
+                    index
+                  );
+                }
+              )}
+            </div>
+          </Collapsible>
+        </div>
+        <Separator my="3" size="4" />
+        <div className="border border-gray-200 p-2 rounded-md">
+          <Collapsible
+            title={
+              <div className="w-full text-left font-bold">
+                <span className="">Features</span>
+              </div>
+            }
+          >
+            <div className="space-y-4 mt-5">
+              <div className="space-y-2">
+                <div className="text-sm font-semibold">Google Analytics</div>
+                <TextFieldRoot>
+                  <TextFieldInput
+                    onChange={(e) =>
+                      setState((prev) => ({ ...prev, ga_id: e.target.value }))
+                    }
+                    value={ga_id}
+                    placeholder="Enter GA Id"
+                  />
+                </TextFieldRoot>
+              </div>
+              <div className="space-y-2">
+                <div className="text-sm font-semibold">Crisp Support</div>
+                <TextFieldRoot>
+                  <TextFieldInput
+                    onChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        crisp_id: e.target.value,
+                      }))
+                    }
+                    value={crisp_id}
+                    placeholder="Enter Crisp Id"
+                  />
+                </TextFieldRoot>
+              </div>
+              <div className="flex items-center">
+                <input
+                  readOnly
+                  checked={true}
+                  type="checkbox"
+                  className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
+                />
+                <label
+                  for="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900"
+                >
+                  Sitemap (SEO)
+                </label>
+              </div>
+            </div>
+          </Collapsible>
         </div>
       </div>
       <div className="text-center">
