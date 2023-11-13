@@ -5,6 +5,8 @@ import path from "path";
 import generateLayout from "../utils__/generateLayout";
 import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
+import { getServerSession } from "next-auth/next";
+import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/route";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
@@ -37,6 +39,11 @@ export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const body = await req.json();
 
+  const session = await getServerSession(AUTH_OPTIONS);
+
+  const is_premium_user = ["rajatdhoot123@gmail.com"].find(
+    (puser) => puser === session?.user?.email
+  );
   const {
     components,
     ga_id = "",
@@ -67,12 +74,18 @@ export async function POST(req) {
       return pages_to_add.includes(file);
     }
     if (DATABASE_FILES.includes(file)) {
+      if (!is_premium_user) {
+        return false;
+      }
       if (is_database || is_next_auth) {
         return true;
       }
       return false;
     }
     if (NEXT_AUTH_FILES.includes(file)) {
+      if (!is_premium_user) {
+        return false;
+      }
       if (is_next_auth) {
         return true;
       }

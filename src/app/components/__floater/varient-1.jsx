@@ -256,7 +256,7 @@ const Floater = ({
                   }`}
                 />
                 <label
-                  for="default-checkbox"
+                  htmlFor="default-checkbox"
                   className="ml-2 text-sm font-medium text-gray-900"
                 >
                   {feature.title}
@@ -331,10 +331,24 @@ const Floater = ({
                   className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
                 />
                 <label
-                  for="default-checkbox"
+                  htmlFor="default-checkbox"
                   className="ml-2 text-sm font-medium text-gray-900"
                 >
                   Sitemap (SEO)
+                </label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  readOnly
+                  checked={true}
+                  type="checkbox"
+                  className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
+                />
+                <label
+                  htmlFor="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900"
+                >
+                  Mdx Support
                 </label>
               </div>
             </div>
@@ -378,7 +392,7 @@ const Floater = ({
                     }`}
                   />
                   <label
-                    for="default-checkbox"
+                    htmlFor="default-checkbox"
                     className="ml-2 text-sm font-medium text-gray-900"
                   >
                     {feature.title}
