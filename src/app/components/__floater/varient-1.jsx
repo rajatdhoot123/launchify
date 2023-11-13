@@ -119,6 +119,7 @@ const Floater = ({
       body: JSON.stringify({
         ga_id,
         crisp_id,
+        pages,
         premium_features,
         components: components.map(({ selected, item_id }) => ({
           item_id,
@@ -359,15 +360,14 @@ const Floater = ({
                     onChange={(e) => {
                       setState((prev) => ({
                         ...prev,
-                        premium_features: prev.premium_features.map(
-                          (feature, findex) =>
-                            findex === index
-                              ? {
-                                  ...feature,
-                                  selected:
-                                    e.target.value === "true" ? false : true,
-                                }
-                              : feature
+                        pages: prev.pages.map((page, findex) =>
+                          findex === index
+                            ? {
+                                ...page,
+                                selected:
+                                  e.target.value === "true" ? false : true,
+                              }
+                            : page
                         ),
                       }));
                     }}

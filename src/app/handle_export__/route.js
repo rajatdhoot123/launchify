@@ -28,11 +28,22 @@ const NEXT_AUTH_FILES = [
   "src/app/api/auth/[...nextauth]",
 ];
 
+const SUPPORT_PAGES = [
+  "src/app/(markdown)/terms-condition/page.mdx",
+  "src/app/(markdown)/privacy-policy/page.mdx",
+];
+
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const body = await req.json();
 
-  const { components, ga_id = "", crisp_id = "", premium_features } = body;
+  const {
+    components,
+    ga_id = "",
+    crisp_id = "",
+    premium_features,
+    pages = [],
+  } = body;
   const zip = new AdmZip();
 
   const is_next_auth = premium_features.find(
@@ -46,7 +57,15 @@ export async function POST(req) {
     return `src/app/components/${item_id}/${varient}.jsx`;
   });
 
+  const pages_to_add = pages
+    .filter((page) => page.selected)
+    .map((item) => `src/app/(markdown)/${item.item_id}/page.mdx`);
+
   zip.addLocalFolder(ui_components, "", (file) => {
+    if (SUPPORT_PAGES.includes(file)) {
+      console.log(pages_to_add, file);
+      return pages_to_add.includes(file);
+    }
     if (DATABASE_FILES.includes(file)) {
       if (is_database || is_next_auth) {
         return true;
@@ -72,6 +91,8 @@ export async function POST(req) {
     if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
       return false;
     }
+
+    console.log(file);
     return true;
   });
 

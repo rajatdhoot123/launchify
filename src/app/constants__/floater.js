@@ -139,12 +139,12 @@ export const PREMIUM_FEATURES = [
 
 export const PAGES = [
   {
-    item_id: "terms_condition",
+    item_id: "terms-condition",
     selected: false,
     title: "Terms and Condition",
   },
   {
-    item_id: "privacy_policy",
+    item_id: "privacy-policy",
     selected: false,
     title: "Privacy Policy",
   },
