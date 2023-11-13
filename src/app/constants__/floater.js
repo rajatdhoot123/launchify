@@ -137,6 +137,19 @@ export const PREMIUM_FEATURES = [
   },
 ];
 
+export const PAGES = [
+  {
+    item_id: "terms_condition",
+    selected: false,
+    title: "Terms and Condition",
+  },
+  {
+    item_id: "privacy_policy",
+    selected: false,
+    title: "Privacy Policy",
+  },
+];
+
 export const FLOATER_SELECT = [
   {
     item_id: "navbar",

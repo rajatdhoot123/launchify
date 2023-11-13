@@ -40,9 +40,9 @@ const Collapsible = ({ title, children, isOpen = false }) => {
       <style jsx>
         {`
           .panel-collapse {
-            max-height: 2000px;
+            max-height: 1500px;
             overflow: scroll;
-            transition: max-height 0.5s ease;
+            transition: max-height 0.3s ease;
           }
           .panel-close {
             max-height: 0;

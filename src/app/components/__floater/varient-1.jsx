@@ -105,6 +105,7 @@ const Floater = ({
   components = [],
   ga_id,
   premium_features,
+  pages,
   crisp_id,
 }) => {
   const searchParams = useSearchParams();
@@ -335,6 +336,56 @@ const Floater = ({
                   Sitemap (SEO)
                 </label>
               </div>
+            </div>
+          </Collapsible>
+        </div>
+        <div className="border border-gray-200 p-2 rounded-md">
+          <Collapsible
+            isOpen={true}
+            title={
+              <div className="w-full text-left font-bold">
+                <span className="">Pages</span>
+              </div>
+            }
+          >
+            <div className="flex flex-col space-y-4 mt-5">
+              {pages.map((feature, index) => (
+                <div
+                  className="flex flex-shrink-0 items-center"
+                  key={feature.item_id}
+                >
+                  <input
+                    disabled={is_disabled}
+                    onChange={(e) => {
+                      setState((prev) => ({
+                        ...prev,
+                        premium_features: prev.premium_features.map(
+                          (feature, findex) =>
+                            findex === index
+                              ? {
+                                  ...feature,
+                                  selected:
+                                    e.target.value === "true" ? false : true,
+                                }
+                              : feature
+                        ),
+                      }));
+                    }}
+                    type="checkbox"
+                    value={feature.selected}
+                    checked={feature.selected}
+                    className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
+                      is_disabled ? "bg-gray-300" : "bg-gray-100"
+                    }`}
+                  />
+                  <label
+                    for="default-checkbox"
+                    className="ml-2 text-sm font-medium text-gray-900"
+                  >
+                    {feature.title}
+                  </label>
+                </div>
+              ))}
             </div>
           </Collapsible>
         </div>
