@@ -27,7 +27,7 @@ const Collapsible = ({ title, children, isOpen = false }) => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
             ></path>
           </svg>
@@ -40,9 +40,9 @@ const Collapsible = ({ title, children, isOpen = false }) => {
       <style jsx>
         {`
           .panel-collapse {
-            max-height: 2000px;
+            max-height: 1500px;
             overflow: scroll;
-            transition: max-height 0.5s ease;
+            transition: max-height 0.3s ease;
           }
           .panel-close {
             max-height: 0;

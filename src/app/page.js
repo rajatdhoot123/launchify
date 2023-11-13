@@ -1,7 +1,11 @@
 "use client";
 import Floater from "@/app/components/__floater/varient-1";
 import { useState } from "react";
-import { FLOATER_SELECT, PREMIUM_FEATURES } from "@/app/constants__/floater";
+import {
+  FLOATER_SELECT,
+  PAGES,
+  PREMIUM_FEATURES,
+} from "@/app/constants__/floater";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -11,12 +15,14 @@ export default function Home() {
     ga_id: "",
     premium_features: PREMIUM_FEATURES,
     crisp_id: "",
+    pages: PAGES,
   });
 
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <Floater
+          pages={state.pages}
           crisp_id={state.crisp_id}
           premium_features={state.premium_features}
           ga_id={state.ga_id}

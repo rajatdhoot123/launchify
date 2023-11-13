@@ -70,7 +70,7 @@ const Footer = () => {
             </div>
 
             <form className="w-full mt-6">
-              <label for="UserEmail" className="sr-only">
+              <label htmlFor="UserEmail" className="sr-only">
                 {" "}
                 Email{" "}
               </label>

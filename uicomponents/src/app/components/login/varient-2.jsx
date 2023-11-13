@@ -43,7 +43,7 @@ const Login = () => {
         <div className="mb-4" data-id="9">
           <label
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            for="email"
+            htmlFor="email"
             data-id="10"
           >
             Email
