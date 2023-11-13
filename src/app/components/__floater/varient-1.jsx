@@ -356,7 +356,6 @@ const Floater = ({
                   key={feature.item_id}
                 >
                   <input
-                    disabled={is_disabled}
                     onChange={(e) => {
                       setState((prev) => ({
                         ...prev,
