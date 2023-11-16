@@ -291,7 +291,7 @@ const Floater = ({
           <Collapsible
             title={
               <div className="w-full text-left font-bold">
-                <span className="">Features</span>
+                <span className="">Integrations</span>
               </div>
             }
           >
