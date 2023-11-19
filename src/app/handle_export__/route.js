@@ -6,7 +6,7 @@ import generateLayout from "../utils__/generateLayout";
 import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/route";
+import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
