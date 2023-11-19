@@ -1,7 +1,7 @@
 "use client";
 import Select from "@/app/components/__select/varient-1";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { Separator, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
@@ -108,7 +108,7 @@ const Floater = ({
   pages,
   crisp_id,
 }) => {
-  const searchParams = useSearchParams();
+  const [floater, setFloter] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -140,7 +140,7 @@ const Floater = ({
   useEffect(() => {
     if (typeof navigator !== "undefined") {
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        router.replace("/?floater=true");
+        setFloter(true);
       }
     }
   }, [router]);
@@ -169,7 +169,7 @@ const Floater = ({
       router.push(`#${item_id}`);
       if (typeof navigator !== "undefined") {
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-          router.replace("/?floater=true");
+          setFloter(true);
         }
       }
     },
@@ -190,10 +190,10 @@ const Floater = ({
     [handleChange, moveItem]
   );
 
-  if (searchParams.get("floater")) {
+  if (floater) {
     return (
       <button
-        onClick={() => router.replace("/", { scroll: false })}
+        onClick={() => setFloter((prev) => !prev)}
         className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-[#F53855]"
       >
         <FloterIcon className="text-white text-xl md:text-2xl" />
@@ -209,7 +209,7 @@ const Floater = ({
     <div className="z-20 fixed md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
       <button
         className="right-4 absolute cursor-pointer"
-        onClick={() => router.replace("/?floater=true", { scroll: false })}
+        onClick={() => setFloter((prev) => !prev)}
       >
         <CloseIcon />
       </button>
