@@ -206,7 +206,7 @@ const Floater = ({
   );
 
   return (
-    <div className="z-20 fixed md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
+    <div className="z-20 fixed top-0 md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
       <button
         className="right-4 absolute cursor-pointer"
         onClick={() => setFloter((prev) => !prev)}
