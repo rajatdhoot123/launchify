@@ -24,7 +24,7 @@
     "ai": "^2.2.21",
     "drizzle-orm": "^0.28.6",
     "langchain": "^0.0.183",
-    "next": "^14.0.1",
+    "next": "^14.0.3",
     "next-auth": "^4.24.4",
     "next-sitemap": "^4.2.3",
     "nodemailer": "^6.9.7",

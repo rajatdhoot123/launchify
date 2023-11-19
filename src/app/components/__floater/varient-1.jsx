@@ -122,6 +122,7 @@ const Floater = ({
         pages,
         premium_features,
         components: components.map(({ selected, item_id }) => ({
+          key: item_id,
           item_id,
           varient: selected,
         })),
