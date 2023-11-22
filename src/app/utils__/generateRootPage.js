@@ -14,7 +14,7 @@ ${components.reduce((acc, { item_id, varient }) => {
 export default function Home() {
       return (
         <>
-          <div className="w-full overflow-scroll">
+          <div className="w-full overflow-scroll space-y-12">
           ${components.reduce((acc, { item_id }) => {
             return `${acc} \n <${capitalizeFirstLetter(item_id)} />`;
           }, "")}

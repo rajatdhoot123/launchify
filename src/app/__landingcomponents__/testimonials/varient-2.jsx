@@ -100,7 +100,7 @@ const Testinomials = () => {
                   </p>
                 </div>
 
-                <h3 className="pl-12 mt-3 text-sm font-medium leading-5 text-gray-800 truncate sm:text-base lg:text-base">
+                <h3 className="mt-3 text-sm font-medium leading-5 text-gray-800 truncate sm:text-base lg:text-base">
                   John Smith
                   <span className="mt-1 text-sm leading-5 text-gray-500 truncate">
                     - Co-Founder, Nexus Innovations
