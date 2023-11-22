@@ -4,11 +4,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { signOut } from "next-auth/react";
 
-const NavBar = () => {
+const NavBar = ({ session }) => {
   const [open, setOpen] = useState(false);
   const [flyer, setFlyer] = useState(false);
   const [flyerTwo, setFlyerTwo] = useState(false);
+
+  const user = session?.user?.name;
 
   return (
     <>
@@ -299,20 +302,31 @@ const NavBar = () => {
                 Pricing
               </a>
             </nav>
-            <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-              <Link
-                href="/auth/signin"
-                className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Sign in
-              </Link>
-              <Link
-                href="/auth/signin"
-                className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-              >
-                Sign up
-              </Link>
-            </div>
+            {user ? (
+              <div className="text-sm">
+                <button
+                  onClick={signOut}
+                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                <Link
+                  href="/auth__/signin"
+                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Sign in
+                </Link>
+                <Link
+                  href="/auth__/signin"
+                  className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                >
+                  Sign up
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         {/*
@@ -542,7 +556,7 @@ const NavBar = () => {
               </div>
               <div>
                 <Link
-                  href="/auth/signin"
+                  href="/auth__/signin"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                 >
                   Sign up
@@ -550,7 +564,7 @@ const NavBar = () => {
                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                   Existing customer?
                   <Link
-                    href="/auth/signin"
+                    href="/auth__/signin"
                     className="text-indigo-600 hover:text-indigo-500"
                   >
                     Sign in
