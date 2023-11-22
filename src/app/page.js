@@ -9,7 +9,7 @@ import Footer from "@/app/__landingcomponents__/footer/varient-3";
 export default function Home() {
   return (
     <>
-      <div className="w-full overflow-scroll">
+      <div className="w-full overflow-scroll space-y-12">
         <Navbar />
         <Hero />
         <Pricing />
