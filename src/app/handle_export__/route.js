@@ -7,6 +7,7 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
+import fs from "fs";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
@@ -37,13 +38,8 @@ const SUPPORT_PAGES = [
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
+  const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
-
-  const session = await getServerSession(AUTH_OPTIONS);
-
-  const is_premium_user = ["rajatdhoot123@gmail.com"].find(
-    (puser) => puser === session?.user?.email
-  );
   const {
     components,
     ga_id = "",
@@ -51,7 +47,6 @@ export async function POST(req) {
     premium_features,
     pages = [],
   } = body;
-  const zip = new AdmZip();
 
   const is_next_auth = premium_features.find(
     ({ item_id }) => item_id === "next_auth"
@@ -60,6 +55,25 @@ export async function POST(req) {
   const is_database = premium_features.find(
     ({ item_id }) => item_id === "database"
   )?.selected;
+  const packageJson = JSON.parse(fs.readFileSync(package_json_path, "utf-8"));
+
+  // Remove a dependency based on a condition
+  if (!(is_database && is_next_auth)) {
+    delete packageJson.dependencies["drizzle-orm"];
+    delete packageJson.devDependencies["drizzle-kit"];
+    delete packageJson.scripts["postinstall"];
+    delete packageJson.scripts["drizzle:push"];
+    delete packageJson.scripts["introspect"];
+  }
+
+  const session = await getServerSession(AUTH_OPTIONS);
+
+  const is_premium_user = ["rajatdhoot123@gmail.com"].find(
+    (puser) => puser === session?.user?.email
+  );
+
+  const zip = new AdmZip();
+
   const file_to_add = components.map(({ item_id, varient }) => {
     return `src/app/components/${item_id}/${varient}.jsx`;
   });
@@ -70,7 +84,6 @@ export async function POST(req) {
 
   zip.addLocalFolder(ui_components, "", (file) => {
     if (SUPPORT_PAGES.includes(file)) {
-      console.log(pages_to_add, file);
       return pages_to_add.includes(file);
     }
     if (DATABASE_FILES.includes(file)) {
@@ -105,7 +118,6 @@ export async function POST(req) {
       return false;
     }
 
-    console.log(file);
     return true;
   });
 
@@ -139,6 +151,7 @@ ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
 `)
   );
 
+  zip.addFile("package.json", Buffer.from(JSON.stringify(packageJson)), "utf8");
   const zipFileContents = zip.toBuffer();
   const fileName = "uploads.zip";
   const fileType = "application/zip";
