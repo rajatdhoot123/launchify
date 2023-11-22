@@ -39,7 +39,10 @@ const Pricing = () => {
             <div>
               <h2 className="text-lg mb-4">Pro Builder</h2>
               <div className="mb-6">
-                <span className="block text-5xl pb-2">$39</span>
+                <span className="block text-5xl pb-2">
+                  $39
+                  <del className="ml-2 text-3xl">$52</del>
+                </span>
                 <span className="text-sm text-grey">Lifetime</span>
               </div>
               <ul className="text-grey-dark leading-loose list-reset mb-6">
@@ -67,7 +70,10 @@ const Pricing = () => {
             <div>
               <h2 className="text-lg mb-4">Ultimate Builder</h2>
               <div className="mb-6">
-                <span className="block text-5xl pb-2">$49</span>
+                <span className="block text-5xl pb-2">
+                  $49
+                  <del className="ml-2 text-3xl">$66</del>
+                </span>
                 <span className="text-sm text-grey">Lifetime</span>
               </div>
               <ul className="text-grey leading-loose list-reset mb-6">
@@ -81,7 +87,7 @@ const Pricing = () => {
                 </li>
                 <li>Discord & Email Support</li>
                 <li>No UiWidgets Branding</li>
-                <li>Minimum 25% off on all upcoming products by us</li>
+                <li>Minimum 25% off on all upcoming products</li>
               </ul>
             </div>
             <a
