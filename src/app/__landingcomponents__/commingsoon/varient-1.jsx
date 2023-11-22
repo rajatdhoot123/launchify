@@ -1,7 +1,7 @@
 const CommingSoon = () => {
   return (
-    <section className="container mx-auto flex items-center flex-1 border border-gray-200 py-12 rounded-xl">
-      <div className="flex flex-col w-full ">
+    <section className="container border border-gray-200 py-12 rounded-xl">
+      <div className="flex flex-col w-full px-5">
         <h1 className="text-5xl font-extrabold text-center lg:text-7xl 2xl:text-8xl">
           <span className="text-transparent bg-gradient-to-br bg-clip-text from-teal-500 via-indigo-500 to-sky-500 dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500">
             Subscribe
@@ -13,7 +13,8 @@ const CommingSoon = () => {
         </h1>
 
         <p className="max-w-3xl mx-auto mt-6 text-lg text-center text-gray-700 dark:text-black md:text-xl">
-        Stay in the know about product launches and indie hacker community buzz.
+          Stay in the know about product launches and indie hacker community
+          buzz.
         </p>
 
         <div className="flex flex-col mt-8 space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
