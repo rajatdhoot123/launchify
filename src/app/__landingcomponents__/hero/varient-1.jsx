@@ -26,7 +26,6 @@ export default function Hero() {
                 <Link
                   href="/app__"
                   className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0"
-                  target="_blank"
                 >
                   Get Started
                   <svg
