@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Minutes from "./minutes";
 export default function Hero() {
   return (
     <>
@@ -7,10 +7,7 @@ export default function Hero() {
         <section className="pt-24 bg-white">
           <div className="px-12 mx-auto max-w-7xl">
             <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
-              <p className="text-lg font-medium leading-8 text-indigo-600/95">
-                Landing Page will be ready today at{" "}
-                {new Date(Date.now() + 5 * 60 * 1000).toLocaleTimeString()}
-              </p>
+              <Minutes />
               <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
                 <span>Build</span>{" "}
                 <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
