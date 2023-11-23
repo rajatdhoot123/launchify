@@ -6,11 +6,13 @@ import Hero2 from "@/app/components/hero/varient-2";
 import Hero3 from "@/app/components/hero/varient-3";
 import Hero4 from "@/app/components/hero/varient-4";
 import Hero5 from "@/app/components/hero/varient-5";
+import Hero6 from "@/app/components/hero/varient-6";
 import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
 import Pricing4 from "@/app/components/pricing/varient-4";
 import Pricing5 from "@/app/components/pricing/varient-5";
+import Pricing6 from "@/app/components/pricing/varient-6";
 import Testimonials1 from "@/app/components/testimonials/varient-1";
 import Testimonials2 from "@/app/components/testimonials/varient-2";
 import Testimonials3 from "@/app/components/testimonials/varient-3";
@@ -54,6 +56,7 @@ const HERO = {
   "varient-3": <Hero3 />,
   "varient-4": <Hero4 />,
   "varient-5": <Hero5 />,
+  "varient-6": <Hero6 />,
 };
 
 const PRICING = {
@@ -62,6 +65,7 @@ const PRICING = {
   "varient-3": <Pricing3 />,
   "varient-4": <Pricing4 />,
   "varient-5": <Pricing5 />,
+  "varient-6": <Pricing6 />,
 };
 
 const TESTIMONIALS = {
