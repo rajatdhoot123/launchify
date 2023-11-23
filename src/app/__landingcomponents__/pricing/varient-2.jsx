@@ -41,7 +41,7 @@ const Pricing = () => {
               <div className="mb-6">
                 <span className="block text-5xl pb-2">
                   $39
-                  <del className="ml-2 text-3xl">$52</del>
+                  <del className="ml-2 text-3xl">$156</del>
                 </span>
                 <span className="text-sm text-grey">Lifetime</span>
               </div>
@@ -72,7 +72,7 @@ const Pricing = () => {
               <div className="mb-6">
                 <span className="block text-5xl pb-2">
                   $49
-                  <del className="ml-2 text-3xl">$66</del>
+                  <del className="ml-2 text-3xl">$196</del>
                 </span>
                 <span className="text-sm text-grey">Lifetime</span>
               </div>
