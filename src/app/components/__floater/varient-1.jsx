@@ -58,12 +58,7 @@ const ListCard = ({
           <button
             onClick={async () => {
               const el = document.getElementById(item_id);
-              const element_copywriting = el.firstChild;
-              let elementToString = "";
-              if (element_copywriting.outerHTML) {
-                elementToString = element_copywriting.outerHTML;
-              } else if (XMLSerializer)
-                elementToString = new XMLSerializer().serializeToString(el);
+              const elementToString = el.outerHTML;
               const {
                 data: { choices },
               } = await axios.post("/api/code-generation", {
@@ -71,8 +66,15 @@ const ListCard = ({
               });
               const htmlWithCopy = choices[0]?.message?.content;
 
-              el.innerHTML = htmlWithCopy.replace(/`/g, "");
-              console.log({ htmlWithCopy: htmlWithCopy.replace(/`/g, "") });
+              el.innerHTML = htmlWithCopy
+                .replace(/```/g, "")
+                .replace(/(\r\n|\n|\r)/gm, "");
+              console.log({
+                orignal: el,
+                htmlWithCopy: htmlWithCopy
+                  .replace(/```/g, "")
+                  .replace(/(\r\n|\n|\r)/gm, ""),
+              });
             }}
             className="text-sm font-semibold"
           >

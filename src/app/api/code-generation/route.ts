@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
   // });
 
   const body: GPT4VCompletionRequest = {
-    model: "gpt-4",
+    model: "gpt-4-1106-preview",
     max_tokens: 4096,
     temperature: 0,
     messages,
@@ -96,8 +96,6 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(body),
     });
     json = await resp.json();
-
-    console.log({ json });
   } catch (e) {
     console.log(e);
   }
@@ -125,7 +123,7 @@ type MessageContent =
     )[];
 
 export type GPT4VCompletionRequest = {
-  model: "gpt-4-vision-preview" | "gpt-4";
+  model: "gpt-4-vision-preview" | "gpt-4" | "gpt-4-1106-preview";
   messages: {
     role: "system" | "user" | "assistant" | "function";
     content: MessageContent;

@@ -3,11 +3,11 @@ User will provide your html code your need to edit it with creative marketing co
 Do not add any code comments.
 Don't change any html tags.
 Don't remove any existing class.
-Return back html code only with edited copywriting in string format only.
+Return back inline html code with edited copywriting wrapped triple backtick.
 `;
 
 export const OPENAI_USER_PROMPT =
-  "Here are the latest html code. Return the same code in html format with modified copywrite according to use case in string format only.";
+  "Here are the latest html code. Return the same code in inline html format with modified copywriting with wrapped in triple backtick";
 
 export const OPENAI_USER_PROMPT_WITH_PREVIOUS_DESIGN =
   "Here are the latest html code. There are also some previous outputs here. Could you make a new copy writing and send back the new html jsx code with updated copy writing?";
