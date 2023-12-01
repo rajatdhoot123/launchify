@@ -29,7 +29,10 @@ export async function POST(req: NextRequest) {
   );
 
   if (!is_premium_user) {
-    return { message: "Contact hello.kwiktwik@gmail.com for access" };
+    return NextResponse.json(
+      { message: "Contact hello.kwiktwik@gmail.com for access" },
+      { status: 200 }
+    );
   }
   if (!apiKey) throw Error("You need to provide an API key (sorry)");
 
