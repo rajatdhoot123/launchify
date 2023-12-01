@@ -1,7 +1,7 @@
 "use client";
 import Select from "@/app/components/__select/varient-1";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import { Separator, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
@@ -9,105 +9,119 @@ import Collapsible from "@/app/components/__accordion/varient-1";
 import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 const ItemType = "ITEM";
 
-const ListCard = ({
-  is_premium,
-  moveItem,
-  selected,
-  title,
-  item_id,
-  varients,
-  index,
-  handleChange,
-}) => {
-  const [, ref] = useDrag({
-    type: ItemType,
-    item: { index },
-  });
+const ListCard = forwardRef(
+  (
+    {
+      ai_key,
 
-  const [loader, setLoader] = useState(false);
-  const [, drop] = useDrop({
-    accept: ItemType,
-    drop: (draggedItem) => {
-      if (draggedItem.index !== index) {
-        moveItem(draggedItem.index, index);
-        draggedItem.index = index;
-      }
+      moveItem,
+      selected,
+      title,
+      item_id,
+      varients,
+      index,
+      handleChange,
     },
-  });
+    api_ref
+  ) => {
+    const [, ref] = useDrag({
+      type: ItemType,
+      item: { index },
+    });
 
-  return (
-    <div
-      key={item_id}
-      ref={(node) => ref(drop(node))}
-      className="rounded-md cursor-move space-y-2"
-    >
-      <div className="flex items-center">
-        <svg
-          stroke="currentColor"
-          fill="currentColor"
-          strokeWidth="0"
-          viewBox="0 0 24 24"
-          height="1em"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path fill="none" d="M0 0h24v24H0V0z"></path>
-          <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-        </svg>
-        <div className="flex justify-between w-full">
-          <div className="text-sm font-semibold flex-shrink-0">{title}</div>
-          <button
-            disabled={loader}
-            onClick={async () => {
-              setLoader(true);
-              try {
-                logEvent("copy_writing_clicked");
-                if (!is_premium) {
-                  window.open(
-                    "https://www.boilercode.app/?utm_source=uiwidgets",
-                    "_blank"
-                  );
-                  return;
-                }
-                const el = document.getElementById(item_id);
-                const elementToString = el.innerHTML;
-                const {
-                  data: { choices },
-                } = await axios.post("/api/code-generation__", {
-                  text: elementToString,
-                });
-                const htmlWithCopy = choices[0]?.message?.content;
+    const [loader, setLoader] = useState(false);
+    const [, drop] = useDrop({
+      accept: ItemType,
+      drop: (draggedItem) => {
+        if (draggedItem.index !== index) {
+          moveItem(draggedItem.index, index);
+          draggedItem.index = index;
+        }
+      },
+    });
 
-                el.innerHTML = htmlWithCopy
-                  .replace(/```/g, "")
-                  .replace(/(\r\n|\n|\r)/gm, "");
-              } catch (err) {
-              } finally {
-                setLoader(false);
-              }
-            }}
-            className="text-sm font-semibold flex overflow-hidden"
+    return (
+      <div
+        key={item_id}
+        ref={(node) => ref(drop(node))}
+        className="rounded-md cursor-move space-y-2"
+      >
+        <div className="flex items-center">
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth="0"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            {loader && (
-              <span className="m-auto px-2">
-                <Loader />
-              </span>
-            )}
-            <span className="flex-shrink-0">Copy Writing</span>
-          </button>
+            <path fill="none" d="M0 0h24v24H0V0z"></path>
+            <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+          </svg>
+          <div className="flex justify-between w-full">
+            <div className="text-sm font-semibold flex-shrink-0">{title}</div>
+            <button
+              disabled={loader}
+              onClick={async () => {
+                setLoader(true);
+                if (!api_ref.current) {
+                  const open_ai_key = prompt("Enter open ai api key");
+                  api_ref.current = open_ai_key;
+                }
+
+                try {
+                  logEvent("copy_writing_clicked");
+                  // if (!is_premium) {
+                  //   window.open(
+                  //     "https://www.boilercode.app/?utm_source=uiwidgets",
+                  //     "_blank"
+                  //   );
+                  //   return;
+                  // }
+                  const el = document.getElementById(item_id);
+                  const elementToString = el.innerHTML;
+
+                  const { choices } = await codeGenerate({
+                    apiKey: api_ref.current,
+                    text: elementToString,
+                  });
+                  const htmlWithCopy = choices[0]?.message?.content;
+
+                  el.innerHTML = htmlWithCopy
+                    .replace(/```/g, "")
+                    .replace(/(\r\n|\n|\r)/gm, "");
+                } catch (err) {
+                } finally {
+                  setLoader(false);
+                }
+              }}
+              className="text-sm font-semibold flex overflow-hidden"
+            >
+              {loader && (
+                <span className="m-auto px-2">
+                  <Loader />
+                </span>
+              )}
+              <span className="flex-shrink-0">Copy Writing</span>
+            </button>
+          </div>
         </div>
+        <Select
+          handleChange={(val) => handleChange(val, index, item_id)}
+          value={selected}
+          title={title}
+          list={Object.keys(varients)}
+        />
       </div>
-      <Select
-        handleChange={(val) => handleChange(val, index, item_id)}
-        value={selected}
-        title={title}
-        list={Object.keys(varients)}
-      />
-    </div>
-  );
-};
+    );
+  }
+);
+
+ListCard.displayName = "ListCard";
 
 const FloterIcon = ({ className }) => (
   <svg
@@ -155,7 +169,7 @@ const Floater = ({
   const [floater, setFloter] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
-
+  const ai_key = useRef("");
   const handleExport = async () => {
     logEvent("export_clicked", { event_name: "export_clicked" });
     const response = await fetch("/handle_export__", {
@@ -226,6 +240,7 @@ const Floater = ({
     (props, index) => {
       return (
         <ListCard
+          ref={ai_key}
           is_premium={is_premium}
           key={index}
           handleChange={handleChange}
