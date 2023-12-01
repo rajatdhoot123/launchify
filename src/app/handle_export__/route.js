@@ -27,7 +27,9 @@ const NEXT_AUTH_FILES = [
   "src/app/auth",
   "src/app/nextauth/provider.js",
   "src/app/nextauth",
+  "src/app/api/auth",
   "src/app/api/auth/[...nextauth]/route.ts",
+  "src/app/api/auth/[...nextauth]/authOptions.ts",
   "src/app/api/auth/[...nextauth]",
 ];
 
