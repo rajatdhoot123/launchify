@@ -27,7 +27,9 @@ const NEXT_AUTH_FILES = [
   "src/app/auth",
   "src/app/nextauth/provider.js",
   "src/app/nextauth",
+  "src/app/api/auth",
   "src/app/api/auth/[...nextauth]/route.ts",
+  "src/app/api/auth/[...nextauth]/authOptions.ts",
   "src/app/api/auth/[...nextauth]",
 ];
 
@@ -57,6 +59,8 @@ export async function POST(req) {
   )?.selected;
   const packageJson = JSON.parse(fs.readFileSync(package_json_path, "utf-8"));
 
+  delete packageJson.dependencies["axios"];
+  delete packageJson.dependencies["cheerio"];
   // Remove a dependency based on a condition
   if (!(is_database && is_next_auth)) {
     delete packageJson.dependencies["drizzle-orm"];
