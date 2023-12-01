@@ -26,6 +26,7 @@ const ListCard = ({
     item: { index },
   });
 
+  const [loader, setLoader] = useState(false);
   const [, drop] = useDrop({
     accept: ItemType,
     drop: (draggedItem) => {
@@ -58,31 +59,42 @@ const ListCard = ({
         <div className="flex justify-between w-full">
           <div className="text-sm font-semibold flex-shrink-0">{title}</div>
           <button
+            disabled={loader}
             onClick={async () => {
-              logEvent("copy_writing_clicked");
-              if (!is_premium) {
-                window.open(
-                  "https://www.boilercode.app/?utm_source=uiwidgets",
-                  "_blank"
-                );
-                return;
-              }
-              const el = document.getElementById(item_id);
-              const elementToString = el.innerHTML;
-              const {
-                data: { choices },
-              } = await axios.post("/api/code-generation__", {
-                text: elementToString,
-              });
-              const htmlWithCopy = choices[0]?.message?.content;
+              setLoader(true);
+              try {
+                logEvent("copy_writing_clicked");
+                if (!is_premium) {
+                  window.open(
+                    "https://www.boilercode.app/?utm_source=uiwidgets",
+                    "_blank"
+                  );
+                  return;
+                }
+                const el = document.getElementById(item_id);
+                const elementToString = el.innerHTML;
+                const {
+                  data: { choices },
+                } = await axios.post("/api/code-generation__", {
+                  text: elementToString,
+                });
+                const htmlWithCopy = choices[0]?.message?.content;
 
-              el.innerHTML = htmlWithCopy
-                .replace(/```/g, "")
-                .replace(/(\r\n|\n|\r)/gm, "");
+                el.innerHTML = htmlWithCopy
+                  .replace(/```/g, "")
+                  .replace(/(\r\n|\n|\r)/gm, "");
+              } catch (err) {
+              } finally {
+                setLoader(false);
+              }
             }}
             className="text-sm font-semibold flex overflow-hidden"
           >
-            <Loader />
+            {loader && (
+              <span className="m-auto px-2">
+                <Loader />
+              </span>
+            )}
             <span className="flex-shrink-0">Copy Writing</span>
           </button>
         </div>
