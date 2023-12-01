@@ -3,7 +3,9 @@ import {
   OPENAI_USER_PROMPT_WITH_PREVIOUS_DESIGN,
   OPEN_AI_SYSTEM_PROMPT,
 } from "@/app/constants__/prompt";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 
 export async function POST(req: NextRequest) {
   const {
@@ -19,6 +21,16 @@ export async function POST(req: NextRequest) {
     // theme?: string;
     previousPreviews;
   } = await req.json();
+
+  const session = await getServerSession(AUTH_OPTIONS);
+
+  const is_premium_user = ["rajatdhoot123@gmail.com"].find(
+    (puser) => puser === session?.user?.email
+  );
+
+  if (!is_premium_user) {
+    return { message: "Contact hello.kwiktwik@gmail.com for access" };
+  }
   if (!apiKey) throw Error("You need to provide an API key (sorry)");
 
   const messages: GPT4VCompletionRequest["messages"] = [

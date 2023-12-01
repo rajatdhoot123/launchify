@@ -6,11 +6,13 @@ import { Separator, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 import Collapsible from "@/app/components/__accordion/varient-1";
+import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 const ItemType = "ITEM";
 
 const ListCard = ({
+  is_premium,
   moveItem,
   selected,
   title,
@@ -54,14 +56,22 @@ const ListCard = ({
           <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
         </svg>
         <div className="flex justify-between w-full">
-          <div className="text-sm font-semibold">{title}</div>
+          <div className="text-sm font-semibold flex-shrink-0">{title}</div>
           <button
             onClick={async () => {
+              logEvent("copy_writing_clicked");
+              if (!is_premium) {
+                window.open(
+                  "https://www.boilercode.app/?utm_source=uiwidgets",
+                  "_blank"
+                );
+                return;
+              }
               const el = document.getElementById(item_id);
-              const elementToString = el.outerHTML;
+              const elementToString = el.innerHTML;
               const {
                 data: { choices },
-              } = await axios.post("/api/code-generation", {
+              } = await axios.post("/api/code-generation__", {
                 text: elementToString,
               });
               const htmlWithCopy = choices[0]?.message?.content;
@@ -69,16 +79,11 @@ const ListCard = ({
               el.innerHTML = htmlWithCopy
                 .replace(/```/g, "")
                 .replace(/(\r\n|\n|\r)/gm, "");
-              console.log({
-                orignal: el,
-                htmlWithCopy: htmlWithCopy
-                  .replace(/```/g, "")
-                  .replace(/(\r\n|\n|\r)/gm, ""),
-              });
             }}
-            className="text-sm font-semibold"
+            className="text-sm font-semibold flex overflow-hidden"
           >
-            Copy Writing
+            <Loader />
+            <span className="flex-shrink-0">Copy Writing</span>
           </button>
         </div>
       </div>
@@ -203,10 +208,13 @@ const Floater = ({
     [router, setState]
   );
 
+  const is_premium = ["rajatdhoot123@gmail.com"].includes(session?.user?.email);
+
   const renderList = useCallback(
     (props, index) => {
       return (
         <ListCard
+          is_premium={is_premium}
           key={index}
           handleChange={handleChange}
           index={index}
@@ -215,7 +223,7 @@ const Floater = ({
         />
       );
     },
-    [handleChange, moveItem]
+    [handleChange, is_premium, moveItem]
   );
 
   if (floater) {
@@ -228,10 +236,6 @@ const Floater = ({
       </button>
     );
   }
-
-  const is_disabled = !["rajatdhoot123@gmail.com"].includes(
-    session?.user?.email
-  );
 
   return (
     <div className="z-20 fixed top-0 md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
@@ -261,7 +265,7 @@ const Floater = ({
                 key={feature.item_id}
               >
                 <input
-                  disabled={is_disabled}
+                  disabled={!is_premium}
                   onChange={(e) => {
                     setState((prev) => ({
                       ...prev,
@@ -281,7 +285,7 @@ const Floater = ({
                   value={feature.selected}
                   checked={feature.selected}
                   className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                    is_disabled ? "bg-gray-300" : "bg-gray-100"
+                    !is_premium ? "bg-gray-300" : "bg-gray-100"
                   }`}
                 />
                 <label
@@ -417,7 +421,7 @@ const Floater = ({
                     value={feature.selected}
                     checked={feature.selected}
                     className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                      is_disabled ? "bg-gray-300" : "bg-gray-100"
+                      !is_premium ? "bg-gray-300" : "bg-gray-100"
                     }`}
                   />
                   <label

@@ -1,5 +1,5 @@
-export const logEvent = (event) => {
+export const logEvent = (eventname, params = {}) => {
   if (typeof window !== "undefined" && typeof window.gtag !== "undefined") {
-    window.gtag("event", event);
+    window.gtag("event", eventname, params);
   }
 };
