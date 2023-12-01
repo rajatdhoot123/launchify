@@ -57,6 +57,7 @@ export async function POST(req) {
   )?.selected;
   const packageJson = JSON.parse(fs.readFileSync(package_json_path, "utf-8"));
 
+  delete packageJson.dependencies["axios"];
   // Remove a dependency based on a condition
   if (!(is_database && is_next_auth)) {
     delete packageJson.dependencies["drizzle-orm"];

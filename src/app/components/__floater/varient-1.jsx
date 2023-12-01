@@ -7,7 +7,7 @@ import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 import Collapsible from "@/app/components/__accordion/varient-1";
 import { useSession } from "next-auth/react";
-
+import axios from "axios";
 const ItemType = "ITEM";
 
 const ListCard = ({
@@ -53,7 +53,32 @@ const ListCard = ({
           <path fill="none" d="M0 0h24v24H0V0z"></path>
           <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
         </svg>
-        <div className="text-sm font-semibold">{title}</div>
+        <div className="flex justify-between w-full">
+          <div className="text-sm font-semibold">{title}</div>
+          <button
+            onClick={async () => {
+              const el = document.getElementById(item_id);
+              const element_copywriting = el.firstChild;
+              let elementToString = "";
+              if (element_copywriting.outerHTML) {
+                elementToString = element_copywriting.outerHTML;
+              } else if (XMLSerializer)
+                elementToString = new XMLSerializer().serializeToString(el);
+              const {
+                data: { choices },
+              } = await axios.post("/api/code-generation", {
+                text: elementToString,
+              });
+              const htmlWithCopy = choices[0]?.message?.content;
+
+              el.innerHTML = htmlWithCopy.replace(/`/g, "");
+              console.log({ htmlWithCopy: htmlWithCopy.replace(/`/g, "") });
+            }}
+            className="text-sm font-semibold"
+          >
+            Copy Writing
+          </button>
+        </div>
       </div>
       <Select
         handleChange={(val) => handleChange(val, index, item_id)}
@@ -180,6 +205,7 @@ const Floater = ({
     (props, index) => {
       return (
         <ListCard
+          key={index}
           handleChange={handleChange}
           index={index}
           moveItem={moveItem}
