@@ -5,7 +5,7 @@ import RenderNode from "./render_node";
 
 import { COMPONENTS_ARRAY } from "../constants__/floater";
 
-export const Container = ({ background, padding, children, ...props }) => {
+const Container = ({ background, padding, children, ...props }) => {
   const {
     connectors: { connect, drag },
   } = useNode();
@@ -34,25 +34,10 @@ const SideBar = () => {
         <div className="p-2" key={name}>
           <div>{name}</div>
           <ul className="flex flex-col">
-            {components.map((Comp, index) => (
+            {components.map((comp, index) => (
               <button
                 key={index}
-                ref={(ref) =>
-                  connectors.create(
-                    ref,
-                    <Element
-                      canvas
-                      is={Container}
-                      width="800px"
-                      height="auto"
-                      background={{ r: 255, g: 255, b: 255, a: 1 }}
-                      padding={["40", "40", "40", "40"]}
-                      custom={{ displayName: name }}
-                    >
-                      <Comp />
-                    </Element>
-                  )
-                }
+                ref={(ref) => connectors.create(ref, comp)}
               >{`Varient ${index + 1}`}</button>
             ))}
           </ul>
