@@ -7,6 +7,7 @@ import {
   Element,
   useEditor,
 } from "@craftjs/core";
+import RenderNode from "./render_node";
 
 import { useNode } from "@craftjs/core";
 import { COMPONENTS_ARRAY } from "../constants__/floater";
@@ -94,8 +95,9 @@ const EditorComp = () => {
 
 const App = () => {
   return (
-    <div className="w-full flex">
+    <div className="w-full flex page-container">
       <Editor
+        onRender={RenderNode}
         resolver={{
           Container,
           TextComponent,
