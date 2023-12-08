@@ -44,6 +44,11 @@ import Contactus2 from "@/app/components/contactus/varient-2";
 import Login1 from "@/app/components/login/varient-1";
 import Login2 from "@/app/components/login/varient-2";
 
+export const COMPONENTS_ARRAY = [
+  { name: "Navbar", components: [Navbar1, Navbar2, Navbar3] },
+  { name: "Hero", components: [Hero1, Hero2, Hero3, Hero4, Hero5, Hero6] },
+];
+
 const NAVBAR = {
   "varient-1": <Navbar1 />,
   "varient-2": <Navbar2 />,

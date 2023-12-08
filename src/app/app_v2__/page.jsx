@@ -9,6 +9,7 @@ import {
 } from "@craftjs/core";
 
 import { useNode } from "@craftjs/core";
+import { COMPONENTS_ARRAY } from "../constants__/floater";
 
 export const Toolbox = () => {
   const { connectors } = useEditor();
@@ -54,14 +55,23 @@ const TextComponent = ({ text }) => {
 };
 
 const SideBar = () => {
+  const { connectors } = useEditor();
+
   return (
-    <div>
-      <div>
-        <Toolbox />
-      </div>
-      <div>Component 2</div>
-      <div>Component 3</div>
-      <div>Component 4</div>
+    <div className="space-y-6 p-5">
+      {COMPONENTS_ARRAY.map(({ name, components }) => (
+        <div className="p-2" key={name}>
+          <div>{name}</div>
+          <ul className="flex flex-col">
+            {components.map((comp, index) => (
+              <button
+                key={index}
+                ref={(ref) => connectors.create(ref, comp)}
+              >{`Varient ${index + 1}`}</button>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
