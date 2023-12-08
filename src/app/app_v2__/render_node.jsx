@@ -78,14 +78,14 @@ const RenderNode = ({ render }) => {
         ? createPortal(
             <div
               ref={currentRef}
-              className="px-2 py-2 text-white bg-blue-400 fixed flex items-center -mt-10 h-10"
+              className="px-2 py-2 text-white bg-blue-400 fixed flex items-center -mt-10 h-10 space-x-2"
               style={{
                 left: getPos(dom).left,
                 top: getPos(dom).top,
                 zIndex: 9999,
               }}
             >
-              <h2 className="flex-1 mr-4">{name}</h2>
+              <h2 className="flex-1">{name}</h2>
               {moveable ? (
                 <button className="cursor-move" ref={drag}>
                   <svg
@@ -109,7 +109,7 @@ const RenderNode = ({ render }) => {
               ) : null}
               {id !== ROOT_NODE && (
                 <button
-                  className="mr-2 cursor-pointer"
+                  className="cursor-pointer"
                   onClick={() => {
                     actions.selectNode(parent);
                   }}
