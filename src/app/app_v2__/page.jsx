@@ -1,32 +1,9 @@
 "use client";
-import {
-  Editor,
-  Frame,
-  Canvas,
-  Selector,
-  Element,
-  useEditor,
-} from "@craftjs/core";
+import { Editor, Frame, Element, useEditor, useNode } from "@craftjs/core";
+
 import RenderNode from "./render_node";
 
-import { useNode } from "@craftjs/core";
 import { COMPONENTS_ARRAY } from "../constants__/floater";
-
-export const Toolbox = () => {
-  const { connectors } = useEditor();
-
-  return (
-    <div>
-      <button
-        ref={(ref) => connectors.create(ref, <div>Bhosadike</div>)}
-        variant="contained"
-        data-cy="toolbox-button"
-      >
-        Button
-      </button>
-    </div>
-  );
-};
 
 export const Container = ({ background, padding, children, ...props }) => {
   const {
@@ -36,21 +13,14 @@ export const Container = ({ background, padding, children, ...props }) => {
     <div
       {...props}
       ref={(ref) => connect(drag(ref))}
-      style={{ margin: "5px 0", background, padding: `${padding}px` }}
+      style={{
+        margin: "5px 0",
+        background,
+        padding: `${padding}px`,
+        zIndex: 9999,
+      }}
     >
       {children}
-    </div>
-  );
-};
-
-const TextComponent = ({ text }) => {
-  const {
-    connectors: { drag },
-  } = useNode();
-
-  return (
-    <div ref={drag}>
-      <h2>{text}</h2>
     </div>
   );
 };
@@ -64,10 +34,25 @@ const SideBar = () => {
         <div className="p-2" key={name}>
           <div>{name}</div>
           <ul className="flex flex-col">
-            {components.map((comp, index) => (
+            {components.map((Comp, index) => (
               <button
                 key={index}
-                ref={(ref) => connectors.create(ref, comp)}
+                ref={(ref) =>
+                  connectors.create(
+                    ref,
+                    <Element
+                      canvas
+                      is={Container}
+                      width="800px"
+                      height="auto"
+                      background={{ r: 255, g: 255, b: 255, a: 1 }}
+                      padding={["40", "40", "40", "40"]}
+                      custom={{ displayName: name }}
+                    >
+                      <Comp />
+                    </Element>
+                  )
+                }
               >{`Varient ${index + 1}`}</button>
             ))}
           </ul>
@@ -77,21 +62,17 @@ const SideBar = () => {
   );
 };
 
-const EditorComp = () => {
-  return (
-    <Frame>
-      <Element
-        canvas
-        is={Container}
-        padding={5}
-        background="#eeeeee"
-        data-cy="root-container"
-      >
-        <TextComponent text="Madarchod" />
-      </Element>
-    </Frame>
-  );
-};
+const all_components = COMPONENTS_ARRAY.reduce((acc, currentComp) => {
+  return {
+    ...acc,
+    ...currentComp.components.reduce((acc, currentVarient, index) => {
+      return {
+        ...acc,
+        [`${currentComp.name}${index + 1}`]: currentVarient,
+      };
+    }, {}),
+  };
+}, {});
 
 const App = () => {
   return (
@@ -100,14 +81,26 @@ const App = () => {
         onRender={RenderNode}
         resolver={{
           Container,
-          TextComponent,
+          ...all_components,
         }}
       >
         <div className="w-3/12">
           <SideBar />
         </div>
-        <div className="w-full">
-          <EditorComp />
+        <div className="w-full min-h-screen">
+          <Frame className="h-56 w-full bg-red-100">
+            <Element
+              canvas
+              is={Container}
+              width="800px"
+              height="auto"
+              background={{ r: 255, g: 255, b: 255, a: 1 }}
+              padding={["40", "40", "40", "40"]}
+              custom={{ displayName: "App" }}
+            >
+              <div>Drag and Drop your component</div>
+            </Element>
+          </Frame>
         </div>
       </Editor>
     </div>
