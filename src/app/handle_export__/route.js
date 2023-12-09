@@ -61,6 +61,7 @@ export async function POST(req) {
 
   delete packageJson.dependencies["axios"];
   delete packageJson.dependencies["cheerio"];
+  delete packageJson.dependencies["@craftjs/core"];
   // Remove a dependency based on a condition
   if (!(is_database && is_next_auth)) {
     delete packageJson.dependencies["drizzle-orm"];
