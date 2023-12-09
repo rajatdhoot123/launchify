@@ -32,9 +32,10 @@ export default function Home() {
       </DndProvider>
       <div className="space-y-16">
         {state.components.map((comp) => {
+          const Component = comp.varients[comp.selected];
           return (
             <section key={comp.item_id} id={comp.item_id}>
-              {comp.varients[comp.selected]}
+              <Component />
             </section>
           );
         })}
