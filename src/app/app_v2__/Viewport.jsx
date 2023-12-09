@@ -8,10 +8,13 @@ const Viewport = ({ children }) => {
 
   return (
     <div className="viewport">
-      <div className={"flex h-full overflow-hidden flex-row w-full fixed"}>
+      <div
+        className={
+          "flex h-full overflow-hidden flex-row w-full fixed bg-[#3e434c]"
+        }
+      >
         <Toolbox />
         <div className="page-container flex flex-1 h-full flex-col">
-          {/* <Header /> */}
           <div
             className="craftjs-renderer flex-1 h-full w-full transition overflow-auto"
             ref={(ref) => connectors.select(connectors.hover(ref, null), null)}

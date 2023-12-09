@@ -20,7 +20,7 @@ const all_components = COMPONENTS_ARRAY.reduce((acc, currentComp) => {
 
 const App = () => {
   return (
-    <div className="w-full flex page-container">
+    <div className="page-container">
       <Editor
         onRender={RenderNode}
         resolver={{
@@ -30,7 +30,7 @@ const App = () => {
         }}
       >
         <Viewport>
-          <div className="w-full craftjs-renderer">
+          <div className="w-full craftjs-renderer shadow-xl">
             <Frame className="h-56 w-full bg-red-100">
               <Element
                 canvas

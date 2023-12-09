@@ -1,11 +1,6 @@
 import { useNode } from "@craftjs/core";
 
-export const ElementContainer = ({
-  background,
-  padding,
-  children,
-  ...props
-}) => {
+export const ElementContainer = ({ children, ...props }) => {
   const {
     connectors: { connect, drag },
   } = useNode();
@@ -14,11 +9,7 @@ export const ElementContainer = ({
       className="relative z-50"
       {...props}
       ref={(ref) => connect(drag(ref))}
-      style={{
-        margin: "5px 0",
-        background,
-        padding: `${padding}px`,
-      }}
+      style={{}}
     >
       {children}
     </div>
