@@ -7,6 +7,7 @@ import Hero3 from "@/app/components/hero/varient-3";
 import Hero4 from "@/app/components/hero/varient-4";
 import Hero5 from "@/app/components/hero/varient-5";
 import Hero6 from "@/app/components/hero/varient-6";
+import Hero7 from "@/app/components/hero/varient-7";
 import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
@@ -37,7 +38,6 @@ import Footer2 from "@/app/components/footer/varient-2";
 import Footer3 from "@/app/components/footer/varient-3";
 import Footer4 from "@/app/components/footer/varient-4";
 import CommingSoon1 from "@/app/components/commingsoon/varient-1";
-import ProductLaunch1 from "@/app/components/productlaunch/varient-1";
 import Animated1 from "@/app/components/animatedcards/varient-1";
 import Contactus1 from "@/app/components/contactus/varient-1";
 import Contactus2 from "@/app/components/contactus/varient-2";
@@ -57,6 +57,7 @@ const HERO = {
   "varient-4": Hero4,
   "varient-5": Hero5,
   "varient-6": Hero6,
+  "varient-7": Hero7,
 };
 
 const PRICING = {
@@ -72,10 +73,6 @@ const TESTIMONIALS = {
   "varient-1": Testimonials1,
   "varient-2": Testimonials2,
   "varient-3": Testimonials3,
-};
-
-const PRODUCT_LAUNCH = {
-  "varient-1": ProductLaunch1,
 };
 
 const TABLE = {
@@ -139,10 +136,6 @@ export const COMPONENTS_ARRAY = [
   {
     name: "Testimonials",
     components: Object.values(TESTIMONIALS),
-  },
-  {
-    name: "ProductLaunch",
-    components: Object.values(PRODUCT_LAUNCH),
   },
   {
     name: "Table",
@@ -209,36 +202,30 @@ export const FLOATER_SELECT = [
     item_id: "navbar",
     varients: NAVBAR,
     title: "Select Nabar",
-    selected: "varient-1",
+    selected: "varient-2",
   },
   {
     item_id: "hero",
     varients: HERO,
     title: "Select Hero",
-    selected: "varient-1",
+    selected: "varient-7",
   },
   {
     item_id: "pricing",
     varients: PRICING,
     title: "Select Pricing",
-    selected: "varient-1",
+    selected: "varient-3",
   },
   {
     item_id: "login",
     varients: LOGIN,
     title: "Select Login",
-    selected: "varient-1",
+    selected: "varient-2",
   },
   {
     item_id: "testimonials",
     varients: TESTIMONIALS,
     title: "Select Testimonials",
-    selected: "varient-1",
-  },
-  {
-    item_id: "productlaunch",
-    varients: PRODUCT_LAUNCH,
-    title: "Select Product Launch",
     selected: "varient-1",
   },
   {
@@ -251,7 +238,7 @@ export const FLOATER_SELECT = [
     item_id: "cards",
     varients: CARDS,
     title: "Select Card",
-    selected: "varient-1",
+    selected: "varient-6",
   },
   {
     item_id: "commingsoon",
@@ -263,19 +250,19 @@ export const FLOATER_SELECT = [
     item_id: "contactus",
     varients: CONTACT_US,
     title: "Select Contact Us",
-    selected: "varient-1",
+    selected: "varient-2",
   },
   {
     item_id: "randomcards",
     varients: RANDOMCARD,
     title: "Select Random Card",
-    selected: "varient-1",
+    selected: "varient-2",
   },
   {
     item_id: "footer",
     varients: FOOTER,
     title: "Select Footer",
-    selected: "varient-1",
+    selected: "varient-4",
   },
   {
     item_id: "animatedcards",

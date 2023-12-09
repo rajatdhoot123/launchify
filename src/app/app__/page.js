@@ -8,7 +8,7 @@ import {
 } from "@/app/constants__/floater";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import DialogComponent from "@/app/components/__dialog";
+
 export default function Home() {
   const [state, setState] = useState({
     components: FLOATER_SELECT,
@@ -37,7 +37,7 @@ export default function Home() {
           setState={setState}
         />
       </DndProvider>
-      <div className="space-y-16">
+      <div className="space-y-24">
         {state.components.map((comp, index) => {
           const Component = comp.varients[comp.selected];
           return (
