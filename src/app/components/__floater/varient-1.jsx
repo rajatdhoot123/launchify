@@ -2,21 +2,73 @@
 import Select from "@/app/components/__select/varient-1";
 import { useRouter } from "next/navigation";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
-import { Separator, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import {
+  Button,
+  Link,
+  Separator,
+  TextFieldInput,
+  TextFieldRoot,
+} from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 import Collapsible from "@/app/components/__accordion/varient-1";
 import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
-import axios from "axios";
+
+import OptionPopover from "@/app/components/__popover";
+import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 const ItemType = "ITEM";
+
+const CodeGenerateButton = ({ api_ref, item_id }) => {
+  const [loader, setLoader] = useState(false);
+
+  return (
+    <Button
+      variant="ghost"
+      disabled={loader}
+      onClick={async () => {
+        setLoader(true);
+        if (!api_ref.current) {
+          const open_ai_key = prompt("Enter open ai api key");
+          api_ref.current = open_ai_key;
+        }
+
+        try {
+          logEvent("copy_writing_clicked");
+          const el = document.getElementById(item_id);
+          const elementToString = el.innerHTML;
+
+          const { choices } = await codeGenerate({
+            apiKey: api_ref.current,
+            text: elementToString,
+          });
+          const htmlWithCopy = choices[0]?.message?.content;
+
+          el.innerHTML = htmlWithCopy
+            .replace(/```/g, "")
+            .replace(/(\r\n|\n|\r)/gm, "");
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setLoader(false);
+        }
+      }}
+    >
+      {loader && (
+        <span className="m-auto px-2">
+          <Loader />
+        </span>
+      )}
+      <Link className="flex-shrink-0">Copy Writing</Link>
+    </Button>
+  );
+};
 
 const ListCard = forwardRef(
   (
     {
-      ai_key,
-
+      handleShowCode,
       moveItem,
       selected,
       title,
@@ -49,6 +101,7 @@ const ListCard = forwardRef(
         ref={(node) => ref(drop(node))}
         className="rounded-md cursor-move space-y-2"
       >
+        <div className="px-2"></div>
         <div className="flex items-center">
           <svg
             stroke="currentColor"
@@ -62,52 +115,27 @@ const ListCard = forwardRef(
             <path fill="none" d="M0 0h24v24H0V0z"></path>
             <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
           </svg>
-          <div className="flex justify-between w-full">
+
+          <div className="flex justify-between w-full items-center">
             <div className="text-sm font-semibold flex-shrink-0">{title}</div>
-            <button
-              disabled={loader}
-              onClick={async () => {
-                setLoader(true);
-                if (!api_ref.current) {
-                  const open_ai_key = prompt("Enter open ai api key");
-                  api_ref.current = open_ai_key;
-                }
-
-                try {
-                  logEvent("copy_writing_clicked");
-                  // if (!is_premium) {
-                  //   window.open(
-                  //     "https://www.boilercode.app/?utm_source=uiwidgets",
-                  //     "_blank"
-                  //   );
-                  //   return;
-                  // }
-                  const el = document.getElementById(item_id);
-                  const elementToString = el.innerHTML;
-
-                  const { choices } = await codeGenerate({
-                    apiKey: api_ref.current,
-                    text: elementToString,
-                  });
-                  const htmlWithCopy = choices[0]?.message?.content;
-
-                  el.innerHTML = htmlWithCopy
-                    .replace(/```/g, "")
-                    .replace(/(\r\n|\n|\r)/gm, "");
-                } catch (err) {
-                } finally {
-                  setLoader(false);
-                }
-              }}
-              className="text-sm font-semibold flex overflow-hidden"
-            >
-              {loader && (
-                <span className="m-auto px-2">
-                  <Loader />
-                </span>
-              )}
-              <span className="flex-shrink-0">Copy Writing</span>
-            </button>
+            <div className="mx-5">
+              <OptionPopover
+                components={[
+                  <DialogComponent
+                    key="Show code"
+                    title={title}
+                    handleShowCode={handleShowCode}
+                  >
+                    <Link>Show Code</Link>
+                  </DialogComponent>,
+                  <CodeGenerateButton
+                    item_id={item_id}
+                    api_ref={api_ref}
+                    key="CodeGeneration"
+                  />,
+                ]}
+              />
+            </div>
           </div>
         </div>
         <Select
@@ -159,6 +187,7 @@ const CloseIcon = ({ className }) => (
 );
 
 const Floater = ({
+  handleShowCode,
   setState,
   components = [],
   ga_id,
@@ -338,7 +367,13 @@ const Floater = ({
               {components.map(
                 ({ item_id, varients, title, selected }, index) => {
                   return renderList(
-                    { item_id, varients, title, selected },
+                    {
+                      item_id,
+                      varients,
+                      title,
+                      selected,
+                      handleShowCode: () => handleShowCode(index),
+                    },
                     index
                   );
                 }

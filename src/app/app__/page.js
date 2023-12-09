@@ -1,6 +1,6 @@
 "use client";
 import Floater from "@/app/components/__floater/varient-1";
-import { useState } from "react";
+import { createRef, useRef, useState } from "react";
 import {
   FLOATER_SELECT,
   PAGES,
@@ -8,7 +8,7 @@ import {
 } from "@/app/constants__/floater";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-
+import DialogComponent from "@/app/components/__dialog";
 export default function Home() {
   const [state, setState] = useState({
     components: FLOATER_SELECT,
@@ -18,10 +18,17 @@ export default function Home() {
     pages: PAGES,
   });
 
+  const elementsRef = useRef(state.components.map(() => createRef()));
+
+  const handleShowCode = (index) => {
+    return elementsRef.current[index].current.innerHTML;
+  };
+
   return (
     <>
       <DndProvider backend={HTML5Backend}>
         <Floater
+          handleShowCode={handleShowCode}
           pages={state.pages}
           crisp_id={state.crisp_id}
           premium_features={state.premium_features}
@@ -31,10 +38,14 @@ export default function Home() {
         />
       </DndProvider>
       <div className="space-y-16">
-        {state.components.map((comp) => {
+        {state.components.map((comp, index) => {
           const Component = comp.varients[comp.selected];
           return (
-            <section key={comp.item_id} id={comp.item_id}>
+            <section
+              ref={elementsRef.current[index]}
+              key={comp.item_id}
+              id={comp.item_id}
+            >
               <Component />
             </section>
           );
