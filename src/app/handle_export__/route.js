@@ -8,7 +8,7 @@ import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
-
+import { mergeCode } from "../api/code-generation__/merge-code";
 const DATABASE_FILES = [
   "src/lib/database/db.js",
   "src/lib/database/schema.js",
@@ -50,6 +50,8 @@ export async function POST(req) {
     pages = [],
   } = body;
 
+  // mergeCode({ apiKey: process.env.OPEN_AI_KEY , html_code: , jsx_code: });
+
   const is_next_auth = premium_features.find(
     ({ item_id }) => item_id === "next_auth"
   )?.selected;
@@ -82,6 +84,18 @@ export async function POST(req) {
   const file_to_add = components.map(({ item_id, varient }) => {
     return `src/app/components/${item_id}/${varient}.jsx`;
   });
+
+  const jsx_file = fs.readFileSync(file_to_add[1], "utf8");
+
+  const jsx_code = `import Link from "next/link";\n\nexport default function Hero() {\n  return (\n    <>\n      <section className="container mx-auto flex items-center justify-center bg-white">\n        <div className="mx-auto max-w-[43rem]">\n          <div className="text-center">\n            <p className="text-lg font-medium leading-8 text-indigo-600/95">\n              Welcome to the Future of Brand Consistency\n            </p>\n            <h1 className="mt-3 text-[3.5rem] font-bold leading-[4rem] tracking-tight text-black">\n              Seamless Brand Integration Across All Platforms\n            </h1>\n            <p className="mt-3 text-lg leading-relaxed text-slate-400">\n              Specify streamlines your brand's presence by seamlessly syncing design tokens and assets, ensuring uniformity at every touchpoint.\n            </p>\n          </div>\n\n          <div className="mt-6 flex items-center justify-center gap-4">\n            <Link\n              href="/app__"\n              className="transform rounded-md bg-indigo-600/95 px-5 py-3 font-medium text-white transition-colors hover:bg-indigo-700"\n            >\n              Start Your Free Journey\n            </Link>\n            <a\n              className="transform rounded-md border border-slate-200 px-5 py-3 font-medium text-slate-900 transition-colors hover:bg-slate-50"\n              target="_blank"\n            >\n              Explore a Live Demo\n            </a>\n          </div>\n        </div>\n      </section>\n    </>\n  );\n}`;
+
+  // const response = await mergeCode({
+  //   jsx_code: jsx_file,
+  //   apiKey: process.env.OPEN_AI_KEY,
+  //   html_code:
+  //     '<section class="container mx-auto flex items-center justify-center bg-white">\n  <div class="mx-auto max-w-[43rem]">\n    <div class="text-center">\n      <p class="text-lg font-medium leading-8 text-indigo-600/95">Welcome to the Future of Brand Consistency</p>\n      <h1 class="mt-3 text-[3.5rem] font-bold leading-[4rem] tracking-tight text-black">Seamless Brand Integration Across All Platforms</h1>\n      <p class="mt-3 text-lg leading-relaxed text-slate-400">Specify streamlines your brand\'s presence by seamlessly syncing design tokens and assets, ensuring uniformity at every touchpoint.</p>\n    </div>\n    <div class="mt-6 flex items-center justify-center gap-4">\n      <a class="transform rounded-md bg-indigo-600/95 px-5 py-3 font-medium text-white transition-colors hover:bg-indigo-700" href="/app__">Start Your Free Journey</a>\n      <a class="transform rounded-md border border-slate-200 px-5 py-3 font-medium text-slate-900 transition-colors hover:bg-slate-50" target="_blank">Explore a Live Demo</a>\n    </div>\n  </div>\n</section>',
+  // });
+  // console.log(JSON.stringify(response));
 
   const pages_to_add = pages
     .filter((page) => page.selected)
@@ -142,6 +156,16 @@ export async function POST(req) {
     "src/app/page.js",
     Buffer.from(
       await prettier.format(generateRootPage({ components }), {
+        parser: "babel",
+      })
+    ),
+    "utf8"
+  );
+
+  zip.addFile(
+    "src/app/code.jsx",
+    Buffer.from(
+      await prettier.format(jsx_code, {
         parser: "babel",
       })
     ),

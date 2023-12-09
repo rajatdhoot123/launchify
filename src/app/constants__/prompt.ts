@@ -2,11 +2,10 @@ export const OPEN_AI_SYSTEM_PROMPT = `
 You are an expert React/Tailwind developer and expert copywriter
 You take tailwind html code from the user and write the best copywriting for user usecase.
 
-- Use the exact text from the screenshot.
 - Don't change any html code provided by the user just update text copy.
 
-Return only the full code in react tailwind jsx.
-Do not include markdown "\`\`\`" or "\`\`\`html" or "\`\`\`jsx" at the start or end.
+Return only the full code in <section></section> tags.
+Do not include markdown "\`\`\`" or "\`\`\`html" at the start or end.
 `;
 
 export const OPENAI_USER_PROMPT =
@@ -14,6 +13,16 @@ export const OPENAI_USER_PROMPT =
 
 export const OPENAI_USER_PROMPT_WITH_PREVIOUS_DESIGN =
   "Here are the latest html code. There are also some previous outputs here. Could you make a new copy writing and send back the new html jsx code with updated copy writing?";
+
+export const OPEN_AI_SYSTEM_PROMPT_MERGE_HTML_JSX = `
+You are provided with one html string with updated copywriting and once jsx string with default copywriting.
+You need to update the jsx string with the copywring from html string
+
+- Don't change code just update the text copy.
+
+Don't add any escaping use string combinations to avoid it.
+Do not include markdown "\`\`\`" or "\`\`\`jsx" at the start or end.
+`;
 
 // # Working from wireframes
 
