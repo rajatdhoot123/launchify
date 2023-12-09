@@ -1,6 +1,6 @@
 import { useNode } from "@craftjs/core";
 
-export const ElementContainer = ({ children, ...props }) => {
+const ElementContainer = ({ children, ...props }) => {
   const {
     connectors: { connect, drag },
   } = useNode();

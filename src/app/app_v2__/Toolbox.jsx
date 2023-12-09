@@ -1,15 +1,16 @@
 import { Element, useEditor } from "@craftjs/core";
 import { COMPONENTS_ARRAY } from "../constants__/floater";
 import ElementContainer from "./selectors/ElementContainer";
+import { prettifyCamelCase } from "@/app/utils__/helper";
 const ToolBox = () => {
   const { connectors } = useEditor();
 
   return (
-    <div className="space-y-6 p-5 shadow-xl w-1/6 bg-white">
+    <div className="space-y-6 p-5 shadow-xl w-1/6 bg-white overflow-y-scroll">
       <div>
         {COMPONENTS_ARRAY.map(({ name, components }) => (
           <div className="p-2" key={name}>
-            <div className="font-bold my-2">{name}</div>
+            <div className="font-bold my-2">{prettifyCamelCase(name)}</div>
             <ul className="space-y-2">
               {components.map((Comp, index) => (
                 <li className="flex items-center space-x-2" key={index}>

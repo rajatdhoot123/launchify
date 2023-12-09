@@ -44,94 +44,139 @@ import Contactus2 from "@/app/components/contactus/varient-2";
 import Login1 from "@/app/components/login/varient-1";
 import Login2 from "@/app/components/login/varient-2";
 
-export const COMPONENTS_ARRAY = [
-  { name: "Navbar", components: [Navbar1, Navbar2, Navbar3] },
-  { name: "Hero", components: [Hero1, Hero2, Hero3, Hero4, Hero5, Hero6] },
-];
-
 const NAVBAR = {
-  "varient-1": <Navbar1 />,
-  "varient-2": <Navbar2 />,
-  "varient-3": <Navbar3 />,
+  "varient-1": Navbar1,
+  "varient-2": Navbar2,
+  "varient-3": Navbar3,
 };
 
 const HERO = {
-  "varient-1": <Hero1 />,
-  "varient-2": <Hero2 />,
-  "varient-3": <Hero3 />,
-  "varient-4": <Hero4 />,
-  "varient-5": <Hero5 />,
-  "varient-6": <Hero6 />,
+  "varient-1": Hero1,
+  "varient-2": Hero2,
+  "varient-3": Hero3,
+  "varient-4": Hero4,
+  "varient-5": Hero5,
+  "varient-6": Hero6,
 };
 
 const PRICING = {
-  "varient-1": <Pricing1 />,
-  "varient-2": <Pricing2 />,
-  "varient-3": <Pricing3 />,
-  "varient-4": <Pricing4 />,
-  "varient-5": <Pricing5 />,
-  "varient-6": <Pricing6 />,
+  "varient-1": Pricing1,
+  "varient-2": Pricing2,
+  "varient-3": Pricing3,
+  "varient-4": Pricing4,
+  "varient-5": Pricing5,
+  "varient-6": Pricing6,
 };
 
 const TESTIMONIALS = {
-  "varient-1": <Testimonials1 />,
-  "varient-2": <Testimonials2 />,
-  "varient-3": <Testimonials3 />,
+  "varient-1": Testimonials1,
+  "varient-2": Testimonials2,
+  "varient-3": Testimonials3,
 };
 
 const PRODUCT_LAUNCH = {
-  "varient-1": <ProductLaunch1 />,
+  "varient-1": ProductLaunch1,
 };
 
 const TABLE = {
-  "varient-1": <Table1 />,
-  "varient-2": <Table2 />,
-  "varient-3": <Table3 />,
+  "varient-1": Table1,
+  "varient-2": Table2,
+  "varient-3": Table3,
 };
 
 const RANDOMCARD = {
-  "varient-1": <RandomCard1 />,
-  "varient-2": <RandomCard2 />,
+  "varient-1": RandomCard1,
+  "varient-2": RandomCard2,
 };
 
 const FOOTER = {
-  "varient-1": <Footer1 />,
-  "varient-2": <Footer2 />,
-  "varient-3": <Footer3 />,
-  "varient-4": <Footer4 />,
+  "varient-1": Footer1,
+  "varient-2": Footer2,
+  "varient-3": Footer3,
+  "varient-4": Footer4,
 };
 
 const CARDS = {
-  "varient-1": <Card1 />,
-  "varient-2": <Card2 />,
-  "varient-3": <Card3 />,
-  "varient-4": <Card4 />,
-  "varient-5": <Card5 />,
-  "varient-6": <Card6 />,
-  "varient-7": <Card7 />,
-  "varient-8": <Card8 />,
-  "varient-9": <Card9 />,
-  "varient-10": <Card10 />,
-  "varient-11": <Card11 />,
+  "varient-1": Card1,
+  "varient-2": Card2,
+  "varient-3": Card3,
+  "varient-4": Card4,
+  "varient-5": Card5,
+  "varient-6": Card6,
+  "varient-7": Card7,
+  "varient-8": Card8,
+  "varient-9": Card9,
+  "varient-10": Card10,
+  "varient-11": Card11,
 };
 
 const COMMING_SOON = {
-  "varient-1": <CommingSoon1 />,
+  "varient-1": CommingSoon1,
 };
 
 const ANIMATED_CARDS = {
-  "varient-1": <Animated1 />,
+  "varient-1": Animated1,
 };
 
 const CONTACT_US = {
-  "varient-1": <Contactus1 />,
-  "varient-2": <Contactus2 />,
+  "varient-1": Contactus1,
+  "varient-2": Contactus2,
 };
 
 const LOGIN = {
-  "varient-1": <Login1 />,
-  "varient-2": <Login2 />,
+  "varient-1": Login1,
+  "varient-2": Login2,
 };
+
+export const COMPONENTS_ARRAY = [
+  { name: "Navbar", components: Object.values(NAVBAR) },
+  { name: "Hero", components: Object.values(HERO) },
+  {
+    name: "Pricing",
+    components: Object.values(PRICING),
+  },
+
+  {
+    name: "Testimonials",
+    components: Object.values(TESTIMONIALS),
+  },
+  {
+    name: "ProductLaunch",
+    components: Object.values(PRODUCT_LAUNCH),
+  },
+  {
+    name: "Table",
+    components: Object.values(TABLE),
+  },
+  {
+    name: "RandomCards",
+    components: Object.values(RANDOMCARD),
+  },
+  {
+    name: "Footer",
+    components: Object.values(FOOTER),
+  },
+  {
+    name: "Cards",
+    components: Object.values(CARDS),
+  },
+  {
+    name: "CommingSoon",
+    components: Object.values(COMMING_SOON),
+  },
+  {
+    name: "AnimatedCard",
+    components: Object.values(ANIMATED_CARDS),
+  },
+  {
+    name: "ContactUs",
+    components: Object.values(CONTACT_US),
+  },
+  {
+    name: "Login",
+    components: Object.values(LOGIN),
+  },
+];
 
 export const PREMIUM_FEATURES = [
   {
