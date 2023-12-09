@@ -7,7 +7,7 @@ const ToolBox = () => {
 
   return (
     <div className="space-y-6 p-5 shadow-xl w-1/6 bg-white overflow-y-scroll">
-      <div>
+      <div className="pb-12">
         {COMPONENTS_ARRAY.map(({ name, components }) => (
           <div className="p-2" key={name}>
             <div className="font-bold my-2">{prettifyCamelCase(name)}</div>

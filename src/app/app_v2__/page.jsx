@@ -31,12 +31,11 @@ const App = () => {
       >
         <Viewport>
           <div className="w-full craftjs-renderer shadow-xl">
-            <Frame className="h-56 w-full bg-red-100">
+            <Frame className="w-full">
               <Element
                 canvas
                 is={Container}
-                width="800px"
-                background={{ r: 255, g: 255, b: 255, a: 1 }}
+                width="100%"
                 padding={["40", "40", "40", "40"]}
                 custom={{ displayName: "App" }}
               ></Element>

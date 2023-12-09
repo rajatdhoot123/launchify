@@ -6,7 +6,7 @@ const Container = ({ children, ...props }) => {
   } = useNode();
   return (
     <div
-      className="overflow-y-scroll min-h-screen bg-white space-y-12"
+      className="overflow-y-scroll min-h-screen bg-white space-y-12 pb-40"
       {...props}
       ref={(ref) => connect(drag(ref))}
     >
