@@ -1,10 +1,10 @@
 "use client";
-import { Editor, Frame, Element, useEditor, useNode } from "@craftjs/core";
-import Viewport from "./ViewPort";
-import RenderNode from "./render_node";
-import ElementContainer from "./selectors/ElementContainer";
-import Container from "./selectors/Container";
-import { COMPONENTS_ARRAY } from "../constants__/floater";
+import { Editor, Frame, Element } from "@craftjs/core";
+import Viewport from "@/app/editor__/Viewport";
+import RenderNode from "@/app/editor__/render_node";
+import ElementContainer from "@/app/editor__/selectors/Container";
+import Container from "@/app/editor__/selectors/Container";
+import { COMPONENTS_ARRAY } from "@/app/constants__/floater";
 
 const all_components = COMPONENTS_ARRAY.reduce((acc, currentComp) => {
   return {
