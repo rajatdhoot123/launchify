@@ -408,7 +408,7 @@ const ContactUs = () => {
               transform="translate(-52 -162.63)"
               fill="none"
               stroke="#3f3d56"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
               strokeWidth="4"
             ></path>
             <path
@@ -456,7 +456,7 @@ const ContactUs = () => {
               transform="translate(-52 -162.63)"
               fill="none"
               stroke="#3f3d56"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
               strokeWidth="4"
             ></path>
             <path
@@ -504,7 +504,7 @@ const ContactUs = () => {
               transform="translate(-52 -162.63)"
               fill="none"
               stroke="#3f3d56"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
               strokeWidth="4"
             ></path>
             <path
@@ -712,7 +712,7 @@ const ContactUs = () => {
               transform="translate(-52 -162.63)"
               fill="none"
               stroke="#000"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
               opacity="0.1"
             ></path>
             <path
@@ -735,7 +735,7 @@ const ContactUs = () => {
               transform="translate(-52 -162.63)"
               fill="none"
               stroke="#3f3d56"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
               strokeWidth="4"
             ></path>
             <path
@@ -783,7 +783,7 @@ const ContactUs = () => {
               transform="translate(-52 -162.63)"
               fill="none"
               stroke="#3f3d56"
-              stroke-miterlimit="10"
+              strokeMiterlimit="10"
               strokeWidth="4"
             ></path>
             <path
