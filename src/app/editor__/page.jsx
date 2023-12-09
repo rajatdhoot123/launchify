@@ -33,6 +33,7 @@ const App = () => {
           <div className="w-full craftjs-renderer shadow-xl">
             <Frame className="w-full">
               <Element
+                id="container"
                 canvas
                 is={Container}
                 width="100%"

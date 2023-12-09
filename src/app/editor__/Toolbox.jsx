@@ -31,6 +31,7 @@ const ToolBox = () => {
                       connectors.create(
                         ref,
                         <Element
+                          id={`${name}${index + 1}`}
                           custom={{
                             displayName: `${name}${index + 1}`,
                             type: name,
