@@ -20,9 +20,7 @@ import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 const ItemType = "ITEM";
 
-const CodeGenerateButton = ({ api_ref, item_id }) => {
-  const [loader, setLoader] = useState(false);
-
+const CodeGenerateButton = ({ api_ref, item_id, setLoader, loader }) => {
   return (
     <Button
       variant="ghost"
@@ -129,6 +127,8 @@ const ListCard = forwardRef(
                     <Link>Show Code</Link>
                   </DialogComponent>,
                   <CodeGenerateButton
+                    loader={loader}
+                    setLoader={setLoader}
                     item_id={item_id}
                     api_ref={api_ref}
                     key="CodeGeneration"

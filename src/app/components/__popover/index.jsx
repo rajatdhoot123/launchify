@@ -3,7 +3,9 @@ const OptionPopover = ({ components }) => {
   return (
     <HoverCard.Root>
       <HoverCard.Trigger>
-        <Link variant="ghost">Code & Ai Magic</Link>
+        <Link className="text-sm font-bold" variant="ghost">
+          Code & Ai Magic
+        </Link>
       </HoverCard.Trigger>
       <HoverCard.Content>
         <div className="flex flex-col space-y-2 cursor-pointer">

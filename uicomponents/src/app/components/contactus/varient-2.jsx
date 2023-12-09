@@ -28,13 +28,13 @@ const ContactUs = () => {
                 y2="560.46"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0" stop-color="gray" stop-opacity="0.25"></stop>
+                <stop offset="0" stopColor="gray" stopOpacity="0.25"></stop>
                 <stop
                   offset="0.54"
-                  stop-color="gray"
-                  stop-opacity="0.12"
+                  stopColor="gray"
+                  stopOpacity="0.12"
                 ></stop>
-                <stop offset="1" stop-color="gray" stop-opacity="0.1"></stop>
+                <stop offset="1" stopColor="gray" stopOpacity="0.1"></stop>
               </linearGradient>
               <pattern
                 id="ad310e25-2b04-44c8-bb7b-982389166780"
