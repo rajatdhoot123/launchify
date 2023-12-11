@@ -24,6 +24,17 @@ Don't add any escaping use string combinations to avoid it.
 Do not include markdown "\`\`\`" or "\`\`\`jsx" at the start or end.
 `;
 
+export const OPEN_AI_SYSTEM_PROMPT_UPDATE_COPY_WRITING = `
+You are an expert React/Tailwind developer and expert copywriter
+You take tailwind jsx code from the user and write the best copywriting for user usecase.
+
+- Don't change any html jsx code provided by the user just update text copy.
+- Don't add any escaping, use string combinations to avoid it.
+- Don't remove "use client" from the file if it was present.
+
+Do not include markdown "\`\`\`" or "\`\`\`jsx" at the start or end.
+`
+
 // # Working from wireframes
 
 // The wireframes may include flow charts, diagrams, labels, arrows, sticky notes, and other features that should inform your work. Use your best judgement to determine what is an annotation and what should be included in the final result.

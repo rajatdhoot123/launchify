@@ -11,12 +11,12 @@ function doesChildExist(parentSelector, childSelector) {
 // Load HTML content using Cheerio
 const html_element = cheerio.load(`
   <nav
-    class="container flex md:hidden mx-auto items-center justify-between p-5"
+    className="container flex md:hidden mx-auto items-center justify-between p-5"
   >
-    <div class="flex items-center">
-      <button class="pointer-cursor md:hidden block lg:hidden mr-5">
+    <div className="flex items-center">
+      <button className="pointer-cursor md:hidden block lg:hidden mr-5">
         <svg
-          class="fill-current text-gray-900"
+          className="fill-current text-gray-900"
           xmlns="http://www.w3.org/2000/svg"
           width="20"
           height="20"
@@ -28,70 +28,70 @@ const html_element = cheerio.load(`
       </button>
       <a
         href="/"
-        class="flex items-center hover:scale-125 transition duration-150 ease-in"
+        className="flex items-center hover:scale-125 transition duration-150 ease-in"
       >
-        <div class="flex-shrink-0">
-          <div class="text-xl font-bold">YourBrand</div>
+        <div className="flex-shrink-0">
+          <div className="text-xl font-bold">YourBrand</div>
         </div>
       </a>
     </div>
-    <button class="p-2 rounded-lg font-bold text-xl">Get Started</button>
+    <button className="p-2 rounded-lg font-bold text-xl">Get Started</button>
   </nav>
   <nav
-    class="hidden md:flex items-center text-white justify-between p-2 px-5 shadow-md"
+    className="hidden md:flex items-center text-white justify-between p-2 px-5 shadow-md"
   >
     <a
       href="/"
-      class="flex items-center hover:scale-125 transition duration-150 ease-in text-black text-xl font-bold"
+      className="flex items-center hover:scale-125 transition duration-150 ease-in text-black text-xl font-bold"
       >YourBrand</a
     >
     <div
-      class="hidden peer-checked:block md:flex md:items-center md:w-auto w-full"
+      className="hidden peer-checked:block md:flex md:items-center md:w-auto w-full"
       id="menu"
     >
       <nav>
         <ul
-          class="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0"
+          className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0"
         >
-          <li><a class="md:p-4 py-3 px-0 block" href="#">Home</a></li>
-          <li><a class="md:p-4 py-3 px-0 block" href="#">Services</a></li>
-          <li><a class="md:p-4 py-3 px-0 block" href="#">Portfolio</a></li>
+          <li><a className="md:p-4 py-3 px-0 block" href="#">Home</a></li>
+          <li><a className="md:p-4 py-3 px-0 block" href="#">Services</a></li>
+          <li><a className="md:p-4 py-3 px-0 block" href="#">Portfolio</a></li>
           <li>
-            <a class="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Contact</a>
+            <a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#">Contact</a>
           </li>
         </ul>
       </nav>
     </div>
-    <button class="p-2 rounded-lg text-black font-bold">Join Now</button>
+    <button className="p-2 rounded-lg text-black font-bold">Join Now</button>
   </nav>
   <div
-    class="z-20 md:hidden fixed inset-0 bg-white w-full md:w-96 transform transition-all ease-in-out duration-500 -translate-x-full"
+    className="z-20 md:hidden fixed inset-0 bg-white w-full md:w-96 transform transition-all ease-in-out duration-500 -translate-x-full"
   >
     <div>
-      <div class="w-full justify-between flex items-center p-5">
+      <div className="w-full justify-between flex items-center p-5">
         <a
           href="/"
-          class="flex items-center hover:scale-125 transition duration-150 ease-in text-black text-xl font-bold"
+          className="flex items-center hover:scale-125 transition duration-150 ease-in text-black text-xl font-bold"
           >YourBrand</a
         >
         <button>
-          <strong class="text-[28px] align-center cursor-pointer alert-del"
+          <strong className="text-[28px] align-center cursor-pointer alert-del"
             >×</strong
           >
         </button>
       </div>
-      <div class="px-5">
+      <div className="px-5">
         <div
-          class="peer-checked:block md:flex md:items-center md:w-auto w-full"
+          className="peer-checked:block md:flex md:items-center md:w-auto w-full"
           id="menu"
         >
           <nav>
-            <ul class="items-center justify-between text-base text-gray-700">
-              <li><a class="md:p-4 py-3 px-0 block" href="#">About</a></li>
-              <li><a class="md:p-4 py-3 px-0 block" href="#">Our Work</a></li>
-              <li><a class="md:p-4 py-3 px-0 block" href="#">Insights</a></li>
+            <ul className="items-center justify-between text-base text-gray-700">
+              <li><a className="md:p-4 py-3 px-0 block" href="#">About</a></li>
+              <li><a className="md:p-4 py-3 px-0 block" href="#">Our Work</a></li>
+              <li><a className="md:p-4 py-3 px-0 block" href="#">Insights</a></li>
               <li>
-                <a class="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#"
+                <a className="md:p-4 py-3 px-0 block md:mb-0 mb-2" href="#"
                   >Reach Out</a
                 >
               </li>

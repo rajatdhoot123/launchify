@@ -2,16 +2,16 @@ const Pricing = () => {
   return (
     <section
       id="pricing"
-      class="flex flex-col container mx-auto items-center justify-center mt-32 pt-20 relative"
+      className="flex flex-col container mx-auto items-center justify-center mt-32 pt-20 relative"
     >
-      <div class="max-w-xl text-center">
-        <div class="rounded-[40px] border uppercase backdrop-blur-sm text-xs text-primary font-medium md:mt-0 mb-4 py-2 px-4 border-primary/40 w-fit mx-auto text-center z-10">
+      <div className="max-w-xl text-center">
+        <div className="rounded-[40px] border uppercase backdrop-blur-sm text-xs text-primary font-medium md:mt-0 mb-4 py-2 px-4 border-primary/40 w-fit mx-auto text-center z-10">
           Pricing
         </div>
-        <h2 class="text-3xl md:text-5xl font-medium md:leading-[64px] mt-6">
+        <h2 className="text-3xl md:text-5xl font-medium md:leading-[64px] mt-6">
           Free until your first subscriber. Yep.
         </h2>
-        <p class="mt-6 text-primary/80 text-base md:text-xl mb-10 max-w-xl">
+        <p className="mt-6 text-primary/80 text-base md:text-xl mb-10 max-w-xl">
           Breeew is the best option for your productized service. Whether you're
           testing your idea or scaling, we've got a plan for you.
         </p>
@@ -19,12 +19,12 @@ const Pricing = () => {
       <div
         dir="ltr"
         data-orientation="horizontal"
-        class="flex flex-col items-center justify-center"
+        className="flex flex-col items-center justify-center"
       >
         <div
           role="tablist"
           aria-orientation="horizontal"
-          class="inline-flex h-10 items-center justify-center rounded-md p-1 text-primary space-x-2 mb-4 outline-none"
+          className="inline-flex h-10 items-center justify-center rounded-md p-1 text-primary space-x-2 mb-4 outline-none"
           tabindex="0"
           data-orientation="horizontal"
         >
@@ -35,7 +35,7 @@ const Pricing = () => {
             aria-controls="radix-:Rjbqbqda:-content-month"
             data-state="active"
             id="radix-:Rjbqbqda:-trigger-month"
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 w-fit text-sm bg-primary/5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-transparent disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 w-fit text-sm bg-primary/5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-transparent disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
             tabindex="0"
             data-orientation="horizontal"
             data-radix-collection-item=""
@@ -49,7 +49,7 @@ const Pricing = () => {
             aria-controls="radix-:Rjbqbqda:-content-year"
             data-state="inactive"
             id="radix-:Rjbqbqda:-trigger-year"
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 w-fit text-sm bg-primary/5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-transparent disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 w-fit text-sm bg-primary/5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-transparent disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
             tabindex="-1"
             data-orientation="horizontal"
             data-radix-collection-item=""
@@ -64,40 +64,40 @@ const Pricing = () => {
           aria-labelledby="radix-:Rjbqbqda:-trigger-month"
           id="radix-:Rjbqbqda:-content-month"
           tabindex="0"
-          class="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 grid md:grid-flow-col grid-flow-row justify-center gap-6 items-stretch"
+          className="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 grid md:grid-flow-col grid-flow-row justify-center gap-6 items-stretch"
 
         >
-          <div class="rounded-lg border bg-card text-card-foreground w-full max-w-full my-4 shadow-lg flex flex-col justify-between relative md:w-[640px] md:max-w-[640px]">
+          <div className="rounded-lg border bg-card text-card-foreground w-full max-w-full my-4 shadow-lg flex flex-col justify-between relative md:w-[640px] md:max-w-[640px]">
             <div>
-              <div class="flex flex-col space-y-1.5 p-8">
-                <h3 class="text-lg font-medium leading-none tracking-tight">
+              <div className="flex flex-col space-y-1.5 p-8">
+                <h3 className="text-lg font-medium leading-none tracking-tight">
                   Starter
                 </h3>
-                <p class="text-sm text-muted-foreground md:h-10 md:max-w-[65%]">
+                <p className="text-sm text-muted-foreground md:h-10 md:max-w-[65%]">
                   Setup your subscription based service for free. Automatically
                   billed at your first subscriber.
                 </p>
               </div>
-              <div class="p-8 pt-0 mt-6">
-                <p class="text-3xl font-medium">
-                  Free <span class="text-sm mx-2">then</span> $49.95
-                  <span class="text-xs text-muted-foreground font-normal">
+              <div className="p-8 pt-0 mt-6">
+                <p className="text-3xl font-medium">
+                  Free <span className="text-sm mx-2">then</span> $49.95
+                  <span className="text-xs text-muted-foreground font-normal">
                     /month
                   </span>
                 </p>
                 <div
                   data-orientation="horizontal"
                   role="none"
-                  class="shrink-0 bg-border h-[1px] w-full my-6"
+                  className="shrink-0 bg-border h-[1px] w-full my-6"
                 ></div>
-                <div class="grid gap-4 md:grid-cols-2">
-                  <div class="flex items-center space-x-2">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -105,15 +105,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">2 team seats</p>
+                    <p className="text-sm font-normal">2 team seats</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -121,15 +121,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Accept subscriptions</p>
+                    <p className="text-sm font-normal">Accept subscriptions</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -137,15 +137,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Manage plans and add-ons</p>
+                    <p className="text-sm font-normal">Manage plans and add-ons</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -153,15 +153,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Autogenerated public page</p>
+                    <p className="text-sm font-normal">Autogenerated public page</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -169,15 +169,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Custom client portal</p>
+                    <p className="text-sm font-normal">Custom client portal</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -185,15 +185,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Embed anywhere</p>
+                    <p className="text-sm font-normal">Embed anywhere</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -201,17 +201,17 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">
+                    <p className="text-sm font-normal">
                       Theming &amp; custom domain name
                     </p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -219,15 +219,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Powerful task management</p>
+                    <p className="text-sm font-normal">Powerful task management</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -235,15 +235,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Communicate with comments</p>
+                    <p className="text-sm font-normal">Communicate with comments</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -251,18 +251,18 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">2TB of cloud storage</p>
+                    <p className="text-sm font-normal">2TB of cloud storage</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="flex items-center p-8 pt-0">
-              <form class="flex flex-1 gap-6 items-center w-full flex-col-reverse">
-                <div class="flex md:flex-row flex-col items-center justify-center mt-6 w-full">
-                  <div class="flex flex-1 flex-col w-full relative">
-                    <div class="group flex items-center space-x-2 w-full rounded-md border-input px-3 py-2 focus-within:outline-none focus-within:border-primary/30 h-11 md:h-14 rounded-b-none border-0 border-t border-x md:rounded-r-none md:rounded-l-md md:border md:border-r-0 bg-background md:px-6">
+            <div className="flex items-center p-8 pt-0">
+              <form className="flex flex-1 gap-6 items-center w-full flex-col-reverse">
+                <div className="flex md:flex-row flex-col items-center justify-center mt-6 w-full">
+                  <div className="flex flex-1 flex-col w-full relative">
+                    <div className="group flex items-center space-x-2 w-full rounded-md border-input px-3 py-2 focus-within:outline-none focus-within:border-primary/30 h-11 md:h-14 rounded-b-none border-0 border-t border-x md:rounded-r-none md:rounded-l-md md:border md:border-r-0 bg-background md:px-6">
                       <input
-                        class="bg-transparent w-full ring-offset-background file:border-0 outline-none file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground text-base"
+                        className="bg-transparent w-full ring-offset-background file:border-0 outline-none file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground text-base"
                         placeholder="Email address"
                         value=""
                         name="email"
@@ -270,7 +270,7 @@ const Pricing = () => {
                     </div>
                   </div>
                   <button
-                    class="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-accent text-accent-foreground hover:bg-accent/90 h-11 md:h-14 px-6 rounded-md text-base rounded-t-none md:rounded-l-none w-full md:w-fit md:rounded-r-md"
+                    className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-accent text-accent-foreground hover:bg-accent/90 h-11 md:h-14 px-6 rounded-md text-base rounded-t-none md:rounded-l-none w-full md:w-fit md:rounded-r-md"
                     type="submit"
                   >
                     Start now
@@ -281,7 +281,7 @@ const Pricing = () => {
                       strokeWidth="1.5"
                       stroke="currentColor"
                       aria-hidden="true"
-                      class="ml-2 h-4 w-4"
+                      className="ml-2 h-4 w-4"
                     >
                       <path
                         strokeLinecap="round"
@@ -291,38 +291,38 @@ const Pricing = () => {
                     </svg>
                   </button>
                 </div>
-                <span class="text-xs text-primary/60">
+                <span className="text-xs text-primary/60">
                   Free until first subscriber - No credit card needed
                 </span>
               </form>
             </div>
           </div>
-          <div class="rounded-lg border bg-card text-card-foreground w-full max-w-full md:max-w-xs my-4 shadow-lg flex flex-col justify-between relative">
+          <div className="rounded-lg border bg-card text-card-foreground w-full max-w-full md:max-w-xs my-4 shadow-lg flex flex-col justify-between relative">
             <div>
-              <div class="flex flex-col space-y-1.5 p-8">
-                <h3 class="text-lg font-medium leading-none tracking-tight">
+              <div className="flex flex-col space-y-1.5 p-8">
+                <h3 className="text-lg font-medium leading-none tracking-tight">
                   Agency
                 </h3>
-                <p class="text-sm text-muted-foreground md:h-10">
+                <p className="text-sm text-muted-foreground md:h-10">
                   For more established agencies with powerful team features and
                   a fully white labeled experience.
                 </p>
               </div>
-              <div class="p-8 pt-0 mt-6">
-                <p class="text-3xl font-medium">Contact us</p>
+              <div className="p-8 pt-0 mt-6">
+                <p className="text-3xl font-medium">Contact us</p>
                 <div
                   data-orientation="horizontal"
                   role="none"
-                  class="shrink-0 bg-border h-[1px] w-full my-6"
+                  className="shrink-0 bg-border h-[1px] w-full my-6"
                 ></div>
-                <div class="grid gap-4">
-                  <div class="flex items-center space-x-2">
+                <div className="grid gap-4">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -330,15 +330,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">2+ team members</p>
+                    <p className="text-sm font-normal">2+ team members</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -346,15 +346,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Manage permissions</p>
+                    <p className="text-sm font-normal">Manage permissions</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -362,15 +362,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Dedicated support</p>
+                    <p className="text-sm font-normal">Dedicated support</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -378,15 +378,15 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">Fully white labelled</p>
+                    <p className="text-sm font-normal">Fully white labelled</p>
                   </div>
-                  <div class="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       aria-hidden="true"
-                      class="h-5 w-5"
+                      className="h-5 w-5"
                     >
                       <path
                         fill-rule="evenodd"
@@ -394,21 +394,21 @@ const Pricing = () => {
                         clip-rule="evenodd"
                       ></path>
                     </svg>
-                    <p class="text-sm font-normal">
+                    <p className="text-sm font-normal">
                       Emails sent with custom domain
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="flex items-center p-8 pt-0">
+            <div className="flex items-center p-8 pt-0">
               <a
-                class="w-full"
+                className="w-full"
                 target="_blank"
                 href="https://gv8y05ju6yg.typeform.com/to/Blzx6tEh"
               >
                 <button
-                  class="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-primary/5 hover:text-secondary-foreground bg-background h-11 md:h-14 px-6 rounded-md text-base w-full"
+                  className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-primary/5 hover:text-secondary-foreground bg-background h-11 md:h-14 px-6 rounded-md text-base w-full"
                   type="submit"
                 >
                   Join waitlist
@@ -424,7 +424,7 @@ const Pricing = () => {
           aria-labelledby="radix-:Rjbqbqda:-trigger-year"
           id="radix-:Rjbqbqda:-content-year"
           tabindex="0"
-          class="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 grid md:grid-flow-col grid-flow-row justify-center gap-6 items-stretch"
+          className="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 grid md:grid-flow-col grid-flow-row justify-center gap-6 items-stretch"
           hidden=""
         ></div>
       </div>
