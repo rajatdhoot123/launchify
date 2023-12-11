@@ -21,6 +21,7 @@ export default function Home() {
   const elementsRef = useRef(state.components.map(() => createRef()));
 
   const handleShowCode = (index) => {
+    console.log({ d: elementsRef.current });
     return elementsRef.current[index].current.innerHTML;
   };
 
