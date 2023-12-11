@@ -8,7 +8,6 @@ import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
-import { updateCopywriting } from "../api/code-generation__/update-copywriting";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
@@ -51,8 +50,6 @@ export async function POST(req) {
     pages = [],
   } = body;
 
-  // mergeCode({ apiKey: process.env.OPEN_AI_KEY , html_code: , jsx_code: });
-
   const is_next_auth = premium_features.find(
     ({ item_id }) => item_id === "next_auth"
   )?.selected;
@@ -85,20 +82,6 @@ export async function POST(req) {
   const file_to_add = components.map(({ item_id, varient }) => {
     return `src/app/components/${item_id}/${varient}.jsx`;
   });
-
-  const all_copy_writing = await Promise.all(
-    file_to_add.map(async (file) => {
-      const data = fs.readFileSync(file, "utf8");
-      return {
-        name: file,
-        data: await updateCopywriting({
-          use_case: "ecommerce website which sells cloths",
-          jsx_code: data,
-          apiKey: process.env.OPEN_AI_KEY,
-        }),
-      };
-    }, {})
-  );
 
   const pages_to_add = pages
     .filter((page) => page.selected)
@@ -171,20 +154,6 @@ export async function POST(req) {
 ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
 ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
 `)
-  );
-
-  await Promise.all(
-    all_copy_writing.map(async ({ file, data }) =>
-      zip.addFile(
-        file,
-        Buffer.from(
-          await prettier.format(data.choices[0].message.content, {
-            parser: "babel",
-          })
-        ),
-        "utf8"
-      )
-    )
   );
 
   zip.addFile("package.json", Buffer.from(JSON.stringify(packageJson)), "utf8");
