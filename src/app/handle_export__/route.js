@@ -87,11 +87,11 @@ export async function POST(req) {
   });
 
   const all_copy_writing = await Promise.all(
-    file_to_add.reduce((acc, current) => {
+    file_to_add.map(async (file) => {
       const data = fs.readFileSync(file, "utf8");
       return {
-        ...acc,
-        [current]: updateCopywriting({
+        name: file,
+        data: await updateCopywriting({
           use_case: "ecommerce website which sells cloths",
           jsx_code: data,
           apiKey: process.env.OPEN_AI_KEY,
@@ -174,11 +174,11 @@ ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
   );
 
   await Promise.all(
-    Object.entries(file_to_add).map(async ([filename, chat_apt_jsx]) =>
+    all_copy_writing.map(async ({ file, data }) =>
       zip.addFile(
-        filename,
+        file,
         Buffer.from(
-          await prettier.format(chat_apt_jsx.choices[0].message.content, {
+          await prettier.format(data.choices[0].message.content, {
             parser: "babel",
           })
         ),
