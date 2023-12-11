@@ -6,9 +6,7 @@ export async function updateCopywriting({
   apiKey = process.env.OPEN_AI_KEY,
 }: {
   use_case: string;
-  image: string;
   apiKey: string;
-
   jsx_code: string;
   // theme?: string;
 }) {
