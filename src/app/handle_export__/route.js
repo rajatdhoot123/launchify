@@ -82,8 +82,20 @@ export async function POST(req) {
 
   const zip = new AdmZip();
 
-  const file_to_add = components.map(({ item_id, varient }) => {
-    return `src/app/components/${item_id}/${varient}.jsx`;
+  components.forEach(({ item_id, varient }) => {
+    zip.addFile(
+      `src/app/components/${item_id}/index.jsx`,
+      Buffer.from(
+        fs.readFileSync(
+          path.join(
+            process.cwd(),
+            "uicomponents",
+            `src/app/components/${item_id}/${varient}.jsx`
+          ),
+          "utf-8"
+        )
+      )
+    );
   });
 
   const pages_to_add = pages
@@ -113,9 +125,6 @@ export async function POST(req) {
       return false;
     }
     if (file.startsWith("src/app/components")) {
-      if (file_to_add.includes(file)) {
-        return true;
-      }
       return false;
     }
     if (file.includes("__")) {
