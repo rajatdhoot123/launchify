@@ -200,59 +200,101 @@ const Floater = ({
   const router = useRouter();
   const { data: session, status } = useSession();
   const ai_key = useRef("");
+  const [loader, setLoader] = useState({
+    export: false,
+    export_wih_copywriting: false,
+  });
+
   const handleExport = async () => {
-    logEvent("export_clicked", { event_name: "export_clicked" });
-
-    if (!ai_key.current) {
-      const open_ai_key = prompt("Enter open ai api key");
-      ai_key.current = open_ai_key;
+    setLoader((prev) => ({ ...prev, export: false }));
+    try {
+      logEvent("export_clicked", { event_name: "export_clicked" });
+      const response = await fetch("/handle_export__", {
+        method: "POST",
+        body: JSON.stringify({
+          ga_id,
+          crisp_id,
+          pages,
+          premium_features,
+          components: components.map(({ selected, item_id }) => ({
+            key: item_id,
+            item_id,
+            varient: selected,
+          })),
+        }),
+      });
+      const res_blob = await response.blob();
+      const url = window.URL.createObjectURL(res_blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "uicomponents";
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+    } finally {
+      setLoader((prev) => ({ ...prev, export: false }));
     }
-    if (!ai_key.current) {
-      return;
+  };
+
+  const handleExportWithCopywriting = async () => {
+    try {
+      setLoader((prev) => ({ ...prev, export_wih_copywriting: true }));
+      logEvent("export_clicked", { event_name: "export_clicked" });
+
+      if (!ai_key.current) {
+        const open_ai_key = prompt("Enter open ai api key");
+        ai_key.current = open_ai_key;
+      }
+      if (!ai_key.current) {
+        return;
+      }
+      const jsx_files = await fetch("/api/get-file__", {
+        method: "POST",
+        body: JSON.stringify({
+          files: components.map(({ selected, item_id }) => ({
+            key: item_id,
+            item_id,
+            varient: selected,
+          })),
+        }),
+      });
+
+      const jsx_code_response = await jsx_files.json();
+      const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
+        updateCopywriting({
+          jsx_code: content,
+          use_case: prompt("Provide use case for website generation"),
+          apiKey: ai_key.current,
+        })
+      );
+
+      const result = await Promise.all(open_ai_copy_writing);
+
+      const response = await fetch("/handle_export_with_copy_from_fe__", {
+        method: "POST",
+        body: JSON.stringify({
+          ga_id,
+          crisp_id,
+          pages,
+          premium_features,
+          components: result.map(({ choices }, index) => ({
+            file_path: jsx_code_response[index].key,
+            item_id: jsx_code_response[index].item_id,
+            content: choices?.[0]?.message?.content,
+          })),
+        }),
+      });
+      const res_blob = await response.blob();
+      const url = window.URL.createObjectURL(res_blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "uicomponents";
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+    } finally {
+      setLoader((prev) => ({ ...prev, export_wih_copywriting: false }));
     }
-    const jsx_files = await fetch("/api/get-file__", {
-      method: "POST",
-      body: JSON.stringify({
-        files: components.map(({ selected, item_id }) => ({
-          key: item_id,
-          item_id,
-          varient: selected,
-        })),
-      }),
-    });
-
-    const jsx_code_response = await jsx_files.json();
-    const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
-      updateCopywriting({
-        jsx_code: content,
-        use_case: "Ecommerce website which sells shoes",
-        apiKey: ai_key.current,
-      })
-    );
-
-    const result = await Promise.all(open_ai_copy_writing);
-
-    const response = await fetch("/handle_export_with_copy_from_fe__", {
-      method: "POST",
-      body: JSON.stringify({
-        ga_id,
-        crisp_id,
-        pages,
-        premium_features,
-        components: result.map(({ choices }, index) => ({
-          file_path: jsx_code_response[index].key,
-          item_id: jsx_code_response[index].item_id,
-          content: choices?.[0]?.message?.content,
-        })),
-      }),
-    });
-    const res_blob = await response.blob();
-    const url = window.URL.createObjectURL(res_blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "uicomponents";
-    link.click();
-    window.URL.revokeObjectURL(url);
   };
 
   useEffect(() => {
@@ -529,12 +571,30 @@ const Floater = ({
           </Collapsible>
         </div>
       </div>
-      <div className="text-center">
+      <div className="text-center flex gap-6">
         <button
+          disabled={loader.export}
           onClick={handleExport}
-          className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg"
+          className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
         >
+          {loader.export && (
+            <span className="m-auto px-2">
+              <Loader />
+            </span>
+          )}
           Export
+        </button>
+        <button
+          disabled={loader.export_wih_copywriting}
+          onClick={handleExportWithCopywriting}
+          className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
+        >
+          {loader.export_wih_copywriting && (
+            <span className="m-auto px-2">
+              <Loader />
+            </span>
+          )}
+          Export with copywriting
         </button>
       </div>
     </div>
