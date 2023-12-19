@@ -9,30 +9,10 @@ import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
-
-function removeBackticksAndJSX(inputString) {
-  return inputString.replace(/```jsx/g, "").replace(/```/g, "");
-}
-
-function formatComponentPath(inputPath) {
-  // Split the path using '/'
-  const pathParts = inputPath.split("/");
-
-  // Get the last part of the path (filename)
-  const filename = pathParts.pop();
-
-  // Check if the filename contains a dash
-
-  if (filename.includes("-")) {
-    // Replace the last part with 'index.jsx'
-    pathParts.push("index.jsx");
-  }
-
-  // Join the path parts back together
-  const formattedPath = pathParts.join("/");
-
-  return formattedPath;
-}
+import {
+  formatComponentPath,
+  removeBackticksAndJSX,
+} from "@/app/utils__/helper";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",

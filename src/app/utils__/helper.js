@@ -19,3 +19,27 @@ export function prettifyCamelCase(str) {
 
   return output;
 }
+
+export function removeBackticksAndJSX(inputString) {
+  return inputString.replace(/```jsx/g, "").replace(/```/g, "");
+}
+
+export function formatComponentPath(inputPath) {
+  // Split the path using '/'
+  const pathParts = inputPath.split("/");
+
+  // Get the last part of the path (filename)
+  const filename = pathParts.pop();
+
+  // Check if the filename contains a dash
+
+  if (filename.includes("-")) {
+    // Replace the last part with 'index.jsx'
+    pathParts.push("index.jsx");
+  }
+
+  // Join the path parts back together
+  const formattedPath = pathParts.join("/");
+
+  return formattedPath;
+}

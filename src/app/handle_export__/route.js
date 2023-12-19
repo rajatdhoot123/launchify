@@ -8,6 +8,10 @@ import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
+import {
+  formatComponentPath,
+  removeBackticksAndJSX,
+} from "@/app/utils__/helper";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
