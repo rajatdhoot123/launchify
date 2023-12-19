@@ -201,7 +201,7 @@ const Floater = ({
   const ai_key = useRef("");
   const handleExport = async () => {
     logEvent("export_clicked", { event_name: "export_clicked" });
-    const response = await fetch("/handle_export__", {
+    const response = await fetch("/handle_export_with_copy__", {
       method: "POST",
       body: JSON.stringify({
         ga_id,

@@ -10,6 +10,30 @@ import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
 
+function removeBackticksAndJSX(inputString) {
+  return inputString.replace(/```jsx/g, "").replace(/```/g, "");
+}
+
+function formatComponentPath(inputPath) {
+  // Split the path using '/'
+  const pathParts = inputPath.split("/");
+
+  // Get the last part of the path (filename)
+  const filename = pathParts.pop();
+
+  // Check if the filename contains a dash
+
+  if (filename.includes("-")) {
+    // Replace the last part with 'index.jsx'
+    pathParts.push("index.jsx");
+  }
+
+  // Join the path parts back together
+  const formattedPath = pathParts.join("/");
+
+  return formattedPath;
+}
+
 const DATABASE_FILES = [
   "src/lib/database/db.js",
   "src/lib/database/schema.js",
@@ -173,13 +197,16 @@ ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
   );
 
   await Promise.all(
-    all_copy_writing.map(async ({ file, data }) =>
+    all_copy_writing.map(async ({ name, data }) =>
       zip.addFile(
-        file,
+        formatComponentPath(name),
         Buffer.from(
-          await prettier.format(data.choices[0].message.content, {
-            parser: "babel",
-          })
+          await prettier.format(
+            removeBackticksAndJSX(data.choices[0].message.content),
+            {
+              parser: "babel",
+            }
+          )
         ),
         "utf8"
       )
