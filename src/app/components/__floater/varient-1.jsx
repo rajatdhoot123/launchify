@@ -355,26 +355,9 @@ const Floater = ({
     [handleChange, is_premium, moveItem]
   );
 
-  if (floater) {
-    return (
-      <button
-        onClick={() => setFloter((prev) => !prev)}
-        className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-[#F53855]"
-      >
-        <FloterIcon className="text-white text-xl md:text-2xl" />
-      </button>
-    );
-  }
-
   return (
-    <div className="z-20 fixed top-0 md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
-      <button
-        className="right-4 absolute cursor-pointer"
-        onClick={() => setFloter((prev) => !prev)}
-      >
-        <CloseIcon />
-      </button>
-      <div className="flex-1 space-y-4 overflow-y-scroll py-2">
+    <div className="flex flex-col h-full">
+      <div className="overflow-scroll h-full flex-1 p-5 space-y-6">
         <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
           <div className="flex items-center justify-between">
             <div className="font-bold text-sm">PRO Features</div>
@@ -571,7 +554,7 @@ const Floater = ({
           </Collapsible>
         </div>
       </div>
-      <div className="text-center flex gap-6">
+      <div className="text-center flex gap-6 m-5">
         <button
           disabled={loader.export}
           onClick={handleExport}
@@ -594,7 +577,7 @@ const Floater = ({
               <Loader />
             </span>
           )}
-          Export with copywriting
+          With Copywriting
         </button>
       </div>
     </div>
