@@ -18,6 +18,7 @@ import { useSession } from "next-auth/react";
 import OptionPopover from "@/app/components/__popover";
 import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
+import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
 const ItemType = "ITEM";
 
 const CodeGenerateButton = ({ api_ref, item_id, setLoader, loader }) => {
@@ -201,7 +202,15 @@ const Floater = ({
   const ai_key = useRef("");
   const handleExport = async () => {
     logEvent("export_clicked", { event_name: "export_clicked" });
-    const da = await fetch("/api/get-file__", {
+
+    if (!ai_key.current) {
+      const open_ai_key = prompt("Enter open ai api key");
+      ai_key.current = open_ai_key;
+    }
+    if (!ai_key.current) {
+      return;
+    }
+    const jsx_files = await fetch("/api/get-file__", {
       method: "POST",
       body: JSON.stringify({
         files: components.map(({ selected, item_id }) => ({
@@ -212,20 +221,28 @@ const Floater = ({
       }),
     });
 
-    console.log({ da: await da.json() }, "Hello");
+    const jsx_code_response = await jsx_files.json();
+    const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
+      updateCopywriting({
+        jsx_code: content,
+        use_case: "Ecommerce website which sells shoes",
+        apiKey: ai_key.current,
+      })
+    );
 
-    return;
-    const response = await fetch("/handle_export_with_copy__", {
+    const result = await Promise.all(open_ai_copy_writing);
+
+    const response = await fetch("/handle_export_with_copy_from_fe__", {
       method: "POST",
       body: JSON.stringify({
         ga_id,
         crisp_id,
         pages,
         premium_features,
-        components: components.map(({ selected, item_id }) => ({
-          key: item_id,
-          item_id,
-          varient: selected,
+        components: result.map(({ choices }, index) => ({
+          file_path: jsx_code_response[index].key,
+          item_id: jsx_code_response[index].item_id,
+          content: choices?.[0]?.message?.content,
         })),
       }),
     });

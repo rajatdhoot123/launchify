@@ -21,6 +21,6 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "src/app/handle_export_with_copy_from_fe__/route.js"],
   "exclude": ["node_modules"]
 }

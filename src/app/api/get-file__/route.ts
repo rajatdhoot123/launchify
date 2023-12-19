@@ -12,11 +12,7 @@ export async function POST(req: NextRequest) {
 
   const session = await getServerSession(AUTH_OPTIONS);
 
-  const is_premium_user = ["rajatdhoot123@gmail.com"].find(
-    (puser) => puser === session?.user?.email
-  );
-
-  if (!is_premium_user) {
+  if (!session?.user) {
     return NextResponse.json(
       { message: "Contact hello.kwiktwik@gmail.com for access" },
       { status: 200 }
@@ -34,7 +30,9 @@ export async function POST(req: NextRequest) {
         "utf8"
       );
       return {
-        name: `src/app/components/${item_id}/${varient}.jsx`,
+        item_id,
+        varient,
+        key: `src/app/components/${item_id}/${varient}.jsx`,
         content: data,
       };
     }, {})
