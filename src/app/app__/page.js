@@ -13,7 +13,7 @@ const LeftDrawer = ({ children = null, is_active }) => {
   return (
     <>
       <div
-        className={`rounded-md h-screen md:h-5/6 top-1/2 transform -translate-y-1/2 transition duration-500 ease-in-out shadow-2xl z-50 fixed right-0 bg-white w-full md:w-96  ${
+        className={`border border-gray-500 border-opacity-30 rounded-md h-screen md:h-5/6 top-1/2 transform -translate-y-1/2 transition duration-500 ease-in-out shadow-2xl z-50 fixed right-0 bg-white w-full md:w-96  ${
           is_active ? "" : "translate-x-full"
         }`}
       >
@@ -36,7 +36,6 @@ export default function Home() {
   const elementsRef = useRef(state.components.map(() => createRef()));
 
   const handleShowCode = (index) => {
-    console.log({ d: elementsRef.current });
     return elementsRef.current[index].current.innerHTML;
   };
 
