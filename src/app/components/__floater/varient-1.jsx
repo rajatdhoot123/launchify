@@ -228,10 +228,11 @@ const Floater = ({
       });
 
       const jsx_code_response = await jsx_files.json();
+      const use_case = prompt("Provide use case for website generation");
       const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
         updateCopywriting({
           jsx_code: content,
-          use_case: prompt("Provide use case for website generation"),
+          use_case: use_case,
           apiKey: ai_key.current,
         })
       );
@@ -545,7 +546,9 @@ const Floater = ({
         </div>
       </div>
       <div className="m-5 text-center">
-        <small className="font-semibold text-center">With copywriting export can take 3-5 mins</small>
+        <small className="font-semibold text-center">
+          With copywriting export can take 3-5 mins
+        </small>
         <div className="flex gap-6">
           <button
             disabled={loader.export}
