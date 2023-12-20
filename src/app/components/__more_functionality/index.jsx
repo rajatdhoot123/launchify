@@ -1,6 +1,6 @@
 "use client";
 import { FLOATER_SELECT } from "@/app/constants__/floater";
-import { Dialog, Button, Flex, Text, Checkbox } from "@radix-ui/themes";
+import { Dialog, Button, Flex, Text, Checkbox, Link } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
 const MoreFunctionality = ({ children, components, setState }) => {
@@ -25,9 +25,9 @@ const MoreFunctionality = ({ children, components, setState }) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <div className="text-sm" onClick={(e) => e.stopPropagation()}>
+        <Link className="text-sm" onClick={(e) => e.stopPropagation()}>
           {children}
-        </div>
+        </Link>
       </Dialog.Trigger>
 
       <Dialog.Content

@@ -258,16 +258,16 @@ export const FLOATER_SELECT = [
     title: "Random Card",
     selected: "varient-2",
   },
-  {
-    item_id: "footer",
-    varients: FOOTER,
-    title: "Footer",
-    selected: "varient-4",
-  },
-  {
-    item_id: "animatedcards",
-    varients: ANIMATED_CARDS,
-    title: "Animated",
-    selected: "varient-1",
-  },
+  // {
+  //   item_id: "footer",
+  //   varients: FOOTER,
+  //   title: "Footer",
+  //   selected: "varient-4",
+  // },
+  // {
+  //   item_id: "animatedcards",
+  //   varients: ANIMATED_CARDS,
+  //   title: "Animated",
+  //   selected: "varient-1",
+  // },
 ];

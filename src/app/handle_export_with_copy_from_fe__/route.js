@@ -90,7 +90,7 @@ export async function POST(req) {
 
   zip.addLocalFolder(ui_components, "", (file) => {
     // Remove File For Project Use
-    if (file.includes("__")) {
+    if (file.includes("__") || ["src/app/globals.css"].includes(file)) {
       return false;
     }
     if (SUPPORT_PAGES.includes(file)) {
@@ -167,6 +167,21 @@ export async function POST(req) {
       await prettier.format(generateRootPage({ components }), {
         parser: "babel",
       })
+    ),
+    "utf8"
+  );
+
+  zip.addFile(
+    "src/app/globals.css",
+    Buffer.from(
+      `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+      `,
+      {
+        parser: "babel",
+      }
     ),
     "utf8"
   );

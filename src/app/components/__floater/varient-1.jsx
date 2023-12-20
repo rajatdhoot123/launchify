@@ -404,7 +404,7 @@ const Floater = ({
               <div className="w-full text-left font-bold flex items-center justify-between">
                 <span className="">Components</span>
                 <MoreFunctionality setState={setState} components={components}>
-                  Add Components
+                  Add/Remove Components
                 </MoreFunctionality>
               </div>
             }

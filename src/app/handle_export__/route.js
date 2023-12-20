@@ -157,7 +157,7 @@ export async function POST(req) {
   );
 
   zip.addFile(
-    "src/app/global.css",
+    "src/app/globals.css",
     Buffer.from(
       `
 @tailwind base;
