@@ -78,8 +78,20 @@ export async function POST(req) {
 
   const zip = new AdmZip();
 
-  const file_to_add = components.map(({ item_id, varient }) => {
-    return `src/app/components/${item_id}/${varient}.jsx`;
+  components.forEach(({ item_id, varient }) => {
+    zip.addFile(
+      `src/app/components/${item_id}/index.jsx`,
+      Buffer.from(
+        fs.readFileSync(
+          path.join(
+            process.cwd(),
+            "uicomponents",
+            `src/app/components/${item_id}/${varient}.jsx`
+          ),
+          "utf-8"
+        )
+      )
+    );
   });
 
   const pages_to_add = pages
@@ -109,12 +121,9 @@ export async function POST(req) {
       return false;
     }
     if (file.startsWith("src/app/components")) {
-      if (file_to_add.includes(file)) {
-        return true;
-      }
       return false;
     }
-    if (file.includes("__")) {
+    if (file.includes("__") || ["src/app/globals.css"].includes(file)) {
       return false;
     }
 
@@ -143,6 +152,21 @@ export async function POST(req) {
       await prettier.format(generateRootPage({ components }), {
         parser: "babel",
       })
+    ),
+    "utf8"
+  );
+
+  zip.addFile(
+    "src/app/globals.css",
+    Buffer.from(
+      `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+      `,
+      {
+        parser: "babel",
+      }
     ),
     "utf8"
   );

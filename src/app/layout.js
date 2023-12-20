@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Theme } from "@radix-ui/themes";
-import "@radix-ui/themes/styles.css";
 import Script from "next/script";
 import NextAuthProvider from "@/app/nextauth/provider";
 import Image from "next/image";

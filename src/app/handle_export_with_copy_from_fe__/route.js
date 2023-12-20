@@ -8,7 +8,6 @@ import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
-import { updateCopywriting } from "../api/code-generation__/update-copywriting";
 import {
   formatComponentPath,
   removeBackticksAndJSX,
@@ -85,29 +84,15 @@ export async function POST(req) {
 
   const zip = new AdmZip();
 
-  const file_to_add = components.map(({ item_id, varient }) => {
-    return `src/app/components/${item_id}/${varient}.jsx`;
-  });
-
-  const all_copy_writing = await Promise.all(
-    file_to_add.map(async (file) => {
-      const data = fs.readFileSync(file, "utf8");
-      return {
-        name: file,
-        data: await updateCopywriting({
-          use_case: "ecommerce website which sells cloths",
-          jsx_code: data,
-          apiKey: process.env.OPEN_AI_KEY,
-        }),
-      };
-    }, {})
-  );
-
   const pages_to_add = pages
     .filter((page) => page.selected)
     .map((item) => `src/app/(markdown)/${item.item_id}/page.mdx`);
 
   zip.addLocalFolder(ui_components, "", (file) => {
+    // Remove File For Project Use
+    if (file.includes("__") || ["src/app/globals.css"].includes(file)) {
+      return false;
+    }
     if (SUPPORT_PAGES.includes(file)) {
       return pages_to_add.includes(file);
     }
@@ -130,12 +115,6 @@ export async function POST(req) {
       return false;
     }
     if (file.startsWith("src/app/components")) {
-      if (file_to_add.includes(file)) {
-        return true;
-      }
-      return false;
-    }
-    if (file.includes("__")) {
       return false;
     }
 
@@ -145,6 +124,20 @@ export async function POST(req) {
 
     return true;
   });
+
+  await Promise.all(
+    components.map(async ({ file_path, content }) =>
+      zip.addFile(
+        formatComponentPath(file_path),
+        Buffer.from(
+          await prettier.format(removeBackticksAndJSX(content), {
+            parser: "babel",
+          })
+        ),
+        "utf8"
+      )
+    )
+  );
 
   zip.addFile(
     "src/app/layout.js",
@@ -169,28 +162,36 @@ export async function POST(req) {
   );
 
   zip.addFile(
+    "src/app/page.js",
+    Buffer.from(
+      await prettier.format(generateRootPage({ components }), {
+        parser: "babel",
+      })
+    ),
+    "utf8"
+  );
+
+  zip.addFile(
+    "src/app/globals.css",
+    Buffer.from(
+      `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+      `,
+      {
+        parser: "babel",
+      }
+    ),
+    "utf8"
+  );
+
+  zip.addFile(
     ".env.local",
     Buffer.from(`
 ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
 ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
 `)
-  );
-
-  await Promise.all(
-    all_copy_writing.map(async ({ name, data }) =>
-      zip.addFile(
-        formatComponentPath(name),
-        Buffer.from(
-          await prettier.format(
-            removeBackticksAndJSX(data.choices[0].message.content),
-            {
-              parser: "babel",
-            }
-          )
-        ),
-        "utf8"
-      )
-    )
   );
 
   zip.addFile("package.json", Buffer.from(JSON.stringify(packageJson)), "utf8");

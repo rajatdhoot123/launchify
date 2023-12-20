@@ -1,10 +1,11 @@
 "use client";
-import Select from "@/app/components/__select/varient-1";
+import SelectDropdown from "@/app/components/__select/varient-1";
 import { useRouter } from "next/navigation";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import {
   Button,
   Link,
+  Select,
   Separator,
   TextFieldInput,
   TextFieldRoot,
@@ -16,8 +17,10 @@ import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
 
 import OptionPopover from "@/app/components/__popover";
+import MoreFunctionality from "@/app/components/__more_functionality";
 import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
+import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
 const ItemType = "ITEM";
 
 const CodeGenerateButton = ({ api_ref, item_id, setLoader, loader }) => {
@@ -138,7 +141,7 @@ const ListCard = forwardRef(
             </div>
           </div>
         </div>
-        <Select
+        <SelectDropdown
           handleChange={(val) => handleChange(val, index, item_id)}
           value={selected}
           title={title}
@@ -151,42 +154,8 @@ const ListCard = forwardRef(
 
 ListCard.displayName = "ListCard";
 
-const FloterIcon = ({ className }) => (
-  <svg
-    className={className}
-    stroke="currentColor"
-    fill="none"
-    strokeWidth="2"
-    viewBox="0 0 24 24"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-    <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-    <path d="M16 5l3 3"></path>
-  </svg>
-);
-
-const CloseIcon = ({ className }) => (
-  <svg
-    className={className}
-    stroke="currentColor"
-    fill="currentColor"
-    strokeWidth="0"
-    viewBox="0 0 24 24"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path fill="none" strokeWidth="2" d="M3,3 L21,21 M3,21 L21,3"></path>
-  </svg>
-);
-
 const Floater = ({
+  toggleHamburger,
   handleShowCode,
   setState,
   components = [],
@@ -199,29 +168,102 @@ const Floater = ({
   const router = useRouter();
   const { data: session, status } = useSession();
   const ai_key = useRef("");
+  const [loader, setLoader] = useState({
+    export: false,
+    export_wih_copywriting: false,
+  });
+
   const handleExport = async () => {
-    logEvent("export_clicked", { event_name: "export_clicked" });
-    const response = await fetch("/handle_export__", {
-      method: "POST",
-      body: JSON.stringify({
-        ga_id,
-        crisp_id,
-        pages,
-        premium_features,
-        components: components.map(({ selected, item_id }) => ({
-          key: item_id,
-          item_id,
-          varient: selected,
-        })),
-      }),
-    });
-    const res_blob = await response.blob();
-    const url = window.URL.createObjectURL(res_blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "uicomponents";
-    link.click();
-    window.URL.revokeObjectURL(url);
+    setLoader((prev) => ({ ...prev, export: false }));
+    try {
+      logEvent("export_clicked", { event_name: "export_clicked" });
+      const response = await fetch("/handle_export__", {
+        method: "POST",
+        body: JSON.stringify({
+          ga_id,
+          crisp_id,
+          pages,
+          premium_features,
+          components: components.map(({ selected, item_id }) => ({
+            key: item_id,
+            item_id,
+            varient: selected,
+          })),
+        }),
+      });
+      const res_blob = await response.blob();
+      const url = window.URL.createObjectURL(res_blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "uicomponents";
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+    } finally {
+      setLoader((prev) => ({ ...prev, export: false }));
+    }
+  };
+
+  const handleExportWithCopywriting = async () => {
+    try {
+      setLoader((prev) => ({ ...prev, export_wih_copywriting: true }));
+      logEvent("export_clicked", { event_name: "export_clicked" });
+
+      if (!ai_key.current) {
+        const open_ai_key = prompt("Enter open ai api key");
+        ai_key.current = open_ai_key;
+      }
+      if (!ai_key.current) {
+        return;
+      }
+      const jsx_files = await fetch("/api/get-file__", {
+        method: "POST",
+        body: JSON.stringify({
+          files: components.map(({ selected, item_id }) => ({
+            key: item_id,
+            item_id,
+            varient: selected,
+          })),
+        }),
+      });
+
+      const jsx_code_response = await jsx_files.json();
+      const use_case = prompt("Provide use case for website generation");
+      const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
+        updateCopywriting({
+          jsx_code: content,
+          use_case: use_case,
+          apiKey: ai_key.current,
+        })
+      );
+
+      const result = await Promise.all(open_ai_copy_writing);
+
+      const response = await fetch("/handle_export_with_copy_from_fe__", {
+        method: "POST",
+        body: JSON.stringify({
+          ga_id,
+          crisp_id,
+          pages,
+          premium_features,
+          components: result.map(({ choices }, index) => ({
+            file_path: jsx_code_response[index].key,
+            item_id: jsx_code_response[index].item_id,
+            content: choices?.[0]?.message?.content,
+          })),
+        }),
+      });
+      const res_blob = await response.blob();
+      const url = window.URL.createObjectURL(res_blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "uicomponents";
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+    } finally {
+      setLoader((prev) => ({ ...prev, export_wih_copywriting: false }));
+    }
   };
 
   useEffect(() => {
@@ -282,26 +324,28 @@ const Floater = ({
     [handleChange, is_premium, moveItem]
   );
 
-  if (floater) {
-    return (
-      <button
-        onClick={() => setFloter((prev) => !prev)}
-        className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-[#F53855]"
-      >
-        <FloterIcon className="text-white text-xl md:text-2xl" />
-      </button>
-    );
-  }
-
   return (
-    <div className="z-20 fixed top-0 md:top-1/2 md:right-4  md:transform  md:-translate-y-1/2 w-full md:w-3/12 md:h-[80vh] h-full bg-white rounded-lg shadow-xl border border-gray-200 p-5 space-y-6 flex flex-col justify-between">
-      <button
-        className="right-4 absolute cursor-pointer"
-        onClick={() => setFloter((prev) => !prev)}
-      >
-        <CloseIcon />
-      </button>
-      <div className="flex-1 space-y-4 overflow-y-scroll py-2">
+    <div className="flex flex-col h-full p-5 space-y-4">
+      <div className="flex justify-between items-center">
+        <button className="ml-auto" onClick={toggleHamburger}>
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth="0"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="none"
+              strokeWidth="2"
+              d="M3,3 L21,21 M3,21 L21,3"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div className="overflow-scroll h-full flex-1 space-y-6">
         <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
           <div className="flex items-center justify-between">
             <div className="font-bold text-sm">PRO Features</div>
@@ -358,8 +402,11 @@ const Floater = ({
           <Collapsible
             isOpen={true}
             title={
-              <div className="w-full text-left font-bold">
+              <div className="w-full text-left font-bold flex items-center justify-between">
                 <span className="">Components</span>
+                <MoreFunctionality setState={setState} components={components}>
+                  Add/Remove Components
+                </MoreFunctionality>
               </div>
             }
           >
@@ -498,13 +545,36 @@ const Floater = ({
           </Collapsible>
         </div>
       </div>
-      <div className="text-center">
-        <button
-          onClick={handleExport}
-          className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg"
-        >
-          Export
-        </button>
+      <div className="m-5 text-center">
+        <small className="font-semibold text-center">
+          With copywriting export can take 3-5 mins
+        </small>
+        <div className="flex gap-6">
+          <button
+            disabled={loader.export}
+            onClick={handleExport}
+            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
+          >
+            {loader.export && (
+              <span className="m-auto px-2">
+                <Loader />
+              </span>
+            )}
+            Export
+          </button>
+          <button
+            disabled={loader.export_wih_copywriting}
+            onClick={handleExportWithCopywriting}
+            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
+          >
+            {loader.export_wih_copywriting && (
+              <span className="m-auto px-2">
+                <Loader />
+              </span>
+            )}
+            With Copywriting
+          </button>
+        </div>
       </div>
     </div>
   );
