@@ -1,12 +1,33 @@
-import { Dialog, Button, Flex } from "@radix-ui/themes";
+"use client";
+import { FLOATER_SELECT } from "@/app/constants__/floater";
+import { Dialog, Button, Flex, Text, Checkbox } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
 
-const MoreFunctionality = ({ children }) => {
+const MoreFunctionality = ({ children, components, setState }) => {
+  const [active_component, set_active_components] = useState({});
+
+  useEffect(() => {
+    const modified = FLOATER_SELECT.reduce((acc, current) => {
+      const { selected } =
+        components.find(({ item_id }) => item_id === current.item_id) || {};
+      return {
+        ...acc,
+        [current.item_id]: {
+          active: Boolean(selected),
+          selected: selected,
+        },
+      };
+    }, {});
+
+    set_active_components(modified);
+  }, [components]);
+
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button onClick={(e) => e.stopPropagation()} variant="ghost">
+        <div className="text-sm" onClick={(e) => e.stopPropagation()}>
           {children}
-        </Button>
+        </div>
       </Dialog.Trigger>
 
       <Dialog.Content
@@ -29,7 +50,28 @@ const MoreFunctionality = ({ children }) => {
         </Dialog.Close>
         <Dialog.Title>Features</Dialog.Title>
 
-        <div className="w-full overflow-scroll p-5">Add remove</div>
+        <div className="w-full overflow-scroll p-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {FLOATER_SELECT.map(({ title, item_id }) => (
+              <Text key={title} as="label" size="2">
+                <Checkbox
+                  className="mr-2"
+                  onCheckedChange={(val) =>
+                    set_active_components((prev) => ({
+                      ...prev,
+                      [item_id]: {
+                        ...prev[item_id],
+                        active: val,
+                      },
+                    }))
+                  }
+                  checked={active_component[item_id]?.active}
+                />
+                {title}
+              </Text>
+            ))}
+          </div>
+        </div>
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
             <Button
@@ -41,7 +83,26 @@ const MoreFunctionality = ({ children }) => {
             </Button>
           </Dialog.Close>
           <Dialog.Close>
-            <Button onClick={(e) => e.stopPropagation()}>Done</Button>
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                setState((prev) => ({
+                  ...prev,
+                  components: FLOATER_SELECT.filter(
+                    ({ item_id }) => active_component[item_id].active
+                  ).map((comp) => {
+                    return {
+                      ...comp,
+                      selected:
+                        active_component[comp.item_id].selected ||
+                        comp.selected,
+                    };
+                  }),
+                }));
+              }}
+            >
+              Done
+            </Button>
           </Dialog.Close>
         </Flex>
       </Dialog.Content>

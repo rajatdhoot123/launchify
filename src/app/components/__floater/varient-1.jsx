@@ -154,41 +154,6 @@ const ListCard = forwardRef(
 
 ListCard.displayName = "ListCard";
 
-const FloterIcon = ({ className }) => (
-  <svg
-    className={className}
-    stroke="currentColor"
-    fill="none"
-    strokeWidth="2"
-    viewBox="0 0 24 24"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-    <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-    <path d="M16 5l3 3"></path>
-  </svg>
-);
-
-const CloseIcon = ({ className }) => (
-  <svg
-    className={className}
-    stroke="currentColor"
-    fill="currentColor"
-    strokeWidth="0"
-    viewBox="0 0 24 24"
-    height="1em"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path fill="none" strokeWidth="2" d="M3,3 L21,21 M3,21 L21,3"></path>
-  </svg>
-);
-
 const Floater = ({
   toggleHamburger,
   handleShowCode,
@@ -438,7 +403,9 @@ const Floater = ({
             title={
               <div className="w-full text-left font-bold flex items-center justify-between">
                 <span className="">Components</span>
-                <MoreFunctionality>Add Components</MoreFunctionality>
+                <MoreFunctionality setState={setState} components={components}>
+                  Add Components
+                </MoreFunctionality>
               </div>
             }
           >
