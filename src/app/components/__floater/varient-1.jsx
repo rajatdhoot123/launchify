@@ -544,31 +544,34 @@ const Floater = ({
           </Collapsible>
         </div>
       </div>
-      <div className="text-center flex gap-6 m-5">
-        <button
-          disabled={loader.export}
-          onClick={handleExport}
-          className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
-        >
-          {loader.export && (
-            <span className="m-auto px-2">
-              <Loader />
-            </span>
-          )}
-          Export
-        </button>
-        <button
-          disabled={loader.export_wih_copywriting}
-          onClick={handleExportWithCopywriting}
-          className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
-        >
-          {loader.export_wih_copywriting && (
-            <span className="m-auto px-2">
-              <Loader />
-            </span>
-          )}
-          With Copywriting
-        </button>
+      <div className="m-5 text-center">
+        <small className="font-semibold text-center">With copywriting export can take 3-5 mins</small>
+        <div className="flex gap-6">
+          <button
+            disabled={loader.export}
+            onClick={handleExport}
+            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
+          >
+            {loader.export && (
+              <span className="m-auto px-2">
+                <Loader />
+              </span>
+            )}
+            Export
+          </button>
+          <button
+            disabled={loader.export_wih_copywriting}
+            onClick={handleExportWithCopywriting}
+            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
+          >
+            {loader.export_wih_copywriting && (
+              <span className="m-auto px-2">
+                <Loader />
+              </span>
+            )}
+            With Copywriting
+          </button>
+        </div>
       </div>
     </div>
   );
