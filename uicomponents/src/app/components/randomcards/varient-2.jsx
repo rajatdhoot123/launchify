@@ -1,6 +1,6 @@
 const RandomCard = () => {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto hidden md:block">
       <div className="flex flex-col md:block -space-y-72 items-center relative">
         <div className="relative shadow-2xl shadow-[#16192E] z-30 bg-transparent stroke-1 -rotate-[60deg] skew-y-[30deg] scale-75 border-gray-200 w-[650px] mx-auto h-[420px] rounded-3xl">
           <div className="w-full h-full absolute top-0 left-0 rounded-3xl bg-cover bg-[url('https://products.ls.graphics/mesh-gradients/images/37.-Light-Sky-Blue_1.jpg')]">

@@ -8,10 +8,6 @@ import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
-import {
-  formatComponentPath,
-  removeBackticksAndJSX,
-} from "@/app/utils__/helper";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
@@ -127,7 +123,7 @@ export async function POST(req) {
     if (file.startsWith("src/app/components")) {
       return false;
     }
-    if (file.includes("__")) {
+    if (file.includes("__") || ["src/app/globals.css"].includes(file)) {
       return false;
     }
 
@@ -156,6 +152,21 @@ export async function POST(req) {
       await prettier.format(generateRootPage({ components }), {
         parser: "babel",
       })
+    ),
+    "utf8"
+  );
+
+  zip.addFile(
+    "src/app/global.css",
+    Buffer.from(
+      `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+      `,
+      {
+        parser: "babel",
+      }
     ),
     "utf8"
   );
