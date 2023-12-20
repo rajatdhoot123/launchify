@@ -4,10 +4,13 @@ const MoreFunctionality = ({ children }) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button variant="ghost">{children}</Button>
+        <Button onClick={(e) => e.stopPropagation()} variant="ghost">
+          {children}
+        </Button>
       </Dialog.Trigger>
 
       <Dialog.Content
+        onClick={(e) => e.stopPropagation()}
         className="relative flex flex-col"
         style={{ width: "80%" }}
       >
@@ -29,12 +32,17 @@ const MoreFunctionality = ({ children }) => {
         <div className="w-full overflow-scroll p-5">Add remove</div>
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button variant="soft" color="gray">
+            <Button
+              onClick={(e) => e.stopPropagation()}
+              variant="soft"
+              color="gray"
+            >
               Cancel
             </Button>
           </Dialog.Close>
-
-          <Button>Copy</Button>
+          <Dialog.Close>
+            <Button onClick={(e) => e.stopPropagation()}>Done</Button>
+          </Dialog.Close>
         </Flex>
       </Dialog.Content>
     </Dialog.Root>

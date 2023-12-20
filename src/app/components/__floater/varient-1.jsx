@@ -1,10 +1,11 @@
 "use client";
-import Select from "@/app/components/__select/varient-1";
+import SelectDropdown from "@/app/components/__select/varient-1";
 import { useRouter } from "next/navigation";
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import {
   Button,
   Link,
+  Select,
   Separator,
   TextFieldInput,
   TextFieldRoot,
@@ -140,7 +141,7 @@ const ListCard = forwardRef(
             </div>
           </div>
         </div>
-        <Select
+        <SelectDropdown
           handleChange={(val) => handleChange(val, index, item_id)}
           value={selected}
           title={title}
@@ -360,8 +361,7 @@ const Floater = ({
   return (
     <div className="flex flex-col h-full p-5 space-y-4">
       <div className="flex justify-between items-center">
-        <MoreFunctionality>More Features</MoreFunctionality>
-        <button onClick={toggleHamburger}>
+        <button className="ml-auto" onClick={toggleHamburger}>
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -436,8 +436,9 @@ const Floater = ({
           <Collapsible
             isOpen={true}
             title={
-              <div className="w-full text-left font-bold">
+              <div className="w-full text-left font-bold flex items-center justify-between">
                 <span className="">Components</span>
+                <MoreFunctionality>Add Components</MoreFunctionality>
               </div>
             }
           >

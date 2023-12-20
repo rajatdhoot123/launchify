@@ -1,6 +1,6 @@
 "use client";
 import Floater from "@/app/components/__floater/varient-1";
-import { createRef, useRef, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import {
   FLOATER_SELECT,
   PAGES,
@@ -13,7 +13,7 @@ const LeftDrawer = ({ children = null, is_active }) => {
   return (
     <>
       <div
-        className={`rounded-md h-5/6 top-1/2 transform -translate-y-1/2 transition duration-500 ease-in-out shadow-2xl z-50 fixed right-0 bg-white w-full md:w-96 ${
+        className={`rounded-md h-screen md:h-5/6 top-1/2 transform -translate-y-1/2 transition duration-500 ease-in-out shadow-2xl z-50 fixed right-0 bg-white w-full md:w-96  ${
           is_active ? "" : "translate-x-full"
         }`}
       >
@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   const toggleHamburger = () => {
-    set_is_active((prev) => console.log(prev) || !prev);
+    set_is_active((prev) => !prev);
   };
   return (
     <>
@@ -83,6 +83,7 @@ export default function Home() {
           />
         </LeftDrawer>
       </DndProvider>
+
       <div className="space-y-24">
         {state.components.map((comp, index) => {
           const Component = comp.varients[comp.selected];
