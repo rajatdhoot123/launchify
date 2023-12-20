@@ -16,6 +16,7 @@ import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
 
 import OptionPopover from "@/app/components/__popover";
+import MoreFunctionality from "@/app/components/__more_functionality";
 import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
@@ -188,6 +189,7 @@ const CloseIcon = ({ className }) => (
 );
 
 const Floater = ({
+  toggleHamburger,
   handleShowCode,
   setState,
   components = [],
@@ -356,8 +358,28 @@ const Floater = ({
   );
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="overflow-scroll h-full flex-1 p-5 space-y-6">
+    <div className="flex flex-col h-full p-5 space-y-4">
+      <div className="flex justify-between items-center">
+        <MoreFunctionality>More Features</MoreFunctionality>
+        <button onClick={toggleHamburger}>
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth="0"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill="none"
+              strokeWidth="2"
+              d="M3,3 L21,21 M3,21 L21,3"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div className="overflow-scroll h-full flex-1 space-y-6">
         <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
           <div className="flex items-center justify-between">
             <div className="font-bold text-sm">PRO Features</div>
