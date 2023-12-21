@@ -9,7 +9,7 @@ const Hero = () => {
           1-app for everything money
         </h1>
         <div
-          className="flex justify-center ml-[-8.5rem] mb-6"
+          className="flex justify-center ml-[-8.5rem] mb-6 my-2"
           id="toggle-animation"
         >
           <p className="md:text-2xl text-sm pr-1">Manage your money like you</p>
@@ -36,8 +36,8 @@ const Hero = () => {
         <p className="lg:w-2/5 text-lg mx-auto mb-6 md:text-2xl leading-tight text-black60">
           powered by{" "}
           <img
-            className="inline w-20 h-auto"
-            src="https://jupiter.money/assets/images/logos/federal.svg?v=6e6a058f64"
+            className="inline w-12 h-auto my-2"
+            src="/logo.png"
             alt="Federal Bank"
           />
         </p>
