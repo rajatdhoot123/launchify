@@ -8,6 +8,7 @@ import Hero4 from "@/app/components/hero/varient-4";
 import Hero5 from "@/app/components/hero/varient-5";
 import Hero6 from "@/app/components/hero/varient-6";
 import Hero7 from "@/app/components/hero/varient-7";
+import Hero8 from "@/app/components/hero/varient-8";
 import Pricing1 from "@/app/components/pricing/varient-1";
 import Pricing2 from "@/app/components/pricing/varient-2";
 import Pricing3 from "@/app/components/pricing/varient-3";
@@ -58,6 +59,7 @@ const HERO = {
   "varient-5": Hero5,
   "varient-6": Hero6,
   "varient-7": Hero7,
+  "varient-8": Hero8,
 };
 
 const PRICING = {
