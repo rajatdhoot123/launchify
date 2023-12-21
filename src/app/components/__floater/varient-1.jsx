@@ -141,12 +141,33 @@ const ListCard = forwardRef(
             </div>
           </div>
         </div>
-        <SelectDropdown
-          handleChange={(val) => handleChange(val, index, item_id)}
+
+        <div className="flex text-sm flex-wrap gap-4">
+          {Object.keys(varients).map((key) => {
+            return (
+              <button
+                onClick={() => {
+                  handleChange(key, index, item_id);
+                }}
+                className={`border border-opacity-70 ${
+                  selected === key ? "border-blue-500" : "border-gray-300"
+                }  p-2 rounded-md`}
+                key={key}
+              >
+                {key}
+              </button>
+            );
+          })}
+        </div>
+        {/* <SelectDropdown
+          handleChange={(val) => {
+            console.log({ val, index, item_id });
+            handleChange(val, index, item_id);
+          }}
           value={selected}
           title={title}
           list={Object.keys(varients)}
-        />
+        /> */}
       </div>
     );
   }
