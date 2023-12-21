@@ -1,9 +1,4 @@
 "use client";
-import { Frame, Element } from "@craftjs/core";
-import Viewport from "@/app/editor__/Viewport";
-import RenderNode from "@/app/editor__/render_node";
-import ElementContainer from "@/app/editor__/selectors/Container";
-import Container from "@/app/editor__/selectors/Container";
 import { Puck, Render } from "@measured/puck";
 import "@measured/puck/puck.css";
 import { COMPONENTS_ARRAY } from "@/app/constants__/floater";
