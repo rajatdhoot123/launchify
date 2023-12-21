@@ -3,8 +3,6 @@ import { Puck, Render } from "@measured/puck";
 import "@measured/puck/puck.css";
 import { COMPONENTS_ARRAY } from "@/app/constants__/floater";
 
-console.log(COMPONENTS_ARRAY);
-
 const config = {
   categories: {
     ...COMPONENTS_ARRAY.reduce(
@@ -27,7 +25,11 @@ const config = {
           (compAcc, CurrentComp, index) => ({
             ...compAcc,
             [`${current.name}-${index + 1}`]: {
-              render: () => <CurrentComp />,
+              render: () => (
+                <div className="pb-12">
+                  <CurrentComp />
+                </div>
+              ),
             },
           }),
           {}
@@ -37,25 +39,11 @@ const config = {
     ),
   },
   root: {
-    render: ({ children }) => {
+    render: ({ children, ...rest }) => {
       return <div>{children}</div>;
     },
   },
 };
-
-console.log(config);
-
-const all_components = COMPONENTS_ARRAY.reduce((acc, currentComp) => {
-  return {
-    ...acc,
-    ...currentComp.components.reduce((acc, currentVarient, index) => {
-      return {
-        ...acc,
-        [`${currentComp.name}${index + 1}`]: currentVarient,
-      };
-    }, {}),
-  };
-}, {});
 
 // Describe the initial data
 const initialData = {
