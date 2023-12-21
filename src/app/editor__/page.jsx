@@ -54,7 +54,7 @@ const initialData = {
 const save = (data) => {};
 
 // Render Puck editor
-export function Editor() {
+function Editor() {
   return <Puck config={config} data={initialData} onPublish={save} />;
 }
 
