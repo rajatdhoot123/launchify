@@ -1,5 +1,5 @@
 "use client";
-import Floater from "@/app/components/__floater/varient-1";
+import Floater from "@/app/components/__floater/variant-1";
 import { createRef, useEffect, useRef, useState } from "react";
 import {
   FLOATER_SELECT,
@@ -85,7 +85,7 @@ export default function Home() {
 
       <div className="space-y-24">
         {state.components.map((comp, index) => {
-          const Component = comp.varients[comp.selected];
+          const Component = comp.variants[comp.selected];
           return (
             <section
               ref={elementsRef.current[index]}

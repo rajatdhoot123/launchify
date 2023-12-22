@@ -20,19 +20,19 @@ export async function POST(req: NextRequest) {
   }
 
   const response = await Promise.all(
-    files.map(async ({ item_id, varient }: any) => {
+    files.map(async ({ item_id, variant }: any) => {
       const data = fs.readFileSync(
         join(
           process.cwd(),
           "uicomponents",
-          `src/app/components/${item_id}/${varient}.jsx`
+          `src/app/components/${item_id}/${variant}.jsx`
         ),
         "utf8"
       );
       return {
         item_id,
-        varient,
-        key: `src/app/components/${item_id}/${varient}.jsx`,
+        variant,
+        key: `src/app/components/${item_id}/${variant}.jsx`,
         content: data,
       };
     }, {})

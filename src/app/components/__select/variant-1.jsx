@@ -22,7 +22,7 @@ const SelectComponent = ({ list, title, value, handleChange }) => {
           <SelectLabel>{title}</SelectLabel>
           {list.map((li, index) => (
             <SelectItem key={li} value={li}>
-              {`Varient ${index + 1}`}
+              {`variant ${index + 1}`}
             </SelectItem>
           ))}
         </SelectGroup>

@@ -1,6 +1,6 @@
 const all_copy_writing = [
   {
-    name: "src/app/components/navbar/varient-3.jsx",
+    name: "src/app/components/navbar/variant-3.jsx",
     data: {
       id: "chatcmpl-8XP0aUAmPJIPNGLkeTKz718pHjmVF",
       object: "chat.completion",
@@ -27,7 +27,7 @@ const all_copy_writing = [
     },
   },
   {
-    name: "src/app/components/hero/varient-1.jsx",
+    name: "src/app/components/hero/variant-1.jsx",
     data: {
       id: "chatcmpl-8XP0ZSln4KUoSNS73UhkNsxaf3Xji",
       object: "chat.completion",
@@ -54,7 +54,7 @@ const all_copy_writing = [
     },
   },
   {
-    name: "src/app/components/pricing/varient-4.jsx",
+    name: "src/app/components/pricing/variant-4.jsx",
     data: {
       id: "chatcmpl-8XP0aCLycdJc6bxhokwGm8N0ZGILl",
       object: "chat.completion",
@@ -81,7 +81,7 @@ const all_copy_writing = [
     },
   },
   {
-    name: "src/app/components/login/varient-2.jsx",
+    name: "src/app/components/login/variant-2.jsx",
     data: {
       id: "chatcmpl-8XP0a5O41bSvhDRopQOIdrR86k4od",
       object: "chat.completion",
@@ -108,7 +108,7 @@ const all_copy_writing = [
     },
   },
   {
-    name: "src/app/components/testimonials/varient-2.jsx",
+    name: "src/app/components/testimonials/variant-2.jsx",
     data: {
       id: "chatcmpl-8XP0aBLo1Fpn0ebFbvPPIro2Lg7DI",
       object: "chat.completion",

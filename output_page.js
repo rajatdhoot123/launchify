@@ -1,6 +1,6 @@
-import Navbar1 from "@/app/components/navbar/varient-1";
-import Hero1 from "@/app/components/hero/varient-1";
-import Pricing1 from "@/app/components/pricing/varient-1";
+import Navbar1 from "@/app/components/navbar/variant-1";
+import Hero1 from "@/app/components/hero/variant-1";
+import Pricing1 from "@/app/components/pricing/variant-1";
 import Script from "next/script";
 
 export default function Home() {

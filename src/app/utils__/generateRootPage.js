@@ -5,7 +5,7 @@ function capitalizeFirstLetter(string) {
 const generateRootPage = ({ components }) => {
   return `
 
-${components.reduce((acc, { item_id, varient }) => {
+${components.reduce((acc, { item_id, variant }) => {
   return `${acc} \n import ${capitalizeFirstLetter(
     item_id
   )} from "@/app/components/${item_id}";`;

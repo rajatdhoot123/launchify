@@ -46,7 +46,7 @@ export async function POST(req) {
     components,
     ga_id = "",
     crisp_id = "",
-    premium_features,
+    premium_features = [],
     pages = [],
   } = body;
 
@@ -78,7 +78,7 @@ export async function POST(req) {
 
   const zip = new AdmZip();
 
-  components.forEach(({ item_id, varient }) => {
+  components.forEach(({ item_id, variant }) => {
     zip.addFile(
       `src/app/components/${item_id}/index.jsx`,
       Buffer.from(
@@ -86,7 +86,7 @@ export async function POST(req) {
           path.join(
             process.cwd(),
             "uicomponents",
-            `src/app/components/${item_id}/${varient}.jsx`
+            `src/app/components/${item_id}/${variant}.jsx`
           ),
           "utf-8"
         )

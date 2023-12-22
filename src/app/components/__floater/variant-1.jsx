@@ -1,18 +1,16 @@
 "use client";
-import SelectDropdown from "@/app/components/__select/varient-1";
 import { useRouter } from "next/navigation";
-import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useRef, useState } from "react";
 import {
   Button,
   Link,
-  Select,
   Separator,
   TextFieldInput,
   TextFieldRoot,
 } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
-import Collapsible from "@/app/components/__accordion/varient-1";
+import Collapsible from "@/app/components/__accordion/variant-1";
 import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
 
@@ -21,6 +19,7 @@ import MoreFunctionality from "@/app/components/__more_functionality";
 import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
+
 const ItemType = "ITEM";
 
 const CodeGenerateButton = ({ api_ref, item_id, setLoader, loader }) => {
@@ -74,7 +73,7 @@ const ListCard = forwardRef(
       selected,
       title,
       item_id,
-      varients,
+      variants,
       index,
       handleChange,
     },
@@ -143,7 +142,7 @@ const ListCard = forwardRef(
         </div>
 
         <div className="flex text-sm flex-wrap gap-4">
-          {Object.keys(varients).map((key) => {
+          {Object.keys(variants).map((key) => {
             return (
               <button
                 onClick={() => {
@@ -166,7 +165,7 @@ const ListCard = forwardRef(
           }}
           value={selected}
           title={title}
-          list={Object.keys(varients)}
+          list={Object.keys(variants)}
         /> */}
       </div>
     );
@@ -185,7 +184,6 @@ const Floater = ({
   pages,
   crisp_id,
 }) => {
-  const [floater, setFloter] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
   const ai_key = useRef("");
@@ -208,7 +206,7 @@ const Floater = ({
           components: components.map(({ selected, item_id }) => ({
             key: item_id,
             item_id,
-            varient: selected,
+            variant: selected,
           })),
         }),
       });
@@ -243,7 +241,7 @@ const Floater = ({
           files: components.map(({ selected, item_id }) => ({
             key: item_id,
             item_id,
-            varient: selected,
+            variant: selected,
           })),
         }),
       });
@@ -287,14 +285,6 @@ const Floater = ({
     }
   };
 
-  useEffect(() => {
-    if (typeof navigator !== "undefined") {
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        setFloter(true);
-      }
-    }
-  }, [router]);
-
   const moveItem = useCallback(
     (dragIndex, dropIndex) => {
       setState((prevState) => {
@@ -317,11 +307,6 @@ const Floater = ({
       }));
 
       router.push(`#${item_id}`);
-      if (typeof navigator !== "undefined") {
-        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-          setFloter(true);
-        }
-      }
     },
     [router, setState]
   );
@@ -433,11 +418,11 @@ const Floater = ({
           >
             <div className="space-y-4 mt-5">
               {components.map(
-                ({ item_id, varients, title, selected }, index) => {
+                ({ item_id, variants, title, selected }, index) => {
                   return renderList(
                     {
                       item_id,
-                      varients,
+                      variants,
                       title,
                       selected,
                       handleShowCode: () => handleShowCode(index),

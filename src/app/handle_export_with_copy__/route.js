@@ -85,8 +85,8 @@ export async function POST(req) {
 
   const zip = new AdmZip();
 
-  const file_to_add = components.map(({ item_id, varient }) => {
-    return `src/app/components/${item_id}/${varient}.jsx`;
+  const file_to_add = components.map(({ item_id, variant }) => {
+    return `src/app/components/${item_id}/${variant}.jsx`;
   });
 
   const all_copy_writing = await Promise.all(
