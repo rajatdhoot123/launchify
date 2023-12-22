@@ -100,7 +100,8 @@ function Editor() {
   };
   return (
     <Puck
-      renderHeaderActions={() => <div>Hello</div>}
+      renderHeaderActions={() => <div>Click Publish to Export Code</div>}
+      headerTitle="Drag and Drop Components"
       config={config}
       data={initialData}
       onPublish={save}
