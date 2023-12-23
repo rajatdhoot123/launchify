@@ -149,6 +149,10 @@ export const COMPONENTS_ARRAY = [
     components: Object.values(TABLE),
   },
   {
+    name: "Faq",
+    components: Object.values(FAQ),
+  },
+  {
     name: "RandomCards",
     components: Object.values(RANDOMCARD),
   },
