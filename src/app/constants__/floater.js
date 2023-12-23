@@ -44,6 +44,7 @@ import Contactus1 from "@/app/components/contactus/variant-1";
 import Contactus2 from "@/app/components/contactus/variant-2";
 import Login1 from "@/app/components/login/variant-1";
 import Login2 from "@/app/components/login/variant-2";
+import Faq1 from "@/app/components/faq/variant-1";
 
 const NAVBAR = {
   "variant-1": Navbar1,
@@ -93,6 +94,10 @@ const FOOTER = {
   "variant-2": Footer2,
   "variant-3": Footer3,
   "variant-4": Footer4,
+};
+
+const FAQ = {
+  "variant-1": Faq1,
 };
 
 const CARDS = {
@@ -237,6 +242,12 @@ export const FLOATER_SELECT = [
     selected: "variant-1",
   },
   {
+    item_id: "faq",
+    variants: FAQ,
+    title: "Faq",
+    selected: "variant-1",
+  },
+  {
     item_id: "cards",
     variants: CARDS,
     title: "Card",
@@ -260,6 +271,7 @@ export const FLOATER_SELECT = [
     title: "Footer",
     selected: "variant-4",
   },
+
   // {
   //   item_id: "randomcards",
   //   variants: RANDOMCARD,
