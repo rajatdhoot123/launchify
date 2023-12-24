@@ -1,14 +1,14 @@
 "use client";
-import { Puck, usePuck } from "@measured/puck";
+import { Puck, Render } from "@measured/puck";
 import "@measured/puck/puck.css";
 import {
   COMPONENTS_ARRAY,
-  FLOATER_SELECT,
   PAGES,
   PREMIUM_FEATURES,
 } from "@/app/constants__/floater";
+import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
-import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { Button, Link, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
@@ -216,6 +216,8 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const [modal_is_open, set_modal] = useState(false);
+  const [data, setData] = useState({ content: [], root: {} });
   const ai_key = useRef("");
   const [loader, setLoader] = useState({
     export: false,
@@ -263,8 +265,6 @@ function Editor() {
       );
 
       const result = await Promise.all(open_ai_copy_writing);
-
-      console.log({ result });
 
       const response = await fetch("/handle_export_with_copy_from_fe__", {
         method: "POST",
@@ -329,51 +329,65 @@ function Editor() {
   };
 
   return (
-    <Puck
-      onChange={(data) => {
-        puck_data.current = data;
-      }}
-      overrides={{
-        headerActions: () => {
-          return (
-            <div className="space-x-6">
-              <Button
-                onClick={() =>
-                  handleExportWithCopywriting({
-                    components: modify_components(puck_data.current.content),
-                  })
-                }
-                className="cursor-pointer"
-              >
-                Copywriting Export
-              </Button>
-              <Button
-                onClick={() =>
-                  handleExport({
-                    components: modify_components(puck_data.current.content),
-                  })
-                }
-                className="cursor-pointer"
-              >
-                Export
-              </Button>
-            </div>
-          );
-        },
-        components: ({ children }) => {
-          return (
-            <div className="flex flex-col space-y-6 justify-between relative">
-              <div>{children}</div>
-              <NextBoilerPlate ref={state_ref} />
-            </div>
-          );
-        },
-      }}
-      headerTitle="Drag and Drop Components"
-      config={config}
-      data={initialData}
-      onPublish={save}
-    />
+    <>
+      <ViewDemo onClose={() => set_modal(false)} isOpen={modal_is_open}>
+        <Render data={data} config={config} />
+      </ViewDemo>
+      <Puck
+        onChange={(data) => {
+          puck_data.current = data;
+        }}
+        overrides={{
+          headerActions: () => {
+            return (
+              <div className="space-x-6">
+                <Button
+                  onClick={() =>
+                    handleExportWithCopywriting({
+                      components: modify_components(puck_data.current.content),
+                    })
+                  }
+                  className="cursor-pointer"
+                >
+                  Copywriting Export
+                </Button>
+                <Button
+                  onClick={() =>
+                    handleExport({
+                      components: modify_components(puck_data.current.content),
+                    })
+                  }
+                  className="cursor-pointer"
+                >
+                  Export
+                </Button>
+                <Button
+                  onClick={() => {
+                    set_modal(true);
+                    setData(puck_data.current);
+                  }}
+                  className="cursor-pointer"
+                >
+                  View
+                </Button>
+              </div>
+            );
+          },
+          components: ({ children }) => {
+            return (
+              <div className="flex flex-col space-y-6 justify-between relative">
+                <div>{children}</div>
+                <NextBoilerPlate ref={state_ref} />
+              </div>
+            );
+          },
+        }}
+        headerTitle="Drag and Drop Components"
+        config={config}
+        data={initialData}
+        onPublish={save}
+      />
+    </>
   );
 }
 

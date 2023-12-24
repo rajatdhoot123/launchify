@@ -27,7 +27,7 @@ const FaqAccordion = () => {
               " If you go over your organisations or user limit, a member of the team will reach out about bespoke pricing. In the meantime, our collaborative features won't appear in accounts or users that are over the 100-account or 1,000-user limit.",
           },
         ].map(({ title, content }, index) => (
-          <div key={title} className="py-2">
+          <div key={`${title}-${index}`} className="py-2">
             <h2>
               <button
                 id="faqs-title-01"
