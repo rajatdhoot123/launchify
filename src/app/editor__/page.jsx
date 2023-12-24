@@ -8,9 +8,21 @@ import {
   PREMIUM_FEATURES,
 } from "@/app/constants__/floater";
 import Collapsible from "@/app/components/__accordion/variant-1";
-import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
+import { logEvent } from "../utils__/events";
+import { updateCopywriting } from "../api/code-generation__/update-copywriting";
+
+const modify_components = (content) => {
+  return content.reduce((acc, current) => {
+    const [item_id, variant] = current.type.split("-");
+    return [
+      ...acc,
+      { item_id: item_id, variant: `variant-${variant}`, key: item_id },
+    ];
+  }, []);
+};
 
 const NextBoilerPlate = forwardRef((props, state_ref) => {
   const [state, setState] = useState({
@@ -204,19 +216,89 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const ai_key = useRef("");
+  const [loader, setLoader] = useState({
+    export: false,
+    export_wih_copywriting: false,
+  });
   const state_ref = useRef({});
+  const puck_data = useRef({});
 
-  const save = async (data) => {
+  const handleExportWithCopywriting = async ({ components }) => {
     const state = state_ref.current;
+    try {
+      setLoader((prev) => ({ ...prev, export_wih_copywriting: true }));
+      logEvent("export_clicked", {
+        event_name: "export_with_copywriting_clicked",
+      });
 
-    const components = data.content.reduce((acc, current) => {
-      const [item_id, variant] = current.type.split("-");
-      return [
-        ...acc,
-        { item_id: item_id, variant: `variant-${variant}`, key: item_id },
-      ];
-    }, []);
+      if (!ai_key.current) {
+        console.log;
+        const open_ai_key = prompt("Enter open ai api key");
+        ai_key.current = open_ai_key;
+      }
+      if (!ai_key.current) {
+        return;
+      }
 
+      const jsx_files = await fetch("/api/get-file__", {
+        method: "POST",
+        body: JSON.stringify({
+          files: components.map(({ variant, item_id }) => ({
+            key: item_id,
+            item_id,
+            variant,
+          })),
+        }),
+      });
+
+      const jsx_code_response = await jsx_files.json();
+      const use_case = prompt("Provide use case for website generation");
+      const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
+        updateCopywriting({
+          jsx_code: content,
+          use_case: use_case,
+          apiKey: ai_key.current,
+        })
+      );
+
+      const result = await Promise.all(open_ai_copy_writing);
+
+      console.log({ result });
+
+      const response = await fetch("/handle_export_with_copy_from_fe__", {
+        method: "POST",
+        body: JSON.stringify({
+          ga_id: state.ga_id,
+          crisp_id: state.crisp_id,
+          pages: state.pages,
+          premium_features: state.premium_features,
+          components: result.map(({ choices }, index) => ({
+            file_path: jsx_code_response[index].key,
+            item_id: jsx_code_response[index].item_id,
+            content: choices?.[0]?.message?.content,
+          })),
+        }),
+      });
+      const res_blob = await response.blob();
+      const url = window.URL.createObjectURL(res_blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "uicomponents";
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.log({ err });
+    } finally {
+      setLoader((prev) => ({ ...prev, export_wih_copywriting: false }));
+    }
+  };
+
+  const handleExport = async ({ components }) => {
+    const state = state_ref.current;
+    logEvent("export_clicked", {
+      event_name: "export_clicked",
+    });
     const response = await fetch("/handle_export__", {
       method: "POST",
       body: JSON.stringify({
@@ -236,27 +318,48 @@ function Editor() {
     window.URL.revokeObjectURL(url);
   };
 
-  // return (
-  //   <Puck config={config} data={initialData}>
-  //     <div className="flex flex-col fixed top-0 w-full h-screen justify-between z-50 bg-white gap-6">
-  //       <div>1</div>
-  //       <div className="flex-1 overflow-scroll flex gap-5 px-5">
-  //         <div class="w-2/6  border border-gray-300 p-5 overflow-y-scroll">
-  //           <Puck.Components />
-  //           <Puck.Fields />
-  //           <Puck.Outline />
-  //         </div>
-  //         <div class="w-full border border-gray-300 p-5 overflow-y-scroll">
-  //           <Puck.Preview className="bg-red-400" />
-  //         </div>
-  //       </div>
-  //       <div className="bg-red-500">2</div>
-  //     </div>
-  //   </Puck>
-  // );
+  const save = async (data) => {
+    const components = modify_components(data.content);
+
+    try {
+      await handleExport({ components });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Puck
+      onChange={(data) => {
+        puck_data.current = data;
+      }}
       overrides={{
+        headerActions: () => {
+          return (
+            <div className="space-x-6">
+              <Button
+                onClick={() =>
+                  handleExportWithCopywriting({
+                    components: modify_components(puck_data.current.content),
+                  })
+                }
+                className="cursor-pointer"
+              >
+                Copywriting Export
+              </Button>
+              <Button
+                onClick={() =>
+                  handleExport({
+                    components: modify_components(puck_data.current.content),
+                  })
+                }
+                className="cursor-pointer"
+              >
+                Export
+              </Button>
+            </div>
+          );
+        },
         components: ({ children }) => {
           return (
             <div className="flex flex-col space-y-6 justify-between relative">
@@ -266,7 +369,6 @@ function Editor() {
           );
         },
       }}
-      renderHeaderActions={() => <div>Click Publish to Export Code</div>}
       headerTitle="Drag and Drop Components"
       config={config}
       data={initialData}
