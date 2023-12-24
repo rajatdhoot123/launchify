@@ -1,7 +1,157 @@
 "use client";
 import { Puck, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
-import { COMPONENTS_ARRAY, FLOATER_SELECT } from "@/app/constants__/floater";
+import {
+  COMPONENTS_ARRAY,
+  FLOATER_SELECT,
+  PAGES,
+  PREMIUM_FEATURES,
+} from "@/app/constants__/floater";
+import Collapsible from "@/app/components/__accordion/variant-1";
+import { TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { forwardRef, useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+
+const NextBoilerPlate = forwardRef((props, state_ref) => {
+  const [state, setState] = useState({
+    ga_id: "",
+    premium_features: PREMIUM_FEATURES,
+    crisp_id: "",
+    pages: PAGES,
+  });
+  const { data: session } = useSession();
+  const is_premium = ["rajatdhoot123@gmail.com"].includes(session?.user?.email);
+
+  useEffect(() => {
+    state_ref.current = state;
+  }, [state, state_ref]);
+  return (
+    <div className="space-y-6 sticky bottom-0 w-full bg-white">
+      <div className=" border border-gray-300 border-opacity-80 p-2 rounded-md">
+        <Collapsible
+          isOpen={true}
+          title={
+            <div className="w-full text-left">
+              <span>Integrations</span>
+            </div>
+          }
+        >
+          <div className="space-y-4 p-2">
+            <div className="space-y-2">
+              <div className="text-sm font-semibold">Google Analytics</div>
+              <TextFieldRoot>
+                <TextFieldInput
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      ga_id: e.target.value,
+                    }))
+                  }
+                  value={state.ga_id}
+                  placeholder="Enter GA Id"
+                />
+              </TextFieldRoot>
+            </div>
+            <div className="space-y-2">
+              <div className="text-sm font-semibold">Crisp Support</div>
+              <TextFieldRoot>
+                <TextFieldInput
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      crisp_id: e.target.value,
+                    }))
+                  }
+                  value={state.crisp_id}
+                  placeholder="Enter Crisp Id"
+                />
+              </TextFieldRoot>
+            </div>
+            <div className="flex items-center">
+              <input
+                readOnly
+                checked={true}
+                type="checkbox"
+                className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
+              />
+              <label
+                htmlFor="default-checkbox"
+                className="ml-2 text-sm font-medium text-gray-900"
+              >
+                Sitemap (SEO)
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input
+                readOnly
+                checked={true}
+                type="checkbox"
+                className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
+              />
+              <label
+                htmlFor="default-checkbox"
+                className="ml-2 text-sm font-medium text-gray-900"
+              >
+                Mdx Support
+              </label>
+            </div>
+          </div>
+        </Collapsible>
+      </div>
+      <div className="bg-white border border-gray-300 border-opacity-80 p-2 rounded-md">
+        <Collapsible
+          isOpen={false}
+          title={
+            <div className="w-full text-left">
+              <span className="">Pages</span>
+            </div>
+          }
+        >
+          <div className="flex flex-col space-y-4 mt-5">
+            {state.pages.map((feature, index) => (
+              <div
+                className="flex flex-shrink-0 items-center"
+                key={feature.item_id}
+              >
+                <input
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    setState((prev) => ({
+                      ...prev,
+                      pages: prev.pages.map((page, findex) =>
+                        findex === index
+                          ? {
+                              ...page,
+                              selected:
+                                e.target.value === "true" ? false : true,
+                            }
+                          : page
+                      ),
+                    }));
+                  }}
+                  type="checkbox"
+                  value={feature.selected}
+                  checked={feature.selected}
+                  className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
+                    !is_premium ? "bg-gray-300" : "bg-gray-100"
+                  }`}
+                />
+                <label
+                  htmlFor="default-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900"
+                >
+                  {feature.title}
+                </label>
+              </div>
+            ))}
+          </div>
+        </Collapsible>
+      </div>
+    </div>
+  );
+});
+
+NextBoilerPlate.displayName = "NextBoilerPlate";
 
 // Describe the initial data
 const initialData = {
@@ -46,36 +196,21 @@ const config = {
     ),
   },
   root: {
-    render: ({ children, ...rest }) => {
-      return <div>{children}</div>;
+    render: ({ children }) => {
+      return children;
     },
   },
 };
 
-const CustomHeader = ({ onPublish }) => {
-  const { appState, dispatch } = usePuck();
-
-  return (
-    <header
-      className="w-full flex flex-wrap p-6 items-center bg-white border border-gray-300 z-50"
-      onClick={() => dispatch({ type: "setUi", ui: { itemSelector: null } })}
-    >
-      <span style={{ fontWeight: 600 }}>Custom UI example </span>
-      <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-        <div>
-          <button onClick={() => onPublish(appState.data)}>Publish</button>
-        </div>
-      </div>
-    </header>
-  );
-};
-
 // Render Puck editor
 function Editor() {
+  const state_ref = useRef({});
+
   const save = async (data) => {
+    const state = state_ref.current;
+
     const components = data.content.reduce((acc, current) => {
       const [item_id, variant] = current.type.split("-");
-      console.log({ variant, item_id });
       return [
         ...acc,
         { item_id: item_id, variant: `variant-${variant}`, key: item_id },
@@ -85,8 +220,10 @@ function Editor() {
     const response = await fetch("/handle_export__", {
       method: "POST",
       body: JSON.stringify({
-        ga_id: "",
-        crisp_id: "",
+        ga_id: state.ga_id,
+        crisp_id: state.crisp_id,
+        pages: state.pages,
+        premium_features: state.premium_features,
         components: components,
       }),
     });
@@ -119,6 +256,16 @@ function Editor() {
   // );
   return (
     <Puck
+      overrides={{
+        components: ({ children }) => {
+          return (
+            <div className="flex flex-col space-y-6 justify-between relative">
+              <div>{children}</div>
+              <NextBoilerPlate ref={state_ref} />
+            </div>
+          );
+        },
+      }}
       renderHeaderActions={() => <div>Click Publish to Export Code</div>}
       headerTitle="Drag and Drop Components"
       config={config}
