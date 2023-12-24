@@ -15,21 +15,20 @@ const Collapsible = ({ title, children, isOpen = false }) => {
           onClick={handleToggle}
         >
           <svg
-            className={`transition-all transform duration-300 ${
-              open ? "rotate-90" : ""
+            className={`lucide lucide-chevron-down transition-all transform duration-300 ${
+              open ? "" : "-rotate-90"
             }`}
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="1"
-            viewBox="0 0 16 16"
-            height="1em"
-            width="1em"
             xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path
-              fillRule="evenodd"
-              d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-            ></path>
+            <path d="m6 9 6 6 6-6"></path>
           </svg>
           {title}
         </button>
