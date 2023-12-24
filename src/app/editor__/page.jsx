@@ -98,6 +98,25 @@ function Editor() {
     link.click();
     window.URL.revokeObjectURL(url);
   };
+
+  // return (
+  //   <Puck config={config} data={initialData}>
+  //     <div className="flex flex-col fixed top-0 w-full h-screen justify-between z-50 bg-white gap-6">
+  //       <div>1</div>
+  //       <div className="flex-1 overflow-scroll flex gap-5 px-5">
+  //         <div class="w-2/6  border border-gray-300 p-5 overflow-y-scroll">
+  //           <Puck.Components />
+  //           <Puck.Fields />
+  //           <Puck.Outline />
+  //         </div>
+  //         <div class="w-full border border-gray-300 p-5 overflow-y-scroll">
+  //           <Puck.Preview className="bg-red-400" />
+  //         </div>
+  //       </div>
+  //       <div className="bg-red-500">2</div>
+  //     </div>
+  //   </Puck>
+  // );
   return (
     <Puck
       renderHeaderActions={() => <div>Click Publish to Export Code</div>}
