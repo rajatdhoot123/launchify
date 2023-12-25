@@ -8,7 +8,7 @@ import {
 } from "@/app/constants__/floater";
 import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
-import { Button, Link, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";

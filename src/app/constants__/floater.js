@@ -133,51 +133,51 @@ const LOGIN = {
 };
 
 export const COMPONENTS_ARRAY = [
-  { name: "Navbar", components: Object.values(NAVBAR) },
-  { name: "Hero", components: Object.values(HERO) },
+  { name: "navbar", components: Object.values(NAVBAR) },
+  { name: "hero", components: Object.values(HERO) },
   {
-    name: "Pricing",
+    name: "pricing",
     components: Object.values(PRICING),
   },
 
   {
-    name: "Testimonials",
+    name: "testimonials",
     components: Object.values(TESTIMONIALS),
   },
   {
-    name: "Table",
+    name: "table",
     components: Object.values(TABLE),
   },
   {
-    name: "Faq",
+    name: "faq",
     components: Object.values(FAQ),
   },
   {
-    name: "RandomCards",
+    name: "randomcards",
     components: Object.values(RANDOMCARD),
   },
   {
-    name: "Footer",
+    name: "footer",
     components: Object.values(FOOTER),
   },
   {
-    name: "Cards",
+    name: "cards",
     components: Object.values(CARDS),
   },
   {
-    name: "CommingSoon",
+    name: "commingsoon",
     components: Object.values(COMMING_SOON),
   },
   {
-    name: "AnimatedCard",
+    name: "animatedcard",
     components: Object.values(ANIMATED_CARDS),
   },
   {
-    name: "ContactUs",
+    name: "contactus",
     components: Object.values(CONTACT_US),
   },
   {
-    name: "Login",
+    name: "login",
     components: Object.values(LOGIN),
   },
 ];
