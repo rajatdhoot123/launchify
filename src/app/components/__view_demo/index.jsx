@@ -37,7 +37,7 @@ const Modal = ({ isOpen, onClose, children }) => {
           <div className="overflow-y-scroll flex-1">{children}</div>
           <div>
             <div className="border-t border-gray-300 p-2 flex justify-end">
-              <Button onClick={closeModal}>Close</Button>
+              <Button className="cursor-pointer" onClick={closeModal}>Close</Button>
               {/* <button className="">
                 <svg
                   stroke="currentColor"
