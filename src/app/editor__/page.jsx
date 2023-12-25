@@ -8,11 +8,12 @@ import {
 } from "@/app/constants__/floater";
 import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
-import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { Button, Link, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
+import CopyWritingDialog from "@/app/components/__copywriting_dialog";
 
 const modify_components = (content) => {
   return content.reduce((acc, current) => {
@@ -216,6 +217,8 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const [state, setState] = useState({ open_ai: "", prompt: "" });
+
   const [modal_is_open, set_modal] = useState(false);
   const [data, setData] = useState({ content: [], root: {} });
   const ai_key = useRef("");
@@ -340,8 +343,17 @@ function Editor() {
         overrides={{
           headerActions: () => {
             return (
-              <div className="space-x-6">
-                <Button
+              <div className="space-x-6 flex items-center">
+                <CopyWritingDialog
+                  state={state}
+                  setState={setState}
+                  data={puck_data.current}
+                  key="Show code"
+                  title="Select component to update copywriting"
+                >
+                  <Button className="cursor-pointer">With Copywriting</Button>
+                </CopyWritingDialog>
+                {/* <Button
                   onClick={() =>
                     handleExportWithCopywriting({
                       components: modify_components(puck_data.current.content),
@@ -350,7 +362,7 @@ function Editor() {
                   className="cursor-pointer"
                 >
                   Copywriting Export
-                </Button>
+                </Button> */}
                 <Button
                   onClick={() =>
                     handleExport({
