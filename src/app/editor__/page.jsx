@@ -238,7 +238,6 @@ function Editor() {
       });
 
       if (!ai_key.current) {
-        console.log;
         const open_ai_key = prompt("Enter open ai api key");
         ai_key.current = open_ai_key;
       }
@@ -331,6 +330,7 @@ function Editor() {
     }
   };
 
+  console.log({ puck_data });
   return (
     <>
       <ViewDemo onClose={() => set_modal(false)} isOpen={modal_is_open}>
@@ -344,15 +344,32 @@ function Editor() {
           headerActions: () => {
             return (
               <div className="space-x-6 flex items-center">
-                <CopyWritingDialog
-                  state={state}
-                  setState={setState}
-                  data={puck_data.current}
-                  key="Show code"
-                  title="Select component to update copywriting"
-                >
-                  <Button className="cursor-pointer">With Copywriting</Button>
-                </CopyWritingDialog>
+                {(puck_data?.current?.content ?? []).length === 0 ? (
+                  <Button
+                    onClick={() =>
+                      alert("Add components to generate copywriting")
+                    }
+                  >
+                    With Copywriting
+                  </Button>
+                ) : (
+                  <CopyWritingDialog
+                    handleCopywriting={() =>
+                      handleExportWithCopywriting({
+                        components: modify_components(
+                          puck_data.current.content
+                        ),
+                      })
+                    }
+                    state={state}
+                    setState={setState}
+                    data={puck_data.current}
+                    key="Show code"
+                    title="Select component to update copywriting"
+                  >
+                    <Button className="cursor-pointer">With Copywriting</Button>
+                  </CopyWritingDialog>
+                )}
                 {/* <Button
                   onClick={() =>
                     handleExportWithCopywriting({

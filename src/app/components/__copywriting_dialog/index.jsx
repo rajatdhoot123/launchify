@@ -9,7 +9,14 @@ import {
 } from "@radix-ui/themes";
 import { useState } from "react";
 
-const CopyWritingDialog = ({ children, title, data, setState, state }) => {
+const CopyWritingDialog = ({
+  children,
+  title,
+  data,
+  setState,
+  state,
+  handleCopywriting,
+}) => {
   const [open_ai, set_open_ai] = useState(state);
   const [active_component, set_active_components] = useState({});
 
