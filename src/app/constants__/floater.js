@@ -4,11 +4,11 @@ import Navbar3 from "@/app/components/navbar/variant-3";
 import Hero1 from "@/app/components/hero/variant-1";
 import Hero2 from "@/app/components/hero/variant-2";
 import Hero3 from "@/app/components/hero/variant-3";
-import Hero4 from "@/app/components/hero/variant-4";
 import Hero5 from "@/app/components/hero/variant-5";
 import Hero6 from "@/app/components/hero/variant-6";
 import Hero7 from "@/app/components/hero/variant-7";
 import Hero8 from "@/app/components/hero/variant-8";
+import Section1 from "@/app/components/section/variant-1";
 import Pricing1 from "@/app/components/pricing/variant-1";
 import Pricing2 from "@/app/components/pricing/variant-2";
 import Pricing3 from "@/app/components/pricing/variant-3";
@@ -54,14 +54,16 @@ const NAVBAR = {
 
 const HERO = {
   "variant-1": Hero1,
-  "variant-2": Hero2,
   "variant-3": Hero3,
-  "variant-4": Hero4,
   "variant-5": Hero5,
   "variant-6": Hero6,
   "variant-7": Hero7,
   "variant-8": Hero8,
 };
+
+const SECTION = {
+  "variant-1": Section1
+}
 
 const PRICING = {
   "variant-1": Pricing1,
@@ -149,6 +151,10 @@ export const COMPONENTS_ARRAY = [
     components: Object.values(TABLE),
   },
   {
+    name: "section",
+    components: Object.values(SECTION),
+  },
+  {
     name: "faq",
     components: Object.values(FAQ),
   },
@@ -226,6 +232,12 @@ export const FLOATER_SELECT = [
     variants: PRICING,
     title: "Pricing",
     selected: "variant-3",
+  },
+  {
+    item_id: "section",
+    variants: SECTION,
+    title: "Sections",
+    selected: "variant-1",
   },
   {
     item_id: "login",
