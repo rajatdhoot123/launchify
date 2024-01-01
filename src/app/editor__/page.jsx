@@ -8,8 +8,19 @@ import {
 } from "@/app/constants__/floater";
 import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
-import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HoverCard,
+  Link,
+  Text,
+  TextFieldInput,
+  TextFieldRoot,
+} from "@radix-ui/themes";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
@@ -207,6 +218,14 @@ const config = {
           (compAcc, CurrentComp, index) => ({
             ...compAcc,
             [`${current.name}-${index + 1}`]: {
+              fields: {
+                params: {
+                  type: "object",
+                  objectFields: {
+                    title: { type: "text" },
+                  },
+                },
+              },
               render: () => (
                 <div className="pb-12">
                   <CurrentComp />
@@ -350,6 +369,40 @@ function Editor() {
           puck_data.current = data;
         }}
         overrides={{
+          componentItem: ({ children, ...rest }) => (
+            <div className="mb-4">
+              <HoverCard.Root>
+                <HoverCard.Trigger>
+                  <Link href="https://twitter.com/radix_ui" target="_blank">
+                    {children}
+                  </Link>
+                </HoverCard.Trigger>
+                <HoverCard.Content>
+                  <Flex gap="4">
+                    <Avatar
+                      size="3"
+                      fallback="R"
+                      radius="full"
+                      src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
+                    />
+                    <Box>
+                      <Heading size="3" as="h3">
+                        Radix
+                      </Heading>
+                      <Text as="div" size="2" color="gray">
+                        @radix_ui
+                      </Text>
+
+                      <Text as="div" size="2" style={{ maxWidth: 300 }} mt="3">
+                        React components, icons, and colors for building
+                        high-quality, accessible UI.
+                      </Text>
+                    </Box>
+                  </Flex>
+                </HoverCard.Content>
+              </HoverCard.Root>
+            </div>
+          ),
           headerActions: () => {
             return (
               <div className="space-x-6 flex items-center">
