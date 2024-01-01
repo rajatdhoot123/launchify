@@ -1,6 +1,8 @@
 "use client";
 import { Puck, Render } from "@measured/puck";
 import "@measured/puck/puck.css";
+import { createPortal } from "react-dom";
+
 import {
   COMPONENTS_ARRAY,
   PAGES,
@@ -36,6 +38,17 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+};
+
+export const IFrame = ({ children, ...props }) => {
+  const [contentRef, setContentRef] = useState(null);
+  const mountNode = contentRef?.contentWindow?.document?.body;
+
+  return (
+    <iframe {...props} ref={setContentRef}>
+      {mountNode && createPortal(children, mountNode)}
+    </iframe>
+  );
 };
 
 const modify_components = (content) => {
@@ -256,7 +269,6 @@ function Editor() {
 
   const [modal_is_open, set_modal] = useState(false);
   const [data, setData] = useState({ content: [], root: {} });
-  const ai_key = useRef("");
   const [loader, setLoader] = useState({
     export: false,
     export_with_copy_writing: false,
@@ -369,40 +381,34 @@ function Editor() {
           puck_data.current = data;
         }}
         overrides={{
-          componentItem: ({ children, ...rest }) => (
-            <div className="mb-4">
-              <HoverCard.Root>
-                <HoverCard.Trigger>
-                  <Link href="https://twitter.com/radix_ui" target="_blank">
-                    {children}
-                  </Link>
-                </HoverCard.Trigger>
-                <HoverCard.Content>
-                  <Flex gap="4">
-                    <Avatar
-                      size="3"
-                      fallback="R"
-                      radius="full"
-                      src="https://pbs.twimg.com/profile_images/1337055608613253126/r_eiMp2H_400x400.png"
-                    />
-                    <Box>
-                      <Heading size="3" as="h3">
-                        Radix
-                      </Heading>
-                      <Text as="div" size="2" color="gray">
-                        @radix_ui
-                      </Text>
+          componentItem: ({ children, ...rest }) => {
+            const [name, index] =
+              children?.props?.children?.props?.children?.[0]?.props?.children?.split(
+                "-"
+              );
 
-                      <Text as="div" size="2" style={{ maxWidth: 300 }} mt="3">
-                        React components, icons, and colors for building
-                        high-quality, accessible UI.
-                      </Text>
-                    </Box>
-                  </Flex>
-                </HoverCard.Content>
-              </HoverCard.Root>
-            </div>
-          ),
+            const selected_comp = COMPONENTS_ARRAY.find(
+              ({ name: compName }) => compName === name
+            );
+
+            const CurrentComp = selected_comp.components[+index - 1];
+            return (
+              <div className="mb-4">
+                <HoverCard.Root>
+                  <HoverCard.Trigger>
+                    <Link href="https://twitter.com/radix_ui" target="_blank">
+                      {children}
+                    </Link>
+                  </HoverCard.Trigger>
+                  <HoverCard.Content className="ml-40 h-96 w-96 overflow-scroll">
+                    <IFrame>
+                      <CurrentComp />
+                    </IFrame>
+                  </HoverCard.Content>
+                </HoverCard.Root>
+              </div>
+            );
+          },
           headerActions: () => {
             return (
               <div className="space-x-6 flex items-center">
