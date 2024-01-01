@@ -1,140 +1,55 @@
 const Hero = () => {
   return (
-    <div className="bg-white relative container md:px-12 px-5">
-      <h1 className="sm:mx-auto sm:w-10/12 md:w-2/3 font-black text-blue-900 text-4xl text-center sm:text-5xl md:text-6xl lg:w-auto lg:text-left xl:text-7xl ">
-        Run successful remote and <br className="lg:block hidden" />{" "}
-        <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 ">
-          Hybrid teams
-        </span>
-        .
-      </h1>
-      <div className="lg:flex">
-        <div className="relative mt-8 md:mt-16 space-y-8 sm:w-10/12 md:w-2/3 lg:ml-0 sm:mx-auto text-center lg:text-left lg:mr-auto lg:w-7/12">
-          <p className="sm:text-lg text-gray-700  lg:w-11/12">
-            DailyBot takes chat and collaboration to the next level: daily
-            standups, team check-ins, surveys, kudos, best companion bot for
-            your virtual watercooler, 1:1 intros, motivation tracking and more.
-          </p>
-          <span className="block font-semibold text-gray-500">
-            The best companion bot for your chat app.
-          </span>
-          <div className="grid grid-cols-3 space-x-4 md:space-x-6 md:flex md:justify-center lg:justify-start">
-            <a
-              aria-label="add to slack"
-              className="p-4 border border-gray-200 rounded-full duration-300 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/20 "
-              target="_blank"
-            >
-              <div className="flex justify-center space-x-4">
-                <img
-                  className="w-6 h-6"
-                  src="https://tailus.io/sources/blocks/tech-startup/preview/images/slack.png"
-                  alt="slack logo"
-                  loading="lazy"
-                  width="128"
-                  height="128"
-                />
-                <span className="hidden font-medium md:block ">
-                  Slack
-                </span>
-              </div>
-            </a>
-            <a
-              aria-label="add to chat"
-              className="p-4 border border-gray-200  rounded-full duration-300 hover:border-green-400 hover:shadow-lg hover:shadow-lime-600/20 "
-              target="_blank"
-            >
-              <div className="flex justify-center space-x-4">
-                <img
-                  className="w-6 h-6"
-                  src="https://tailus.io/sources/blocks/tech-startup/preview/images/chat.png"
-                  alt="chat logo"
-                  loading="lazy"
-                  width="128"
-                  height="128"
-                />
-                <span className="hidden font-medium md:block ">
-                  Google Chat
-                </span>
-              </div>
-            </a>
-            <a
-              aria-label="add to zoom"
-              className="p-4 border border-gray-200  rounded-full duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-600/20 "
-              target="_blank"
-            >
-              <div className="flex justify-center space-x-4">
-                <img
-                  className="w-6 h-6"
-                  src="https://tailus.io/sources/blocks/tech-startup/preview/images/zoom.png"
-                  alt="chat logo"
-                  loading="lazy"
-                  width="128"
-                  height="128"
-                />
-                <span className="hidden font-medium md:block ">
-                  Zoom
-                </span>
-              </div>
-            </a>
-          </div>
-
-          <div className="">
-            🔥🌟
-            <span>Other integrations :</span>
-            <a
-              className="font-semibold text-gray-700 "
-              target="_blank"
-            >
-              Discord,
-            </a>
-            <a
-              className="font-semibold text-gray-700 "
-              target="_blank"
-            >
-              Telegram
-            </a>
-          </div>
-
-          <div className="pt-12 flex gap-6 lg:gap-12 justify-between grayscale lg:w-2/3">
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/airbnb.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/ge.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/coty.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/microsoft.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="mt-12 md:mt-0 lg:absolute -right-10 lg:w-7/12">
-          <div className="relative w-full">
-            <div
-              aria-hidden="true"
-              className="absolute scale-75 md:scale-110 inset-0 m-auto w-full h-full md:w-96 md:h-96 rounded-full rotate-45 bg-gradient-to-r from-sky-500 to-cyan-300 blur-3xl"
-            ></div>
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/globalization-cuate.svg"
-              className="relative w-full"
-              alt="wath illustration"
-              loading="lazy"
-              width="320"
-              height="280"
-            />
-          </div>
-        </div>
+    <div className="container mx-auto max-w-4xl text-center flex flex-col justify-center items-center">
+      <div className="rounded-[40px] border uppercase backdrop-blur-sm text-xs text-primary font-medium md:mt-0 mb-4 py-2 px-4 border-primary/40 w-fit mx-auto text-center z-10">
+        FREE UNTIL YOUR FIRST SUBSCRIBER
       </div>
+      <h1 className="text-4xl md:text-6xl font-bold md:leading-[72px] mt-6 max-w-3xl">
+        Productize yourself, <br />
+        earn more with what you're good at.
+      </h1>
+      <p className="mt-6 text-primary/80 text-lg md:text-xl mb-10 max-w-xl">
+        With Breeew, anyone can generate recurring income online. People need
+        your skills, let them subscribe to you. It's that easy.
+      </p>
+      <form className="flex flex-1 flex-col gap-6 items-center w-full">
+        <div className="flex md:flex-row flex-col items-center justify-center mt-6 w-full max-w-lg">
+          <div className="flex flex-1 flex-col w-full relative">
+            <div className="group flex items-center space-x-2 w-full rounded-md border-input px-3 py-2 focus-within:outline-none focus-within:border-primary/30 h-11 md:h-14 rounded-b-none border-0 border-t border-x md:rounded-r-none md:rounded-l-md md:border md:border-r-0 bg-background md:px-6">
+              <input
+                className="bg-transparent w-full ring-offset-background file:border-0 outline-none file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground text-base"
+                placeholder="Email address"
+                name="email"
+                value=""
+              />
+            </div>
+          </div>
+          <button
+            className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-accent text-accent-foreground hover:bg-accent/90 h-11 md:h-14 px-6 rounded-md text-base rounded-t-none md:rounded-l-none w-full md:w-fit md:rounded-r-md"
+            type="submit"
+          >
+            Start now
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              className="ml-2 h-4 w-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <span className="text-xs text-primary/60">
+          Free until first subscriber - No credit card needed
+        </span>
+      </form>
     </div>
   );
 };
