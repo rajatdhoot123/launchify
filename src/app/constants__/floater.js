@@ -4,10 +4,9 @@ import Navbar3 from "@/app/components/navbar/variant-3";
 import Hero1 from "@/app/components/hero/variant-1";
 import Hero2 from "@/app/components/hero/variant-2";
 import Hero3 from "@/app/components/hero/variant-3";
-import Hero4 from "@/app/components/hero/variant-5";
+import Hero4 from "@/app/components/hero/variant-4";
 import Hero5 from "@/app/components/hero/variant-5";
-import Hero6 from "@/app/components/hero/variant-7";
-import Hero7 from "@/app/components/hero/variant-7";
+import Hero6 from "@/app/components/hero/variant-6";
 import Section1 from "@/app/components/section/variant-1";
 import Pricing1 from "@/app/components/pricing/variant-1";
 import Pricing2 from "@/app/components/pricing/variant-2";
@@ -59,12 +58,11 @@ const HERO = {
   "variant-4": Hero4,
   "variant-5": Hero5,
   "variant-6": Hero6,
-  "variant-7": Hero7,
 };
 
 const SECTION = {
-  "variant-1": Section1
-}
+  "variant-1": Section1,
+};
 
 const PRICING = {
   "variant-1": Pricing1,
@@ -226,7 +224,7 @@ export const FLOATER_SELECT = [
     item_id: "hero",
     variants: HERO,
     title: "Hero",
-    selected: "variant-7",
+    selected: "variant-5",
   },
   {
     item_id: "pricing",
