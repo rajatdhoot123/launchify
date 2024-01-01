@@ -231,6 +231,8 @@ function Editor() {
 
   const handleExportWithCopywriting = async ({ components }) => {
     const state = state_ref.current;
+
+    console.log("Here");
     try {
       setLoader((prev) => ({ ...prev, export_wih_copywriting: true }));
       logEvent("export_clicked", {
@@ -330,7 +332,6 @@ function Editor() {
     }
   };
 
-  console.log({ puck_data });
   return (
     <>
       <ViewDemo onClose={() => set_modal(false)} isOpen={modal_is_open}>
@@ -354,8 +355,8 @@ function Editor() {
                   </Button>
                 ) : (
                   <CopyWritingDialog
-                    handleCopywriting={() =>
-                      handleExportWithCopywriting({
+                    handleCopywriting={async () =>
+                      await handleExportWithCopywriting({
                         components: modify_components(
                           puck_data.current.content
                         ),
@@ -370,16 +371,6 @@ function Editor() {
                     <Button className="cursor-pointer">With Copywriting</Button>
                   </CopyWritingDialog>
                 )}
-                {/* <Button
-                  onClick={() =>
-                    handleExportWithCopywriting({
-                      components: modify_components(puck_data.current.content),
-                    })
-                  }
-                  className="cursor-pointer"
-                >
-                  Copywriting Export
-                </Button> */}
                 <Button
                   onClick={() =>
                     handleExport({

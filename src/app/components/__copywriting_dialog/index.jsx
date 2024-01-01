@@ -88,7 +88,7 @@ const CopyWritingDialog = ({
             <Button onClick={() => setState(open_ai)}>Generate</Button>
           </Dialog.Close>
           <Dialog.Close>
-            <Button variant="soft" color="gray">
+            <Button onClick={handleCopywriting} variant="soft" color="gray">
               Cancel
             </Button>
           </Dialog.Close>
