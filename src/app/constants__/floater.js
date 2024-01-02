@@ -45,12 +45,16 @@ import Login1 from "@/app/components/login/variant-1";
 import Login2 from "@/app/components/login/variant-2";
 import Faq1 from "@/app/components/faq/variant-1";
 import About1 from "@/app/components/about/variant-1";
-
+import Feature1 from "@/app/components/featuresservice/variant-1";
 
 const NAVBAR = {
   "variant-1": Navbar1,
   "variant-2": Navbar2,
   "variant-3": Navbar3,
+};
+
+const FEATURE_SERVICE = {
+  "variant-1": Feature1,
 };
 
 const ABOUT = {
@@ -147,6 +151,10 @@ export const COMPONENTS_ARRAY = [
     components: Object.values(PRICING),
   },
   {
+    name: "feature-service",
+    components: Object.values(FEATURE_SERVICE),
+  },
+  {
     name: "testimonials",
     components: Object.values(TESTIMONIALS),
   },
@@ -234,6 +242,12 @@ export const FLOATER_SELECT = [
     variants: HERO,
     title: "Hero",
     selected: "variant-5",
+  },
+  {
+    item_id: "featureservice",
+    variants: FEATURE_SERVICE,
+    title: "Feature Service",
+    selected: "variant-1",
   },
   {
     item_id: "about",
