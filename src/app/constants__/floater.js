@@ -151,7 +151,7 @@ export const COMPONENTS_ARRAY = [
     components: Object.values(PRICING),
   },
   {
-    name: "feature-service",
+    name: "featureservice",
     components: Object.values(FEATURE_SERVICE),
   },
   {
