@@ -45,7 +45,7 @@ import Login1 from "@/app/components/login/variant-1";
 import Login2 from "@/app/components/login/variant-2";
 import Faq1 from "@/app/components/faq/variant-1";
 import About1 from "@/app/components/about/variant-1";
-import Feature1 from "@/app/components/featuresservice/variant-1";
+import Feature1 from "@/app/components/featureservice/variant-1";
 
 const NAVBAR = {
   "variant-1": Navbar1,
