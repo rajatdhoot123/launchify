@@ -8,12 +8,23 @@ import {
 } from "@/app/constants__/floater";
 import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
-import { Button, Link, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
+import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
 import CopyWritingDialog from "@/app/components/__copywriting_dialog";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "OPEN_COPWRITING_MODAL":
+      return { ...state, is_copywriting_active: true };
+    case "CLOSE_COPWRITING_MODAL":
+      return { ...state, ...action.payload, is_copywriting_active: false };
+    default:
+      return state;
+  }
+};
 
 const modify_components = (content) => {
   return content.reduce((acc, current) => {
@@ -217,7 +228,11 @@ const config = {
 
 // Render Puck editor
 function Editor() {
-  const [state, setState] = useState({ open_ai: "", prompt: "" });
+  const [state, dispatch] = useReducer(reducer, {
+    open_ai_key: "",
+    open_ai_prompt: "",
+    is_copywriting_active: false,
+  });
 
   const [modal_is_open, set_modal] = useState(false);
   const [data, setData] = useState({ content: [], root: {} });
@@ -355,20 +370,21 @@ function Editor() {
                   </Button>
                 ) : (
                   <CopyWritingDialog
-                    handleCopywriting={async () =>
-                      await handleExportWithCopywriting({
-                        components: modify_components(
-                          puck_data.current.content
-                        ),
-                      })
-                    }
                     state={state}
-                    setState={setState}
+                    dispatch={dispatch}
+                    is_open={state.is_copywriting_active}
                     data={puck_data.current}
                     key="Show code"
                     title="Select component to update copywriting"
                   >
-                    <Button className="cursor-pointer">With Copywriting</Button>
+                    <Button
+                      onClick={() =>
+                        dispatch({ type: "OPEN_COPWRITING_MODAL" })
+                      }
+                      className="cursor-pointer"
+                    >
+                      With Copywriting
+                    </Button>
                   </CopyWritingDialog>
                 )}
                 <Button

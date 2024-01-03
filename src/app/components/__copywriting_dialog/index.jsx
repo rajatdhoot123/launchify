@@ -10,25 +10,48 @@ import {
 import { useState } from "react";
 
 const CopyWritingDialog = ({
+  dispatch,
   children,
   title,
   data,
   setState,
   state,
-  handleCopywriting,
+  is_open,
 }) => {
-  const [open_ai, set_open_ai] = useState(state);
+  const [{ open_ai_key, open_ai_prompt }, set_open_ai] = useState(state);
   const [active_component, set_active_components] = useState({});
 
+  const handleClose = () => {
+    dispatch({
+      type: "CLOSE_COPWRITING_MODAL",
+      payload: {
+        open_ai_key,
+        open_ai_prompt,
+      },
+    });
+  };
+
+  const handleGenerate = () => {
+    dispatch({
+      type: "CLOSE_COPWRITING_MODAL",
+      payload: {
+        open_ai_key,
+        open_ai_prompt,
+      },
+    });
+  };
   return (
-    <Dialog.Root>
+    <Dialog.Root open={is_open}>
       <Dialog.Trigger>{children}</Dialog.Trigger>
 
       <Dialog.Content
         className="relative flex flex-col"
         style={{ width: "80%" }}
       >
-        <Dialog.Close className="absolute right-4 cursor-pointer">
+        <Dialog.Close
+          onClick={handleClose}
+          className="absolute right-4 cursor-pointer"
+        >
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -49,18 +72,24 @@ const CopyWritingDialog = ({
           <TextField.Root>
             <TextField.Slot className="text-bold">Open Ai Key</TextField.Slot>
             <TextField.Input
-              value={open_ai.open_ai}
+              value={open_ai_key}
               name="open_ai"
               onChange={(e) => {
-                set_open_ai((prev) => ({ ...prev, open_ai: e.target.value }));
+                set_open_ai((prev) => ({
+                  ...prev,
+                  open_ai_key: e.target.value,
+                }));
               }}
               placeholder="Enter Open AI Key"
             />
           </TextField.Root>
           <TextArea
-            value={open_ai.prompt}
+            value={open_ai_prompt}
             onChange={(e) => {
-              set_open_ai((prev) => ({ ...prev, prompt: e.target.value }));
+              set_open_ai((prev) => ({
+                ...prev,
+                open_ai_prompt: e.target.value,
+              }));
             }}
             size="2"
             placeholder="Enter Your Use Case"
@@ -85,10 +114,10 @@ const CopyWritingDialog = ({
         </div>
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button onClick={() => setState(open_ai)}>Generate</Button>
+            <Button onClick={handleGenerate}>Generate</Button>
           </Dialog.Close>
           <Dialog.Close>
-            <Button onClick={handleCopywriting} variant="soft" color="gray">
+            <Button onClick={handleClose} variant="soft" color="gray">
               Cancel
             </Button>
           </Dialog.Close>
