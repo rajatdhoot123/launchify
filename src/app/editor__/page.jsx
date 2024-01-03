@@ -9,10 +9,23 @@ import {
 import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
 import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
+import CopyWritingDialog from "@/app/components/__copywriting_dialog";
+import Loader from "@/app/components/__loader/loader";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "OPEN_COPWRITING_MODAL":
+      return { ...state, is_copywriting_active: true };
+    case "CLOSE_COPWRITING_MODAL":
+      return { ...state, ...action.payload, is_copywriting_active: false };
+    default:
+      return state;
+  }
+};
 
 const modify_components = (content) => {
   return content.reduce((acc, current) => {
@@ -216,38 +229,38 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const [state, dispatch] = useReducer(reducer, {
+    open_ai_key: "",
+    open_ai_prompt: "",
+    is_copywriting_active: false,
+  });
+
   const [modal_is_open, set_modal] = useState(false);
   const [data, setData] = useState({ content: [], root: {} });
   const ai_key = useRef("");
   const [loader, setLoader] = useState({
     export: false,
-    export_wih_copywriting: false,
+    export_with_copy_writing: false,
   });
   const state_ref = useRef({});
   const puck_data = useRef({});
 
-  const handleExportWithCopywriting = async ({ components }) => {
+  const handleExportWithCopywriting = async ({
+    components,
+    open_ai_key,
+    open_ai_prompt,
+  }) => {
     const state = state_ref.current;
     try {
-      setLoader((prev) => ({ ...prev, export_wih_copywriting: true }));
+      setLoader((prev) => ({ ...prev, export_with_copy_writing: true }));
       logEvent("export_clicked", {
         event_name: "export_with_copywriting_clicked",
       });
-
-      if (!ai_key.current) {
-        console.log;
-        const open_ai_key = prompt("Enter open ai api key");
-        ai_key.current = open_ai_key;
-      }
-      if (!ai_key.current) {
-        return;
-      }
 
       const jsx_files = await fetch("/api/get-file__", {
         method: "POST",
         body: JSON.stringify({
           files: components.map(({ variant, item_id }) => ({
-            key: item_id,
             item_id,
             variant,
           })),
@@ -255,12 +268,11 @@ function Editor() {
       });
 
       const jsx_code_response = await jsx_files.json();
-      const use_case = prompt("Provide use case for website generation");
       const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
         updateCopywriting({
           jsx_code: content,
-          use_case: use_case,
-          apiKey: ai_key.current,
+          use_case: open_ai_prompt,
+          apiKey: open_ai_key,
         })
       );
 
@@ -290,7 +302,7 @@ function Editor() {
     } catch (err) {
       console.log({ err });
     } finally {
-      setLoader((prev) => ({ ...prev, export_wih_copywriting: false }));
+      setLoader((prev) => ({ ...prev, export_with_copy_writing: false }));
     }
   };
 
@@ -340,18 +352,39 @@ function Editor() {
         overrides={{
           headerActions: () => {
             return (
-              <div className="space-x-6">
+              <div className="space-x-6 flex items-center">
+                {(puck_data?.current?.content ?? []).length === 0 ? (
+                  <Button
+                    onClick={() =>
+                      alert("Add components to generate copywriting")
+                    }
+                  >
+                    With Copywriting
+                  </Button>
+                ) : (
+                  <CopyWritingDialog
+                    handleExportWithCopywriting={handleExportWithCopywriting}
+                    state={state}
+                    dispatch={dispatch}
+                    is_open={state.is_copywriting_active}
+                    data={puck_data.current}
+                    key="Show code"
+                    title="Select component to update copywriting"
+                  >
+                    <Button
+                      disabled={loader.export_with_copy_writing}
+                      onClick={() =>
+                        dispatch({ type: "OPEN_COPWRITING_MODAL" })
+                      }
+                      className="cursor-pointer"
+                    >
+                      {loader.export_with_copy_writing && <Loader />}
+                      With Copywriting
+                    </Button>
+                  </CopyWritingDialog>
+                )}
                 <Button
-                  onClick={() =>
-                    handleExportWithCopywriting({
-                      components: modify_components(puck_data.current.content),
-                    })
-                  }
-                  className="cursor-pointer"
-                >
-                  Copywriting Export
-                </Button>
-                <Button
+                  disabled={loader.export}
                   onClick={() =>
                     handleExport({
                       components: modify_components(puck_data.current.content),
@@ -359,6 +392,7 @@ function Editor() {
                   }
                   className="cursor-pointer"
                 >
+                  {loader.export && <Loader />}
                   Export
                 </Button>
                 <Button
