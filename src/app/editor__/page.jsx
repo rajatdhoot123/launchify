@@ -244,29 +244,22 @@ function Editor() {
   const state_ref = useRef({});
   const puck_data = useRef({});
 
-  const handleExportWithCopywriting = async ({ components }) => {
+  const handleExportWithCopywriting = async ({
+    components,
+    open_ai_key,
+    open_ai_prompt,
+  }) => {
     const state = state_ref.current;
-
-    console.log("Here");
     try {
       setLoader((prev) => ({ ...prev, export_wih_copywriting: true }));
       logEvent("export_clicked", {
         event_name: "export_with_copywriting_clicked",
       });
 
-      if (!ai_key.current) {
-        const open_ai_key = prompt("Enter open ai api key");
-        ai_key.current = open_ai_key;
-      }
-      if (!ai_key.current) {
-        return;
-      }
-
       const jsx_files = await fetch("/api/get-file__", {
         method: "POST",
         body: JSON.stringify({
           files: components.map(({ variant, item_id }) => ({
-            key: item_id,
             item_id,
             variant,
           })),
@@ -274,12 +267,11 @@ function Editor() {
       });
 
       const jsx_code_response = await jsx_files.json();
-      const use_case = prompt("Provide use case for website generation");
       const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
         updateCopywriting({
           jsx_code: content,
-          use_case: use_case,
-          apiKey: ai_key.current,
+          use_case: open_ai_prompt,
+          apiKey: open_ai_key,
         })
       );
 
@@ -370,6 +362,7 @@ function Editor() {
                   </Button>
                 ) : (
                   <CopyWritingDialog
+                    handleExportWithCopywriting={handleExportWithCopywriting}
                     state={state}
                     dispatch={dispatch}
                     is_open={state.is_copywriting_active}

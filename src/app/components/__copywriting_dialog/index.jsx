@@ -9,7 +9,18 @@ import {
 } from "@radix-ui/themes";
 import { useState } from "react";
 
+const modify_components = (content) => {
+  return content.reduce((acc, current) => {
+    const [item_id, variant] = current.split("-");
+    return [
+      ...acc,
+      { item_id: item_id, variant: `variant-${variant}`, key: item_id },
+    ];
+  }, []);
+};
+
 const CopyWritingDialog = ({
+  handleExportWithCopywriting,
   dispatch,
   children,
   title,
@@ -32,6 +43,11 @@ const CopyWritingDialog = ({
   };
 
   const handleGenerate = () => {
+    handleExportWithCopywriting({
+      components: modify_components(Object.keys(active_component)),
+      open_ai_key,
+      open_ai_prompt,
+    });
     dispatch({
       type: "CLOSE_COPWRITING_MODAL",
       payload: {
