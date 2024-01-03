@@ -14,6 +14,7 @@ import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
 import CopyWritingDialog from "@/app/components/__copywriting_dialog";
+import Loader from "@/app/components/__loader/loader";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -239,7 +240,7 @@ function Editor() {
   const ai_key = useRef("");
   const [loader, setLoader] = useState({
     export: false,
-    export_wih_copywriting: false,
+    export_with_copy_writing: false,
   });
   const state_ref = useRef({});
   const puck_data = useRef({});
@@ -251,7 +252,7 @@ function Editor() {
   }) => {
     const state = state_ref.current;
     try {
-      setLoader((prev) => ({ ...prev, export_wih_copywriting: true }));
+      setLoader((prev) => ({ ...prev, export_with_copy_writing: true }));
       logEvent("export_clicked", {
         event_name: "export_with_copywriting_clicked",
       });
@@ -301,7 +302,7 @@ function Editor() {
     } catch (err) {
       console.log({ err });
     } finally {
-      setLoader((prev) => ({ ...prev, export_wih_copywriting: false }));
+      setLoader((prev) => ({ ...prev, export_with_copy_writing: false }));
     }
   };
 
@@ -371,16 +372,19 @@ function Editor() {
                     title="Select component to update copywriting"
                   >
                     <Button
+                      disabled={loader.export_with_copy_writing}
                       onClick={() =>
                         dispatch({ type: "OPEN_COPWRITING_MODAL" })
                       }
                       className="cursor-pointer"
                     >
+                      {loader.export_with_copy_writing && <Loader />}
                       With Copywriting
                     </Button>
                   </CopyWritingDialog>
                 )}
                 <Button
+                  disabled={loader.export}
                   onClick={() =>
                     handleExport({
                       components: modify_components(puck_data.current.content),
@@ -388,6 +392,7 @@ function Editor() {
                   }
                   className="cursor-pointer"
                 >
+                  {loader.export && <Loader />}
                   Export
                 </Button>
                 <Button
