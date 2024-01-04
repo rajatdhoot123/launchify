@@ -7,11 +7,11 @@ export default function Hero() {
         <div className="px-12 mx-auto max-w-7xl lg:pt-24">
           <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
             <Minutes />
-            <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
+            <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-purple-500 mb-8 text-4xl font-extrabold leading-none tracking-normal md:text-6xl md:tracking-tight">
               <span>Build</span>{" "}
-              <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
-                Beautiful Landing Pages
-              </span>{" "}
+              <span className="block w-full py-2leading-12 text-gray-700 lg:inline">
+                Beautiful Landing Pages&nbsp;
+              </span>
               <span>in Minutes</span>
             </h1>
             <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">

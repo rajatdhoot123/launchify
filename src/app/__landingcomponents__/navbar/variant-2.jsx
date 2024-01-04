@@ -112,10 +112,7 @@ const NavBar = ({ session }) => {
                 >
                   <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                     <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                      <a
-                        href="#"
-                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                      >
+                      <div className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50">
                         {/* Heroicon name: outline/chart-bar */}
                         <svg
                           className="flex-shrink-0 h-6 w-6 text-indigo-600"
@@ -136,13 +133,18 @@ const NavBar = ({ session }) => {
                           <p className="text-base font-medium text-gray-900">
                             MVP
                           </p>
-                          <p className="mt-1 text-sm text-gray-500">
+                          <a
+                            href="https://www.kwiktwik.com/mvp"
+                            target="_blank"
+                            className="mt-1 text-sm text-gray-500"
+                          >
                             Have your MVP developed in just 15 days!
-                          </p>
+                          </a>
                         </div>
-                      </a>
+                      </div>
                       <a
-                        href="#"
+                        target="_blank"
+                        href="https://boilercode.app/?utm_source=ui_widget"
                         className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/cursor-click */}
@@ -171,7 +173,8 @@ const NavBar = ({ session }) => {
                         </div>
                       </a>
                       <a
-                        href="#"
+                        target="_blank"
+                        href="https://fitness.kwiktwik.com/?utm_source=ui_widgets"
                         className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/shield-check */}
@@ -200,7 +203,8 @@ const NavBar = ({ session }) => {
                         </div>
                       </a>
                       <a
-                        href="#"
+                        target="_blank"
+                        href="https://media.kwiktwik.com/?utm_source=ui_widgets"
                         className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/view-grid */}
