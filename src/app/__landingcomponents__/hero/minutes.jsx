@@ -6,10 +6,11 @@ const Minutes = () => {
   const [time, setTime] = useState();
   useEffect(() => {
     setTime(
-      new Date(Date.now() + 5 * 60 * 1000).toLocaleTimeString(
-        navigator.language,
-        { hour: "2-digit", minute: "2-digit", hour12: true }
-      )
+      new Date(Date.now() + 5 * 60 * 1000).toLocaleTimeString("en-us", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
     );
   }, []);
   return (
