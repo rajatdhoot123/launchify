@@ -49,7 +49,7 @@ const Pricing = () => {
                 <li>
                   <a href="https://www.boilercode.app/">
                     {" "}
-                    <u>Boilerplate Code</u>{" "}
+                    <u>NextJS Boilercode</u>{" "}
                   </a>
                 </li>
                 <li>All UI Componenets</li>
@@ -81,7 +81,7 @@ const Pricing = () => {
                 <li>
                   {" "}
                   <a href="https://www.boilercode.app/">
-                    <u>Boilerplate Code</u>
+                    <u>NextJS Boilercode</u>
                   </a>{" "}
                   Lifetime Updates
                 </li>

@@ -272,7 +272,7 @@ const NavBar = ({ session }) => {
                       </div>
                       <div className="flow-root">
                         <a
-                          href="#"
+                          href="mailto:hello@kwiktwik.com"
                           className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
                         >
                           {/* Heroicon name: outline/phone */}
