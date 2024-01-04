@@ -20,7 +20,7 @@ const Pricing = () => {
                 <span className="text-sm text-grey">Forever</span>
               </div>
               <ul className="text-grey leading-loose list-reset mb-6">
-                <li>Only Free UI Components</li>
+                <li>Only Free UI Components (React + Tailwind)</li>
                 <li>UiWidgets Branding</li>
                 <li> </li>
               </ul>
@@ -35,7 +35,7 @@ const Pricing = () => {
         </div>
 
         <div className="mb-4 lg:mb-0 lg:w-1/3 lg:px-2">
-          <div className="text-center border border-grey-light p-10 rounded h-full flex flex-col justify-between">
+          <div className="text-center border border-pink-400 p-10 rounded h-full flex flex-col justify-between">
             <div>
               <h2 className="text-lg mb-4">Pro Builder</h2>
               <div className="mb-6">
@@ -52,7 +52,7 @@ const Pricing = () => {
                     <u>NextJS Boilercode</u>{" "}
                   </a>
                 </li>
-                <li>All UI Componenets</li>
+                <li>Premium Components(React + Tailwind)</li>
                 <li>No UiWidgets Branding</li>
               </ul>
             </div>
@@ -77,7 +77,7 @@ const Pricing = () => {
                 <span className="text-sm text-grey">Lifetime</span>
               </div>
               <ul className="text-grey leading-loose list-reset mb-6">
-                <li>All UI Componenets</li>
+                <li>Premium Components (React + Tailwind)</li>
                 <li>
                   {" "}
                   <a href="https://www.boilercode.app/">
