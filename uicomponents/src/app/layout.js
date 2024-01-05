@@ -54,18 +54,6 @@ export default function RootLayout({ children }) {
       )}
       <body className={inter.className}>
         <Theme>
-          <a
-            className="bg-[#4cc95a] w-full text-center text-white flex items-center font-bold justify-center p-1"
-            href="https://api.whatsapp.com/send?phone=7606060439&text=hello"
-          >
-            <Image
-              height={20}
-              width={20}
-              className="h-6 w-6"
-              src="/whatsApp.webp"
-            />
-            <div>Connect with us</div>
-          </a>
           <NextAuthProvider>{children}</NextAuthProvider>
         </Theme>
       </body>
