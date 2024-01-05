@@ -7,16 +7,16 @@ export default function Hero() {
         <div className="px-12 mx-auto max-w-7xl lg:pt-24">
           <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
             <Minutes />
-            <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-purple-500 mb-8 text-4xl font-extrabold leading-none tracking-normal md:text-6xl md:tracking-tight">
+            <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
               <span>Build</span>{" "}
-              <span className="block w-full py-2leading-12 text-gray-700 lg:inline">
-                Beautiful Landing Pages&nbsp;
-              </span>
+              <span className="block w-full py-2 text-transparent bg-clip-text leading-12 font-bold bg-gradient-to-r from-blue-500 to-pink-500 lg:inline">
+                Beautiful Landing Pages
+              </span>{" "}
               <span>in Minutes</span>
             </h1>
             <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
               UiWidgets helps you create high-converting landing pages with
-              creative components & ready-to-use NextJS Boilercode.
+              creative components & ready-to-use boilerplate codes.
             </p>
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
               <Link
