@@ -5,7 +5,7 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="flex w-full items-center bg-white justify-center mx-5">
+    <header className="flex w-full items-center bg-white justify-center">
       <div className="container">
         <div className="relative flex items-center justify-between">
           <div className="w-60 max-w-full px-4">
