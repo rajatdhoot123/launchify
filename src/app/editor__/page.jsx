@@ -1,6 +1,7 @@
 "use client";
 import { Puck, Render } from "@measured/puck";
 import "@measured/puck/puck.css";
+
 import {
   COMPONENTS_ARRAY,
   PAGES,
@@ -8,8 +9,19 @@ import {
 } from "@/app/constants__/floater";
 import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
-import { Button, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HoverCard,
+  Link,
+  Text,
+  TextFieldInput,
+  TextFieldRoot,
+} from "@radix-ui/themes";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
@@ -207,6 +219,14 @@ const config = {
           (compAcc, CurrentComp, index) => ({
             ...compAcc,
             [`${current.name}-${index + 1}`]: {
+              fields: {
+                params: {
+                  type: "object",
+                  objectFields: {
+                    title: { type: "text" },
+                  },
+                },
+              },
               render: () => (
                 <div className="pb-12">
                   <CurrentComp />
@@ -237,7 +257,6 @@ function Editor() {
 
   const [modal_is_open, set_modal] = useState(false);
   const [data, setData] = useState({ content: [], root: {} });
-  const ai_key = useRef("");
   const [loader, setLoader] = useState({
     export: false,
     export_with_copy_writing: false,
@@ -350,6 +369,34 @@ function Editor() {
           puck_data.current = data;
         }}
         overrides={{
+          componentItem: ({ children, ...rest }) => {
+            const [name, index] =
+              children?.props?.children?.props?.children?.[0]?.props?.children?.split(
+                "-"
+              );
+
+            return (
+              <div className="mb-4">
+                <HoverCard.Root>
+                  <HoverCard.Trigger>
+                    <Link href="https://twitter.com/radix_ui" target="_blank">
+                      {children}
+                    </Link>
+                  </HoverCard.Trigger>
+                  <HoverCard.Content className="ml-40 h-96 w-96 overflow-scroll">
+                    <iframe
+                      style={{
+                        maxWidth: "100%",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      src={`/iframe__/${name}/${index}`}
+                    ></iframe>
+                  </HoverCard.Content>
+                </HoverCard.Root>
+              </div>
+            );
+          },
           headerActions: () => {
             return (
               <div className="space-x-6 flex items-center">
