@@ -1,7 +1,6 @@
 "use client";
 import { Puck, Render } from "@measured/puck";
 import "@measured/puck/puck.css";
-import { createPortal } from "react-dom";
 
 import {
   COMPONENTS_ARRAY,
@@ -38,17 +37,6 @@ const reducer = (state, action) => {
     default:
       return state;
   }
-};
-
-export const IFrame = ({ children, ...props }) => {
-  const [contentRef, setContentRef] = useState(null);
-  const mountNode = contentRef?.contentWindow?.document?.body;
-
-  return (
-    <iframe {...props} ref={setContentRef}>
-      {mountNode && createPortal(children, mountNode)}
-    </iframe>
-  );
 };
 
 const modify_components = (content) => {
@@ -387,11 +375,6 @@ function Editor() {
                 "-"
               );
 
-            const selected_comp = COMPONENTS_ARRAY.find(
-              ({ name: compName }) => compName === name
-            );
-
-            const CurrentComp = selected_comp.components[+index - 1];
             return (
               <div className="mb-4">
                 <HoverCard.Root>
@@ -401,9 +384,14 @@ function Editor() {
                     </Link>
                   </HoverCard.Trigger>
                   <HoverCard.Content className="ml-40 h-96 w-96 overflow-scroll">
-                    <IFrame>
-                      <CurrentComp />
-                    </IFrame>
+                    <iframe
+                      style={{
+                        maxWidth: "100%",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      src={`/iframe__/${name}/${index}`}
+                    ></iframe>
                   </HoverCard.Content>
                 </HoverCard.Root>
               </div>
