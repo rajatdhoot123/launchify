@@ -7,7 +7,7 @@ const Iframe = ({ params: { component, index } }) => {
     ({ name }) => name === component
   );
 
-  const RenderComponent = selectedComponent.components[index];
+  const RenderComponent = selectedComponent.components[index - 1];
   return <RenderComponent />;
 };
 
