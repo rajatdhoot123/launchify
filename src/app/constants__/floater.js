@@ -1,6 +1,5 @@
 import Navbar1 from "@/app/components/navbar/variant-1";
 import Navbar2 from "@/app/components/navbar/variant-2";
-import Navbar3 from "@/app/components/navbar/variant-3";
 import Hero1 from "@/app/components/hero/variant-1";
 import Hero2 from "@/app/components/hero/variant-2";
 import Hero3 from "@/app/components/hero/variant-3";
@@ -50,7 +49,6 @@ import Feature1 from "@/app/components/featureservice/variant-1";
 const NAVBAR = {
   "variant-1": Navbar1,
   "variant-2": Navbar2,
-  "variant-3": Navbar3,
 };
 
 const FEATURE_SERVICE = {
