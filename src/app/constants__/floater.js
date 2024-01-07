@@ -169,10 +169,6 @@ export const COMPONENTS_ARRAY = [
     components: Object.values(FAQ),
   },
   {
-    name: "randomcards",
-    components: Object.values(RANDOMCARD),
-  },
-  {
     name: "footer",
     components: Object.values(FOOTER),
   },
