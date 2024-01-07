@@ -14,7 +14,6 @@ import Pricing5 from "@/app/components/pricing/variant-5";
 import Pricing6 from "@/app/components/pricing/variant-6";
 import Testimonials1 from "@/app/components/testimonials/variant-1";
 import Testimonials2 from "@/app/components/testimonials/variant-2";
-import Testimonials3 from "@/app/components/testimonials/variant-3";
 import Table1 from "@/app/components/table/variant-1";
 import Table2 from "@/app/components/table/variant-2";
 import Table3 from "@/app/components/table/variant-3";
@@ -82,7 +81,6 @@ const PRICING = {
 const TESTIMONIALS = {
   "variant-1": Testimonials1,
   "variant-2": Testimonials2,
-  "variant-3": Testimonials3,
 };
 
 const TABLE = {
