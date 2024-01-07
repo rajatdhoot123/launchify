@@ -5,7 +5,6 @@ import Hero2 from "@/app/components/hero/variant-2";
 import Hero3 from "@/app/components/hero/variant-3";
 import Hero4 from "@/app/components/hero/variant-4";
 import Hero5 from "@/app/components/hero/variant-5";
-import Hero6 from "@/app/components/hero/variant-6";
 import Section1 from "@/app/components/section/variant-1";
 import Pricing1 from "@/app/components/pricing/variant-1";
 import Pricing2 from "@/app/components/pricing/variant-2";
@@ -65,7 +64,6 @@ const HERO = {
   "variant-3": Hero3,
   "variant-4": Hero4,
   "variant-5": Hero5,
-  "variant-6": Hero6,
 };
 
 const SECTION = {

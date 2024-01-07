@@ -1,137 +1,72 @@
 const Hero = () => {
   return (
-    <div className="bg-white relative container md:px-12 px-5">
-      <h1 className="sm:mx-auto sm:w-10/12 md:w-2/3 font-black text-blue-900 text-4xl text-center sm:text-5xl md:text-6xl lg:w-auto lg:text-left xl:text-7xl ">
-        Run successful remote and <br className="lg:block hidden" />{" "}
-        <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 ">
-          Hybrid teams
-        </span>
-        .
-      </h1>
-      <div className="lg:flex">
-        <div className="relative mt-8 md:mt-16 space-y-8 sm:w-10/12 md:w-2/3 lg:ml-0 sm:mx-auto text-center lg:text-left lg:mr-auto lg:w-7/12">
-          <p className="sm:text-lg text-gray-700  lg:w-11/12">
-            DailyBot takes chat and collaboration to the next level: daily
-            standups, team check-ins, surveys, kudos, best companion bot for
-            your virtual watercooler, 1:1 intros, motivation tracking and more.
-          </p>
-          <span className="block font-semibold text-gray-500">
-            The best companion bot for your chat app.
-          </span>
-          <div className="grid grid-cols-3 space-x-4 md:space-x-6 md:flex md:justify-center lg:justify-start">
-            <a
-              aria-label="add to slack"
-              className="p-4 border border-gray-200 rounded-full duration-300 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/20 "
-              target="_blank"
+    <div className="px-12 mx-auto max-w-7xl">
+      <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
+        <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
+          <span>Start</span>{" "}
+          <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
+            building a buzz
+          </span>{" "}
+          <span>around your product ?</span>
+        </h1>
+        <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
+          Start gaining the traction you've always wanted with our next-level
+          templates and designs. Crafted to help you tell your story.
+        </p>
+        <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
+          <a
+            href="#_"
+            className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0"
+            target="_blank"
+          >
+            Get Started
+            <svg
+              className="w-4 h-4 ml-1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
             >
-              <div className="flex justify-center space-x-4">
-                <img
-                  className="w-6 h-6"
-                  src="https://tailus.io/sources/blocks/tech-startup/preview/images/slack.png"
-                  alt="slack logo"
-                  loading="lazy"
-                  width="128"
-                  height="128"
-                />
-                <span className="hidden font-medium md:block ">
-                  Slack
-                </span>
-              </div>
-            </a>
-            <a
-              aria-label="add to chat"
-              className="p-4 border border-gray-200  rounded-full duration-300 hover:border-green-400 hover:shadow-lg hover:shadow-lime-600/20 "
-              target="_blank"
+              <path
+                fillRule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href="#_"
+            className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg bg-gray-100 rounded-2xl sm:w-auto sm:mb-0"
+            target="_blank"
+          >
+            Learn More
+            <svg
+              className="w-4 h-4 ml-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <div className="flex justify-center space-x-4">
-                <img
-                  className="w-6 h-6"
-                  src="https://tailus.io/sources/blocks/tech-startup/preview/images/chat.png"
-                  alt="chat logo"
-                  loading="lazy"
-                  width="128"
-                  height="128"
-                />
-                <span className="hidden font-medium md:block ">
-                  Google Chat
-                </span>
-              </div>
-            </a>
-            <a
-              aria-label="add to zoom"
-              className="p-4 border border-gray-200  rounded-full duration-300 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-600/20 "
-              target="_blank"
-            >
-              <div className="flex justify-center space-x-4">
-                <img
-                  className="w-6 h-6"
-                  src="https://tailus.io/sources/blocks/tech-startup/preview/images/zoom.png"
-                  alt="chat logo"
-                  loading="lazy"
-                  width="128"
-                  height="128"
-                />
-                <span className="hidden font-medium md:block ">
-                  Zoom
-                </span>
-              </div>
-            </a>
-          </div>
-
-          <div className="">
-            🔥🌟
-            <span>Other integrations :</span>
-            <a
-              className="font-semibold text-gray-700 "
-              target="_blank"
-            >
-              Discord,
-            </a>
-            <a
-              className="font-semibold text-gray-700 "
-              target="_blank"
-            >
-              Telegram
-            </a>
-          </div>
-
-          <div className="pt-12 flex gap-6 lg:gap-12 justify-between grayscale lg:w-2/3">
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/airbnb.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/ge.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/coty.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/clients/microsoft.svg"
-              className="h-8 sm:h-10 w-auto lg:h-12"
-              alt=""
-            />
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path>
+            </svg>
+          </a>
         </div>
-        <div className="mt-12 md:mt-0 lg:absolute -right-10 lg:w-7/12">
-          <div className="relative w-full">
-            <div
-              aria-hidden="true"
-              className="absolute scale-75 md:scale-110 inset-0 m-auto w-full h-full md:w-96 md:h-96 rounded-full rotate-45 bg-gradient-to-r from-sky-500 to-cyan-300 blur-3xl"
-            ></div>
-            <img
-              src="https://tailus.io/sources/blocks/tech-startup/preview/images/globalization-cuate.svg"
-              className="relative w-full"
-              alt="wath illustration"
-              loading="lazy"
-              width="320"
-              height="280"
-            />
+      </div>
+      <div className="w-full mx-auto mt-20 text-center md:w-10/12">
+        <div className="relative z-0 w-full mt-8">
+          <div className="relative overflow-hidden shadow-2xl">
+            <div className="flex items-center flex-none px-4 bg-green-400 rounded-b-none h-11 rounded-xl">
+              <div className="flex space-x-1.5">
+                <div className="w-3 h-3 border-2 border-white rounded-full"></div>
+                <div className="w-3 h-3 border-2 border-white rounded-full"></div>
+                <div className="w-3 h-3 border-2 border-white rounded-full"></div>
+              </div>
+            </div>
+            <img src="https://cdn.devdojo.com/images/march2021/green-dashboard.jpg" />
           </div>
         </div>
       </div>
