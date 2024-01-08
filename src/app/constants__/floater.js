@@ -141,57 +141,61 @@ export const COMPONENTS_ARRAY = [
   { name: "navbar", components: Object.values(NAVBAR) },
   { name: "hero", components: Object.values(HERO) },
   {
-    name: "pricing",
-    components: Object.values(PRICING),
+    name: "cards",
+    components: Object.values(CARDS),
   },
   {
     name: "featureservice",
     components: Object.values(FEATURE_SERVICE),
   },
   {
-    name: "testimonials",
-    components: Object.values(TESTIMONIALS),
-  },
-  {
-    name: "about",
-    components: Object.values(ABOUT),
-  },
-  {
     name: "table",
     components: Object.values(TABLE),
   },
   {
-    name: "section",
-    components: Object.values(SECTION),
+    name: "pricing",
+    components: Object.values(PRICING),
+  },
+  {
+    name: "testimonials",
+    components: Object.values(TESTIMONIALS),
   },
   {
     name: "faq",
     components: Object.values(FAQ),
   },
   {
-    name: "footer",
-    components: Object.values(FOOTER),
+    name: "contactus",
+    components: Object.values(CONTACT_US),
   },
+
   {
-    name: "cards",
-    components: Object.values(CARDS),
+    name: "login",
+    components: Object.values(LOGIN),
   },
   {
     name: "commingsoon",
     components: Object.values(COMMING_SOON),
   },
+
   {
-    name: "animatedcard",
-    components: Object.values(ANIMATED_CARDS),
+    name: "footer",
+    components: Object.values(FOOTER),
   },
   {
-    name: "contactus",
-    components: Object.values(CONTACT_US),
+    name: "about",
+    components: Object.values(ABOUT),
   },
+
   {
-    name: "login",
-    components: Object.values(LOGIN),
+    name: "section",
+    components: Object.values(SECTION),
   },
+
+  // {
+  //   name: "animatedcard",
+  //   components: Object.values(ANIMATED_CARDS),
+  // },
 ];
 
 export const PREMIUM_FEATURES = [
