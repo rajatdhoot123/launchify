@@ -378,13 +378,9 @@ function Editor() {
                       {children}
                     </Link>
                   </HoverCard.Trigger>
-                  <HoverCard.Content className="ml-40 h-96 w-96 overflow-scroll">
+                  <HoverCard.Content className="ml-40 h-80 w-96 overflow-hidden">
                     <iframe
-                      style={{
-                        maxWidth: "100%",
-                        width: "100%",
-                        height: "100%",
-                      }}
+                      className="frame"
                       src={`/iframe__/${name}/${index}`}
                     ></iframe>
                   </HoverCard.Content>

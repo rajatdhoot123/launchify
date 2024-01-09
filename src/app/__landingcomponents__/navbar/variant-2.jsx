@@ -16,7 +16,7 @@ const NavBar = ({ session }) => {
 
   const pathname = usePathname();
 
-  if (pathname.startsWith("/iframe")) {
+  if (pathname.startsWith("/iframe") || pathname.startsWith("/app__")) {
     return null;
   }
   return (
