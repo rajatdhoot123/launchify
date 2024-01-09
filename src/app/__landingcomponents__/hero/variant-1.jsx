@@ -20,10 +20,10 @@ export default function Hero() {
             </p>
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
               <Link
-                href="/app__"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0"
+                href="/editor__"
+                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-blue-400 font-bold rounded-2xl sm:w-auto sm:mb-0"
               >
-                Get Started
+                Editor Mode
                 <svg
                   className="w-4 h-4 ml-1"
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,10 +38,10 @@ export default function Hero() {
                 </svg>
               </Link>
               <Link
-                href="/editor__"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-400 rounded-2xl sm:w-auto sm:mb-0"
+                href="/app__"
+                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-blue-400 font-bold rounded-2xl sm:w-auto sm:mb-0"
               >
-                Editor (beta)
+                Drag and Drop Mode
                 <svg
                   className="w-4 h-4 ml-1"
                   xmlns="http://www.w3.org/2000/svg"

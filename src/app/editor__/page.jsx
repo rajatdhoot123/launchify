@@ -463,7 +463,7 @@ function Editor() {
             );
           },
         }}
-        headerTitle="Drag and Drop Components"
+        headerTitle="Drag a page component from the left menu here to begin"
         config={config}
         data={initialData}
         onPublish={save}
