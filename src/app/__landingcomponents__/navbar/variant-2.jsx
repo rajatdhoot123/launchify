@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 const NavBar = ({ session }) => {
   const [open, setOpen] = useState(false);
@@ -13,6 +14,11 @@ const NavBar = ({ session }) => {
 
   const user = session?.user?.name;
 
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/iframe")) {
+    return null;
+  }
   return (
     <>
       {/* This example requires Tailwind CSS v2.0+ */}
