@@ -21,7 +21,7 @@ export default function Hero() {
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
               <Link
                 href="/editor__"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-blue-400 font-bold rounded-2xl sm:w-auto sm:mb-0"
+                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white hover:bg-blue-700 bg-blue-500 font-bold rounded-2xl sm:w-auto sm:mb-0"
               >
                 Editor Mode
                 <svg
@@ -39,7 +39,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/app__"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-blue-400 font-bold rounded-2xl sm:w-auto sm:mb-0"
+                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white hover:bg-blue-700 bg-blue-500 font-bold rounded-2xl sm:w-auto sm:mb-0"
               >
                 Drag and Drop Mode
                 <svg
