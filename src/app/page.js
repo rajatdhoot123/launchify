@@ -14,7 +14,6 @@ export default async function Home() {
   return (
     <>
       <div className="w-full overflow-scroll space-y-12">
-        <Navbar session={session} />
         <Hero />
         <Pricing />
         <Testimonials />
