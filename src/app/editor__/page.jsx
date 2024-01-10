@@ -1,5 +1,5 @@
 "use client";
-import { Puck, Render } from "@measured/puck";
+import { Puck, Render, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
 
 import {
@@ -11,14 +11,9 @@ import ViewDemo from "@/app/components/__view_demo";
 import Collapsible from "@/app/components/__accordion/variant-1";
 import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
 import {
-  Avatar,
-  Box,
   Button,
-  Flex,
-  Heading,
   HoverCard,
   Link,
-  Text,
   TextFieldInput,
   TextFieldRoot,
 } from "@radix-ui/themes";
@@ -383,13 +378,9 @@ function Editor() {
                       {children}
                     </Link>
                   </HoverCard.Trigger>
-                  <HoverCard.Content className="ml-40 h-96 w-96 overflow-scroll">
+                  <HoverCard.Content className="ml-40 h-80 w-96 overflow-hidden">
                     <iframe
-                      style={{
-                        maxWidth: "100%",
-                        width: "100%",
-                        height: "100%",
-                      }}
+                      className="frame"
                       src={`/iframe__/${name}/${index}`}
                     ></iframe>
                   </HoverCard.Content>
@@ -465,7 +456,7 @@ function Editor() {
         }}
         headerTitle="Drag a page component from the left menu here to begin"
         config={config}
-        data={initialData}
+        data={state.puck_state}
         onPublish={save}
       />
     </>

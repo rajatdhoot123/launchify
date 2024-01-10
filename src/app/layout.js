@@ -3,7 +3,9 @@ import "./globals.css";
 import { Theme } from "@radix-ui/themes";
 import Script from "next/script";
 import NextAuthProvider from "@/app/nextauth/provider";
-import Image from "next/image";
+import { getServerSession } from "next-auth";
+import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
+import NavBar from "@/app/__landingcomponents__/navbar/variant-2";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +36,8 @@ export const viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(AUTH_OPTIONS);
   return (
     <html lang="en">
       {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
@@ -54,7 +57,10 @@ export default function RootLayout({ children }) {
       )}
       <body className={inter.className}>
         <Theme>
-          <NextAuthProvider>{children}</NextAuthProvider>
+          <NextAuthProvider>
+            <NavBar session={session} />
+            {children}
+          </NextAuthProvider>
         </Theme>
       </body>
     </html>

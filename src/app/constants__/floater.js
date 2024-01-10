@@ -191,11 +191,10 @@ export const COMPONENTS_ARRAY = [
     name: "section",
     components: Object.values(SECTION),
   },
-
-  // {
-  //   name: "animatedcard",
-  //   components: Object.values(ANIMATED_CARDS),
-  // },
+  {
+    name: "animatedcard",
+    components: Object.values(ANIMATED_CARDS),
+  },
 ];
 
 export const PREMIUM_FEATURES = [
@@ -316,10 +315,10 @@ export const FLOATER_SELECT = [
   //   title: "Random Card",
   //   selected: "variant-2",
   // },
-  // {
-  //   item_id: "animatedcards",
-  //   variants: ANIMATED_CARDS,
-  //   title: "Animated",
-  //   selected: "variant-1",
-  // },
+  {
+    item_id: "animatedcards",
+    variants: ANIMATED_CARDS,
+    title: "Animated",
+    selected: "variant-1",
+  },
 ];
