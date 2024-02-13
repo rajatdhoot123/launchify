@@ -31,6 +31,7 @@ You take tailwind jsx code from the user and write the best copywriting for user
 - Don't change any html jsx code provided by the user just update text copy.
 - Don't add any escaping, use string combinations to avoid it.
 - Don't remove "use client" from the file if it was present.
+- Add the icon or images from the pixabay or unsplash and use the alt text as "icon" or "image" respectively.
 
 Do not include markdown "\`\`\`" or "\`\`\`jsx" at the start or end.
 `
