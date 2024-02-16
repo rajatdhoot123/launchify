@@ -226,7 +226,7 @@ const NavBar = () => {
                     <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                       <a
                         href="#"
-                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                        className=" p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/view-grid */}
                         <svg
@@ -259,7 +259,7 @@ const NavBar = () => {
                       <div className="flow-root">
                         <a
                           href="#"
-                          className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+                          className=" p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
                         >
                           {/* Heroicon name: outline/play */}
                           <svg
@@ -289,7 +289,7 @@ const NavBar = () => {
                       <div className="flow-root">
                         <a
                           href="#"
-                          className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+                          className=" p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
                         >
                           {/* Heroicon name: outline/phone */}
                           <svg
@@ -336,7 +336,7 @@ const NavBar = () => {
                     <DropdownMenuItem>
                       <a
                         href="#"
-                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                        className=" p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/support */}
                         <svg
@@ -370,7 +370,7 @@ const NavBar = () => {
                     <DropdownMenuItem>
                       <a
                         href="#"
-                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                        className=" p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/bookmark-alt */}
                         <svg
@@ -404,7 +404,7 @@ const NavBar = () => {
                     <DropdownMenuItem>
                       <a
                         href="#"
-                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                        className=" p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/calendar */}
                         <svg
@@ -438,7 +438,7 @@ const NavBar = () => {
                     <DropdownMenuItem>
                       <a
                         href="#"
-                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                        className=" p-3 flex items-start rounded-lg hover:bg-gray-50"
                       >
                         {/* Heroicon name: outline/shield-check */}
                         <svg
@@ -466,39 +466,24 @@ const NavBar = () => {
                         </div>
                       </a>
                     </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem disabled> Recent Posts</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Boost your conversion rate
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem>
+                      How to use search engine optimization to drive traffic to
+                      your site
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem>
+                      {" "}
+                      Improve your customer experience
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
                 {/* Item active: "text-gray-900", Item inactive: "text-gray-500" */}
-                <Button
-                  variant="link"
-                  type="button"
-                  className="group bg-white rounded-md text-gray-500 inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() => (setFlyerTwo(!flyerTwo), setFlyer(false))}
-                >
-                  <span>More</span>
-                  {/*
-                Heroicon name: solid/chevron-down
-  
-                Item active: "text-gray-600", Item inactive: "text-gray-400"
-              */}
-                  <svg
-                    className={
-                      flyerTwo === true
-                        ? "transform rotate-180 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500 transition ease-out duration-200"
-                        : "ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                    }
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Button>
 
                 <div
                   onMouseLeave={() => setFlyerTwo(false)}
@@ -511,31 +496,11 @@ const NavBar = () => {
               </div>
             </nav>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-              <a
-                href="#"
-                className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Sign in
-              </a>
-              <a
-                href="#"
-                className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-              >
-                Sign up
-              </a>
+              <Button variant="ghost">Sign in</Button>
+              <Button> Signup</Button>
             </div>
           </div>
         </div>
-        {/*
-      Mobile menu, show/hide based on mobile menu state.
-  
-      Entering: "duration-200 ease-out"
-        From: ""
-        To: ""
-      Leaving: "duration-100 ease-in"
-        From: "opacity-100 scale-100"
-        To: "opacity-0 scale-95"
-    */}
 
         <div
           className={
@@ -584,7 +549,7 @@ const NavBar = () => {
                 <nav className="grid gap-y-8">
                   <a
                     href="#"
-                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                    className=" p-3 flex items-center rounded-md hover:bg-gray-50"
                   >
                     {/* Heroicon name: outline/chart-bar */}
                     <svg
@@ -608,7 +573,7 @@ const NavBar = () => {
                   </a>
                   <a
                     href="#"
-                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                    className=" p-3 flex items-center rounded-md hover:bg-gray-50"
                   >
                     {/* Heroicon name: outline/cursor-click */}
                     <svg
@@ -632,7 +597,7 @@ const NavBar = () => {
                   </a>
                   <a
                     href="#"
-                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                    className=" p-3 flex items-center rounded-md hover:bg-gray-50"
                   >
                     {/* Heroicon name: outline/shield-check */}
                     <svg
@@ -656,7 +621,7 @@ const NavBar = () => {
                   </a>
                   <a
                     href="#"
-                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                    className=" p-3 flex items-center rounded-md hover:bg-gray-50"
                   >
                     {/* Heroicon name: outline/view-grid */}
                     <svg
@@ -680,7 +645,7 @@ const NavBar = () => {
                   </a>
                   <a
                     href="#"
-                    className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                    className=" p-3 flex items-center rounded-md hover:bg-gray-50"
                   >
                     {/* Heroicon name: outline/refresh */}
                     <svg
