@@ -1,7 +1,17 @@
-"use client";
 import { FLOATER_SELECT } from "@/app/constants__/floater";
-import { Dialog, Button, Flex, Text, Checkbox, Link } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const MoreFunctionality = ({ children, components, setState }) => {
   const [active_component, set_active_components] = useState({});
@@ -23,57 +33,44 @@ const MoreFunctionality = ({ children, components, setState }) => {
   }, [components]);
 
   return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <Link className="text-sm" onClick={(e) => e.stopPropagation()}>
-          {children}
-        </Link>
-      </Dialog.Trigger>
-
-      <Dialog.Content
-        onClick={(e) => e.stopPropagation()}
-        className="relative flex flex-col"
-        style={{ width: "80%" }}
-      >
-        <Dialog.Close className="absolute right-4 cursor-pointer">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 512 512"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"></path>
-          </svg>
-        </Dialog.Close>
-        <Dialog.Title>Features</Dialog.Title>
-
-        <div className="w-full overflow-scroll p-5">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {FLOATER_SELECT.map(({ title, item_id }) => (
-              <Text key={title} as="label" size="2">
-                <Checkbox
-                  className="mr-2"
-                  onCheckedChange={(val) =>
-                    set_active_components((prev) => ({
-                      ...prev,
-                      [item_id]: {
-                        ...prev[item_id],
-                        active: val,
-                      },
-                    }))
-                  }
-                  checked={active_component[item_id]?.active}
-                />
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="link">{children}</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Features</DialogTitle>
+          <DialogDescription>
+            Select / Remove Components from here
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid grid-cols-3 gap-4 p-5">
+          {FLOATER_SELECT.map(({ title, item_id }) => (
+            <div key={item_id} className="flex items-center space-x-2">
+              <Checkbox
+                checked={active_component[item_id]?.active}
+                onCheckedChange={(val) =>
+                  set_active_components((prev) => ({
+                    ...prev,
+                    [item_id]: {
+                      ...prev[item_id],
+                      active: val,
+                    },
+                  }))
+                }
+                id="terms"
+              />
+              <label
+                htmlFor="terms"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
                 {title}
-              </Text>
-            ))}
-          </div>
+              </label>
+            </div>
+          ))}
         </div>
-        <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
+        <DialogFooter>
+          <DialogClose asChild>
             <Button
               onClick={(e) => e.stopPropagation()}
               variant="soft"
@@ -81,8 +78,8 @@ const MoreFunctionality = ({ children, components, setState }) => {
             >
               Cancel
             </Button>
-          </Dialog.Close>
-          <Dialog.Close>
+          </DialogClose>
+          <DialogClose asChild>
             <Button
               onClick={(e) => {
                 e.stopPropagation();
@@ -103,10 +100,10 @@ const MoreFunctionality = ({ children, components, setState }) => {
             >
               Done
             </Button>
-          </Dialog.Close>
-        </Flex>
-      </Dialog.Content>
-    </Dialog.Root>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 

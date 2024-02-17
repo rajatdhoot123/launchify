@@ -5,7 +5,7 @@ const OptionPopover = ({ components }) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Button className="text-sm font-bold" variant="ghost">
+        <Button className="text-sm" variant="ghost">
           Code & Ai Magic
         </Button>
       </HoverCardTrigger>

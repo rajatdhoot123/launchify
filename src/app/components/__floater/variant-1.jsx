@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { forwardRef, useCallback, useRef, useState } from "react";
-import { Link, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 import Loader from "@/app/components/__loader/loader";
@@ -12,17 +11,25 @@ import MoreFunctionality from "@/app/components/__more_functionality";
 import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { CaretSortIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, ReloadIcon } from "@radix-ui/react-icons";
 
 const ItemType = "ITEM";
 
@@ -64,7 +71,9 @@ const CodeGenerateButton = ({ api_ref, item_id, setLoader, loader }) => {
           <Loader />
         </span>
       )}
-      <Link className="flex-shrink-0">Copy Writing</Link>
+      <Button variant="link" className="flex-shrink-0">
+        Copy Writing
+      </Button>
     </Button>
   );
 };
@@ -131,7 +140,7 @@ const ListCard = forwardRef(
                       title={title}
                       handleShowCode={handleShowCode}
                     >
-                      <Link>Show Code</Link>
+                      <Button variant="link">Show Code</Button>
                     </DialogComponent>,
                     <CodeGenerateButton
                       loader={loader}
@@ -337,8 +346,8 @@ const Floater = ({
   );
 
   return (
-    <ScrollArea className="h-full w-full rounded-md border">
-      <div className="border w-full p-2 bg-gradient-to-r from-purple-200 via-pink-200 to-red-200 space-y-4 p-5">
+    <ScrollArea className="h-full w-full rounded-md border pb-20">
+      <div className="border w-full bg-gradient-to-r from-purple-200 via-pink-200 to-red-200 space-y-4 p-5">
         <div className="flex justify-between items-center">
           <p>PRO Features</p>
           <Button variant="link">
@@ -395,19 +404,20 @@ const Floater = ({
           <Collapsible
             open={collapsible.components}
             onOpenChange={(open) => setCollapsible({ components: open })}
-            className="space-y-2"
           >
-            <CollapsibleTrigger asChild>
-              <div className="w-full text-left font-bold flex items-center justify-between">
-                <MoreFunctionality setState={setState} components={components}>
-                  Add/Remove Components
-                </MoreFunctionality>
+            <div className="space-y-2 justify-between flex">
+              <MoreFunctionality setState={setState} components={components}>
+                Add/Remove Components
+              </MoreFunctionality>
+              <CollapsibleTrigger asChild>
+                {/* <div className="w-full text-left font-bold flex items-center justify-between"> */}
                 <Button variant="ghost" size="sm">
                   <CaretSortIcon className="h-4 w-4" />
                   <span className="sr-only">Toggle</span>
                 </Button>
-              </div>
-            </CollapsibleTrigger>
+                {/* </div> */}
+              </CollapsibleTrigger>
+            </div>
             <CollapsibleContent className="space-y-2">
               <div className="space-y-4 mt-5">
                 {components.map(
@@ -428,267 +438,123 @@ const Floater = ({
             </CollapsibleContent>
           </Collapsible>
         </CardContent>
-        {/* <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Deploy</Button>
-        </CardFooter> */}
       </Card>
-    </ScrollArea>
-  );
-
-  return (
-    <div className="flex flex-col h-full p-5 space-y-4">
-      <div className="flex justify-between items-center">
-        <button className="ml-auto" onClick={toggleHamburger}>
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="none"
-              strokeWidth="2"
-              d="M3,3 L21,21 M3,21 L21,3"
-            ></path>
-          </svg>
-        </button>
-      </div>
-      <div className="overflow-scroll h-full flex-1 space-y-6">
-        <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
-          <div className="flex items-center justify-between">
-            <div className="font-bold text-sm">PRO Features</div>
-            <a
-              href="https://boilercode.app?utm_source=uiwidgets"
-              target="_blank"
-              className="font-bold text-sm my-2 bg-red-300 p-2 rounded-md"
-            >
-              Boilercode App
-            </a>
-          </div>
-          <Separator mb="3" size="4" />
-          <div className="flex flex-wrap items-center gap-2">
-            {premium_features.map((feature, index) => (
-              <div
-                className="flex flex-shrink-0 items-center"
-                key={feature.item_id}
-              >
-                <input
-                  disabled={!is_premium}
-                  onChange={(e) => {
-                    setState((prev) => ({
-                      ...prev,
-                      premium_features: prev.premium_features.map(
-                        (feature, findex) =>
-                          findex === index
-                            ? {
-                                ...feature,
-                                selected:
-                                  e.target.value === "true" ? false : true,
-                              }
-                            : feature
-                      ),
-                    }));
-                  }}
-                  type="checkbox"
-                  value={feature.selected}
-                  checked={feature.selected}
-                  className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                    !is_premium ? "bg-gray-300" : "bg-gray-100"
-                  }`}
-                />
-                <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900"
-                >
-                  {feature.title}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="border border-gray-200 p-2 rounded-md">
-          <Collapsible
-            isOpen={true}
-            title={
-              <div className="w-full text-left font-bold flex items-center justify-between">
-                <span className="">Components</span>
-                <MoreFunctionality setState={setState} components={components}>
-                  Add/Remove Components
-                </MoreFunctionality>
-              </div>
-            }
-          >
-            <div className="space-y-4 mt-5">
-              {components.map(
-                ({ item_id, variants, title, selected }, index) => {
-                  return renderList(
-                    {
-                      item_id,
-                      variants,
-                      title,
-                      selected,
-                      handleShowCode: () => handleShowCode(index),
-                    },
-                    index
-                  );
+      <Card className="p-2 m-5">
+        <CardHeader className="p-2">
+          <CardTitle>Integrations</CardTitle>
+          <CardDescription>Select your integrations</CardDescription>
+        </CardHeader>
+        <CardContent className="p-2">
+          <div className="space-y-4 mt-5">
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="ga_id">Google Analytics</Label>
+              <Input
+                placeholder="Enter GA Id"
+                onChange={(e) =>
+                  setState((prev) => ({ ...prev, ga_id: e.target.value }))
                 }
+                type="text"
+                id="ga_id"
+              />
+            </div>
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="crisp_id">Crisp Support</Label>
+              <Input
+                placeholder="Enter Crisp Id"
+                onChange={(e) =>
+                  setState((prev) => ({ ...prev, crisp_id: e.target.value }))
+                }
+                type="text"
+                id="crisp_id"
+              />
+            </div>
+
+            <div className="flex items-center">
+              <Checkbox
+                className="mr-2"
+                id="mdx_support"
+                readOnly
+                checked={true}
+              />
+              <Label htmlFor="mdx_support">Mdx Support</Label>
+            </div>
+            <div className="flex items-center">
+              <Checkbox
+                className="mr-2"
+                id="sitemap_seo"
+                readOnly
+                checked={true}
+              />
+              <Label htmlFor="sitemap_seo">Sitemap SEO</Label>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="p-2 m-5">
+        <CardContent className="p-2 space-y-4">
+          <CardHeader className="p-2">
+            <CardTitle>Page</CardTitle>
+            <CardDescription>Select your page</CardDescription>
+          </CardHeader>
+          {pages.map((feature, index) => (
+            <div key={feature.item_id} className="flex items-center">
+              <Checkbox
+                className="mr-2"
+                id={feature.item_id}
+                readOnly
+                onCheckedChange={(e) =>
+                  setState((prev) => ({
+                    ...prev,
+                    pages: prev.pages.map((page, findex) =>
+                      findex === index
+                        ? {
+                            ...page,
+                            selected: e,
+                          }
+                        : page
+                    ),
+                  }))
+                }
+                checked={true}
+              />
+              <Label htmlFor={feature.item_id}>{feature.title}</Label>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+      <div className="fixed bottom-0 w-full p-5">
+        <div className="text-center">
+          <small className="font-semibold text-center">
+            With copywriting export can take 3-5 mins
+          </small>
+          <div className="flex gap-6">
+            <Button
+              className="w-1/2"
+              block
+              disabled={loader.export}
+              onClick={handleExport}
+            >
+              {loader.export && (
+                <span className="m-auto px-2">
+                  <Loader />
+                </span>
               )}
-            </div>
-          </Collapsible>
-        </div>
-        <Separator my="3" size="4" />
-        <div className="border border-gray-200 p-2 rounded-md">
-          <Collapsible
-            title={
-              <div className="w-full text-left font-bold">
-                <span className="">Integrations</span>
-              </div>
-            }
-          >
-            <div className="space-y-4 mt-5">
-              <div className="space-y-2">
-                <div className="text-sm font-semibold">Google Analytics</div>
-                <TextFieldRoot>
-                  <TextFieldInput
-                    onChange={(e) =>
-                      setState((prev) => ({ ...prev, ga_id: e.target.value }))
-                    }
-                    value={ga_id}
-                    placeholder="Enter GA Id"
-                  />
-                </TextFieldRoot>
-              </div>
-              <div className="space-y-2">
-                <div className="text-sm font-semibold">Crisp Support</div>
-                <TextFieldRoot>
-                  <TextFieldInput
-                    onChange={(e) =>
-                      setState((prev) => ({
-                        ...prev,
-                        crisp_id: e.target.value,
-                      }))
-                    }
-                    value={crisp_id}
-                    placeholder="Enter Crisp Id"
-                  />
-                </TextFieldRoot>
-              </div>
-              <div className="flex items-center">
-                <input
-                  readOnly
-                  checked={true}
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
-                />
-                <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900"
-                >
-                  Sitemap (SEO)
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  readOnly
-                  checked={true}
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
-                />
-                <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900"
-                >
-                  Mdx Support
-                </label>
-              </div>
-            </div>
-          </Collapsible>
-        </div>
-        <div className="border border-gray-200 p-2 rounded-md">
-          <Collapsible
-            isOpen={true}
-            title={
-              <div className="w-full text-left font-bold">
-                <span className="">Pages</span>
-              </div>
-            }
-          >
-            <div className="flex flex-col space-y-4 mt-5">
-              {pages.map((feature, index) => (
-                <div
-                  className="flex flex-shrink-0 items-center"
-                  key={feature.item_id}
-                >
-                  <input
-                    onChange={(e) => {
-                      setState((prev) => ({
-                        ...prev,
-                        pages: prev.pages.map((page, findex) =>
-                          findex === index
-                            ? {
-                                ...page,
-                                selected:
-                                  e.target.value === "true" ? false : true,
-                              }
-                            : page
-                        ),
-                      }));
-                    }}
-                    type="checkbox"
-                    value={feature.selected}
-                    checked={feature.selected}
-                    className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                      !is_premium ? "bg-gray-300" : "bg-gray-100"
-                    }`}
-                  />
-                  <label
-                    htmlFor="default-checkbox"
-                    className="ml-2 text-sm font-medium text-gray-900"
-                  >
-                    {feature.title}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </Collapsible>
+              Export
+            </Button>
+            <Button
+              className="w-1/2"
+              disabled={loader.export_wih_copywriting}
+              onClick={handleExportWithCopywriting}
+            >
+              {loader.export_wih_copywriting && (
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              With Copywriting
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="m-5 text-center">
-        <small className="font-semibold text-center">
-          With copywriting export can take 3-5 mins
-        </small>
-        <div className="flex gap-6">
-          <button
-            disabled={loader.export}
-            onClick={handleExport}
-            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
-          >
-            {loader.export && (
-              <span className="m-auto px-2">
-                <Loader />
-              </span>
-            )}
-            Export
-          </button>
-          <button
-            disabled={loader.export_wih_copywriting}
-            onClick={handleExportWithCopywriting}
-            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
-          >
-            {loader.export_wih_copywriting && (
-              <span className="m-auto px-2">
-                <Loader />
-              </span>
-            )}
-            With Copywriting
-          </button>
-        </div>
-      </div>
-    </div>
+    </ScrollArea>
   );
 };
 

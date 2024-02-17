@@ -33,9 +33,7 @@ const Navbar = () => {
         <div className="z-10 relative md:hidden">
           <Drawer>
             <DrawerTrigger>
-              <Button variant="ghost">
-                <HamburgerMenuIcon />
-              </Button>
+              <HamburgerMenuIcon className="ml-2" />
             </DrawerTrigger>
             <DrawerContent>
               <div className="p-5 flex flex-col">

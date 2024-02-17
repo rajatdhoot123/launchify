@@ -33,7 +33,7 @@ const NavBar = () => {
             <div className="z-10 relative md:hidden">
               <Drawer>
                 <DrawerTrigger>
-                  <HamburgerMenuIcon />
+                  <HamburgerMenuIcon className="ml-2" />
                 </DrawerTrigger>
                 <DrawerContent>
                   <nav className="grid gap-y-8 p-5">

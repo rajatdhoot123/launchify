@@ -3,25 +3,40 @@ import { Puck, Render, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
 
 import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardPortal,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
   COMPONENTS_ARRAY,
   PAGES,
   PREMIUM_FEATURES,
 } from "@/app/constants__/floater";
 import ViewDemo from "@/app/components/__view_demo";
-import Collapsible from "@/app/components/__accordion/variant-1";
 import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
-import {
-  Button,
-  HoverCard,
-  Link,
-  TextFieldInput,
-  TextFieldRoot,
-} from "@radix-ui/themes";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
 import CopyWritingDialog from "@/app/components/__copywriting_dialog";
 import Loader from "@/app/components/__loader/loader";
+import { Button } from "@/components/ui/button";
+import { CaretSortIcon } from "@radix-ui/react-icons";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -51,134 +66,147 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
     crisp_id: "",
     pages: PAGES,
   });
+  const [isOpen, setIsOpen] = useState({ integrations: false, page: false });
   const { data: session } = useSession();
   const is_premium = ["rajatdhoot123@gmail.com"].includes(session?.user?.email);
 
   useEffect(() => {
     state_ref.current = state;
   }, [state, state_ref]);
+
+  console.log({ isOpen: isOpen.page });
   return (
     <div className="space-y-6 sticky bottom-0 w-full bg-white">
-      <div className=" border border-gray-300 border-opacity-80 p-2 rounded-md">
-        <Collapsible
-          isOpen={true}
-          title={
-            <div className="w-full text-left">
-              <span>Integrations</span>
-            </div>
-          }
-        >
-          <div className="space-y-4 p-2">
-            <div className="space-y-2">
-              <div className="text-sm font-semibold">Google Analytics</div>
-              <TextFieldRoot>
-                <TextFieldInput
+      <Card>
+        <CardContent className="p-2 space-y-4">
+          <Collapsible
+            open={isOpen.integrations}
+            onOpenChange={() =>
+              setIsOpen((prev) => ({
+                ...prev,
+                integrations: !prev.integrations,
+              }))
+            }
+            className="space-y-2"
+          >
+            <CollapsibleTrigger asChild>
+              <CardHeader className="p-2 cursor-pointer">
+                <CardTitle className="flex items-center justify-between">
+                  <span>Integrations</span>
+                  <div>
+                    <CaretSortIcon className="h-4 w-4" />
+                    <span className="sr-only">Toggle</span>
+                  </div>
+                </CardTitle>
+                <CardDescription>Select your integrations</CardDescription>
+              </CardHeader>
+            </CollapsibleTrigger>
+
+            <CollapsibleContent className="space-y-4">
+              <div>
+                <Label htmlFor="email">Google Analytics</Label>
+                <Input
                   onChange={(e) =>
                     setState((prev) => ({
                       ...prev,
                       ga_id: e.target.value,
                     }))
                   }
+                  type="text"
                   value={state.ga_id}
-                  placeholder="Enter GA Id"
+                  placeholder="Email"
                 />
-              </TextFieldRoot>
-            </div>
-            <div className="space-y-2">
-              <div className="text-sm font-semibold">Crisp Support</div>
-              <TextFieldRoot>
-                <TextFieldInput
+              </div>
+              <div>
+                <Label htmlFor="email">Crisp Support</Label>
+                <Input
                   onChange={(e) =>
                     setState((prev) => ({
                       ...prev,
                       crisp_id: e.target.value,
                     }))
                   }
+                  type="text"
                   value={state.crisp_id}
                   placeholder="Enter Crisp Id"
                 />
-              </TextFieldRoot>
-            </div>
-            <div className="flex items-center">
-              <input
-                readOnly
-                checked={true}
-                type="checkbox"
-                className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
-              />
-              <label
-                htmlFor="default-checkbox"
-                className="ml-2 text-sm font-medium text-gray-900"
-              >
-                Sitemap (SEO)
-              </label>
-            </div>
-            <div className="flex items-center">
-              <input
-                readOnly
-                checked={true}
-                type="checkbox"
-                className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
-              />
-              <label
-                htmlFor="default-checkbox"
-                className="ml-2 text-sm font-medium text-gray-900"
-              >
-                Mdx Support
-              </label>
-            </div>
-          </div>
-        </Collapsible>
-      </div>
-      <div className="bg-white border border-gray-300 border-opacity-80 p-2 rounded-md">
-        <Collapsible
-          isOpen={false}
-          title={
-            <div className="w-full text-left">
-              <span className="">Pages</span>
-            </div>
-          }
-        >
-          <div className="flex flex-col space-y-4 mt-5">
-            {state.pages.map((feature, index) => (
-              <div
-                className="flex flex-shrink-0 items-center"
-                key={feature.item_id}
-              >
-                <input
-                  onChange={(e) => {
-                    e.stopPropagation();
-                    setState((prev) => ({
-                      ...prev,
-                      pages: prev.pages.map((page, findex) =>
-                        findex === index
-                          ? {
-                              ...page,
-                              selected:
-                                e.target.value === "true" ? false : true,
-                            }
-                          : page
-                      ),
-                    }));
-                  }}
-                  type="checkbox"
-                  value={feature.selected}
-                  checked={feature.selected}
-                  className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                    !is_premium ? "bg-gray-300" : "bg-gray-100"
-                  }`}
-                />
-                <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900"
-                >
-                  {feature.title}
-                </label>
               </div>
-            ))}
-          </div>
-        </Collapsible>
-      </div>
+              <div className="flex items-center">
+                <Checkbox
+                  className="mr-2"
+                  id="mdx_support"
+                  readOnly
+                  checked={true}
+                />
+                <Label htmlFor="mdx_support">Mdx Support</Label>
+              </div>
+              <div className="flex items-center">
+                <Checkbox
+                  className="mr-2"
+                  id="sitemap_seo"
+                  readOnly
+                  checked={true}
+                />
+                <Label htmlFor="sitemap_seo">Sitemap SEO</Label>
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="p-2 space-y-4">
+          <Collapsible
+            open={isOpen.page}
+            onOpenChange={() =>
+              setIsOpen((prev) => ({
+                ...prev,
+                page: !prev.page,
+              }))
+            }
+            className="space-y-2"
+          >
+            <CollapsibleTrigger asChild>
+              <CardHeader className="p-2 cursor-pointer">
+                <CardTitle className="flex items-center justify-between">
+                  <span>Page</span>
+                  <div>
+                    <CaretSortIcon className="h-4 w-4" />
+                    <span className="sr-only">Toggle</span>
+                  </div>
+                </CardTitle>
+                <CardDescription>Select your page</CardDescription>
+              </CardHeader>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="space-y-4">
+              {state.pages.map((feature, index) => (
+                <div key={feature.item_id} className="flex items-center">
+                  <Checkbox
+                    className="mr-2"
+                    id={feature.item_id}
+                    readOnly
+                    onCheckedChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        pages: prev.pages.map((page, findex) =>
+                          findex === index
+                            ? {
+                                ...page,
+                                selected: e,
+                              }
+                            : page
+                        ),
+                      }))
+                    }
+                    checked={true}
+                  />
+                  <Label htmlFor={feature.item_id}>{feature.title}</Label>
+                </div>
+              ))}
+            </CollapsibleContent>
+          </Collapsible>
+        </CardContent>
+      </Card>
     </div>
   );
 });
@@ -372,19 +400,22 @@ function Editor() {
 
             return (
               <div className="mb-4">
-                <HoverCard.Root>
-                  <HoverCard.Trigger>
-                    <Link href="https://twitter.com/radix_ui" target="_blank">
-                      {children}
-                    </Link>
-                  </HoverCard.Trigger>
-                  <HoverCard.Content className="ml-40 h-80 w-96 overflow-hidden">
-                    <iframe
-                      className="frame"
-                      src={`/iframe__/${name}/${index}`}
-                    ></iframe>
-                  </HoverCard.Content>
-                </HoverCard.Root>
+                <HoverCard className="z-[999] relative">
+                  <HoverCardTrigger>{children}</HoverCardTrigger>
+                  <HoverCardPortal>
+                    <HoverCardContent
+                      side="right"
+                      className="w-[340px] h-[196px] overflow-hidden"
+                    >
+                      {/* <AspectRatio ratio={16 / 9} className="bg-muted "> */}
+                      <iframe
+                        className="frame"
+                        src={`/iframe__/${name}/${index}`}
+                      ></iframe>
+                      {/* </AspectRatio> */}
+                    </HoverCardContent>
+                  </HoverCardPortal>
+                </HoverCard>
               </div>
             );
           },
@@ -393,6 +424,7 @@ function Editor() {
               <div className="space-x-6 flex items-center">
                 {(puck_data?.current?.content ?? []).length === 0 ? (
                   <Button
+                    variant="link"
                     onClick={() =>
                       alert("Add components to generate copywriting")
                     }
@@ -410,6 +442,7 @@ function Editor() {
                     title="Select component to update copywriting"
                   >
                     <Button
+                      variant="link"
                       disabled={loader.export_with_copy_writing}
                       onClick={() =>
                         dispatch({ type: "OPEN_COPWRITING_MODAL" })
@@ -422,6 +455,7 @@ function Editor() {
                   </CopyWritingDialog>
                 )}
                 <Button
+                  variant="link"
                   disabled={loader.export}
                   onClick={() =>
                     handleExport({
@@ -434,6 +468,7 @@ function Editor() {
                   Export
                 </Button>
                 <Button
+                  variant="link"
                   onClick={() => {
                     set_modal(true);
                     setData(puck_data.current);
