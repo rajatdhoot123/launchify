@@ -1,16 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { forwardRef, useCallback, useRef, useState } from "react";
-import {
-  Button,
-  Link,
-  Separator,
-  TextFieldInput,
-  TextFieldRoot,
-} from "@radix-ui/themes";
+import React, { forwardRef, useCallback, useRef, useState } from "react";
+import { Link, TextFieldInput, TextFieldRoot } from "@radix-ui/themes";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
-import Collapsible from "@/app/components/__accordion/variant-1";
 import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
 
@@ -19,6 +12,17 @@ import MoreFunctionality from "@/app/components/__more_functionality";
 import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
+import { Card, CardContent } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { CaretSortIcon } from "@radix-ui/react-icons";
 
 const ItemType = "ITEM";
 
@@ -144,17 +148,15 @@ const ListCard = forwardRef(
         <div className="flex text-sm flex-wrap gap-4">
           {Object.keys(variants).map((key) => {
             return (
-              <button
+              <Button
+                size="sm"
                 onClick={() => {
                   handleChange(key, index, item_id);
                 }}
-                className={`border border-opacity-70 ${
-                  selected === key ? "border-blue-500" : "border-gray-300"
-                }  p-2 rounded-md`}
                 key={key}
               >
                 {key}
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -184,6 +186,7 @@ const Floater = ({
   pages,
   crisp_id,
 }) => {
+  const [collapsible, setCollapsible] = useState({ components: true });
   const router = useRouter();
   const { data: session, status } = useSession();
   const ai_key = useRef("");
@@ -328,6 +331,110 @@ const Floater = ({
       );
     },
     [handleChange, is_premium, moveItem]
+  );
+
+  return (
+    <ScrollArea className="h-full w-full rounded-md border">
+      <div className="border w-full p-2 bg-gradient-to-r from-purple-200 via-pink-200 to-red-200 space-y-4 p-5">
+        <div className="flex justify-between items-center">
+          <p>PRO Features</p>
+          <Button variant="link">
+            <a
+              href="https://boilercode.app?utm_source=uiwidgets"
+              target="_blank"
+            >
+              Boilercode App
+            </a>
+          </Button>
+        </div>
+        <Separator />
+        <div className="flex items-center space-x-4">
+          {premium_features.map(({ item_id, title, selected }, index) => (
+            <React.Fragment key={item_id}>
+              <div key={item_id} className="flex items-center space-x-2">
+                <Checkbox
+                  value={selected}
+                  onCheckedChange={(val) =>
+                    setState((prev) => ({
+                      ...prev,
+                      premium_features: prev.premium_features.map(
+                        (feature, findex) =>
+                          findex === index
+                            ? {
+                                ...feature,
+                                selected: val,
+                              }
+                            : feature
+                      ),
+                    }))
+                  }
+                  id={item_id}
+                />
+                <label
+                  htmlFor={item_id}
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  {title}
+                </label>
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+      <Card className="p-2 m-5">
+        {/* <CardHeader>
+          <CardTitle>Create project</CardTitle>
+          <CardDescription>
+            Deploy your new project in one-click.
+          </CardDescription>
+        </CardHeader> */}
+        <CardContent className="p-2">
+          <Collapsible
+            open={collapsible.components}
+            onOpenChange={(open) => setCollapsible({ components: open })}
+            className="space-y-2"
+          >
+            <CollapsibleTrigger asChild>
+              <div className="w-full text-left font-bold flex items-center justify-between">
+                <MoreFunctionality setState={setState} components={components}>
+                  Add/Remove Components
+                </MoreFunctionality>
+                <Button variant="ghost" size="sm">
+                  <CaretSortIcon className="h-4 w-4" />
+                  <span className="sr-only">Toggle</span>
+                </Button>
+              </div>
+            </CollapsibleTrigger>
+
+            <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+              @radix-ui/primitives
+            </div>
+            <CollapsibleContent className="space-y-2">
+              <div className="space-y-4 mt-5">
+                {components.map(
+                  ({ item_id, variants, title, selected }, index) => {
+                    return renderList(
+                      {
+                        item_id,
+                        variants,
+                        title,
+                        selected,
+                        handleShowCode: () => handleShowCode(index),
+                      },
+                      index
+                    );
+                  }
+                )}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </CardContent>
+        {/* <CardFooter className="flex justify-between">
+          <Button variant="outline">Cancel</Button>
+          <Button>Deploy</Button>
+        </CardFooter> */}
+      </Card>
+    </ScrollArea>
   );
 
   return (

@@ -12,7 +12,7 @@ const CommingSoon = () => {
           </span>
         </h1>
 
-        <p className="max-w-3xl mx-auto mt-6 text-lg text-center text-gray-700 dark:text-black md:text-xl">
+        <p className="max-w-3xl mx-auto mt-6 text-lg text-center   dark:text-black md:text-xl">
           Stay in the know about product launches and indie hacker community
           buzz.
         </p>
@@ -21,7 +21,7 @@ const CommingSoon = () => {
           <input
             id="email"
             type="text"
-            className="px-6 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring sm:mx-2"
+            className="px-6 py-3   bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring sm:mx-2"
             placeholder="Email Address"
           />
 
@@ -30,7 +30,7 @@ const CommingSoon = () => {
           </button>
         </div>
 
-        <p className="mt-8 text-center text-gray-700 dark:text-white text-md md:text-xl">
+        <p className="mt-8 text-center   dark:text-white text-md md:text-xl">
           Notify me when App is launched
         </p>
       </div>

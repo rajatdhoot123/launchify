@@ -59,37 +59,37 @@ const Footer = () => {
       <nav aria-label="Footer Nav" className="mt-12">
         <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a className="  transition hover: /75" href="/">
               About
             </a>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a className="  transition hover: /75" href="/">
               Careers
             </a>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a className="  transition hover: /75" href="/">
               History
             </a>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a className="  transition hover: /75" href="/">
               Services
             </a>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a className="  transition hover: /75" href="/">
               Projects
             </a>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+            <a className="  transition hover: /75" href="/">
               Blog
             </a>
           </li>
@@ -102,7 +102,7 @@ const Footer = () => {
             href="/"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:text-gray-700/75"
+            className="  transition hover: /75"
           >
             <span className="sr-only">Facebook</span>
             <svg
@@ -125,7 +125,7 @@ const Footer = () => {
             href="/"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:text-gray-700/75"
+            className="  transition hover: /75"
           >
             <span className="sr-only">Instagram</span>
             <svg
@@ -148,7 +148,7 @@ const Footer = () => {
             href="/"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:text-gray-700/75"
+            className="  transition hover: /75"
           >
             <span className="sr-only">Twitter</span>
             <svg
@@ -167,7 +167,7 @@ const Footer = () => {
             href="/"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:text-gray-700/75"
+            className="  transition hover: /75"
           >
             <span className="sr-only">GitHub</span>
             <svg
@@ -190,7 +190,7 @@ const Footer = () => {
             href="/"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:text-gray-700/75"
+            className="  transition hover: /75"
           >
             <span className="sr-only">Dribbble</span>
             <svg

@@ -21,7 +21,7 @@ const Footer = () => {
             href="https://www.instagram.com/kwiktwik.co"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:text-gray-700/75"
+            className="  transition hover: /75"
           >
             <span className="sr-only">Instagram</span>
             <svg
@@ -44,7 +44,7 @@ const Footer = () => {
             href="https://twitter.com/yeskhush_5"
             rel="noreferrer"
             target="_blank"
-            className="text-gray-700 transition hover:text-gray-700/75"
+            className="  transition hover: /75"
           >
             <span className="sr-only">Twitter</span>
             <svg
