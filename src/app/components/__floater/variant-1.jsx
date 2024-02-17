@@ -100,67 +100,68 @@ const ListCard = forwardRef(
     });
 
     return (
-      <div
-        key={item_id}
-        ref={(node) => ref(drop(node))}
-        className="rounded-md cursor-move space-y-2"
-      >
-        <div className="px-2"></div>
-        <div className="flex items-center">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path fill="none" d="M0 0h24v24H0V0z"></path>
-            <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-          </svg>
+      <>
+        <div
+          key={item_id}
+          ref={(node) => ref(drop(node))}
+          className="rounded-md cursor-move space-y-2"
+        >
+          <div className="px-2"></div>
+          <div className="flex items-center">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 24 24"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+            </svg>
 
-          <div className="flex justify-between w-full items-center">
-            <div className="text-sm font-semibold flex-shrink-0">{title}</div>
-            <div className="mx-5">
-              <OptionPopover
-                components={[
-                  <DialogComponent
-                    key="Show code"
-                    title={title}
-                    handleShowCode={handleShowCode}
-                  >
-                    <Link>Show Code</Link>
-                  </DialogComponent>,
-                  <CodeGenerateButton
-                    loader={loader}
-                    setLoader={setLoader}
-                    item_id={item_id}
-                    api_ref={api_ref}
-                    key="CodeGeneration"
-                  />,
-                ]}
-              />
+            <div className="flex justify-between w-full items-center">
+              <div className="text-sm font-semibold flex-shrink-0">{title}</div>
+              <div className="mx-5">
+                <OptionPopover
+                  components={[
+                    <DialogComponent
+                      key="Show code"
+                      title={title}
+                      handleShowCode={handleShowCode}
+                    >
+                      <Link>Show Code</Link>
+                    </DialogComponent>,
+                    <CodeGenerateButton
+                      loader={loader}
+                      setLoader={setLoader}
+                      item_id={item_id}
+                      api_ref={api_ref}
+                      key="CodeGeneration"
+                    />,
+                  ]}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex text-sm flex-wrap gap-4">
-          {Object.keys(variants).map((key) => {
-            return (
-              <Button
-                size="sm"
-                onClick={() => {
-                  handleChange(key, index, item_id);
-                }}
-                key={key}
-              >
-                {key}
-              </Button>
-            );
-          })}
-        </div>
-        {/* <SelectDropdown
+          <div className="flex text-sm flex-wrap gap-4">
+            {Object.keys(variants).map((key) => {
+              return (
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    handleChange(key, index, item_id);
+                  }}
+                  key={key}
+                >
+                  {key}
+                </Button>
+              );
+            })}
+          </div>
+          {/* <SelectDropdown
           handleChange={(val) => {
             console.log({ val, index, item_id });
             handleChange(val, index, item_id);
@@ -169,7 +170,9 @@ const ListCard = forwardRef(
           title={title}
           list={Object.keys(variants)}
         /> */}
-      </div>
+        </div>
+        <Separator />
+      </>
     );
   }
 );
@@ -405,10 +408,6 @@ const Floater = ({
                 </Button>
               </div>
             </CollapsibleTrigger>
-
-            <div className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-              @radix-ui/primitives
-            </div>
             <CollapsibleContent className="space-y-2">
               <div className="space-y-4 mt-5">
                 {components.map(
