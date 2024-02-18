@@ -227,7 +227,7 @@ export const FLOATER_SELECT = [
   {
     item_id: "navbar",
     variants: NAVBAR,
-    title: "Nabar",
+    title: "Navbar",
     selected: "variant-2",
   },
   {

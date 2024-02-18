@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const Hero = () => {
   return (
     <>
@@ -5,7 +7,7 @@ const Hero = () => {
         className="text-center"
         data-scroll-magic-target="phoneContainer"
       >
-        <h1 className="lg:w-2/3 text-3xl md:text-[56px] font-bold leading-none mx-auto">
+        <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight lg:text-5xl">
           1-app for everything money
         </h1>
         <div
@@ -25,14 +27,13 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <a
+        <Button
           target="_blank"
           data-controller="download-link"
           href="https://jptr.onelink.me/TOMp/81c06bec"
-          className="bg-red-500 text-white text-sm md:text-xl hover:bg-red-700 hover:text-sf60 border border-sf60 py-3 px-6 rounded-full inline-block"
         >
           Open Savings Account
-        </a>
+        </Button>
         <p className="lg:w-2/5 text-lg mx-auto mb-6 md:text-2xl leading-tight text-black60">
           powered by{" "}
           <img
@@ -75,7 +76,6 @@ const Hero = () => {
           font-weight: 600;
         }
         .cubespinner .face1 {
-          color: #fc7a69;
           transform: translateZ(20px);
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
@@ -85,7 +85,6 @@ const Hero = () => {
           -o-transform: translateZ(20px);
         }
         .cubespinner .face2 {
-          color: #fc7a69;
           transform: rotateX(120deg) translateZ(20px);
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
@@ -95,7 +94,6 @@ const Hero = () => {
           -o-transform: rotateX(120deg) translateZ(20px);
         }
         .cubespinner .face3 {
-          color: #fc7a69;
           transform: rotateX(240deg) translateZ(20px);
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;

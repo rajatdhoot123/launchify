@@ -43,7 +43,7 @@ const Pricing = () => (
               </div>
               <div>
                 <ul>
-                  <li className="text-gray-700 py-3">Feature 1</li>
+                  <li className="  py-3">Feature 1</li>
                 </ul>
               </div>
             </div>
@@ -76,9 +76,9 @@ const Pricing = () => (
               </div>
               <div>
                 <ul className="divide-y">
-                  <li className="text-gray-700 py-3">Feature 1</li>
-                  <li className="text-gray-700 py-3">Feature 2</li>
-                  <li className="text-gray-700 py-3">Feature 3</li>
+                  <li className="  py-3">Feature 1</li>
+                  <li className="  py-3">Feature 2</li>
+                  <li className="  py-3">Feature 3</li>
                 </ul>
               </div>
             </div>
@@ -111,10 +111,10 @@ const Pricing = () => (
               </div>
               <div>
                 <ul className="divide-y">
-                  <li className="text-gray-700 py-3">Feature 1</li>
-                  <li className="text-gray-700 py-3">Feature 2</li>
-                  <li className="text-gray-700 py-3">Feature 3</li>
-                  <li className="text-gray-700 py-3">Feature 4</li>
+                  <li className="  py-3">Feature 1</li>
+                  <li className="  py-3">Feature 2</li>
+                  <li className="  py-3">Feature 3</li>
+                  <li className="  py-3">Feature 4</li>
                 </ul>
               </div>
             </div>
@@ -147,11 +147,11 @@ const Pricing = () => (
               </div>
               <div>
                 <ul className="divide-y">
-                  <li className="text-gray-700 py-3">Feature 1</li>
-                  <li className="text-gray-700 py-3">Feature 2</li>
-                  <li className="text-gray-700 py-3">Feature 3</li>
-                  <li className="text-gray-700 py-3">Feature 4</li>
-                  <li className="text-gray-700 py-3">Feature 5</li>
+                  <li className="  py-3">Feature 1</li>
+                  <li className="  py-3">Feature 2</li>
+                  <li className="  py-3">Feature 3</li>
+                  <li className="  py-3">Feature 4</li>
+                  <li className="  py-3">Feature 5</li>
                 </ul>
               </div>
             </div>

@@ -1,18 +1,20 @@
-import { HoverCard, Link } from "@radix-ui/themes";
+import { Button } from "@/components/ui/button";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+
 const OptionPopover = ({ components }) => {
   return (
-    <HoverCard.Root>
-      <HoverCard.Trigger>
-        <Link className="text-sm font-bold" variant="ghost">
+    <HoverCard>
+      <HoverCardTrigger asChild>
+        <Button className="text-sm" variant="ghost">
           Code & Ai Magic
-        </Link>
-      </HoverCard.Trigger>
-      <HoverCard.Content>
+        </Button>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-80">
         <div className="flex flex-col space-y-2 cursor-pointer">
           {components}
         </div>
-      </HoverCard.Content>
-    </HoverCard.Root>
+      </HoverCardContent>
+    </HoverCard>
   );
 };
 

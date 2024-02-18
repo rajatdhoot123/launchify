@@ -1,7 +1,8 @@
 const generateLayout = ({ ga_id = "", next_auth, crisp_id }) => {
   return `
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/app/styles/globals.css";
+import { Providers } from "@/app/styles/next-theme";
 ${ga_id ? `import Script from "next/script"` : ""}
 ${next_auth ? `import NextAuthProvider from "@/app/nextauth/provider"` : ""}
 
@@ -42,11 +43,13 @@ export default function RootLayout({ children }) {
         : ""
     }
       <body className={inter.className}>
+      <Providers>
       ${
         next_auth
           ? "<NextAuthProvider>{children}</NextAuthProvider>"
           : "{children}"
       }
+      </Providers>
       </body>
     </html>
       );

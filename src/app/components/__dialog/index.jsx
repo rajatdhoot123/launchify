@@ -1,4 +1,14 @@
-import { Dialog, Button, Flex } from "@radix-ui/themes";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 
 function format(html) {
@@ -34,47 +44,32 @@ const DialogComponent = ({ children, handleShowCode, title }) => {
       alert(text);
     }
   };
-  return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <Button variant="ghost">{children}</Button>
-      </Dialog.Trigger>
 
-      <Dialog.Content
-        className="relative flex flex-col"
-        style={{ width: "80%" }}
-      >
-        <Dialog.Close className="absolute right-4 cursor-pointer">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 512 512"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"></path>
-          </svg>
-        </Dialog.Close>
-        <Dialog.Title>Code</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
-          {`${title} Component Code`}
-        </Dialog.Description>
-        <div className="bg-black w-full overflow-scroll p-5">
+  return (
+    <Dialog>
+      <DialogTrigger>{children}</DialogTrigger>
+      <DialogContent >
+        <DialogHeader>
+          <DialogTitle>Code</DialogTitle>
+          <DialogDescription>{`${title} Component Code`}</DialogDescription>
+        </DialogHeader>
+
+        <div className="max-h-[60vh] bg-black w-full overflow-scroll p-5">
           <code className="whitespace-pre text-white">{code}</code>
         </div>
-        <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
-            <Button variant="soft" color="gray">
-              Cancel
-            </Button>
-          </Dialog.Close>
 
-          <Button onClick={handleCopy}>Copy</Button>
-        </Flex>
-      </Dialog.Content>
-    </Dialog.Root>
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+          <Button onClick={handleCopy} type="button">
+            Copy
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 

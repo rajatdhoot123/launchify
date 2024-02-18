@@ -9,7 +9,7 @@ const Login = () => {
           </p>
           <form className="mt-6" action="#" method="POST">
             <div>
-              <label className="block text-gray-700">Email Address</label>
+              <label className="block  ">Email Address</label>
               <input
                 type="email"
                 name=""
@@ -22,7 +22,7 @@ const Login = () => {
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700">Password</label>
+              <label className="block  ">Password</label>
               <input
                 type="password"
                 name=""
@@ -38,7 +38,7 @@ const Login = () => {
             <div className="text-right mt-2">
               <a
                 href="#"
-                className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700"
+                className="text-sm font-semibold   hover:text-blue-700 focus:text-blue-700"
               >
                 Forgot Password?
               </a>

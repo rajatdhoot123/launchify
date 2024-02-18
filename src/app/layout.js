@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { Theme } from "@radix-ui/themes";
+import "@/app/styles/globals.css";
+import { Providers } from "@/app/styles/next-theme";
 import Script from "next/script";
 import NextAuthProvider from "@/app/nextauth/provider";
 import { getServerSession } from "next-auth";
@@ -56,12 +56,12 @@ export default async function RootLayout({ children }) {
         </>
       )}
       <body className={inter.className}>
-        <Theme>
+        <Providers>
           <NextAuthProvider>
             <NavBar session={session} />
             {children}
           </NextAuthProvider>
-        </Theme>
+        </Providers>
       </body>
     </html>
   );

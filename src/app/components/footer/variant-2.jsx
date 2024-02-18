@@ -151,7 +151,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       1on1 Coaching
                     </a>
@@ -160,7 +160,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       Company Review
                     </a>
@@ -169,7 +169,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       Accounts Review
                     </a>
@@ -178,7 +178,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       HR Consulting
                     </a>
@@ -187,7 +187,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       SEO Optimisation
                     </a>
@@ -204,7 +204,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       About
                     </a>
@@ -213,7 +213,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       Meet the Team
                     </a>
@@ -222,7 +222,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       Accounts Review
                     </a>
@@ -239,7 +239,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       Contact
                     </a>
@@ -248,7 +248,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       FAQs
                     </a>
@@ -257,7 +257,7 @@ const Footer = () => {
                   <li>
                     <a
                       href="#"
-                      className="text-gray-700 transition hover:opacity-75"
+                      className="  transition hover:opacity-75"
                     >
                       Live Chat
                     </a>

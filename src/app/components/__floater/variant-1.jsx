@@ -1,16 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { forwardRef, useCallback, useRef, useState } from "react";
-import {
-  Button,
-  Link,
-  Separator,
-  TextFieldInput,
-  TextFieldRoot,
-} from "@radix-ui/themes";
+import React, { forwardRef, useCallback, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
-import Collapsible from "@/app/components/__accordion/variant-1";
 import Loader from "@/app/components/__loader/loader";
 import { useSession } from "next-auth/react";
 
@@ -19,6 +11,25 @@ import MoreFunctionality from "@/app/components/__more_functionality";
 import DialogComponent from "@/app/components/__dialog";
 import { codeGenerate } from "@/app/api/code-generation__/code-generate";
 import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { CaretSortIcon, ReloadIcon } from "@radix-ui/react-icons";
 
 const ItemType = "ITEM";
 
@@ -60,7 +71,9 @@ const CodeGenerateButton = ({ api_ref, item_id, setLoader, loader }) => {
           <Loader />
         </span>
       )}
-      <Link className="flex-shrink-0">Copy Writing</Link>
+      <Button variant="link" className="flex-shrink-0">
+        Copy Writing
+      </Button>
     </Button>
   );
 };
@@ -96,69 +109,68 @@ const ListCard = forwardRef(
     });
 
     return (
-      <div
-        key={item_id}
-        ref={(node) => ref(drop(node))}
-        className="rounded-md cursor-move space-y-2"
-      >
-        <div className="px-2"></div>
-        <div className="flex items-center">
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path fill="none" d="M0 0h24v24H0V0z"></path>
-            <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-          </svg>
+      <>
+        <div
+          key={item_id}
+          ref={(node) => ref(drop(node))}
+          className="rounded-md cursor-move space-y-2"
+        >
+          <div className="px-2"></div>
+          <div className="flex items-center">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              viewBox="0 0 24 24"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none" d="M0 0h24v24H0V0z"></path>
+              <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+            </svg>
 
-          <div className="flex justify-between w-full items-center">
-            <div className="text-sm font-semibold flex-shrink-0">{title}</div>
-            <div className="mx-5">
-              <OptionPopover
-                components={[
-                  <DialogComponent
-                    key="Show code"
-                    title={title}
-                    handleShowCode={handleShowCode}
-                  >
-                    <Link>Show Code</Link>
-                  </DialogComponent>,
-                  <CodeGenerateButton
-                    loader={loader}
-                    setLoader={setLoader}
-                    item_id={item_id}
-                    api_ref={api_ref}
-                    key="CodeGeneration"
-                  />,
-                ]}
-              />
+            <div className="flex justify-between w-full items-center">
+              <div className="text-sm font-semibold flex-shrink-0">{title}</div>
+              <div className="mx-5">
+                <OptionPopover
+                  components={[
+                    <DialogComponent
+                      key="Show code"
+                      title={title}
+                      handleShowCode={handleShowCode}
+                    >
+                      <Button variant="link">Show Code</Button>
+                    </DialogComponent>,
+                    <CodeGenerateButton
+                      loader={loader}
+                      setLoader={setLoader}
+                      item_id={item_id}
+                      api_ref={api_ref}
+                      key="CodeGeneration"
+                    />,
+                  ]}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex text-sm flex-wrap gap-4">
-          {Object.keys(variants).map((key) => {
-            return (
-              <button
-                onClick={() => {
-                  handleChange(key, index, item_id);
-                }}
-                className={`border border-opacity-70 ${
-                  selected === key ? "border-blue-500" : "border-gray-300"
-                }  p-2 rounded-md`}
-                key={key}
-              >
-                {key}
-              </button>
-            );
-          })}
-        </div>
-        {/* <SelectDropdown
+          <div className="flex text-sm flex-wrap gap-4">
+            {Object.keys(variants).map((key) => {
+              return (
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    handleChange(key, index, item_id);
+                  }}
+                  key={key}
+                >
+                  {key}
+                </Button>
+              );
+            })}
+          </div>
+          {/* <SelectDropdown
           handleChange={(val) => {
             console.log({ val, index, item_id });
             handleChange(val, index, item_id);
@@ -167,7 +179,9 @@ const ListCard = forwardRef(
           title={title}
           list={Object.keys(variants)}
         /> */}
-      </div>
+        </div>
+        <Separator />
+      </>
     );
   }
 );
@@ -184,6 +198,7 @@ const Floater = ({
   pages,
   crisp_id,
 }) => {
+  const [collapsible, setCollapsible] = useState({ components: true });
   const router = useRouter();
   const { data: session, status } = useSession();
   const ai_key = useRef("");
@@ -331,48 +346,27 @@ const Floater = ({
   );
 
   return (
-    <div className="flex flex-col h-full p-5 space-y-4">
-      <div className="flex justify-between items-center">
-        <button className="ml-auto" onClick={toggleHamburger}>
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="none"
-              strokeWidth="2"
-              d="M3,3 L21,21 M3,21 L21,3"
-            ></path>
-          </svg>
-        </button>
-      </div>
-      <div className="overflow-scroll h-full flex-1 space-y-6">
-        <div className="border p-2 rounded-md bg-gradient-to-r from-purple-200 via-pink-200 to-red-200">
-          <div className="flex items-center justify-between">
-            <div className="font-bold text-sm">PRO Features</div>
+    <ScrollArea className="h-full w-full rounded-md border pb-20">
+      <div className="border w-full bg-gradient-to-r from-purple-200 via-pink-200 to-red-200 space-y-4 p-5">
+        <div className="flex justify-between items-center">
+          <p>PRO Features</p>
+          <Button variant="link">
             <a
               href="https://boilercode.app?utm_source=uiwidgets"
               target="_blank"
-              className="font-bold text-sm my-2 bg-red-300 p-2 rounded-md"
             >
               Boilercode App
             </a>
-          </div>
-          <Separator mb="3" size="4" />
-          <div className="flex flex-wrap items-center gap-2">
-            {premium_features.map((feature, index) => (
-              <div
-                className="flex flex-shrink-0 items-center"
-                key={feature.item_id}
-              >
-                <input
-                  disabled={!is_premium}
-                  onChange={(e) => {
+          </Button>
+        </div>
+        <Separator />
+        <div className="flex items-center space-x-4">
+          {premium_features.map(({ item_id, title, selected }, index) => (
+            <React.Fragment key={item_id}>
+              <div key={item_id} className="flex items-center space-x-2">
+                <Checkbox
+                  value={selected}
+                  onCheckedChange={(val) =>
                     setState((prev) => ({
                       ...prev,
                       premium_features: prev.premium_features.map(
@@ -380,209 +374,187 @@ const Floater = ({
                           findex === index
                             ? {
                                 ...feature,
-                                selected:
-                                  e.target.value === "true" ? false : true,
+                                selected: val,
                               }
                             : feature
                       ),
-                    }));
-                  }}
-                  type="checkbox"
-                  value={feature.selected}
-                  checked={feature.selected}
-                  className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                    !is_premium ? "bg-gray-300" : "bg-gray-100"
-                  }`}
+                    }))
+                  }
+                  id={item_id}
                 />
                 <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900"
+                  htmlFor={item_id}
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  {feature.title}
+                  {title}
                 </label>
               </div>
-            ))}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+      <Card className="p-2 m-5">
+        {/* <CardHeader>
+          <CardTitle>Create project</CardTitle>
+          <CardDescription>
+            Deploy your new project in one-click.
+          </CardDescription>
+        </CardHeader> */}
+        <CardContent className="p-2">
+          <Collapsible
+            open={collapsible.components}
+            onOpenChange={(open) => setCollapsible({ components: open })}
+          >
+            <div className="space-y-2 justify-between flex">
+              <MoreFunctionality setState={setState} components={components}>
+                Add/Remove Components
+              </MoreFunctionality>
+              <CollapsibleTrigger asChild>
+                {/* <div className="w-full text-left font-bold flex items-center justify-between"> */}
+                <Button variant="ghost" size="sm">
+                  <CaretSortIcon className="h-4 w-4" />
+                  <span className="sr-only">Toggle</span>
+                </Button>
+                {/* </div> */}
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent className="space-y-2">
+              <div className="space-y-4 mt-5">
+                {components.map(
+                  ({ item_id, variants, title, selected }, index) => {
+                    return renderList(
+                      {
+                        item_id,
+                        variants,
+                        title,
+                        selected,
+                        handleShowCode: () => handleShowCode(index),
+                      },
+                      index
+                    );
+                  }
+                )}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </CardContent>
+      </Card>
+      <Card className="p-2 m-5">
+        <CardHeader className="p-2">
+          <CardTitle>Integrations</CardTitle>
+          <CardDescription>Select your integrations</CardDescription>
+        </CardHeader>
+        <CardContent className="p-2">
+          <div className="space-y-4 mt-5">
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="ga_id">Google Analytics</Label>
+              <Input
+                placeholder="Enter GA Id"
+                onChange={(e) =>
+                  setState((prev) => ({ ...prev, ga_id: e.target.value }))
+                }
+                type="text"
+                id="ga_id"
+              />
+            </div>
+            <div className="grid w-full max-w-sm items-center gap-1.5">
+              <Label htmlFor="crisp_id">Crisp Support</Label>
+              <Input
+                placeholder="Enter Crisp Id"
+                onChange={(e) =>
+                  setState((prev) => ({ ...prev, crisp_id: e.target.value }))
+                }
+                type="text"
+                id="crisp_id"
+              />
+            </div>
+
+            <div className="flex items-center">
+              <Checkbox
+                className="mr-2"
+                id="mdx_support"
+                readOnly
+                checked={true}
+              />
+              <Label htmlFor="mdx_support">Mdx Support</Label>
+            </div>
+            <div className="flex items-center">
+              <Checkbox
+                className="mr-2"
+                id="sitemap_seo"
+                readOnly
+                checked={true}
+              />
+              <Label htmlFor="sitemap_seo">Sitemap SEO</Label>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="p-2 m-5">
+        <CardContent className="p-2 space-y-4">
+          <CardHeader className="p-2">
+            <CardTitle>Page</CardTitle>
+            <CardDescription>Select your page</CardDescription>
+          </CardHeader>
+          {pages.map((feature, index) => (
+            <div key={feature.item_id} className="flex items-center">
+              <Checkbox
+                className="mr-2"
+                id={feature.item_id}
+                readOnly
+                onCheckedChange={(e) =>
+                  setState((prev) => ({
+                    ...prev,
+                    pages: prev.pages.map((page, findex) =>
+                      findex === index
+                        ? {
+                            ...page,
+                            selected: e,
+                          }
+                        : page
+                    ),
+                  }))
+                }
+                checked={true}
+              />
+              <Label htmlFor={feature.item_id}>{feature.title}</Label>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+      <div className="fixed bottom-0 w-full p-5">
+        <div className="text-center">
+          <small className="font-semibold text-center">
+            With copywriting export can take 3-5 mins
+          </small>
+          <div className="flex gap-6">
+            <Button
+              className="w-1/2"
+              block
+              disabled={loader.export}
+              onClick={handleExport}
+            >
+              {loader.export && (
+                <span className="m-auto px-2">
+                  <Loader />
+                </span>
+              )}
+              Export
+            </Button>
+            <Button
+              className="w-1/2"
+              disabled={loader.export_wih_copywriting}
+              onClick={handleExportWithCopywriting}
+            >
+              {loader.export_wih_copywriting && (
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              With Copywriting
+            </Button>
           </div>
         </div>
-        <div className="border border-gray-200 p-2 rounded-md">
-          <Collapsible
-            isOpen={true}
-            title={
-              <div className="w-full text-left font-bold flex items-center justify-between">
-                <span className="">Components</span>
-                <MoreFunctionality setState={setState} components={components}>
-                  Add/Remove Components
-                </MoreFunctionality>
-              </div>
-            }
-          >
-            <div className="space-y-4 mt-5">
-              {components.map(
-                ({ item_id, variants, title, selected }, index) => {
-                  return renderList(
-                    {
-                      item_id,
-                      variants,
-                      title,
-                      selected,
-                      handleShowCode: () => handleShowCode(index),
-                    },
-                    index
-                  );
-                }
-              )}
-            </div>
-          </Collapsible>
-        </div>
-        <Separator my="3" size="4" />
-        <div className="border border-gray-200 p-2 rounded-md">
-          <Collapsible
-            title={
-              <div className="w-full text-left font-bold">
-                <span className="">Integrations</span>
-              </div>
-            }
-          >
-            <div className="space-y-4 mt-5">
-              <div className="space-y-2">
-                <div className="text-sm font-semibold">Google Analytics</div>
-                <TextFieldRoot>
-                  <TextFieldInput
-                    onChange={(e) =>
-                      setState((prev) => ({ ...prev, ga_id: e.target.value }))
-                    }
-                    value={ga_id}
-                    placeholder="Enter GA Id"
-                  />
-                </TextFieldRoot>
-              </div>
-              <div className="space-y-2">
-                <div className="text-sm font-semibold">Crisp Support</div>
-                <TextFieldRoot>
-                  <TextFieldInput
-                    onChange={(e) =>
-                      setState((prev) => ({
-                        ...prev,
-                        crisp_id: e.target.value,
-                      }))
-                    }
-                    value={crisp_id}
-                    placeholder="Enter Crisp Id"
-                  />
-                </TextFieldRoot>
-              </div>
-              <div className="flex items-center">
-                <input
-                  readOnly
-                  checked={true}
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
-                />
-                <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900"
-                >
-                  Sitemap (SEO)
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  readOnly
-                  checked={true}
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600  border-gray-300 rounded bg-gray-300"
-                />
-                <label
-                  htmlFor="default-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900"
-                >
-                  Mdx Support
-                </label>
-              </div>
-            </div>
-          </Collapsible>
-        </div>
-        <div className="border border-gray-200 p-2 rounded-md">
-          <Collapsible
-            isOpen={true}
-            title={
-              <div className="w-full text-left font-bold">
-                <span className="">Pages</span>
-              </div>
-            }
-          >
-            <div className="flex flex-col space-y-4 mt-5">
-              {pages.map((feature, index) => (
-                <div
-                  className="flex flex-shrink-0 items-center"
-                  key={feature.item_id}
-                >
-                  <input
-                    onChange={(e) => {
-                      setState((prev) => ({
-                        ...prev,
-                        pages: prev.pages.map((page, findex) =>
-                          findex === index
-                            ? {
-                                ...page,
-                                selected:
-                                  e.target.value === "true" ? false : true,
-                              }
-                            : page
-                        ),
-                      }));
-                    }}
-                    type="checkbox"
-                    value={feature.selected}
-                    checked={feature.selected}
-                    className={`w-4 h-4 text-blue-600  border-gray-300 rounded ${
-                      !is_premium ? "bg-gray-300" : "bg-gray-100"
-                    }`}
-                  />
-                  <label
-                    htmlFor="default-checkbox"
-                    className="ml-2 text-sm font-medium text-gray-900"
-                  >
-                    {feature.title}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </Collapsible>
-        </div>
       </div>
-      <div className="m-5 text-center">
-        <small className="font-semibold text-center">
-          With copywriting export can take 3-5 mins
-        </small>
-        <div className="flex gap-6">
-          <button
-            disabled={loader.export}
-            onClick={handleExport}
-            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
-          >
-            {loader.export && (
-              <span className="m-auto px-2">
-                <Loader />
-              </span>
-            )}
-            Export
-          </button>
-          <button
-            disabled={loader.export_wih_copywriting}
-            onClick={handleExportWithCopywriting}
-            className="font-bold bg-[#F53855] w-full text-white p-2 rounded-lg text-sm flex items-center justify-center"
-          >
-            {loader.export_wih_copywriting && (
-              <span className="m-auto px-2">
-                <Loader />
-              </span>
-            )}
-            With Copywriting
-          </button>
-        </div>
-      </div>
-    </div>
+    </ScrollArea>
   );
 };
 

@@ -5,10 +5,10 @@ const ServiceCard = ({ icon, title, details }) => {
     <>
       <div className="w-full px-4 md:w-1/2 lg:w-1/3">
         <div className="mb-9 rounded-[20px] bg-white p-10 shadow-2 hover:shadow-lg md:px-7 xl:px-10">
-          <div className="mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-2xl bg-blue-500">
+          <div className="mb-8 flex h-[70px] w-[70px] items-center justify-center rounded-2xl bg-primary">
             {icon}
           </div>
-          <h4 className="mb-[14px] text-2xl font-semibold text-gray-700 ">
+          <h4 className="mb-[14px] text-2xl font-semibold ">
             {title}
           </h4>
           <p className="text-body-color ">{details}</p>
@@ -25,10 +25,10 @@ const Service = () => {
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="mx-auto mb-12 max-w-[510px] text-center lg:mb-20">
-              <span className="mb-2 block text-lg font-semibold text-gray-700">
+              <span className="mb-2 block text-lg font-semibold  ">
                 Our Services
               </span>
-              <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-gray-700  sm:text-4xl md:text-[40px]">
+              <h2 className="mb-3 text-3xl font-bold leading-[1.2]    sm:text-4xl md:text-[40px]">
                 What We Offer
               </h2>
               <p className="text-base text-body-color ">

@@ -12,7 +12,7 @@ const Table = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -44,7 +44,7 @@ const Table = () => {
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -76,7 +76,7 @@ const Table = () => {
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -108,7 +108,7 @@ const Table = () => {
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -140,7 +140,7 @@ const Table = () => {
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -165,14 +165,14 @@ const Table = () => {
               </td>
               <td className="px-4 py-3 text-sm">$ 863.45</td>
               <td className="px-4 py-3 text-xs">
-                <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">
+                <span className="px-2 py-1 font-semibold leading-tight   bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">
                   Expired
                 </span>
               </td>
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -204,7 +204,7 @@ const Table = () => {
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -236,7 +236,7 @@ const Table = () => {
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -268,7 +268,7 @@ const Table = () => {
               <td className="px-4 py-3 text-sm">6/10/2020</td>
             </tr>
 
-            <tr className="text-gray-700 dark:text-gray-400">
+            <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
                   <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">

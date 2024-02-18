@@ -13,7 +13,7 @@ const Card = () => {
             }}
           ></div>
           <div className="p-4 sm:p-6">
-            <p className="font-bold text-gray-700 text-[22px] leading-7 mb-1">
+            <p className="font-bold   text-[22px] leading-7 mb-1">
               Spagetti with shrimp sauce
             </p>
             <div className="flex flex-row">

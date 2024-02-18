@@ -6,7 +6,7 @@ const ContactUs = () => {
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
             Lets talk about everything!
           </h2>
-          <div className="text-gray-700 mt-8">
+          <div className="  mt-8">
             Hate forms? Send us an <span className="underline">email</span> instead.
           </div>
         </div>

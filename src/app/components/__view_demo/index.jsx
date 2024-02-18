@@ -1,4 +1,4 @@
-import { Button } from "@radix-ui/themes";
+import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 
 const Modal = ({ isOpen, onClose, children }) => {

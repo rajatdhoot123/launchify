@@ -529,43 +529,43 @@ const NavBar = ({ session }) => {
               <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                 <a
                   href="#pricing"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base font-medium text-gray-900 hover: "
                 >
                   Pricing
                 </a>
                 <a
                   href="#"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base font-medium text-gray-900 hover: "
                 >
                   Enterprise
                 </a>
                 <a
                   href="#"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base font-medium text-gray-900 hover: "
                 >
                   Blog
                 </a>
                 <a
                   href="#"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base font-medium text-gray-900 hover: "
                 >
                   Help Center
                 </a>
                 <a
                   href="#"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base font-medium text-gray-900 hover: "
                 >
                   Guides
                 </a>
                 <a
                   href="#"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base font-medium text-gray-900 hover: "
                 >
                   Security
                 </a>
                 <a
                   href="#"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base font-medium text-gray-900 hover: "
                 >
                   Events
                 </a>

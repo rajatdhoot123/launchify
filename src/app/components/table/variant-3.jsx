@@ -34,7 +34,7 @@ const Table = () => {
                 <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
               </div>
               <div className="text-sm">
-                <div className="font-medium text-gray-700">Steven Jobs</div>
+                <div className="font-medium  ">Steven Jobs</div>
                 <div className="text-gray-400">jobs@sailboatui.com</div>
               </div>
             </th>
@@ -111,7 +111,7 @@ const Table = () => {
                 <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
               </div>
               <div className="text-sm">
-                <div className="font-medium text-gray-700">Steven Jobs</div>
+                <div className="font-medium  ">Steven Jobs</div>
                 <div className="text-gray-400">jobs@sailboatui.com</div>
               </div>
             </th>
@@ -188,7 +188,7 @@ const Table = () => {
                 <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
               </div>
               <div className="text-sm">
-                <div className="font-medium text-gray-700">Steven Jobs</div>
+                <div className="font-medium  ">Steven Jobs</div>
                 <div className="text-gray-400">jobs@sailboatui.com</div>
               </div>
             </th>
@@ -265,7 +265,7 @@ const Table = () => {
                 <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
               </div>
               <div className="text-sm">
-                <div className="font-medium text-gray-700">Steven Jobs</div>
+                <div className="font-medium  ">Steven Jobs</div>
                 <div className="text-gray-400">jobs@sailboatui.com</div>
               </div>
             </th>
@@ -342,7 +342,7 @@ const Table = () => {
                 <span className="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
               </div>
               <div className="text-sm">
-                <div className="font-medium text-gray-700">Steven Jobs</div>
+                <div className="font-medium  ">Steven Jobs</div>
                 <div className="text-gray-400">jobs@sailboatui.com</div>
               </div>
             </th>
