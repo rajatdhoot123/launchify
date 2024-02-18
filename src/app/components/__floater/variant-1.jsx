@@ -1,6 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { forwardRef, useCallback, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 import Loader from "@/app/components/__loader/loader";
@@ -18,6 +24,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -30,6 +37,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { CaretSortIcon, Cross1Icon, ReloadIcon } from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
 
 const ItemType = "ITEM";
 
@@ -345,9 +353,20 @@ const Floater = ({
     [handleChange, is_premium, moveItem]
   );
 
+  const { theme, setTheme } = useTheme();
+
+  const [localTheme, setLocalTheme] = useState(localStorage.theme || "dark");
+
+  useEffect(() => {
+    setTheme(localTheme);
+  }, [localTheme, setTheme]);
+
   return (
     <ScrollArea className="h-full w-full rounded-md border pb-20">
-      <Cross1Icon onClick={toggleHamburger} className="absolute right-4 top-4 cursor-pointer" />
+      <Cross1Icon
+        onClick={toggleHamburger}
+        className="absolute right-4 top-4 cursor-pointer"
+      />
       <div className="border w-full bg-gradient-to-r from-purple-200 via-pink-200 to-red-200 space-y-4 p-5">
         <div className="flex justify-between items-center">
           <p>PRO Features</p>
@@ -394,6 +413,29 @@ const Floater = ({
           ))}
         </div>
       </div>
+      <Card className="p-2 m-5">
+        <CardHeader className="p-2">Select Theme</CardHeader>
+        <CardContent className="p-2">
+          <RadioGroup
+            value={localTheme}
+            onValueChange={(val) => setLocalTheme(val)}
+            className="flex overflow-scroll"
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="dark" id="r1" />
+              <Label htmlFor="r1">Dark</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="light" id="r2" />
+              <Label htmlFor="r2">Light</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="pink" id="r3" />
+              <Label htmlFor="r3">Pink</Label>
+            </div>
+          </RadioGroup>
+        </CardContent>
+      </Card>
       <Card className="p-2 m-5">
         <CardContent className="p-2">
           <Collapsible

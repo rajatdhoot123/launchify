@@ -8,12 +8,13 @@ import {
 } from "@/app/constants__/floater";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { Button } from "@/components/ui/button";
 
 const LeftDrawer = ({ children = null, is_active }) => {
   return (
     <>
       <div
-        className={`border border-gray-500 border-opacity-30 rounded-md h-screen md:h-5/6 top-1/2 transform -translate-y-1/2 transition duration-500 ease-in-out shadow-2xl z-50 fixed right-0 bg-white w-full md:w-96  ${
+        className={`border bg-card border-primary/50 border-opacity-30 rounded-md h-screen md:h-5/6 top-1/2 transform -translate-y-1/2 transition duration-500 ease-in-out shadow-2xl z-50 fixed right-0 w-full md:w-96  ${
           is_active ? "" : "translate-x-full"
         }`}
       >
@@ -46,12 +47,12 @@ export default function Home() {
     <>
       <DndProvider backend={HTML5Backend}>
         {!is_active && (
-          <button
+          <Button
             onClick={toggleHamburger}
-            className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-primary"
+            className="z-20 bottom-10 fixed right-10 bg-primary text-primary-foreground shadow hover:bg-primary/90 rounded-full h-16 w-16"
           >
             <svg
-              className="text-white text-xl md:text-2xl"
+              className="text-xl md:text-2xl"
               stroke="currentColor"
               fill="none"
               strokeWidth="2"
@@ -67,7 +68,7 @@ export default function Home() {
               <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
               <path d="M16 5l3 3"></path>
             </svg>
-          </button>
+          </Button>
         )}
         <LeftDrawer is_active={is_active}>
           <Floater
