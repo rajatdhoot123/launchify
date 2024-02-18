@@ -48,7 +48,7 @@ export default function Home() {
         {!is_active && (
           <button
             onClick={toggleHamburger}
-            className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-[#F53855]"
+            className="z-20 bottom-10 fixed right-10 shadow-2xl p-5 rounded-full text-xs font-bold bg-primary"
           >
             <svg
               className="text-white text-xl md:text-2xl"

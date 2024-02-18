@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 export default function Pricing() {
   return (
     <div className="container px-4 md:px-6 mx-auto">
@@ -11,7 +13,7 @@ export default function Pricing() {
             <ul className="mt-4 space-y-2">
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -28,7 +30,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -45,7 +47,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -63,13 +65,11 @@ export default function Pricing() {
             </ul>
           </div>
           <div className="mt-6">
-            <button className="text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">
-              Get Started
-            </button>
+            <Button>Get Started</Button>
           </div>
         </div>
-        <div className="relative flex flex-col p-6 bg-white shadow-lg rounded-lg justify-between border border-purple-500">
-          <div className="px-3 py-1 text-sm text-white bg-gradient-to-r from-pink-500 to-purple-500 rounded-full inline-block absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="relative flex flex-col p-6 bg-white shadow-lg rounded-lg justify-between border border-primary">
+          <div className="px-3 py-1 text-sm text-white bg-gradient-to-r from-primary to-secondary rounded-full inline-block absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             Most Popular
           </div>
           <div>
@@ -82,7 +82,7 @@ export default function Pricing() {
             <ul className="mt-4 space-y-2">
               <li className="flex items-center">
                 <svg
-                  className="text-white text-2xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-2xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -99,7 +99,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -116,7 +116,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -133,7 +133,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -151,9 +151,7 @@ export default function Pricing() {
             </ul>
           </div>
           <div className="mt-6">
-            <button className="text-white bg-purple-600 hover:bg-purple-800 font-bold py-2 px-4 rounded">
-              Upgrade Now
-            </button>
+            <Button>Upgrade Now</Button>
           </div>
         </div>
         <div className="flex flex-col p-6 bg-white shadow-lg rounded-lg justify-between border border-gray-300">
@@ -167,7 +165,7 @@ export default function Pricing() {
             <ul className="mt-4 space-y-2">
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -184,7 +182,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -201,7 +199,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -218,7 +216,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -235,7 +233,7 @@ export default function Pricing() {
               </li>
               <li className="flex items-center">
                 <svg
-                  className="text-white text-xs bg-green-500 rounded-full mr-2 p-1"
+                  className="text-white text-xs bg-primary rounded-full mr-2 p-1"
                   fill="none"
                   height="24"
                   stroke="currentColor"
@@ -253,9 +251,7 @@ export default function Pricing() {
             </ul>
           </div>
           <div className="mt-6">
-            <button className="text-white bg-gray-800 hover:bg-gray-900 font-bold py-2 px-4 rounded">
-              Contact Sales
-            </button>
+            <Button>Contact Sales</Button>
           </div>
         </div>
       </div>

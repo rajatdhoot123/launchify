@@ -29,7 +29,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { CaretSortIcon, ReloadIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, Cross1Icon, ReloadIcon } from "@radix-ui/react-icons";
 
 const ItemType = "ITEM";
 
@@ -347,6 +347,7 @@ const Floater = ({
 
   return (
     <ScrollArea className="h-full w-full rounded-md border pb-20">
+      <Cross1Icon onClick={toggleHamburger} className="absolute right-4 top-4 cursor-pointer" />
       <div className="border w-full bg-gradient-to-r from-purple-200 via-pink-200 to-red-200 space-y-4 p-5">
         <div className="flex justify-between items-center">
           <p>PRO Features</p>
@@ -394,12 +395,6 @@ const Floater = ({
         </div>
       </div>
       <Card className="p-2 m-5">
-        {/* <CardHeader>
-          <CardTitle>Create project</CardTitle>
-          <CardDescription>
-            Deploy your new project in one-click.
-          </CardDescription>
-        </CardHeader> */}
         <CardContent className="p-2">
           <Collapsible
             open={collapsible.components}
@@ -410,12 +405,10 @@ const Floater = ({
                 Add/Remove Components
               </MoreFunctionality>
               <CollapsibleTrigger asChild>
-                {/* <div className="w-full text-left font-bold flex items-center justify-between"> */}
                 <Button variant="ghost" size="sm">
                   <CaretSortIcon className="h-4 w-4" />
                   <span className="sr-only">Toggle</span>
                 </Button>
-                {/* </div> */}
               </CollapsibleTrigger>
             </div>
             <CollapsibleContent className="space-y-2">
