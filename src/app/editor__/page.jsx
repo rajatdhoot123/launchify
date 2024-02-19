@@ -74,7 +74,6 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
     state_ref.current = state;
   }, [state, state_ref]);
 
-  console.log({ isOpen: isOpen.page });
   return (
     <div className="space-y-6 sticky bottom-0 w-full bg-white">
       <Card>

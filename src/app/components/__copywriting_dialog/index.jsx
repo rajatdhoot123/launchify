@@ -1,13 +1,18 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
-  Button,
-  Flex,
-  TextField,
-  Text,
-  Checkbox,
-  TextArea,
-} from "@radix-ui/themes";
-import { useState } from "react";
+  DialogTrigger,
+  DialogContent,
+  DialogClose,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+
+import { Fragment, useState } from "react";
 
 const modify_components = (content) => {
   return content.reduce((acc, current) => {
@@ -57,37 +62,17 @@ const CopyWritingDialog = ({
     });
   };
   return (
-    <Dialog.Root open={is_open}>
-      <Dialog.Trigger>{children}</Dialog.Trigger>
-
-      <Dialog.Content
-        className="relative flex flex-col"
-        style={{ width: "80%" }}
-      >
-        <Dialog.Close
-          onClick={handleClose}
-          className="absolute right-4 cursor-pointer"
-        >
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 512 512"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"></path>
-          </svg>
-        </Dialog.Close>
-        <Dialog.Title>Export With Copywriting</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
+    <Dialog open={is_open}>
+      <DialogTrigger>{children}</DialogTrigger>
+      <DialogContent open={is_open}>
+        <DialogTitle>Export With Copywriting</DialogTitle>
+        <DialogDescription size="2" mb="4">
           {title}
-        </Dialog.Description>
-        <div className="w-full overflow-scroll p-5 space-y-6">
-          <TextField.Root>
-            <TextField.Slot className="text-bold">Open Ai Key</TextField.Slot>
-            <TextField.Input
+        </DialogDescription>
+        <div className="w-full overflow-scroll p-5 space-y-4">
+          <div>
+            <Label htmlFor="open_ai">Open Ai Key</Label>
+            <Input
               value={open_ai_key}
               name="open_ai"
               onChange={(e) => {
@@ -96,25 +81,33 @@ const CopyWritingDialog = ({
                   open_ai_key: e.target.value,
                 }));
               }}
-              placeholder="Enter Open AI Key"
+              className="mt-2"
+              type="text"
+              id="open_ai"
+              placeholder="Enter Open Ai Key"
             />
-          </TextField.Root>
-          <TextArea
-            value={open_ai_prompt}
-            onChange={(e) => {
-              set_open_ai((prev) => ({
-                ...prev,
-                open_ai_prompt: e.target.value,
-              }));
-            }}
-            size="2"
-            placeholder="Enter Your Use Case"
-          />
+          </div>
+          <div>
+            <Label htmlFor="use_case">Enter Your Use Case</Label>
+            <Textarea
+              value={open_ai_prompt}
+              onChange={(e) => {
+                set_open_ai((prev) => ({
+                  ...prev,
+                  open_ai_prompt: e.target.value,
+                }));
+              }}
+              size="2"
+              id="use_case"
+              className="mt-2"
+              placeholder="Enter Your Use Case"
+            />
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {(data?.content ?? []).map(({ type }) => (
-              <Text key={type} as="label" size="2">
+              <div className="items-center flex space-x-2" key={type}>
                 <Checkbox
-                  className="mr-2"
+                  id={type}
                   onCheckedChange={(val) =>
                     set_active_components((prev) => ({
                       ...prev,
@@ -123,23 +116,19 @@ const CopyWritingDialog = ({
                   }
                   checked={active_component[type]}
                 />
-                {type}
-              </Text>
+                <Label htmlFor={type}>{type}</Label>
+              </div>
             ))}
           </div>
         </div>
-        <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
-            <Button onClick={handleGenerate}>Generate</Button>
-          </Dialog.Close>
-          <Dialog.Close>
-            <Button onClick={handleClose} variant="soft" color="gray">
-              Cancel
-            </Button>
-          </Dialog.Close>
-        </Flex>
-      </Dialog.Content>
-    </Dialog.Root>
+        <div className="flex justify-end space-x-2">
+          <Button onClick={handleGenerate}>Generate</Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 
