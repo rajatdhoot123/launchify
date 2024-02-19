@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const Pricing = () => {
   return (
     <div className="container mx-auto px-4 py-24">
@@ -24,12 +26,7 @@ const Pricing = () => {
               <li>5GB Storage</li>
               <li>2 Containers</li>
             </ul>
-            <a
-              className="text-sm tracking-wide uppercase inline-block bg-white border border-red text-red font-bold w-full p-3 rounded no-underline"
-              href="#"
-            >
-              Get started
-            </a>
+            <Button className="w-full">Get Started</Button>
           </div>
         </div>
 
@@ -46,12 +43,7 @@ const Pricing = () => {
               <li>20GB Storage</li>
               <li>20 Containers</li>
             </ul>
-            <a
-              className="text-sm tracking-wide uppercase inline-block bg-white border border-red text-red font-bold w-full p-3 rounded no-underline"
-              href="#"
-            >
-              Get started
-            </a>
+            <Button className="w-full">Get Started</Button>
           </div>
         </div>
 
@@ -68,12 +60,7 @@ const Pricing = () => {
               <li>40GB Storage</li>
               <li>40 Containers</li>
             </ul>
-            <a
-              className="text-sm tracking-wide uppercase inline-block bg-white border border-red text-red font-bold w-full p-3 rounded no-underline"
-              href="#"
-            >
-              Get started
-            </a>
+            <Button className="w-full">Get Started</Button>
           </div>
         </div>
       </div>

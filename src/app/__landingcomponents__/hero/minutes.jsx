@@ -14,7 +14,7 @@ const Minutes = () => {
     );
   }, []);
   return (
-    <p className="text-lg font-medium leading-8 text-indigo-600/95">
+    <p className="text-lg font-medium leading-8 text-primary">
       Landing Page will be ready today at{" "}
       <strong className=" uppercase">{time}</strong>
     </p>

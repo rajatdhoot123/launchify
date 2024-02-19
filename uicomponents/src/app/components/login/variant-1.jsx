@@ -1,65 +1,52 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
 const Login = () => {
   return (
     <section className="container mx-auto">
-      <div className="bg-gray-100 p-5 flex mx-auto rounded-2xl shadow-lg max-w-3xl">
+      <Card className="p-5 flex mx-auto rounded-2xl shadow-lg max-w-3xl">
         <div className="md:w-1/2 px-5">
-          <h2 className="text-2xl font-bold text-[#002D74]">Login</h2>
-          <p className="text-sm mt-4 text-[#002D74]">
-            If you have an account, please login
-          </p>
+          <h2 className="text-2xl font-bold ">Login</h2>
+          <p className="text-sm mt-4 ">If you have an account, please login</p>
           <form className="mt-6" action="#" method="POST">
             <div>
-              <label className="block  ">Email Address</label>
-              <input
+              <Label htmlFor="email">Email Address</Label>
+              <Input
+              className="mt-2"
                 type="email"
                 name=""
-                id=""
+                id="email"
                 placeholder="Enter Email Address"
-                className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                 autoFocus
                 required
               />
             </div>
 
             <div className="mt-4">
-              <label className="block  ">Password</label>
-              <input
+              <Label htmlFor="password">Password</Label>
+              <Input
+              className="mt-2"
                 type="password"
                 name=""
-                id=""
+                id="password"
                 placeholder="Enter Password"
                 minLength="6"
-                className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-                    focus:bg-white focus:outline-none"
                 required
               />
             </div>
 
             <div className="text-right mt-2">
-              <a
-                href="#"
-                className="text-sm font-semibold   hover:text-blue-700 focus:text-blue-700"
-              >
+              <a href="#" className="text-sm font-semibold ">
                 Forgot Password?
               </a>
             </div>
-
-            <button
-              type="submit"
-              className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                  px-4 py-3 mt-6"
-            >
-              Log In
-            </button>
+            <Button className="w-full mt-5" type="submit">Log In</Button>
           </form>
-
-          <div className="mt-7 grid grid-cols-3 items-center text-gray-500">
-            <hr className="border-gray-500" />
-            <p className="text-center text-sm">OR</p>
-            <hr className="border-gray-500" />
-          </div>
-
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 ">
+          <Separator className="my-5" />
+          <Button className="w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -93,13 +80,11 @@ const Login = () => {
               />
             </svg>
             <span className="ml-4">Login with Google</span>
-          </button>
+          </Button>
 
           <div className="text-sm flex justify-between items-center mt-3">
             <p>If you don't have an account...</p>
-            <button className="py-2 px-5 ml-3 bg-white border rounded-xl hover:scale-110 duration-300 border-blue-400  ">
-              Register
-            </button>
+            <Button>Register</Button>
           </div>
         </div>
 
@@ -110,7 +95,7 @@ const Login = () => {
             alt="page img"
           />
         </div>
-      </div>
+      </Card>
     </section>
   );
 };
