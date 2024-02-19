@@ -56,7 +56,7 @@ export default async function RootLayout({ children }) {
         </>
       )}
       <body className={inter.className}>
-        <Providers>
+        <Providers themes={["pink", "light", "dark"]}>
           <NextAuthProvider>
             <NavBar session={session} />
             {children}

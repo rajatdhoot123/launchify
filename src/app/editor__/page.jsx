@@ -28,6 +28,7 @@ import {
   PAGES,
   PREMIUM_FEATURES,
 } from "@/app/constants__/floater";
+import ThemeSelector from "@/app/components/__theme_selector";
 import ViewDemo from "@/app/components/__view_demo";
 import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -74,7 +75,6 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
     state_ref.current = state;
   }, [state, state_ref]);
 
-  console.log({ isOpen: isOpen.page });
   return (
     <div className="space-y-6 sticky bottom-0 w-full bg-white">
       <Card>
@@ -392,7 +392,7 @@ function Editor() {
           puck_data.current = data;
         }}
         overrides={{
-          componentItem: ({ children, ...rest }) => {
+          componentItem: ({ children }) => {
             const [name, index] =
               children?.props?.children?.props?.children?.[0]?.props?.children?.split(
                 "-"
@@ -482,7 +482,8 @@ function Editor() {
           },
           components: ({ children }) => {
             return (
-              <div className="flex flex-col space-y-6 justify-between relative">
+              <div>
+                <ThemeSelector />
                 <div>{children}</div>
                 <NextBoilerPlate ref={state_ref} />
               </div>

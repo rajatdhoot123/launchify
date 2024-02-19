@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const Pricing = () => {
   return (
     <div className="container p-5 w-full mx-auto">
@@ -8,12 +10,7 @@ const Pricing = () => {
               <h5>Demo</h5>
               <h3 className="font-bold">FREE</h3>
               <div>
-                <a
-                  href="https://builder.creative-tim.com/builder"
-                  className="border border-gray-500 text-sm p-2 rounded-md"
-                >
-                  Free demo
-                </a>
+                <Button variant="outline">Free demo</Button>
               </div>
             </div>
             <hr className="horizontal dark my-5" />
@@ -88,21 +85,16 @@ const Pricing = () => {
             <div className="text-2xl pt-4 pb-3 px-4 space-y-4 py-5">
               <h5>Basic</h5>
               <h3 className="font-bold">
-                <small className="text-secondary font-weight-bold">
+                <small className="text-primary opacity-50 font-weight-bold">
                   <strike>$239</strike>
                 </small>
                 <span className="text-danger">$49</span>{" "}
-                <small className="text-sm text-secondary font-weight-bold">
+                <small className="text-sm text-primary opacity-50 font-weight-bold">
                   / year
                 </small>
               </h3>
               <div>
-                <a
-                  href="https://builder.creative-tim.com/builder"
-                  className="border border-gray-500 text-sm p-2 rounded-md"
-                >
-                  Buy Now
-                </a>
+                <Button variant="outline"> Buy Now</Button>
               </div>
             </div>
 
@@ -187,21 +179,16 @@ const Pricing = () => {
             <div className="text-2xl pt-4 pb-3 px-4 space-y-4 py-5">
               <h5>Basic</h5>
               <h3 className="font-bold">
-                <small className="text-secondary font-weight-bold">
+                <small className="text-primary opacity-50 font-weight-bold">
                   <strike>$479</strike>
                 </small>
                 <span className="text-danger">$49</span>{" "}
-                <small className="text-sm text-secondary font-weight-bold">
+                <small className="text-sm text-primary opacity-50 font-weight-bold">
                   / year
                 </small>
               </h3>
               <div>
-                <a
-                  href="https://builder.creative-tim.com/builder"
-                  className="border border-gray-500 text-sm p-2 rounded-md"
-                >
-                  Buy Now
-                </a>
+                <Button variant="outline"> Buy Now</Button>
               </div>
             </div>
 

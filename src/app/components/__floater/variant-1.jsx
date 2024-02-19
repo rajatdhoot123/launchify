@@ -1,6 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { forwardRef, useCallback, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { logEvent } from "@/app/utils__/events";
 import Loader from "@/app/components/__loader/loader";
@@ -18,6 +24,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -29,7 +36,8 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { CaretSortIcon, ReloadIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, Cross1Icon, ReloadIcon } from "@radix-ui/react-icons";
+import ThemeSelector from "@/app/components/__theme_selector";
 
 const ItemType = "ITEM";
 
@@ -159,6 +167,7 @@ const ListCard = forwardRef(
             {Object.keys(variants).map((key) => {
               return (
                 <Button
+                  variant={key === selected ? "" : "outline"}
                   size="sm"
                   onClick={() => {
                     handleChange(key, index, item_id);
@@ -347,6 +356,10 @@ const Floater = ({
 
   return (
     <ScrollArea className="h-full w-full rounded-md border pb-20">
+      <Cross1Icon
+        onClick={toggleHamburger}
+        className="absolute right-4 top-4 cursor-pointer"
+      />
       <div className="border w-full bg-gradient-to-r from-purple-200 via-pink-200 to-red-200 space-y-4 p-5">
         <div className="flex justify-between items-center">
           <p>PRO Features</p>
@@ -393,13 +406,8 @@ const Floater = ({
           ))}
         </div>
       </div>
+      <ThemeSelector />
       <Card className="p-2 m-5">
-        {/* <CardHeader>
-          <CardTitle>Create project</CardTitle>
-          <CardDescription>
-            Deploy your new project in one-click.
-          </CardDescription>
-        </CardHeader> */}
         <CardContent className="p-2">
           <Collapsible
             open={collapsible.components}
@@ -410,12 +418,10 @@ const Floater = ({
                 Add/Remove Components
               </MoreFunctionality>
               <CollapsibleTrigger asChild>
-                {/* <div className="w-full text-left font-bold flex items-center justify-between"> */}
                 <Button variant="ghost" size="sm">
                   <CaretSortIcon className="h-4 w-4" />
                   <span className="sr-only">Toggle</span>
                 </Button>
-                {/* </div> */}
               </CollapsibleTrigger>
             </div>
             <CollapsibleContent className="space-y-2">
