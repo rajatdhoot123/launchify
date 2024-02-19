@@ -65,7 +65,7 @@ export default function Pricing() {
             </ul>
           </div>
           <div className="mt-6">
-            <Button>Get Started</Button>
+            <Button className="w-full">Get Started</Button>
           </div>
         </div>
         <div className="relative flex flex-col p-6  shadow-lg rounded-lg justify-between border border-primary">
@@ -151,7 +151,7 @@ export default function Pricing() {
             </ul>
           </div>
           <div className="mt-6">
-            <Button>Upgrade Now</Button>
+            <Button className="w-full">Upgrade Now</Button>
           </div>
         </div>
         <div className="flex flex-col p-6  shadow-lg rounded-lg justify-between border border-gray-300">
@@ -251,7 +251,7 @@ export default function Pricing() {
             </ul>
           </div>
           <div className="mt-6">
-            <Button>Contact Sales</Button>
+            <Button className="w-full">Contact Sales</Button>
           </div>
         </div>
       </div>

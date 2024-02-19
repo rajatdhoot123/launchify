@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const Pricing = () => (
   <div className="py-4 md:py-12">
     <div className="container mx-auto px-4">
@@ -37,9 +39,7 @@ const Pricing = () => (
                   <span className="text-sm align-top inline-block mt-2">$</span>
                   0
                 </div>
-                <button className="border-2 border-solid border-indigo-600 hover:bg-indigo-600 text-indigo-600 hover:text-white rounded py-2 px-4 mt-6 mb-2 transition-colors duration-300">
-                  Get Started
-                </button>
+                <Button className="mt-5">Get Started</Button>
               </div>
               <div>
                 <ul>
@@ -70,9 +70,7 @@ const Pricing = () => (
                   <span className="text-sm align-top inline-block mt-2">$</span>
                   19
                 </div>
-                <button className="border-2 border-solid border-indigo-600 hover:bg-indigo-600 text-indigo-600 hover:text-white rounded py-2 px-4 mt-6 mb-2 transition-colors duration-300">
-                  Get Started
-                </button>
+                <Button className="mt-5">Get Started</Button>
               </div>
               <div>
                 <ul className="divide-y">
@@ -105,9 +103,7 @@ const Pricing = () => (
                   <span className="text-sm align-top inline-block mt-2">$</span>
                   29
                 </div>
-                <button className="border-2 border-solid border-indigo-600 hover:bg-indigo-600 text-indigo-600 hover:text-white rounded py-2 px-4 mt-6 mb-2 transition-colors duration-300">
-                  Get Started
-                </button>
+                <Button className="mt-5">Get Started</Button>
               </div>
               <div>
                 <ul className="divide-y">
@@ -141,9 +137,7 @@ const Pricing = () => (
                   <span className="text-sm align-top inline-block mt-2">$</span>
                   39
                 </div>
-                <button className="border-2 border-solid border-indigo-600 hover:bg-indigo-600 text-indigo-600 hover:text-white rounded py-2 px-4 mt-6 mb-2 transition-colors duration-300">
-                  Get Started
-                </button>
+                <Button className="mt-5">Get Started</Button>
               </div>
               <div>
                 <ul className="divide-y">
