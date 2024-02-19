@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Minutes from "./minutes";
+import { Button } from "@/components/ui/button";
 export default function Hero() {
   return (
     <>
-      <section className="container mx-auto flex items-center justify-center bg-white">
+      <section className="container mx-auto flex items-center justify-center ">
         <div className="px-12 mx-auto max-w-7xl lg:pt-24">
           <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
             <Minutes />
-            <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
+            <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal  md:text-6xl md:tracking-tight">
               <span>Build</span>{" "}
               <span className="block w-full py-2 text-transparent bg-clip-text leading-12 font-bold bg-gradient-to-r from-blue-500 to-pink-500 lg:inline">
                 Beautiful Landing Pages
@@ -19,42 +20,40 @@ export default function Hero() {
               creative components & ready-to-use boilerplate codes.
             </p>
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
-              <Link
-                href="/editor__"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white hover:bg-blue-700 bg-blue-500 font-bold rounded-2xl sm:w-auto sm:mb-0"
-              >
-                Editor Mode
-                <svg
-                  className="w-4 h-4 ml-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </Link>
-              <Link
-                href="/app__"
-                className="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white hover:bg-blue-700 bg-blue-500 font-bold rounded-2xl sm:w-auto sm:mb-0"
-              >
-                Drag and Drop Mode
-                <svg
-                  className="w-4 h-4 ml-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              </Link>
+              <Button asChild>
+                <Link href="/editor__">
+                  Editor Mode
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </Link>
+              </Button>
+              <Button asChild>
+                <Link href="/app__">
+                  Drag and Drop Mode
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    ></path>
+                  </svg>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

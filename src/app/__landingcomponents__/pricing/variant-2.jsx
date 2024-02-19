@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 const Pricing = () => {
   return (
     <div className="container mx-auto px-4 py-24" id="pricing">
@@ -25,12 +28,11 @@ const Pricing = () => {
                 <li> </li>
               </ul>
             </div>
-            <a
-              className="text-sm tracking-wide uppercase inline-block bg-white border border-red text-red font-bold w-full p-3 rounded no-underline"
-              href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0"
-            >
-              Get started
-            </a>
+            <Button asChild>
+              <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                Get started
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -56,12 +58,11 @@ const Pricing = () => {
                 <li>No UiWidgets Branding</li>
               </ul>
             </div>
-            <a
-              className="text-sm tracking-wide uppercase inline-block bg-white border border-red text-red font-bold w-full p-3 rounded no-underline"
-              href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0"
-            >
-              Get started
-            </a>
+            <Button asChild>
+              <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                Get started
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -90,12 +91,11 @@ const Pricing = () => {
                 <li>Minimum 25% off on all upcoming products</li>
               </ul>
             </div>
-            <a
-              className="text-sm tracking-wide uppercase inline-block bg-white border border-red text-red font-bold w-full p-3 rounded no-underline"
-              href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0"
-            >
-              Get started
-            </a>
+            <Button asChild>
+              <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                Get started
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
