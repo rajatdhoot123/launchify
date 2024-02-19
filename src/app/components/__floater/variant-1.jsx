@@ -37,7 +37,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { CaretSortIcon, Cross1Icon, ReloadIcon } from "@radix-ui/react-icons";
-import { useTheme } from "next-themes";
+import ThemeSelector from "@/app/components/__theme_selector";
 
 const ItemType = "ITEM";
 
@@ -354,14 +354,6 @@ const Floater = ({
     [handleChange, is_premium, moveItem]
   );
 
-  const { theme, setTheme } = useTheme();
-
-  const [localTheme, setLocalTheme] = useState(localStorage.theme || "dark");
-
-  useEffect(() => {
-    setTheme(localTheme);
-  }, [localTheme, setTheme]);
-
   return (
     <ScrollArea className="h-full w-full rounded-md border pb-20">
       <Cross1Icon
@@ -414,29 +406,7 @@ const Floater = ({
           ))}
         </div>
       </div>
-      <Card className="p-2 m-5">
-        <CardHeader className="p-2">Select Theme</CardHeader>
-        <CardContent className="p-2">
-          <RadioGroup
-            value={localTheme}
-            onValueChange={(val) => setLocalTheme(val)}
-            className="flex overflow-scroll"
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="dark" id="r1" />
-              <Label htmlFor="r1">Dark</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="light" id="r2" />
-              <Label htmlFor="r2">Light</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="pink" id="r3" />
-              <Label htmlFor="r3">Pink</Label>
-            </div>
-          </RadioGroup>
-        </CardContent>
-      </Card>
+      <ThemeSelector />
       <Card className="p-2 m-5">
         <CardContent className="p-2">
           <Collapsible
