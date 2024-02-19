@@ -167,6 +167,7 @@ const ListCard = forwardRef(
             {Object.keys(variants).map((key) => {
               return (
                 <Button
+                  variant={key === selected ? "" : "outline"}
                   size="sm"
                   onClick={() => {
                     handleChange(key, index, item_id);
