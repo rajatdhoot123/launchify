@@ -6,10 +6,10 @@ const FaqAccordion = () => {
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4 md:px-6 container">
-      <h1 className="text-2xl font-bold text-slate-900 mb-4">FAQs</h1>
+      <h1 className="text-2xl font-bold  mb-4">FAQs</h1>
 
       {/* Accordion component */}
-      <div className="divide-y divide-slate-200">
+      <div className="divide-y">
         {/* Accordion item 1 */}
         {[
           {
@@ -70,7 +70,7 @@ const FaqAccordion = () => {
               id="faqs-text-01"
               role="region"
               aria-labelledby="faqs-title-01"
-              className={`grid text-sm text-slate-600 overflow-hidden transition-all duration-300 ease-in-out ${
+              className={`grid text-sm text-foreground/70 overflow-hidden transition-all duration-300 ease-in-out ${
                 expanded === index
                   ? "grid-rows-[1fr] opacity-100"
                   : "grid-rows-[0fr] opacity-0"

@@ -270,7 +270,7 @@ export const FLOATER_SELECT = [
     item_id: "testimonials",
     variants: TESTIMONIALS,
     title: "Testimonials",
-    selected: "variant-2",
+    selected: "variant-1",
   },
   {
     item_id: "table",
