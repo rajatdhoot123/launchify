@@ -4,14 +4,14 @@ const Table = () => {
       <div className="w-full overflow-x-auto">
         <table className="w-full whitespace-no-wrap">
           <thead>
-            <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <tr className="text-xs font-semibold tracking-wide text-left uppercase border-b bg-background border-primary/75">
               <th className="px-4 py-3">Client</th>
               <th className="px-4 py-3">Amount</th>
               <th className="px-4 py-3">Status</th>
               <th className="px-4 py-3">Date</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+          <tbody className="bg-background divide-y ">
             <tr className="  dark:text-gray-400">
               <td className="px-4 py-3">
                 <div className="flex items-center text-sm">
@@ -302,7 +302,7 @@ const Table = () => {
           </tbody>
         </table>
       </div>
-      <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+      <div className="grid px-4 py-3 text-xs font-semibold tracking-wide bg-background uppercase border-t border-primary/75 sm:grid-cols-9 ">
         <span className="flex items-center col-span-3">Showing 21-30 of 100</span>
         <span className="col-span-2"></span>
 
