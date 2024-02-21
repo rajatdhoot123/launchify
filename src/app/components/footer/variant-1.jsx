@@ -3,9 +3,9 @@ const Footer = () => {
     <div className="container flex flex-col items-center px-8 py-8 mx-auto max-w-7xl sm:flex-row">
       <a
         href="#_"
-        className="text-xl font-black leading-none text-gray-900 select-none logo"
+        className="text-xl font-black leading-none  select-none logo text-primary"
       >
-        WEBSITE<span className="text-indigo-600">.</span>COM
+        WEBSITE<span className="text-primary/90">.</span>COM
       </a>
       <p className="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0">
         © 2021 Tails -

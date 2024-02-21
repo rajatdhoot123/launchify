@@ -1,9 +1,12 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 const Footer = () => {
   return (
     <div className="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
       <div className="lg:grid lg:grid-cols-2">
         <div className="py-8 border-b border-gray-100 lg:order-last lg:border-b-0 lg:border-l lg:py-16 lg:pl-16">
-          <div className="block text-teal-600 lg:hidden">
+          <div className="block text-primary lg:hidden">
             <svg
               className="h-8"
               viewBox="0 0 118 24"
@@ -54,12 +57,10 @@ const Footer = () => {
           </div>
 
           <div className="mt-8 space-y-4 lg:mt-0">
-            <span className="hidden w-10 h-1 bg-teal-500 rounded lg:block"></span>
+            <span className="hidden w-10 h-1 text-primary/70 rounded lg:block"></span>
 
             <div>
-              <h2 className="text-2xl font-medium text-gray-900">
-                Request a Demo
-              </h2>
+              <h2 className="text-2xl font-medium ">Request a Demo</h2>
 
               <p className="max-w-lg mt-4 text-gray-500">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -75,24 +76,21 @@ const Footer = () => {
                 Email{" "}
               </label>
 
-              <div className="p-2 border border-gray-100 rounded-md focus-within:ring sm:flex sm:items-center sm:gap-4">
-                <input
+              <div className="rounded-md sm:flex sm:items-center sm:gap-4">
+                <Input
                   type="email"
                   id="UserEmail"
                   placeholder="john@rhcp.com"
-                  className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
                 />
 
-                <button className="w-full px-6 py-3 mt-1 text-sm font-bold tracking-wide text-white uppercase transition-none bg-teal-500 rounded hover:bg-teal-600 sm:mt-0 sm:w-auto sm:flex-shrink-0">
-                  Sign Up
-                </button>
+                <Button>Sign Up</Button>
               </div>
             </form>
           </div>
         </div>
 
         <div className="py-8 lg:py-16 lg:pr-16">
-          <div className="hidden text-teal-600 lg:block">
+          <div className="hidden text-primary lg:block">
             <svg
               className="h-8"
               viewBox="0 0 118 24"
@@ -144,51 +142,36 @@ const Footer = () => {
 
           <div className="grid grid-cols-1 gap-8 mt-8 sm:grid-cols-3">
             <div>
-              <p className="font-medium text-gray-900">Services</p>
+              <p className="font-medium ">Services</p>
 
               <nav aria-label="Footer Navigation - Services" className="mt-6">
                 <ul className="space-y-4 text-sm">
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       1on1 Coaching
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       Company Review
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       Accounts Review
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       HR Consulting
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       SEO Optimisation
                     </a>
                   </li>
@@ -197,33 +180,24 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="font-medium text-gray-900">Company</p>
+              <p className="font-medium ">Company</p>
 
               <nav aria-label="Footer Navigation - Company" className="mt-6">
                 <ul className="space-y-4 text-sm">
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       About
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       Meet the Team
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       Accounts Review
                     </a>
                   </li>
@@ -232,33 +206,24 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="font-medium text-gray-900">Helpful Links</p>
+              <p className="font-medium ">Helpful Links</p>
 
               <nav aria-label="Footer Navigation - Company" className="mt-6">
                 <ul className="space-y-4 text-sm">
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       Contact
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       FAQs
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="#"
-                      className="  transition hover:opacity-75"
-                    >
+                    <a href="#" className="  transition hover:opacity-75">
                       Live Chat
                     </a>
                   </li>

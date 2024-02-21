@@ -4,11 +4,11 @@ const Footer = () => {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div>
           <img src="/logo.png" className="mr-5 h-6 sm:h-9" alt="logo" />
-          <p className="max-w-xs mt-4 text-sm text-gray-600">
+          <p className="max-w-xs mt-4 text-sm">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
             accusantium.
           </p>
-          <div className="flex mt-8 space-x-6 text-gray-600">
+          <div className="flex mt-8 space-x-6">
             <a
               className="hover:opacity-75"
               href=""
