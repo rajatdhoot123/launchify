@@ -1,30 +1,30 @@
 const Table = () => {
   return (
     <div className="container mx-auto overflow-hidden rounded-lg border border-gray-200 shadow-md">
-      <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
-        <thead className="bg-gray-50">
+      <table className="w-full border-collapse bg-background text-left text-sm text-gray-500">
+        <thead className="bg-background">
           <tr>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+            <th scope="col" className="px-6 py-4 font-medium text-foreground/90">
               Name
             </th>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+            <th scope="col" className="px-6 py-4 font-medium text-foreground/90">
               State
             </th>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+            <th scope="col" className="px-6 py-4 font-medium text-foreground/90">
               Role
             </th>
-            <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+            <th scope="col" className="px-6 py-4 font-medium text-foreground/90">
               Team
             </th>
             <th
               scope="col"
-              className="px-6 py-4 font-medium text-gray-900"
+              className="px-6 py-4 font-medium text-foreground/90"
             ></th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100 border-t border-gray-100">
-          <tr className="hover:bg-gray-50">
-            <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
+        <tbody className="divide-y space-y-4 divide-gray-100 border-t border-gray-100">
+          <tr className="hover:bg-foreground hover:text-background text-foreground/90">
+            <th className="flex gap-3 px-6 py-4 font-normal">
               <div className="relative h-10 w-10">
                 <img
                   className="h-full w-full rounded-full object-cover object-center"
@@ -100,8 +100,8 @@ const Table = () => {
               </div>
             </td>
           </tr>
-          <tr className="hover:bg-gray-50">
-            <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
+          <tr className="hover:bg-foreground hover:text-background text-foreground/90">
+            <th className="flex gap-3 px-6 py-4 font-normal">
               <div className="relative h-10 w-10">
                 <img
                   className="h-full w-full rounded-full object-cover object-center"
@@ -177,8 +177,8 @@ const Table = () => {
               </div>
             </td>
           </tr>
-          <tr className="hover:bg-gray-50">
-            <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
+          <tr className="hover:bg-foreground hover:text-background text-foreground/90">
+            <th className="flex gap-3 px-6 py-4 font-normal">
               <div className="relative h-10 w-10">
                 <img
                   className="h-full w-full rounded-full object-cover object-center"
@@ -254,8 +254,8 @@ const Table = () => {
               </div>
             </td>
           </tr>
-          <tr className="hover:bg-gray-50">
-            <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
+          <tr className="hover:bg-foreground hover:text-background text-foreground/90">
+            <th className="flex gap-3 px-6 py-4 font-normal">
               <div className="relative h-10 w-10">
                 <img
                   className="h-full w-full rounded-full object-cover object-center"
@@ -331,8 +331,8 @@ const Table = () => {
               </div>
             </td>
           </tr>
-          <tr className="hover:bg-gray-50">
-            <th className="flex gap-3 px-6 py-4 font-normal text-gray-900">
+          <tr className="hover:bg-foreground hover:text-background text-foreground/90">
+            <th className="flex gap-3 px-6 py-4 font-normal">
               <div className="relative h-10 w-10">
                 <img
                   className="h-full w-full rounded-full object-cover object-center"

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const NavBar = ({ session }) => {
   const [open, setOpen] = useState(false);
@@ -22,9 +23,9 @@ const NavBar = ({ session }) => {
   return (
     <>
       {/* This example requires Tailwind CSS v2.0+ */}
-      <div className="relative bg-white">
+      <div className="relative ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+          <div className="flex justify-between items-center border-b-2  py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <Link href="/">
                 <span className="sr-only">Workflow</span>
@@ -65,11 +66,9 @@ const NavBar = ({ session }) => {
             <nav className="hidden md:flex space-x-10">
               <div className="relative">
                 {/* Item active: "text-gray-900", Item inactive: "text-gray-500" */}
-                <button
+                <Button
+                  variant="link"
                   type="button"
-                  className="
-                     group bg-white rounded-md text-gray-500 inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 pb-8'
-                    "
                   onClick={() => (setFlyer(!flyer), setFlyerTwo(false))}
                 >
                   <span>Other Products</span>
@@ -95,7 +94,7 @@ const NavBar = ({ session }) => {
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>
+                </Button>
                 {/*
               'Solutions' flyout menu, show/hide based on flyout menu state.
   
@@ -305,27 +304,18 @@ const NavBar = ({ session }) => {
                 </div>
               </div>
 
-              <a
-                href="#pricing"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Pricing
-              </a>
-              <Link
-                href="/templates__"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Templates
-              </Link>
+              <Button variant="link" asChild>
+                <Link href="#pricing">Pricing</Link>
+              </Button>
+              <Button variant="link" asChild>
+                <Link href="/templates__">Templates</Link>
+              </Button>
             </nav>
             {user ? (
               <div className="text-sm">
-                <button
-                  onClick={signOut}
-                  className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-                >
+                <Button onClick={signOut} variant="ghost">
                   Sign Out
-                </button>
+                </Button>
               </div>
             ) : (
               <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
