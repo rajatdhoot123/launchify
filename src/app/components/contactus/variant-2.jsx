@@ -1,13 +1,17 @@
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
 const ContactUs = () => {
   return (
-    <div className="container mx-auto max-w-screen-xl px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 text-gray-900 rounded-lg shadow-lg">
+    <div className="container mx-auto max-w-screen-xl px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16  rounded-lg shadow-lg">
       <div className="flex flex-col justify-between">
         <div>
           <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
             Lets talk about everything!
           </h2>
           <div className="  mt-8">
-            Hate forms? Send us an <span className="underline">email</span> instead.
+            Hate forms? Send us an <span className="underline">email</span>{" "}
+            instead.
           </div>
         </div>
         <div className="mt-8 text-center">
@@ -29,11 +33,7 @@ const ContactUs = () => {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop offset="0" stopColor="gray" stopOpacity="0.25"></stop>
-                <stop
-                  offset="0.54"
-                  stopColor="gray"
-                  stopOpacity="0.12"
-                ></stop>
+                <stop offset="0.54" stopColor="gray" stopOpacity="0.12"></stop>
                 <stop offset="1" stopColor="gray" stopOpacity="0.1"></stop>
               </linearGradient>
               <pattern
@@ -974,25 +974,25 @@ const ContactUs = () => {
       </div>
       <div className="">
         <div>
-          <span className="uppercase text-sm text-gray-600 font-bold">
-            Full Name
-          </span>
+          <span className="uppercase text-sm font-bold">Full Name</span>
+          <Label htmlFor="fullname">Full Name</Label>
+          <Input type="text" id="fullname" placeholder="Full Name" />
           <input
-            className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            className="w-full   mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
             type="text"
             placeholder=""
           />
         </div>
         <div className="mt-8">
-          <span className="uppercase text-sm text-gray-600 font-bold">Email</span>
+          <span className="uppercase text-sm font-bold">Email</span>
           <input
-            className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            className="w-full   mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
             type="text"
           />
         </div>
         <div className="mt-8">
-          <span className="uppercase text-sm text-gray-600 font-bold">Message</span>
-          <textarea className="w-full h-32 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
+          <span className="uppercase text-sm font-bold">Message</span>
+          <textarea className="w-full h-32   mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
         </div>
         <div className="mt-8">
           <button className="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline">
