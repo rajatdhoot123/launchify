@@ -272,6 +272,7 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const { appState, dispatch: puck_dispatch } = usePuck();
   const [state, dispatch] = useReducer(reducer, {
     open_ai_key: "",
     open_ai_prompt: "",
@@ -392,6 +393,92 @@ function Editor() {
           puck_data.current = data;
         }}
         overrides={{
+          header: () => {
+            // return Children.map(
+            //   children,
+            //   (child) => console.log(child) || child
+            // );
+
+            // return children
+
+            return (
+              <div className="w-screen h-16 flex items-center justify-between bg-white drop-shadow-2xl px-6">
+                <div className="w-1/3">
+                  {/* <Button
+                    onClick={() => {
+                      console.log("Called");
+                      puck_dispatch({
+                        type: "setUi",
+                        ui: {
+                          leftSideBarVisible: false,
+                          rightSideBarVisible: false,
+                        },
+                      });
+                    }}
+                  >
+                    Hide Sidebar
+                  </Button> */}
+                </div>
+                <div className="text-center w-1/3">
+                  Drag a page component from the left menu here to begin
+                </div>
+                <div className="space-x-6 flex items-center w-1/3 justify-end">
+                  {(puck_data?.current?.content ?? []).length === 0 ? (
+                    <Button
+                      onClick={() =>
+                        alert("Add components to generate copywriting")
+                      }
+                    >
+                      With Copywriting
+                    </Button>
+                  ) : (
+                    <CopyWritingDialog
+                      handleExportWithCopywriting={handleExportWithCopywriting}
+                      state={state}
+                      dispatch={dispatch}
+                      is_open={state.is_copywriting_active}
+                      data={puck_data.current}
+                      key="Show code"
+                      title="Select component to update copywriting"
+                    >
+                      <Button
+                        disabled={loader.export_with_copy_writing}
+                        onClick={() =>
+                          dispatch({ type: "OPEN_COPWRITING_MODAL" })
+                        }
+                      >
+                        {loader.export_with_copy_writing && <Loader />}
+                        With Copywriting
+                      </Button>
+                    </CopyWritingDialog>
+                  )}
+                  <Button
+                    disabled={loader.export}
+                    onClick={() =>
+                      handleExport({
+                        components: modify_components(
+                          puck_data.current.content
+                        ),
+                      })
+                    }
+                    className="cursor-pointer"
+                  >
+                    {loader.export && <Loader />}
+                    Export
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      set_modal(true);
+                      setData(puck_data.current);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    View
+                  </Button>
+                </div>
+              </div>
+            );
+          },
           componentItem: ({ children }) => {
             const [name, index] =
               children?.props?.children?.props?.children?.[0]?.props?.children?.split(
@@ -416,62 +503,6 @@ function Editor() {
                     </HoverCardContent>
                   </HoverCardPortal>
                 </HoverCard>
-              </div>
-            );
-          },
-          headerActions: () => {
-            return (
-              <div className="space-x-6 flex items-center">
-                {(puck_data?.current?.content ?? []).length === 0 ? (
-                  <Button
-                    onClick={() =>
-                      alert("Add components to generate copywriting")
-                    }
-                  >
-                    With Copywriting
-                  </Button>
-                ) : (
-                  <CopyWritingDialog
-                    handleExportWithCopywriting={handleExportWithCopywriting}
-                    state={state}
-                    dispatch={dispatch}
-                    is_open={state.is_copywriting_active}
-                    data={puck_data.current}
-                    key="Show code"
-                    title="Select component to update copywriting"
-                  >
-                    <Button
-                      disabled={loader.export_with_copy_writing}
-                      onClick={() =>
-                        dispatch({ type: "OPEN_COPWRITING_MODAL" })
-                      }
-                    >
-                      {loader.export_with_copy_writing && <Loader />}
-                      With Copywriting
-                    </Button>
-                  </CopyWritingDialog>
-                )}
-                <Button
-                  disabled={loader.export}
-                  onClick={() =>
-                    handleExport({
-                      components: modify_components(puck_data.current.content),
-                    })
-                  }
-                  className="cursor-pointer"
-                >
-                  {loader.export && <Loader />}
-                  Export
-                </Button>
-                <Button
-                  onClick={() => {
-                    set_modal(true);
-                    setData(puck_data.current);
-                  }}
-                  className="cursor-pointer"
-                >
-                  View
-                </Button>
               </div>
             );
           },

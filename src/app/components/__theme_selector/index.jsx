@@ -8,7 +8,11 @@ import { useEffect, useState } from "react";
 const ThemeSelector = () => {
   const { theme, setTheme } = useTheme();
 
-  const [localTheme, setLocalTheme] = useState(localStorage.theme || "dark");
+  const [localTheme, setLocalTheme] = useState(
+    typeof window !== "undefined"
+      ? window?.localStorage?.theme ?? "dark"
+      : "light"
+  );
 
   useEffect(() => {
     setTheme(localTheme);
