@@ -5,7 +5,7 @@ const Card = () => {
     <div className="mx-auto container">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full  p-4">
         <ShadCnCard className="p-5">
-          <div className="inline-flex rounded-full bg-primary p-4">
+          <div className="inline-flex rounded-full p-4">
             <img className="h-6 w-6" src="/__images__/select.png" alt="" />
           </div>
 
@@ -18,7 +18,7 @@ const Card = () => {
         </ShadCnCard>
 
         <ShadCnCard className="p-5">
-          <div className="inline-flex rounded-full bg-primary p-4">
+          <div className="inline-flex rounded-full  p-4">
             <img className="h-6 w-6" src="/__images__/export.png" alt="" />
           </div>
 
@@ -31,7 +31,7 @@ const Card = () => {
         </ShadCnCard>
 
         <ShadCnCard className="p-5">
-          <div className="inline-flex rounded-full bg-primary p-4">
+          <div className="inline-flex rounded-full  p-4">
             <img className="h-6 w-6" src="/__images__/customise.png" alt="" />
           </div>
 
@@ -44,7 +44,7 @@ const Card = () => {
         </ShadCnCard>
 
         <ShadCnCard className="p-5">
-          <div className="inline-flex rounded-full bg-primary p-4">
+          <div className="inline-flex rounded-full  p-4">
             <img className="h-6 w-6" src="/__images__/publish.png" alt="" />
           </div>
 

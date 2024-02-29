@@ -424,7 +424,6 @@ function Editor() {
               <div className="space-x-6 flex items-center">
                 {(puck_data?.current?.content ?? []).length === 0 ? (
                   <Button
-                    variant="link"
                     onClick={() =>
                       alert("Add components to generate copywriting")
                     }
@@ -442,12 +441,10 @@ function Editor() {
                     title="Select component to update copywriting"
                   >
                     <Button
-                      variant="link"
                       disabled={loader.export_with_copy_writing}
                       onClick={() =>
                         dispatch({ type: "OPEN_COPWRITING_MODAL" })
                       }
-                      className="cursor-pointer"
                     >
                       {loader.export_with_copy_writing && <Loader />}
                       With Copywriting
@@ -455,7 +452,6 @@ function Editor() {
                   </CopyWritingDialog>
                 )}
                 <Button
-                  variant="link"
                   disabled={loader.export}
                   onClick={() =>
                     handleExport({
@@ -468,7 +464,6 @@ function Editor() {
                   Export
                 </Button>
                 <Button
-                  variant="link"
                   onClick={() => {
                     set_modal(true);
                     setData(puck_data.current);
