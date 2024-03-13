@@ -273,7 +273,6 @@ const config = {
 function Editor() {
   const { data: session } = useSession();
   const user = session?.user?.email;
-  const { appState, dispatch: puck_dispatch } = usePuck();
   const [state, dispatch] = useReducer(reducer, {
     open_ai_key: "",
     open_ai_prompt: "",
@@ -288,6 +287,8 @@ function Editor() {
   });
   const state_ref = useRef({});
   const puck_data = useRef({});
+
+  const puck_init = useRef(JSON.parse(localStorage?.getItem("puck_state")));
 
   const handleExportWithCopywriting = async ({
     components,
@@ -392,6 +393,9 @@ function Editor() {
       <Puck
         onChange={(data) => {
           puck_data.current = data;
+          if (localStorage) {
+            localStorage.setItem("puck_state", JSON.stringify(data));
+          }
         }}
         overrides={{
           header: () => {
@@ -530,7 +534,7 @@ function Editor() {
         }}
         headerTitle="Drag a page component from the left menu here to begin"
         config={config}
-        data={state.puck_state}
+        data={puck_init.current}
         onPublish={save}
       />
     </>
