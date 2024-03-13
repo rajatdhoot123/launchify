@@ -29,6 +29,7 @@ import {
   PREMIUM_FEATURES,
 } from "@/app/constants__/floater";
 import ThemeSelector from "@/app/components/__theme_selector";
+import { LoginDialog } from "@/app/components/__login_dialog/login";
 import ViewDemo from "@/app/components/__view_demo";
 import { forwardRef, useEffect, useReducer, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -68,8 +69,6 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
     pages: PAGES,
   });
   const [isOpen, setIsOpen] = useState({ integrations: false, page: false });
-  const { data: session } = useSession();
-  const is_premium = ["rajatdhoot123@gmail.com"].includes(session?.user?.email);
 
   useEffect(() => {
     state_ref.current = state;
@@ -272,6 +271,8 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const { data: session } = useSession();
+  const user = session?.user?.email;
   const { appState, dispatch: puck_dispatch } = usePuck();
   const [state, dispatch] = useReducer(reducer, {
     open_ai_key: "",
@@ -402,8 +403,13 @@ function Editor() {
             // return children
 
             return (
-              <div className="w-screen h-16 flex items-center justify-between bg-white drop-shadow-2xl px-6">
+              <div className="w-screen h-16 flex items-center justify-between drop-shadow-2xl px-6 bg-background">
                 <div className="w-1/3">
+                  {user && (
+                    <span className="text-primary text-sm font-bold">
+                      {user}
+                    </span>
+                  )}
                   {/* <Button
                     onClick={() => {
                       console.log("Called");
@@ -452,20 +458,24 @@ function Editor() {
                       </Button>
                     </CopyWritingDialog>
                   )}
-                  <Button
-                    disabled={loader.export}
-                    onClick={() =>
-                      handleExport({
-                        components: modify_components(
-                          puck_data.current.content
-                        ),
-                      })
-                    }
-                    className="cursor-pointer"
-                  >
-                    {loader.export && <Loader />}
-                    Export
-                  </Button>
+                  {!user ? (
+                    <LoginDialog />
+                  ) : (
+                    <Button
+                      disabled={loader.export}
+                      onClick={() =>
+                        handleExport({
+                          components: modify_components(
+                            puck_data.current.content
+                          ),
+                        })
+                      }
+                      className="cursor-pointer"
+                    >
+                      {loader.export && <Loader />}
+                      Export
+                    </Button>
+                  )}
                   <Button
                     onClick={() => {
                       set_modal(true);
