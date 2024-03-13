@@ -40,6 +40,13 @@ import Loader from "@/app/components/__loader/loader";
 import { Button } from "@/components/ui/button";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 
+// Describe the initial data
+const initialData = {
+  content: [],
+  root: {},
+  zones: {},
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "OPEN_COPWRITING_MODAL":
@@ -212,13 +219,6 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
 
 NextBoilerPlate.displayName = "NextBoilerPlate";
 
-// Describe the initial data
-const initialData = {
-  content: [],
-  root: {},
-  zones: {},
-};
-
 const config = {
   categories: {
     ...COMPONENTS_ARRAY.reduce(
@@ -271,6 +271,7 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const [isPuckLoaded, setPuckLoaded] = useState(false);
   const { data: session } = useSession();
   const user = session?.user?.email;
   const [state, dispatch] = useReducer(reducer, {
@@ -287,8 +288,7 @@ function Editor() {
   });
   const state_ref = useRef({});
   const puck_data = useRef({});
-
-  const puck_init = useRef(JSON.parse(localStorage?.getItem("puck_state")) || undefined);
+  const puck_init = useRef(initialData);
 
   const handleExportWithCopywriting = async ({
     components,
@@ -351,6 +351,17 @@ function Editor() {
     }
   };
 
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      setPuckLoaded(true);
+      const puck_data = JSON.parse(localStorage.getItem("puck_state"));
+      if (puck_data) {
+        puck_init.current = puck_data;
+      }
+    }
+    setPuckLoaded(true);
+  }, []);
+
   const handleExport = async ({ components }) => {
     const state = state_ref.current;
     logEvent("export_clicked", {
@@ -385,38 +396,37 @@ function Editor() {
     }
   };
 
-  console.log(puck_init);
-
   return (
     <>
       <ViewDemo onClose={() => set_modal(false)} isOpen={modal_is_open}>
         <Render data={data} config={config} />
       </ViewDemo>
-      <Puck
-        onChange={(data) => {
-          puck_data.current = data;
-          if (localStorage) {
-            localStorage.setItem("puck_state", JSON.stringify(data));
-          }
-        }}
-        overrides={{
-          header: () => {
-            // return Children.map(
-            //   children,
-            //   (child) => console.log(child) || child
-            // );
+      {isPuckLoaded && (
+        <Puck
+          onChange={(data) => {
+            puck_data.current = data;
+            if (localStorage) {
+              localStorage.setItem("puck_state", JSON.stringify(data));
+            }
+          }}
+          overrides={{
+            header: () => {
+              // return Children.map(
+              //   children,
+              //   (child) => console.log(child) || child
+              // );
 
-            // return children
+              // return children
 
-            return (
-              <div className="w-screen h-16 flex items-center justify-between drop-shadow-2xl px-6 bg-background">
-                <div className="w-1/3">
-                  {user && (
-                    <span className="text-primary text-sm font-bold">
-                      {user}
-                    </span>
-                  )}
-                  {/* <Button
+              return (
+                <div className="w-screen h-16 flex items-center justify-between drop-shadow-2xl px-6 bg-background">
+                  <div className="w-1/3">
+                    {user && (
+                      <span className="text-primary text-sm font-bold">
+                        {user}
+                      </span>
+                    )}
+                    {/* <Button
                     onClick={() => {
                       console.log("Called");
                       puck_dispatch({
@@ -430,115 +440,118 @@ function Editor() {
                   >
                     Hide Sidebar
                   </Button> */}
-                </div>
-                <div className="text-center w-1/3">
-                  Drag a page component from the left menu here to begin
-                </div>
-                <div className="space-x-6 flex items-center w-1/3 justify-end">
-                  {!user ? (
-                    <LoginDialog text="With Copywriting" />
-                  ) : (puck_data?.current?.content ?? []).length === 0 ? (
-                    <Button
-                      onClick={() =>
-                        alert("Add components to generate copywriting")
-                      }
-                    >
-                      With Copywriting
-                    </Button>
-                  ) : (
-                    <CopyWritingDialog
-                      handleExportWithCopywriting={handleExportWithCopywriting}
-                      state={state}
-                      dispatch={dispatch}
-                      is_open={state.is_copywriting_active}
-                      data={puck_data.current}
-                      key="Show code"
-                      title="Select component to update copywriting"
-                    >
+                  </div>
+                  <div className="text-center w-1/3">
+                    Drag a page component from the left menu here to begin
+                  </div>
+                  <div className="space-x-6 flex items-center w-1/3 justify-end">
+                    {!user ? (
+                      <LoginDialog text="With Copywriting" />
+                    ) : (puck_data?.current?.content ?? []).length === 0 ? (
                       <Button
-                        disabled={loader.export_with_copy_writing}
                         onClick={() =>
-                          dispatch({ type: "OPEN_COPWRITING_MODAL" })
+                          alert("Add components to generate copywriting")
                         }
                       >
-                        {loader.export_with_copy_writing && <Loader />}
                         With Copywriting
                       </Button>
-                    </CopyWritingDialog>
-                  )}
-                  {!user ? (
-                    <LoginDialog text="Export" />
-                  ) : (
+                    ) : (
+                      <CopyWritingDialog
+                        handleExportWithCopywriting={
+                          handleExportWithCopywriting
+                        }
+                        state={state}
+                        dispatch={dispatch}
+                        is_open={state.is_copywriting_active}
+                        data={puck_data.current}
+                        key="Show code"
+                        title="Select component to update copywriting"
+                      >
+                        <Button
+                          disabled={loader.export_with_copy_writing}
+                          onClick={() =>
+                            dispatch({ type: "OPEN_COPWRITING_MODAL" })
+                          }
+                        >
+                          {loader.export_with_copy_writing && <Loader />}
+                          With Copywriting
+                        </Button>
+                      </CopyWritingDialog>
+                    )}
+                    {!user ? (
+                      <LoginDialog text="Export" />
+                    ) : (
+                      <Button
+                        disabled={loader.export}
+                        onClick={() =>
+                          handleExport({
+                            components: modify_components(
+                              puck_data.current.content
+                            ),
+                          })
+                        }
+                        className="cursor-pointer"
+                      >
+                        {loader.export && <Loader />}
+                        Export
+                      </Button>
+                    )}
                     <Button
-                      disabled={loader.export}
-                      onClick={() =>
-                        handleExport({
-                          components: modify_components(
-                            puck_data.current.content
-                          ),
-                        })
-                      }
+                      onClick={() => {
+                        set_modal(true);
+                        setData(puck_data.current);
+                      }}
                       className="cursor-pointer"
                     >
-                      {loader.export && <Loader />}
-                      Export
+                      View
                     </Button>
-                  )}
-                  <Button
-                    onClick={() => {
-                      set_modal(true);
-                      setData(puck_data.current);
-                    }}
-                    className="cursor-pointer"
-                  >
-                    View
-                  </Button>
+                  </div>
                 </div>
-              </div>
-            );
-          },
-          componentItem: ({ children }) => {
-            const [name, index] =
-              children?.props?.children?.props?.children?.[0]?.props?.children?.split(
-                "-"
               );
+            },
+            componentItem: ({ children }) => {
+              const [name, index] =
+                children?.props?.children?.props?.children?.[0]?.props?.children?.split(
+                  "-"
+                );
 
-            return (
-              <div className="mb-4">
-                <HoverCard className="z-[999] relative">
-                  <HoverCardTrigger>{children}</HoverCardTrigger>
-                  <HoverCardPortal>
-                    <HoverCardContent
-                      side="right"
-                      className="w-[340px] h-[196px] overflow-hidden"
-                    >
-                      {/* <AspectRatio ratio={16 / 9} className="bg-muted "> */}
-                      <iframe
-                        className="frame"
-                        src={`/iframe__/${name}/${index}`}
-                      ></iframe>
-                      {/* </AspectRatio> */}
-                    </HoverCardContent>
-                  </HoverCardPortal>
-                </HoverCard>
-              </div>
-            );
-          },
-          components: ({ children }) => {
-            return (
-              <div>
-                <ThemeSelector />
-                <div>{children}</div>
-                <NextBoilerPlate ref={state_ref} />
-              </div>
-            );
-          },
-        }}
-        headerTitle="Drag a page component from the left menu here to begin"
-        config={config}
-        data={puck_init.current}
-        onPublish={save}
-      />
+              return (
+                <div className="mb-4">
+                  <HoverCard className="z-[999] relative">
+                    <HoverCardTrigger>{children}</HoverCardTrigger>
+                    <HoverCardPortal>
+                      <HoverCardContent
+                        side="right"
+                        className="w-[340px] h-[196px] overflow-hidden"
+                      >
+                        {/* <AspectRatio ratio={16 / 9} className="bg-muted "> */}
+                        <iframe
+                          className="frame"
+                          src={`/iframe__/${name}/${index}`}
+                        ></iframe>
+                        {/* </AspectRatio> */}
+                      </HoverCardContent>
+                    </HoverCardPortal>
+                  </HoverCard>
+                </div>
+              );
+            },
+            components: ({ children }) => {
+              return (
+                <div>
+                  <ThemeSelector />
+                  <div>{children}</div>
+                  <NextBoilerPlate ref={state_ref} />
+                </div>
+              );
+            },
+          }}
+          headerTitle="Drag a page component from the left menu here to begin"
+          config={config}
+          data={puck_init.current}
+          onPublish={save}
+        />
+      )}
     </>
   );
 }
