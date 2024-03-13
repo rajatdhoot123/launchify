@@ -288,7 +288,7 @@ function Editor() {
   const state_ref = useRef({});
   const puck_data = useRef({});
 
-  const puck_init = useRef(JSON.parse(localStorage?.getItem("puck_state")));
+  const puck_init = useRef(JSON.parse(localStorage?.getItem("puck_state")) || undefined);
 
   const handleExportWithCopywriting = async ({
     components,
@@ -384,6 +384,8 @@ function Editor() {
       console.log(err);
     }
   };
+
+  console.log(puck_init);
 
   return (
     <>
