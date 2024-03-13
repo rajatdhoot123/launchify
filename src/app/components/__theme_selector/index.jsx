@@ -10,7 +10,7 @@ const ThemeSelector = () => {
 
   const [localTheme, setLocalTheme] = useState(
     typeof window !== "undefined"
-      ? window?.localStorage?.theme ?? "dark"
+      ? window?.localStorage?.theme ?? "light"
       : "light"
   );
 

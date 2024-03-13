@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 
 const EmailSingIn = () => {
@@ -31,11 +32,7 @@ const EmailSingIn = () => {
         />
       </div>
 
-      <button
-        className="rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-primary-foreground hover:bg-gray-100 h-10 px-4 py-2 w-full flex items-center justify-center border border-gray-300"
-        type="submit"
-        data-id="12"
-      >
+      <Button className="w-full" type="submit">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -46,14 +43,14 @@ const EmailSingIn = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className=" mr-2 text-blue-500 h-5 w-5"
+          className="mr-2 text-primary-foreground h-5 w-5"
           data-id="13"
         >
           <rect width="20" height="16" x="2" y="4" rx="2"></rect>
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
         </svg>
         Send Magic Link
-      </button>
+      </Button>
     </form>
   );
 };
