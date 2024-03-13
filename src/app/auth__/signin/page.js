@@ -26,11 +26,11 @@ export default async function SignIn() {
 
   return (
     <div
-      className="w-full min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-200 to-green-200"
+      className="w-full absolute top-1/2 -translate-y-1/2 flex items-center justify-center"
       data-id="1"
     >
       <div
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full overflow-hidden relative"
+        className="bg-white drop-shadow-md	 rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full overflow-hidden relative"
         data-id="2"
       >
         <h1 className="text-2xl font-bold text-center mb-5" data-id="4">
