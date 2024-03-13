@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/dialog";
 import EmailSignIn from "@/app/auth__/signin/EmailSignIn";
 
-export function LoginDialog() {
+export function LoginDialog({ text }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="cursor-pointer">Export</Button>
+        <Button className="cursor-pointer">{text}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

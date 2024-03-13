@@ -429,7 +429,9 @@ function Editor() {
                   Drag a page component from the left menu here to begin
                 </div>
                 <div className="space-x-6 flex items-center w-1/3 justify-end">
-                  {(puck_data?.current?.content ?? []).length === 0 ? (
+                  {!user ? (
+                    <LoginDialog text="With Copywriting" />
+                  ) : (puck_data?.current?.content ?? []).length === 0 ? (
                     <Button
                       onClick={() =>
                         alert("Add components to generate copywriting")
@@ -459,7 +461,7 @@ function Editor() {
                     </CopyWritingDialog>
                   )}
                   {!user ? (
-                    <LoginDialog />
+                    <LoginDialog text="Export" />
                   ) : (
                     <Button
                       disabled={loader.export}
