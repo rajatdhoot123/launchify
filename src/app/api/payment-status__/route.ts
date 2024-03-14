@@ -145,12 +145,10 @@ export async function POST(req: NextRequest) {
 
   const {
     meta: { event_name, test_mode },
+    data: {
+      attributes: { user_email, first_order_item },
+    },
   } = body;
-
-  await db.insert(subscriptions).values({
-    email_id: "rajatdhoot123@gmail.com",
-    is_active: false,
-  });
 
   switch (event_name) {
     case ORDER_CREATED:
@@ -158,10 +156,31 @@ export async function POST(req: NextRequest) {
     case ORDER_REFUNDED:
       return NextResponse.json({ message: "order refunded" });
     case SUBSCRIPTION_CREATED:
-      return NextResponse.json({ message: "subscription created" });
+      try {
+        await db.insert(subscriptions).values({
+          meta: body,
+          product_id: first_order_item.product_id,
+          email_id: user_email,
+          is_active: true,
+        });
+        return NextResponse.json({ message: "subscription created" });
+      } catch (err) {
+        return NextResponse.json({ message: "subscription failed" });
+      }
     case SUBSCRIPTION_UPDATED:
       return NextResponse.json({ message: "subscription updated" });
     case SUBSCRIPTION_CANCELLED:
+      try {
+        await db.insert(subscriptions).values({
+          meta: body,
+          product_id: first_order_item.product_id,
+          email_id: user_email,
+          is_active: false,
+        });
+        return NextResponse.json({ message: "subscription created" });
+      } catch (err) {
+        return NextResponse.json({ message: "subscription failed" });
+      }
       return NextResponse.json({ message: "subscription cancelled" });
     case SUBSCRIPTION_RESUMED:
       return NextResponse.json({ message: "subscription resumed" });

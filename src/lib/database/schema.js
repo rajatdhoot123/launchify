@@ -6,6 +6,7 @@ import {
   serial,
   primaryKey,
   integer,
+  jsonb,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
@@ -51,6 +52,8 @@ export const subscriptions = pgTable("subscriptions", {
   created_at: timestamp("created_at"),
   email_id: text("email_id").notNull(),
   is_active: boolean("is_active").notNull(),
+  product_id: boolean("product_id").notNull(),
+  meta: jsonb("meta").notNull(),
 });
 
 export const verificationTokens = pgTable(
