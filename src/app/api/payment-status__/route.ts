@@ -43,110 +43,10 @@ export async function POST(req: NextRequest) {
 
   const body = JSON.parse(text);
 
-  const data = {
-    type: "orders",
-    id: "2290082",
-    attributes: {
-      store_id: 49190,
-      customer_id: 2491725,
-      identifier: "464d65f5-0cff-4fda-a687-184767d37dd8",
-      order_number: 491903,
-      user_name: "helo",
-      user_email: "hello.kwiktwik@gmail.com",
-      currency: "USD",
-      currency_rate: "1.00000000",
-      tax_name: "GST",
-      tax_rate: 18,
-      tax_inclusive: false,
-      status: "paid",
-      status_formatted: "Paid",
-      refunded: false,
-      refunded_at: null,
-      subtotal: 2900,
-      discount_total: 0,
-      tax: 522,
-      setup_fee: 0,
-      total: 3422,
-      subtotal_usd: 2900,
-      discount_total_usd: 0,
-      tax_usd: 522,
-      setup_fee_usd: 0,
-      total_usd: 3422,
-      subtotal_formatted: "$29.00",
-      discount_total_formatted: "$0.00",
-      tax_formatted: "$5.22",
-      setup_fee_formatted: "$0.00",
-      total_formatted: "$34.22",
-      first_order_item: {
-        id: 2250951,
-        order_id: 2290082,
-        product_id: 125339,
-        variant_id: 145239,
-        price_id: 137616,
-        product_name: "Boilercode App",
-        variant_name: "Default",
-        price: 2900,
-        quantity: 1,
-        created_at: "2024-03-14T05:07:49.000000Z",
-        updated_at: "2024-03-14T05:07:49.000000Z",
-        test_mode: true,
-      },
-      urls: {
-        receipt:
-          "https://app.lemonsqueezy.com/my-orders/464d65f5-0cff-4fda-a687-184767d37dd8?signature=03ecfa594268badd76ffb8561eeabba819f332da546545ce0333b1d931796ed5",
-      },
-      created_at: "2024-03-14T05:07:48.000000Z",
-      updated_at: "2024-03-14T05:07:49.000000Z",
-      test_mode: true,
-    },
-    relationships: {
-      store: {
-        links: {
-          related: "https://api.lemonsqueezy.com/v1/orders/2290082/store",
-          self: "https://api.lemonsqueezy.com/v1/orders/2290082/relationships/store",
-        },
-      },
-      customer: {
-        links: {
-          related: "https://api.lemonsqueezy.com/v1/orders/2290082/customer",
-          self: "https://api.lemonsqueezy.com/v1/orders/2290082/relationships/customer",
-        },
-      },
-      "order-items": {
-        links: {
-          related: "https://api.lemonsqueezy.com/v1/orders/2290082/order-items",
-          self: "https://api.lemonsqueezy.com/v1/orders/2290082/relationships/order-items",
-        },
-      },
-      subscriptions: {
-        links: {
-          related:
-            "https://api.lemonsqueezy.com/v1/orders/2290082/subscriptions",
-          self: "https://api.lemonsqueezy.com/v1/orders/2290082/relationships/subscriptions",
-        },
-      },
-      "license-keys": {
-        links: {
-          related:
-            "https://api.lemonsqueezy.com/v1/orders/2290082/license-keys",
-          self: "https://api.lemonsqueezy.com/v1/orders/2290082/relationships/license-keys",
-        },
-      },
-      "discount-redemptions": {
-        links: {
-          related:
-            "https://api.lemonsqueezy.com/v1/orders/2290082/discount-redemptions",
-          self: "https://api.lemonsqueezy.com/v1/orders/2290082/relationships/discount-redemptions",
-        },
-      },
-    },
-    links: { self: "https://api.lemonsqueezy.com/v1/orders/2290082" },
-  };
-
   const {
     meta: { event_name, test_mode },
     data: {
-      attributes: { user_email, first_order_item },
+      attributes: { user_email, product_id },
     },
   } = body;
 
@@ -159,12 +59,13 @@ export async function POST(req: NextRequest) {
       try {
         await db.insert(subscriptions).values({
           meta: body,
-          product_id: first_order_item.product_id,
+          product_id: product_id,
           email_id: user_email,
           is_active: true,
         });
         return NextResponse.json({ message: "subscription created" });
       } catch (err) {
+        console.log(err);
         return NextResponse.json({ message: "subscription failed" });
       }
     case SUBSCRIPTION_UPDATED:
@@ -173,7 +74,7 @@ export async function POST(req: NextRequest) {
       try {
         await db.insert(subscriptions).values({
           meta: body,
-          product_id: first_order_item.product_id,
+          product_id: product_id,
           email_id: user_email,
           is_active: false,
         });
