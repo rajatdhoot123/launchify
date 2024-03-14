@@ -56,8 +56,6 @@ export default async function RootLayout({ children }) {
     current_user = get_user.find((u) => u.email_id === user);
   }
 
-  console.log({ current_user });
-
   return (
     <html lang="en">
       {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
