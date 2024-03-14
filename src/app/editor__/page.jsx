@@ -1,7 +1,7 @@
 "use client";
 import { Puck, Render, usePuck } from "@measured/puck";
 import "@measured/puck/puck.css";
-
+import { useToast } from "@/components/ui/use-toast";
 import {
   HoverCard,
   HoverCardContent,
@@ -271,6 +271,7 @@ const config = {
 
 // Render Puck editor
 function Editor() {
+  const { toast } = useToast();
   const [isPuckLoaded, setPuckLoaded] = useState(false);
   const { data: session } = useSession();
   const user = session?.user?.email;
@@ -367,23 +368,49 @@ function Editor() {
     logEvent("export_clicked", {
       event_name: "export_clicked",
     });
-    const response = await fetch("/handle_export__", {
-      method: "POST",
-      body: JSON.stringify({
-        ga_id: state.ga_id,
-        crisp_id: state.crisp_id,
-        pages: state.pages,
-        premium_features: state.premium_features,
-        components: components,
-      }),
-    });
-    const res_blob = await response.blob();
-    const url = window.URL.createObjectURL(res_blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "uicomponents";
-    link.click();
-    window.URL.revokeObjectURL(url);
+
+    try {
+      const response = await fetch("/handle_export__", {
+        method: "POST",
+        body: JSON.stringify({
+          ga_id: state.ga_id,
+          crisp_id: state.crisp_id,
+          pages: state.pages,
+          premium_features: state.premium_features,
+          components: components,
+        }),
+      });
+
+      if (response.ok) {
+        const res_blob = await response.blob();
+        const url = window.URL.createObjectURL(res_blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "uicomponents";
+        link.click();
+        window.URL.revokeObjectURL(url);
+      } else {
+        throw response;
+      }
+    } catch (error) {
+      if (error instanceof Response) {
+        const { message } = await error.json();
+
+        switch (error.status) {
+          case 403:
+            toast({
+              title: "Something went wrong",
+              description: message,
+            });
+          /* ... */
+          default:
+            toast({
+              title: error.statusText,
+              description: message,
+            });
+        }
+      }
+    }
   };
 
   const save = async (data) => {

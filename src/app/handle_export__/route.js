@@ -80,12 +80,12 @@ export async function POST(req) {
     .from(subscriptions)
     .where(eq(subscriptions.email_id, session?.user?.email));
 
-  const is_premium_user = get_user.filter((user) => user.is_active);
+  const is_premium_user = get_user.find((user) => user.is_active);
 
   if (!is_premium_user) {
     return NextResponse.json(
-      { message: "To export please subscribe" },
-      { status: 503 }
+      { message: "Subscribe to export" },
+      { status: 403 }
     );
   }
 
