@@ -12,6 +12,9 @@ import {
   formatComponentPath,
   removeBackticksAndJSX,
 } from "@/app/utils__/helper";
+import { db } from "@/lib/database/db";
+import { subscriptions } from "@/lib/database/schema";
+import { eq } from "drizzle-orm";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
@@ -43,6 +46,21 @@ const SUPPORT_PAGES = [
 ];
 
 export async function POST(req) {
+  const session = await getServerSession(AUTH_OPTIONS);
+
+  const get_user = await db
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.email_id, session?.user?.email));
+
+  const is_premium_user = get_user.find((user) => user.is_active);
+
+  if (!is_premium_user) {
+    return NextResponse.json(
+      { message: "Subscribe to export" },
+      { status: 403 }
+    );
+  }
   const ui_components = path.join(process.cwd(), "uicomponents");
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
@@ -75,12 +93,6 @@ export async function POST(req) {
     delete packageJson.scripts["drizzle:push"];
     delete packageJson.scripts["introspect"];
   }
-
-  const session = await getServerSession(AUTH_OPTIONS);
-
-  const is_premium_user = ["rajatdhoot123@gmail.com"].find(
-    (puser) => puser === session?.user?.email
-  );
 
   const zip = new AdmZip();
 

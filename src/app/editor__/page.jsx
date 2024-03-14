@@ -8,6 +8,7 @@ import {
   HoverCardPortal,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { ToastAction } from "@/components/ui/toast";
 import {
   Collapsible,
   CollapsibleContent,
@@ -40,6 +41,7 @@ import Loader from "@/app/components/__loader/loader";
 import { Button } from "@/components/ui/button";
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { useConfig } from "@/app/__context/ConfigContext";
+import Link from "next/link";
 
 // Describe the initial data
 const initialData = {
@@ -340,15 +342,49 @@ function Editor() {
           })),
         }),
       });
-      const res_blob = await response.blob();
-      const url = window.URL.createObjectURL(res_blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "uicomponents";
-      link.click();
-      window.URL.revokeObjectURL(url);
-    } catch (err) {
-      console.log({ err });
+      if (response.ok) {
+        const res_blob = await response.blob();
+        const url = window.URL.createObjectURL(res_blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "uicomponents";
+        link.click();
+        window.URL.revokeObjectURL(url);
+      } else {
+        throw response;
+      }
+    } catch (error) {
+      if (error instanceof Response) {
+        const { message } = await error.json();
+
+        switch (error.status) {
+          case 403:
+            toast({
+              title: "Something went wrong",
+              description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
+            });
+          /* ... */
+          default:
+            toast({
+              title: error.statusText,
+              description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
+            });
+        }
+      }
     } finally {
       setLoader((prev) => ({ ...prev, export_with_copy_writing: false }));
     }
@@ -403,12 +439,26 @@ function Editor() {
             toast({
               title: "Something went wrong",
               description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
             });
           /* ... */
           default:
             toast({
               title: error.statusText,
               description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
             });
         }
       }
