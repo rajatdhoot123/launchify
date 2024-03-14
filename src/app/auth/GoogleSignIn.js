@@ -7,11 +7,10 @@ import { usePathname } from "next/navigation";
 export default function GoogleButton() {
   const pathname = usePathname();
 
-  console.log(pathname);
   return (
     <Button
       className="w-full"
-      onClick={() => signIn("google", { callbackUrl: pathname })}
+      onClick={() => signIn("google", { callbackUrl: "/editor__" })}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

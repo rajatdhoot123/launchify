@@ -8,6 +8,9 @@ import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
+import { db } from "@/lib/database/db";
+import { subscriptions } from "@/lib/database/schema";
+import { eq } from "drizzle-orm";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
 import {
   formatComponentPath,
@@ -79,9 +82,19 @@ export async function POST(req) {
 
   const session = await getServerSession(AUTH_OPTIONS);
 
-  const is_premium_user = ["rajatdhoot123@gmail.com"].find(
-    (puser) => puser === session?.user?.email
-  );
+  const get_user = await db
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.email_id, session?.user?.email));
+
+  const is_premium_user = get_user.find((user) => user.is_active);
+
+  if (!is_premium_user) {
+    return NextResponse.json(
+      { message: "Subscribe to export" },
+      { status: 403 }
+    );
+  }
 
   const zip = new AdmZip();
 

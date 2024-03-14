@@ -39,6 +39,7 @@ import CopyWritingDialog from "@/app/components/__copywriting_dialog";
 import Loader from "@/app/components/__loader/loader";
 import { Button } from "@/components/ui/button";
 import { CaretSortIcon } from "@radix-ui/react-icons";
+import { useConfig } from "@/app/__context/ConfigContext";
 
 // Describe the initial data
 const initialData = {
@@ -272,6 +273,7 @@ const config = {
 // Render Puck editor
 function Editor() {
   const { toast } = useToast();
+  const { is_active } = useConfig();
   const [isPuckLoaded, setPuckLoaded] = useState(false);
   const { data: session } = useSession();
   const user = session?.user?.email;
