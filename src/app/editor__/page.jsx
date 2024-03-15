@@ -605,7 +605,7 @@ function Editor() {
                       }}
                       className="cursor-pointer"
                     >
-                      View
+                      Preview
                     </Button>
                   </div>
                 </div>
