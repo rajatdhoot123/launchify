@@ -1,9 +1,12 @@
 import {
   timestamp,
+  boolean,
   pgTable,
   text,
+  serial,
   primaryKey,
   integer,
+  jsonb,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
@@ -42,6 +45,15 @@ export const sessions = pgTable("session", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
+});
+
+export const subscriptions = pgTable("subscriptions", {
+  id: serial("id").primaryKey(),
+  created_at: timestamp("created_at"),
+  email_id: text("email_id").notNull(),
+  is_active: boolean("is_active").notNull(),
+  product_id: boolean("product_id").notNull(),
+  meta: jsonb("meta").notNull(),
 });
 
 export const verificationTokens = pgTable(

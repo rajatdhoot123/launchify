@@ -6,6 +6,11 @@ import NextAuthProvider from "@/app/nextauth/provider";
 import { getServerSession } from "next-auth";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import NavBar from "@/app/__landingcomponents__/navbar/variant-2";
+import { Toaster } from "@/components/ui/toaster";
+import { ConfigProvider } from "@/app/__context/ConfigContext";
+import { db } from "@/lib/database/db";
+import { subscriptions } from "@/lib/database/schema";
+import { eq } from "drizzle-orm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,6 +43,19 @@ export const viewport = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(AUTH_OPTIONS);
+
+  const user = session?.user?.email ?? null;
+
+  let current_user = null;
+  if (user) {
+    const get_user = await db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.email_id, user));
+
+    current_user = get_user.find((u) => u.email_id === user);
+  }
+
   return (
     <html lang="en">
       {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
@@ -58,10 +76,15 @@ export default async function RootLayout({ children }) {
       <body className={inter.className}>
         <Providers themes={["pink", "light", "dark"]}>
           <NextAuthProvider>
-            <NavBar session={session} />
-            {children}
+            <ConfigProvider
+              initialState={{ is_active: current_user?.is_active ?? false }}
+            >
+              <NavBar session={session} />
+              {children}
+            </ConfigProvider>
           </NextAuthProvider>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

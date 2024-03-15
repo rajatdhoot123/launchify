@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   COMPONENTS_ARRAY,
+  INTEGRATIONS,
   PAGES,
   PREMIUM_FEATURES,
 } from "@/app/constants__/floater";
@@ -74,7 +75,10 @@ const modify_components = (content) => {
 const NextBoilerPlate = forwardRef((props, state_ref) => {
   const [state, setState] = useState({
     ga_id: "",
-    premium_features: PREMIUM_FEATURES,
+    premium_features: PREMIUM_FEATURES.reduce(
+      (acc, fe) => ({ ...acc, [fe.item_id]: false }),
+      {}
+    ),
     crisp_id: "",
     pages: PAGES,
   });
@@ -123,7 +127,7 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
                   }
                   type="text"
                   value={state.ga_id}
-                  placeholder="Email"
+                  placeholder="Enter GA Id"
                 />
               </div>
               <div>
@@ -140,6 +144,25 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
                   placeholder="Enter Crisp Id"
                 />
               </div>
+              {INTEGRATIONS.map((feature) => (
+                <div key={feature.item_id} className="flex items-center">
+                  <Checkbox
+                    onCheckedChange={(e) =>
+                      setState((prev) => ({
+                        ...prev,
+                        premium_features: {
+                          ...prev.premium_features,
+                          [feature.item_id]: e,
+                        },
+                      }))
+                    }
+                    className="mr-2"
+                    id="mdx_support"
+                    checked={state.premium_features[feature.item_id]}
+                  />
+                  <Label htmlFor="mdx_support">{feature.title}</Label>
+                </div>
+              ))}
               <div className="flex items-center">
                 <Checkbox
                   className="mr-2"

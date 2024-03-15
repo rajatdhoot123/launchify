@@ -30,8 +30,11 @@ export const AUTH_OPTIONS = {
       }
       return true;
     },
-    async redirect({ baseUrl }) {
-      return `${baseUrl}`;
+    async redirect({ baseUrl, url }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
 };

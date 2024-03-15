@@ -53,13 +53,9 @@ export async function POST(req) {
     pages = [],
   } = body;
 
-  const is_next_auth = premium_features.find(
-    ({ item_id }) => item_id === "next_auth"
-  )?.selected;
+  const is_next_auth = premium_features.next_auth;
+  const is_database = premium_features.database;
 
-  const is_database = premium_features.find(
-    ({ item_id }) => item_id === "database"
-  )?.selected;
   const packageJson = JSON.parse(fs.readFileSync(package_json_path, "utf-8"));
 
   delete packageJson.dependencies["axios"];
@@ -116,18 +112,12 @@ export async function POST(req) {
       return pages_to_add.includes(file);
     }
     if (DATABASE_FILES.includes(file)) {
-      if (!is_premium_user) {
-        return false;
-      }
       if (is_database || is_next_auth) {
         return true;
       }
       return false;
     }
     if (NEXT_AUTH_FILES.includes(file)) {
-      if (!is_premium_user) {
-        return false;
-      }
       if (is_next_auth) {
         return true;
       }
