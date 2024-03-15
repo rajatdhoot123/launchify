@@ -20,7 +20,7 @@ const Pricing = () => {
               <h2 className="text-lg mb-4">Pro Builder</h2>
               <div className="mb-6">
                 <span className="block text-5xl pb-2">
-                  $39
+                  $57
                   <del className="ml-2 text-3xl">$156</del>
                 </span>
                 <span className="text-sm text-grey">Lifetime</span>
@@ -50,7 +50,7 @@ const Pricing = () => {
               <h2 className="text-lg mb-4">Ultimate Builder</h2>
               <div className="mb-6">
                 <span className="block text-5xl pb-2">
-                  $49
+                  $57
                   <del className="ml-2 text-3xl">$196</del>
                 </span>
                 <span className="text-sm text-grey">Lifetime</span>
