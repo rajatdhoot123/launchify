@@ -108,6 +108,12 @@ export async function POST(req) {
     .map((item) => `src/app/(markdown)/${item.item_id}/page.mdx`);
 
   zip.addLocalFolder(ui_components, "", (file) => {
+    if (file.includes("lemon-squeezy")) {
+      if (premium_features.lemon_squeezy) {
+        return true;
+      }
+      return false;
+    }
     if (SUPPORT_PAGES.includes(file)) {
       return pages_to_add.includes(file);
     }

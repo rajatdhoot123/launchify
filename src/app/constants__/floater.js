@@ -208,11 +208,6 @@ export const PREMIUM_FEATURES = [
     selected: false,
     title: "Database (Drizzle ORM)",
   },
-  {
-    item_id: "lemon_squeezy",
-    selected: false,
-    title: "Lemon Squeezy Webhooks",
-  },
 ];
 
 export const INTEGRATIONS = [
@@ -225,6 +220,11 @@ export const INTEGRATIONS = [
     item_id: "database",
     selected: false,
     title: "Database (Drizzle ORM)",
+  },
+  {
+    item_id: "lemon_squeezy",
+    selected: false,
+    title: "Lemon Squeezy Webhooks",
   },
 ];
 
