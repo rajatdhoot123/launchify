@@ -226,6 +226,11 @@ export const INTEGRATIONS = [
     selected: false,
     title: "Lemon Squeezy Webhooks",
   },
+  {
+    item_id: "stripe",
+    selected: false,
+    title: "Stripe Webhooks",
+  },
 ];
 
 export const PAGES = [

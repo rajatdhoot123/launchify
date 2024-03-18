@@ -69,6 +69,10 @@ export async function POST(req) {
     delete packageJson.scripts["introspect"];
   }
 
+  if (!premium_features.stripe) {
+    delete packageJson.dependencies["stripe"];
+  }
+
   const session = await getServerSession(AUTH_OPTIONS);
 
   const get_user = await db
@@ -110,6 +114,12 @@ export async function POST(req) {
   zip.addLocalFolder(ui_components, "", (file) => {
     if (file.includes("lemon-squeezy")) {
       if (premium_features.lemon_squeezy) {
+        return true;
+      }
+      return false;
+    }
+    if (file.includes("stripe")) {
+      if (premium_features.stripe) {
         return true;
       }
       return false;
