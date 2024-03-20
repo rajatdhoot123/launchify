@@ -1,5 +1,8 @@
 import Stripe from "stripe";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
+import { headers } from "next/headers";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 type EventName =
   // Checkout: https://stripe.com/docs/payments/checkout
@@ -304,11 +307,10 @@ async function handleStripeWebhook(body: any) {
   }
 }
 
-async function POST(request: Request) {
+async function POST(request: NextRequest) {
   try {
     // Request Body.
-    const rawBody = await request.text();
-    const body = JSON.parse(rawBody);
+    const body = await request.text();
 
     let event;
 
@@ -319,13 +321,14 @@ async function POST(request: Request) {
         throw new Error("STRIPE_WEBHOOK_SECRET not set");
       }
 
-      const sig = request.headers.get("Stripe-Signature");
+      const headersList = headers();
+      const sig = headersList.get("stripe-signature");
       if (!sig) {
         throw new Error("Stripe Signature missing");
       }
 
       // Assuming you have a Stripe instance configured
-      event = Stripe.webhooks.constructEvent(rawBody, sig, stripeWebhookSecret);
+      event = stripe.webhooks.constructEvent(body, sig, stripeWebhookSecret);
     } catch (err) {
       console.error(`⚠️  Webhook signature verification failed.`, err.message);
       return new Response(
@@ -349,9 +352,4 @@ async function POST(request: Request) {
   }
 }
 
-async function GET(request: NextApiRequest, response: NextApiResponse) {
-  // Bad Request or how ever you want to respond.
-  return response.status(400).json({ error: "Bad Request" });
-}
-
-export { POST, GET };
+export { POST };
