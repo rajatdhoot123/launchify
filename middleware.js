@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { VA_360_LINK_HOST, UI_WIDGET_LINK_HOST } from "@/lib/host";
+import { VA_360_LINK_HOST, UI_WIDGET_LINK_HOST } from "@/lib/host__";
 
 export const config = {
   matcher: [
