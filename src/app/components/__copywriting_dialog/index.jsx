@@ -63,7 +63,7 @@ const CopyWritingDialog = ({
   };
   return (
     <Dialog open={is_open}>
-      <DialogTrigger>{children}</DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent open={is_open}>
         <DialogTitle>Export With Copywriting</DialogTitle>
         <DialogDescription size="2" mb="4">
