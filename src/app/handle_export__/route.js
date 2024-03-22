@@ -36,6 +36,18 @@ const NEXT_AUTH_FILES = [
   "src/app/api/auth/[...nextauth]",
 ];
 
+const LEMON_SQUEEZY_FILES = [
+  "src/app/api/lemon-squeezy/webhook/route.ts",
+  "src/app/api/lemon-squeezy/webhook",
+  "src/app/api/lemon-squeezy",
+];
+
+const STRIPE_FILES = [
+  "src/app/api/stripe/webhook/route.ts",
+  "src/app/api/stripe/webhook",
+  "src/app/api/stripe",
+];
+
 const SUPPORT_PAGES = [
   "src/app/(markdown)/terms-condition/page.mdx",
   "src/app/(markdown)/privacy-policy/page.mdx",
@@ -49,7 +61,7 @@ export async function POST(req) {
     components,
     ga_id = "",
     crisp_id = "",
-    premium_features = [],
+    premium_features = {},
     pages = [],
   } = body;
 
