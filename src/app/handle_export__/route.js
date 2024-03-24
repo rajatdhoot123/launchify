@@ -7,52 +7,18 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import fs from "fs";
+import { readFileSync } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
-import { inngest } from "@/inngest/client";
-
-const DATABASE_FILES = [
-  "src/lib/database/db.js",
-  "src/lib/database/schema.js",
-  "src/lib/database",
-  "drizzle.config.js",
-];
-
-const NEXT_AUTH_FILES = [
-  "src/app/auth/EmailSignIn.js",
-  "src/app/auth/GoogleSignIn.js",
-  "src/app/auth/LoginButton.js",
-  "src/app/auth/authenticated/page.js",
-  "src/app/auth/authenticated",
-  "src/app/auth/signin/page.js",
-  "src/app/auth/signin",
-  "src/app/auth",
-  "src/app/nextauth/provider.js",
-  "src/app/nextauth",
-  "src/app/api/auth",
-  "src/app/api/auth/[...nextauth]/route.ts",
-  "src/app/api/auth/[...nextauth]/authOptions.ts",
-  "src/app/api/auth/[...nextauth]",
-];
-
-const LEMON_SQUEEZY_FILES = [
-  "src/app/api/lemon-squeezy/webhook/route.ts",
-  "src/app/api/lemon-squeezy/webhook",
-  "src/app/api/lemon-squeezy",
-];
-
-const STRIPE_FILES = [
-  "src/app/api/stripe/webhook/route.ts",
-  "src/app/api/stripe/webhook",
-  "src/app/api/stripe",
-];
-
-const SUPPORT_PAGES = [
-  "src/app/(markdown)/terms-condition/page.mdx",
-  "src/app/(markdown)/privacy-policy/page.mdx",
-];
+import {
+  NECESSARY_FILES,
+  NECESSARY_FOLDERS,
+  SHADCN_UI_FILES,
+  SHADCN_UI_FOLDER,
+  SUPPORT_PAGES,
+  MARKDOWN_PAGES,
+} from "@/boilercode/constants";
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
@@ -63,7 +29,7 @@ export async function POST(req) {
     ga_id = "",
     crisp_id = "",
     premium_features = {},
-    pages = [],
+    pages = {},
   } = body;
 
   const session = await getServerSession(AUTH_OPTIONS);
@@ -115,6 +81,14 @@ export async function POST(req) {
   });
 
   NEXT_AUTH_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
+  });
+
+  SUPPORT_PAGES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
+  });
+
+  MARKDOWN_PAGES.forEach((file) => {
     zip.addLocalFile(`${ui_components}/${file}`, file);
   });
 

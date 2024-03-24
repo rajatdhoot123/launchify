@@ -80,7 +80,7 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
       {}
     ),
     crisp_id: "",
-    pages: PAGES,
+    pages: PAGES.reduce((acc, fe) => ({ ...acc, [fe.item_id]: false }), {}),
   });
   const [isOpen, setIsOpen] = useState({ integrations: false, page: false });
 
@@ -211,26 +211,21 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
               </CardHeader>
             </CollapsibleTrigger>
             <CollapsibleContent className="space-y-4">
-              {state.pages.map((feature, index) => (
+              {PAGES.map((feature) => (
                 <div key={feature.item_id} className="flex items-center">
                   <Checkbox
                     className="mr-2"
                     id={feature.item_id}
-                    readOnly
                     onCheckedChange={(e) =>
                       setState((prev) => ({
                         ...prev,
-                        pages: prev.pages.map((page, findex) =>
-                          findex === index
-                            ? {
-                                ...page,
-                                selected: e,
-                              }
-                            : page
-                        ),
+                        pages: {
+                          ...prev.pages,
+                          [feature.item_id]: e,
+                        },
                       }))
                     }
-                    checked={true}
+                    checked={state.pages[feature.item_id]}
                   />
                   <Label htmlFor={feature.item_id}>{feature.title}</Label>
                 </div>
