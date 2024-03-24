@@ -11,13 +11,17 @@ import {
   SHADCN_UI_FOLDER,
   STRIPE_FILES,
 } from "@/boilercode/constants";
-import { promises as fsPromises } from "fs";
+import { promises as fsPromises, readFileSync } from "fs";
 
 export const helloWorld = inngest.createFunction(
   { id: "create-zip" },
   { event: "app/create-zip" },
   async ({ event, step }) => {
     const ui_components = path.join(process.cwd(), "uicomponents");
+    const package_json_path = path.join(process.cwd(), "package.json");
+
+    const packageJson = JSON.parse(readFileSync(package_json_path, "utf-8"));
+
     var zip = new AdmZip();
 
     NECESSARY_FILES.forEach((file) => {
@@ -51,6 +55,12 @@ export const helloWorld = inngest.createFunction(
     NEXT_AUTH_FILES.forEach((file) => {
       zip.addLocalFile(`${ui_components}/${file}`, file);
     });
+
+    zip.addFile(
+      "package.json",
+      Buffer.from(JSON.stringify(packageJson, null, 2)),
+      "utf8"
+    );
     const zipFileContents = zip.toBuffer();
 
     await fsPromises.writeFile(
