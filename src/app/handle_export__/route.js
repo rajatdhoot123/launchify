@@ -66,26 +66,6 @@ export async function POST(req) {
     pages = [],
   } = body;
 
-  const is_next_auth = premium_features.next_auth;
-  const is_database = premium_features.database;
-
-  const packageJson = JSON.parse(fs.readFileSync(package_json_path, "utf-8"));
-
-  delete packageJson.dependencies["axios"];
-  delete packageJson.dependencies["@craftjs/core"];
-  // Remove a dependency based on a condition
-  if (!(is_database && is_next_auth)) {
-    delete packageJson.dependencies["drizzle-orm"];
-    delete packageJson.devDependencies["drizzle-kit"];
-    delete packageJson.scripts["postinstall"];
-    delete packageJson.scripts["drizzle:push"];
-    delete packageJson.scripts["introspect"];
-  }
-
-  if (!premium_features.stripe) {
-    delete packageJson.dependencies["stripe"];
-  }
-
   const session = await getServerSession(AUTH_OPTIONS);
 
   const get_user = await db
@@ -102,75 +82,51 @@ export async function POST(req) {
     );
   }
 
-  const zip = new AdmZip();
+  const packageJson = JSON.parse(readFileSync(package_json_path, "utf-8"));
 
-  components.forEach(({ item_id, variant }) => {
-    zip.addFile(
-      `src/app/components/${item_id}/index.jsx`,
-      Buffer.from(
-        fs.readFileSync(
-          path.join(
-            process.cwd(),
-            "uicomponents",
-            `src/app/components/${item_id}/${variant}.jsx`
-          ),
-          "utf-8"
-        )
-      )
-    );
+  var zip = new AdmZip();
+
+  NECESSARY_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
   });
 
-  const pages_to_add = pages
-    .filter((page) => page.selected)
-    .map((item) => `src/app/(markdown)/${item.item_id}/page.mdx`);
+  SHADCN_UI_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
+  });
 
-  zip.addLocalFolder(ui_components, "", (file) => {
-    if (file.includes("lemon-squeezy")) {
-      if (premium_features.lemon_squeezy) {
-        return true;
-      }
-      return false;
-    }
-    if (file.includes("stripe")) {
-      if (premium_features.stripe) {
-        return true;
-      }
-      return false;
-    }
-    if (SUPPORT_PAGES.includes(file)) {
-      return pages_to_add.includes(file);
-    }
-    if (DATABASE_FILES.includes(file)) {
-      if (is_database || is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (NEXT_AUTH_FILES.includes(file)) {
-      if (is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (file.startsWith("src/app/components")) {
-      return false;
-    }
-    if (file.includes("__") || ["src/app/globals.css"].includes(file)) {
-      return false;
-    }
+  NECESSARY_FOLDERS.forEach((folder) => {
+    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+  });
 
-    if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
-      return false;
-    }
+  SHADCN_UI_FOLDER.forEach((folder) => {
+    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+  });
 
-    return true;
+  DATABASE_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
+  });
+
+  LEMON_SQUEEZY_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
+  });
+
+  STRIPE_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
+  });
+
+  NEXT_AUTH_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, file);
   });
 
   zip.addFile(
     "src/app/layout.js",
     Buffer.from(
       await prettier.format(
-        generateLayout({ ga_id, next_auth: is_next_auth, crisp_id }),
+        generateLayout({
+          ga_id,
+          next_auth: premium_features.next_auth,
+          crisp_id,
+        }),
         {
           parser: "babel",
         }
@@ -189,26 +145,11 @@ export async function POST(req) {
   );
 
   zip.addFile(
-    "src/app/globals.css",
-    Buffer.from(
-      `
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-      `,
-      {
-        parser: "babel",
-      }
-    ),
-    "utf8"
-  );
-
-  zip.addFile(
     ".env.local",
     Buffer.from(`
-${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
-${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
-`)
+  ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
+  ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
+  `)
   );
 
   zip.addFile(
