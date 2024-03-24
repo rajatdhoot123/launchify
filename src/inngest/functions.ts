@@ -1,6 +1,7 @@
 import { inngest } from "./client";
 import path from "path";
 import AdmZip from "adm-zip";
+import * as prettier from "prettier";
 import {
   DATABASE_FILES,
   LEMON_SQUEEZY_FILES,
@@ -13,11 +14,21 @@ import {
 } from "@/boilercode/constants";
 import { readFileSync } from "fs";
 import { createClient } from "@supabase/supabase-js";
+import generateRootPage from "@/app/utils__/generateRootPage";
+import generateLayout from "@/app/utils__/generateLayout";
 
 export const create_zip = inngest.createFunction(
   { id: "create-zip" },
   { event: "app/create-zip" },
   async ({ event, step }) => {
+    const { data = {} } = event;
+    const {
+      components,
+      ga_id = "",
+      crisp_id = "",
+      premium_features = {},
+      pages = [],
+    } = data;
     // Initialize Supabase client
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_KEY;
@@ -62,19 +73,49 @@ export const create_zip = inngest.createFunction(
     });
 
     zip.addFile(
+      "src/app/layout.js",
+      Buffer.from(
+        await prettier.format(
+          generateLayout({ ga_id, next_auth: is_next_auth, crisp_id }),
+          {
+            parser: "babel",
+          }
+        )
+      )
+    );
+
+    zip.addFile(
+      "src/app/page.js",
+      Buffer.from(
+        await prettier.format(generateRootPage({ components }), {
+          parser: "babel",
+        })
+      ),
+      "utf8"
+    );
+
+    zip.addFile(
+      ".env.local",
+      Buffer.from(`
+    ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
+    ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
+    `)
+    );
+
+    zip.addFile(
       "package.json",
       Buffer.from(JSON.stringify(packageJson, null, 2)),
       "utf8"
     );
     const zipFileContents = zip.toBuffer();
 
-    const { data, error } = await supabase.storage
+    const { data: supabase_data, error } = await supabase.storage
       .from("boilerplates")
       .upload(`${new Date().toISOString()}.zip`, zipFileContents, {
         cacheControl: "3600",
         upsert: false,
       });
 
-    return { event, body: { data, error } };
+    return { event, body: { data: supabase_data, error } };
   }
 );

@@ -188,21 +188,6 @@ export async function POST(req) {
   );
 
   zip.addFile(
-    "src/app/globals.css",
-    Buffer.from(
-      `
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-      `,
-      {
-        parser: "babel",
-      }
-    ),
-    "utf8"
-  );
-
-  zip.addFile(
     ".env.local",
     Buffer.from(`
 ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
@@ -210,11 +195,6 @@ ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
 `)
   );
 
-  zip.addFile(
-    "package.json",
-    Buffer.from(JSON.stringify(packageJson, null, 2)),
-    "utf8"
-  );
   const zipFileContents = zip.toBuffer();
   const fileName = "uploads.zip";
   const fileType = "application/zip";
