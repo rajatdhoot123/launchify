@@ -21,7 +21,6 @@ export const create_zip = inngest.createFunction(
   { id: "create-zip" },
   { event: "app/create-zip" },
   async ({ event, step }) => {
-    console.log({ event });
     const { data = {} } = event;
     const {
       components,
