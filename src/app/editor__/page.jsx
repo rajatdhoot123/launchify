@@ -372,6 +372,7 @@ function Editor() {
         throw response;
       }
     } catch (error) {
+      console.log({ error });
       if (error instanceof Response) {
         const { message } = await error.json();
 

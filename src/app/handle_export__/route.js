@@ -14,11 +14,21 @@ import { eq } from "drizzle-orm";
 import {
   NECESSARY_FILES,
   NECESSARY_FOLDERS,
-  SHADCN_UI_FILES,
-  SHADCN_UI_FOLDER,
   SUPPORT_PAGES,
   MARKDOWN_PAGES,
+  DATABASE_FILES,
+  LEMON_SQUEEZY_FILES,
+  STRIPE_FILES,
+  NEXT_AUTH_FILES,
+  SHADCN_UI_FILE,
+  SHADCN_UI_FOLDER,
 } from "@/boilercode/constants";
+
+const getFilePath = (file) => {
+  return file.split("/").length > 1
+    ? file.split("/").slice(0, -1).join("/")
+    : undefined;
+};
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
@@ -53,43 +63,77 @@ export async function POST(req) {
   var zip = new AdmZip();
 
   NECESSARY_FILES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
-  SHADCN_UI_FILES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
-  });
-
-  NECESSARY_FOLDERS.forEach((folder) => {
-    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+  SHADCN_UI_FILE.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
   SHADCN_UI_FOLDER.forEach((folder) => {
     zip.addLocalFolder(`${ui_components}/${folder}`, folder);
   });
 
-  DATABASE_FILES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
+  NECESSARY_FOLDERS.forEach((folder) => {
+    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
   });
 
-  LEMON_SQUEEZY_FILES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
-  });
+  if (
+    premium_features.next_auth ||
+    premium_features.stripe ||
+    premium_features.lemon_squeezy ||
+    premium_features.database
+  ) {
+    DATABASE_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
 
-  STRIPE_FILES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
-  });
+  if (premium_features.lemon_squeezy) {
+    LEMON_SQUEEZY_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
 
-  NEXT_AUTH_FILES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
-  });
+  if (premium_features.stripe) {
+    STRIPE_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  if (premium_features.next_auth) {
+    NEXT_AUTH_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
 
   SUPPORT_PAGES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
+    if (!pages["privacy-policy"] && file.includes("privacy-policy")) {
+      return;
+    }
+    if (!pages["terms-condition"] && file.includes("terms-condition")) {
+      return;
+    }
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
   MARKDOWN_PAGES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, file);
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  components.forEach(({ item_id, variant }) => {
+    zip.addFile(
+      `src/app/components/${item_id}/index.jsx`,
+      Buffer.from(
+        readFileSync(
+          path.join(
+            ui_components,
+            `src/app/components/${item_id}/${variant}.jsx`
+          ),
+          "utf-8"
+        )
+      )
+    );
   });
 
   zip.addFile(
