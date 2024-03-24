@@ -1,3 +1,14 @@
+export const NECESSARY_FILES = [
+  ".gitignore",
+  "tailwind.config.js",
+  "postcss.config.js",
+  "tsconfig.json",
+  ".env.example",
+  "next.config.mjs",
+];
+
+export const NECESSARY_FOLDERS = ["public", "src/app/styles"];
+
 export const DATABASE_FILES = [
   "src/lib/database/db.js",
   "src/lib/database/schema.js",

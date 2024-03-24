@@ -4,6 +4,8 @@ import AdmZip from "adm-zip";
 import {
   DATABASE_FILES,
   LEMON_SQUEEZY_FILES,
+  NECESSARY_FILES,
+  NECESSARY_FOLDERS,
   NEXT_AUTH_FILES,
   STRIPE_FILES,
 } from "@/boilercode/constants";
@@ -15,6 +17,14 @@ export const helloWorld = inngest.createFunction(
   async ({ event, step }) => {
     const ui_components = path.join(process.cwd(), "uicomponents");
     var zip = new AdmZip();
+
+    NECESSARY_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, file);
+    });
+
+    NECESSARY_FOLDERS.forEach((folder) => {
+      zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+    });
 
     DATABASE_FILES.forEach((file) => {
       zip.addLocalFile(`${ui_components}/${file}`, file);
