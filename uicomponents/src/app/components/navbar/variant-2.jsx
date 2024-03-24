@@ -37,7 +37,7 @@ const NavBar = () => {
                 </DrawerTrigger>
                 <DrawerContent>
                   <nav className="grid gap-y-8 p-5">
-                    <Button variant="link" >
+                    <Button variant="link">
                       <svg
                         className="flex-shrink-0 h-6 w-6 "
                         xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +57,7 @@ const NavBar = () => {
                         Analytics
                       </span>
                     </Button>
-                    <Button variant="link" >
+                    <Button variant="link">
                       <svg
                         className="flex-shrink-0 h-6 w-6 "
                         xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +77,7 @@ const NavBar = () => {
                         Engagement
                       </span>
                     </Button>
-                    <Button variant="link" >
+                    <Button variant="link">
                       <svg
                         className="flex-shrink-0 h-6 w-6 "
                         xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ const NavBar = () => {
                         Security
                       </span>
                     </Button>
-                    <Button variant="link" >
+                    <Button variant="link">
                       <svg
                         className="flex-shrink-0 h-6 w-6 "
                         xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ const NavBar = () => {
                         Integrations
                       </span>
                     </Button>
-                    <Button variant="link" >
+                    <Button variant="link">
                       <svg
                         className="flex-shrink-0 h-6 w-6 "
                         xmlns="http://www.w3.org/2000/svg"

@@ -11,12 +11,17 @@ import {
   SHADCN_UI_FOLDER,
   STRIPE_FILES,
 } from "@/boilercode/constants";
-import { promises as fsPromises, readFileSync } from "fs";
+import { readFileSync } from "fs";
+import { createClient } from "@supabase/supabase-js";
 
-export const helloWorld = inngest.createFunction(
+export const create_zip = inngest.createFunction(
   { id: "create-zip" },
   { event: "app/create-zip" },
   async ({ event, step }) => {
+    // Initialize Supabase client
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_KEY;
+    const supabase = createClient(supabaseUrl, supabaseKey);
     const ui_components = path.join(process.cwd(), "uicomponents");
     const package_json_path = path.join(process.cwd(), "package.json");
 
@@ -63,10 +68,13 @@ export const helloWorld = inngest.createFunction(
     );
     const zipFileContents = zip.toBuffer();
 
-    await fsPromises.writeFile(
-      path.join(process.cwd(), "file.zip"),
-      zipFileContents
-    );
-    return { event, body: "Hello, World!" };
+    const { data, error } = await supabase.storage
+      .from("boilerplates")
+      .upload(`${new Date().toISOString()}.zip`, zipFileContents, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    return { event, body: { data, error } };
   }
 );
