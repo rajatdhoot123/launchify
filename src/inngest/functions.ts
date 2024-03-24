@@ -7,6 +7,8 @@ import {
   NECESSARY_FILES,
   NECESSARY_FOLDERS,
   NEXT_AUTH_FILES,
+  SHADCN_UI_FILES,
+  SHADCN_UI_FOLDER,
   STRIPE_FILES,
 } from "@/boilercode/constants";
 import { promises as fsPromises } from "fs";
@@ -22,7 +24,15 @@ export const helloWorld = inngest.createFunction(
       zip.addLocalFile(`${ui_components}/${file}`, file);
     });
 
+    SHADCN_UI_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, file);
+    });
+
     NECESSARY_FOLDERS.forEach((folder) => {
+      zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+    });
+
+    SHADCN_UI_FOLDER.forEach((folder) => {
       zip.addLocalFolder(`${ui_components}/${folder}`, folder);
     });
 
