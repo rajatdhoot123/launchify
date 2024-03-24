@@ -11,6 +11,7 @@ import fs from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
+import { inngest } from "@/inngest/client";
 
 const DATABASE_FILES = [
   "src/lib/database/db.js",
@@ -219,6 +220,10 @@ ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
   const fileName = "uploads.zip";
   const fileType = "application/zip";
 
+  await inngest.send({
+    name: "app/create-zip",
+    data: body,
+  });
   return new NextResponse(zipFileContents, {
     // Create a new NextResponse for the file with the given stream from the disk
     status: 200, //STATUS 200: HTTP - Ok

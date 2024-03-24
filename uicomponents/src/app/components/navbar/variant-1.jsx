@@ -11,18 +11,10 @@ const Navbar = () => {
       </a>
 
       <ul className="hidden md:block">
-        <Button variant="link" >
-          Home
-        </Button>
-        <Button variant="link" >
-          Payment
-        </Button>
-        <Button variant="link" >
-          About
-        </Button>
-        <Button variant="link" >
-          Blog
-        </Button>
+        <Button variant="link">Home</Button>
+        <Button variant="link">Payment</Button>
+        <Button variant="link">About</Button>
+        <Button variant="link">Blog</Button>
       </ul>
 
       <div className="flex items-center">
@@ -37,18 +29,10 @@ const Navbar = () => {
             </DrawerTrigger>
             <DrawerContent>
               <div className="p-5 flex flex-col">
-                <Button variant="link" >
-                  Home
-                </Button>
-                <Button variant="link" >
-                  Payment
-                </Button>
-                <Button variant="link" >
-                  About
-                </Button>
-                <Button variant="link" >
-                  Blog
-                </Button>
+                <Button variant="link">Home</Button>
+                <Button variant="link">Payment</Button>
+                <Button variant="link">About</Button>
+                <Button variant="link">Blog</Button>
               </div>
             </DrawerContent>
           </Drawer>
