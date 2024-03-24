@@ -1,10 +1,7 @@
 "use server";
-import AdmZip from "adm-zip";
+import { inngest } from "@/inngest/client";
 import { NextResponse } from "next/server";
 import path from "path";
-import generateLayout from "../utils__/generateLayout";
-import generateRootPage from "../utils__/generateRootPage";
-import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
@@ -101,111 +98,10 @@ export async function POST(req) {
     );
   }
 
-  const zip = new AdmZip();
-
-  components.forEach(({ item_id, variant }) => {
-    zip.addFile(
-      `src/app/components/${item_id}/index.jsx`,
-      Buffer.from(
-        fs.readFileSync(
-          path.join(
-            process.cwd(),
-            "uicomponents",
-            `src/app/components/${item_id}/${variant}.jsx`
-          ),
-          "utf-8"
-        )
-      )
-    );
+  await inngest.send({
+    name: "app/create-zip",
+    data: body,
   });
 
-  const pages_to_add = pages
-    .filter((page) => page.selected)
-    .map((item) => `src/app/(markdown)/${item.item_id}/page.mdx`);
-
-  zip.addLocalFolder(ui_components, "", (file) => {
-    if (file.includes("lemon-squeezy")) {
-      if (premium_features.lemon_squeezy) {
-        return true;
-      }
-      return false;
-    }
-    if (file.includes("stripe")) {
-      if (premium_features.stripe) {
-        return true;
-      }
-      return false;
-    }
-    if (SUPPORT_PAGES.includes(file)) {
-      return pages_to_add.includes(file);
-    }
-    if (DATABASE_FILES.includes(file)) {
-      if (is_database || is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (NEXT_AUTH_FILES.includes(file)) {
-      if (is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (file.startsWith("src/app/components")) {
-      return false;
-    }
-    if (file.includes("__") || ["src/app/globals.css"].includes(file)) {
-      return false;
-    }
-
-    if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
-      return false;
-    }
-
-    return true;
-  });
-
-  zip.addFile(
-    "src/app/layout.js",
-    Buffer.from(
-      await prettier.format(
-        generateLayout({ ga_id, next_auth: is_next_auth, crisp_id }),
-        {
-          parser: "babel",
-        }
-      )
-    )
-  );
-
-  zip.addFile(
-    "src/app/page.js",
-    Buffer.from(
-      await prettier.format(generateRootPage({ components }), {
-        parser: "babel",
-      })
-    ),
-    "utf8"
-  );
-
-  zip.addFile(
-    ".env.local",
-    Buffer.from(`
-${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
-${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
-`)
-  );
-
-  const zipFileContents = zip.toBuffer();
-  const fileName = "uploads.zip";
-  const fileType = "application/zip";
-
-  return new NextResponse(zipFileContents, {
-    // Create a new NextResponse for the file with the given stream from the disk
-    status: 200, //STATUS 200: HTTP - Ok
-    headers: new Headers({
-      //Headers
-      "content-disposition": `attachment; filename=${path.basename(fileName)}`, //State that this is a file attachment
-      "content-type": fileType,
-    }),
-  });
+  return NextResponse.json({ name: "Hello Inngest from Next!" });
 }

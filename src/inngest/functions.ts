@@ -21,6 +21,7 @@ export const create_zip = inngest.createFunction(
   { id: "create-zip" },
   { event: "app/create-zip" },
   async ({ event, step }) => {
+    console.log({ event });
     const { data = {} } = event;
     const {
       components,
@@ -76,7 +77,11 @@ export const create_zip = inngest.createFunction(
       "src/app/layout.js",
       Buffer.from(
         await prettier.format(
-          generateLayout({ ga_id, next_auth: is_next_auth, crisp_id }),
+          generateLayout({
+            ga_id,
+            next_auth: premium_features.next_auth,
+            crisp_id,
+          }),
           {
             parser: "babel",
           }
