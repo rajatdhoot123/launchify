@@ -7,52 +7,28 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import fs from "fs";
+import { readFileSync } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
-import { inngest } from "@/inngest/client";
+import {
+  NECESSARY_FILES,
+  NECESSARY_FOLDERS,
+  SUPPORT_PAGES,
+  MARKDOWN_PAGES,
+  DATABASE_FILES,
+  LEMON_SQUEEZY_FILES,
+  STRIPE_FILES,
+  NEXT_AUTH_FILES,
+  SHADCN_UI_FILE,
+  SHADCN_UI_FOLDER,
+} from "@/boilercode/constants";
 
-const DATABASE_FILES = [
-  "src/lib/database/db.js",
-  "src/lib/database/schema.js",
-  "src/lib/database",
-  "drizzle.config.js",
-];
-
-const NEXT_AUTH_FILES = [
-  "src/app/auth/EmailSignIn.js",
-  "src/app/auth/GoogleSignIn.js",
-  "src/app/auth/LoginButton.js",
-  "src/app/auth/authenticated/page.js",
-  "src/app/auth/authenticated",
-  "src/app/auth/signin/page.js",
-  "src/app/auth/signin",
-  "src/app/auth",
-  "src/app/nextauth/provider.js",
-  "src/app/nextauth",
-  "src/app/api/auth",
-  "src/app/api/auth/[...nextauth]/route.ts",
-  "src/app/api/auth/[...nextauth]/authOptions.ts",
-  "src/app/api/auth/[...nextauth]",
-];
-
-const LEMON_SQUEEZY_FILES = [
-  "src/app/api/lemon-squeezy/webhook/route.ts",
-  "src/app/api/lemon-squeezy/webhook",
-  "src/app/api/lemon-squeezy",
-];
-
-const STRIPE_FILES = [
-  "src/app/api/stripe/webhook/route.ts",
-  "src/app/api/stripe/webhook",
-  "src/app/api/stripe",
-];
-
-const SUPPORT_PAGES = [
-  "src/app/(markdown)/terms-condition/page.mdx",
-  "src/app/(markdown)/privacy-policy/page.mdx",
-];
+const getFilePath = (file) => {
+  return file.split("/").length > 1
+    ? file.split("/").slice(0, -1).join("/")
+    : undefined;
+};
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
@@ -63,28 +39,8 @@ export async function POST(req) {
     ga_id = "",
     crisp_id = "",
     premium_features = {},
-    pages = [],
+    pages = {},
   } = body;
-
-  const is_next_auth = premium_features.next_auth;
-  const is_database = premium_features.database;
-
-  const packageJson = JSON.parse(fs.readFileSync(package_json_path, "utf-8"));
-
-  delete packageJson.dependencies["axios"];
-  delete packageJson.dependencies["@craftjs/core"];
-  // Remove a dependency based on a condition
-  if (!(is_database && is_next_auth)) {
-    delete packageJson.dependencies["drizzle-orm"];
-    delete packageJson.devDependencies["drizzle-kit"];
-    delete packageJson.scripts["postinstall"];
-    delete packageJson.scripts["drizzle:push"];
-    delete packageJson.scripts["introspect"];
-  }
-
-  if (!premium_features.stripe) {
-    delete packageJson.dependencies["stripe"];
-  }
 
   const session = await getServerSession(AUTH_OPTIONS);
 
@@ -102,16 +58,76 @@ export async function POST(req) {
     );
   }
 
-  const zip = new AdmZip();
+  const packageJson = JSON.parse(readFileSync(package_json_path, "utf-8"));
+
+  var zip = new AdmZip();
+
+  NECESSARY_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  SHADCN_UI_FILE.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  SHADCN_UI_FOLDER.forEach((folder) => {
+    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+  });
+
+  NECESSARY_FOLDERS.forEach((folder) => {
+    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+  });
+
+  if (
+    premium_features.next_auth ||
+    premium_features.stripe ||
+    premium_features.lemon_squeezy ||
+    premium_features.database
+  ) {
+    DATABASE_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  if (premium_features.lemon_squeezy) {
+    LEMON_SQUEEZY_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  if (premium_features.stripe) {
+    STRIPE_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  if (premium_features.next_auth) {
+    NEXT_AUTH_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  SUPPORT_PAGES.forEach((file) => {
+    if (!pages["privacy-policy"] && file.includes("privacy-policy")) {
+      return;
+    }
+    if (!pages["terms-condition"] && file.includes("terms-condition")) {
+      return;
+    }
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  MARKDOWN_PAGES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
 
   components.forEach(({ item_id, variant }) => {
     zip.addFile(
       `src/app/components/${item_id}/index.jsx`,
       Buffer.from(
-        fs.readFileSync(
+        readFileSync(
           path.join(
-            process.cwd(),
-            "uicomponents",
+            ui_components,
             `src/app/components/${item_id}/${variant}.jsx`
           ),
           "utf-8"
@@ -120,57 +136,15 @@ export async function POST(req) {
     );
   });
 
-  const pages_to_add = pages
-    .filter((page) => page.selected)
-    .map((item) => `src/app/(markdown)/${item.item_id}/page.mdx`);
-
-  zip.addLocalFolder(ui_components, "", (file) => {
-    if (file.includes("lemon-squeezy")) {
-      if (premium_features.lemon_squeezy) {
-        return true;
-      }
-      return false;
-    }
-    if (file.includes("stripe")) {
-      if (premium_features.stripe) {
-        return true;
-      }
-      return false;
-    }
-    if (SUPPORT_PAGES.includes(file)) {
-      return pages_to_add.includes(file);
-    }
-    if (DATABASE_FILES.includes(file)) {
-      if (is_database || is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (NEXT_AUTH_FILES.includes(file)) {
-      if (is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (file.startsWith("src/app/components")) {
-      return false;
-    }
-    if (file.includes("__") || ["src/app/globals.css"].includes(file)) {
-      return false;
-    }
-
-    if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
-      return false;
-    }
-
-    return true;
-  });
-
   zip.addFile(
     "src/app/layout.js",
     Buffer.from(
       await prettier.format(
-        generateLayout({ ga_id, next_auth: is_next_auth, crisp_id }),
+        generateLayout({
+          ga_id,
+          next_auth: premium_features.next_auth,
+          crisp_id,
+        }),
         {
           parser: "babel",
         }
@@ -189,26 +163,11 @@ export async function POST(req) {
   );
 
   zip.addFile(
-    "src/app/globals.css",
-    Buffer.from(
-      `
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-      `,
-      {
-        parser: "babel",
-      }
-    ),
-    "utf8"
-  );
-
-  zip.addFile(
     ".env.local",
     Buffer.from(`
-${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
-${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
-`)
+  ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
+  ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
+  `)
   );
 
   zip.addFile(

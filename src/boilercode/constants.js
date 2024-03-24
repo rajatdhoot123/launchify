@@ -9,8 +9,8 @@ export const NECESSARY_FILES = [
   "src/lib/utils.js",
 ];
 
+export const SHADCN_UI_FILE = ["components.json"];
 export const SHADCN_UI_FOLDER = ["src/components/ui"];
-export const SHADCN_UI_FILES = ["components.json"];
 
 export const NECESSARY_FOLDERS = ["public", "src/app/styles"];
 
@@ -42,6 +42,10 @@ export const SUPPORT_PAGES = [
   "src/app/(markdown)/privacy-policy/page.mdx",
 ];
 
-export const MARKDOWN_PAGES = ["src/markdown.css", "src/mdx-components.tsx"];
+export const MARKDOWN_PAGES = [
+  "src/markdown.css",
+  "src/mdx-components.tsx",
+  "src/app/(markdown)/layout.jsx",
+];
 
 export const SITE_MAP_FILES = ["next-sitemap.config.js"];

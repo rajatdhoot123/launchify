@@ -8,7 +8,7 @@ import {
   NECESSARY_FILES,
   NECESSARY_FOLDERS,
   NEXT_AUTH_FILES,
-  SHADCN_UI_FILES,
+  SHADCN_UI_FILE,
   SHADCN_UI_FOLDER,
   STRIPE_FILES,
 } from "@/boilercode/constants";
@@ -44,7 +44,7 @@ export const create_zip = inngest.createFunction(
       zip.addLocalFile(`${ui_components}/${file}`, file);
     });
 
-    SHADCN_UI_FILES.forEach((file) => {
+    SHADCN_UI_FILE.forEach((file) => {
       zip.addLocalFile(`${ui_components}/${file}`, file);
     });
 
