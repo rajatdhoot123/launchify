@@ -46,12 +46,22 @@ export async function POST(req: NextRequest) {
   const {
     meta: { event_name, test_mode },
     data: {
-      attributes: { user_email, product_id },
+      attributes: {
+        user_email,
+        product_id,
+        first_order_item: { product_id: first_order_product_id = null } = {},
+      },
     },
   } = body;
 
   switch (event_name) {
     case ORDER_CREATED:
+      await db.insert(subscriptions).values({
+        meta: body,
+        product_id: first_order_product_id,
+        email_id: user_email,
+        is_active: true,
+      });
       return NextResponse.json({ message: "order created" });
     case ORDER_REFUNDED:
       return NextResponse.json({ message: "order refunded" });
