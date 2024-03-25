@@ -325,27 +325,6 @@ function Editor() {
         event_name: "export_with_copywriting_clicked",
       });
 
-      // const jsx_files = await fetch("/api/get-file__", {
-      //   method: "POST",
-      //   body: JSON.stringify({
-      //     files: components.map(({ variant, item_id }) => ({
-      //       item_id,
-      //       variant,
-      //     })),
-      //   }),
-      // });
-
-      // const jsx_code_response = await jsx_files.json();
-      // const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
-      //   updateCopywriting({
-      //     jsx_code: content,
-      //     use_case: open_ai_prompt,
-      //     apiKey: open_ai_key,
-      //   })
-      // );
-
-      // const result = await Promise.all(open_ai_copy_writing);
-
       const response = await fetch("/handle_export_with_copy__", {
         method: "POST",
         body: JSON.stringify({
