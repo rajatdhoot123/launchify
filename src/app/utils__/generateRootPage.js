@@ -12,7 +12,7 @@ ${components.reduce((acc, { item_id, variant }) => {
   return `${acc} \n import ${capitalizeFirstLetter(
     item_id
   )} from "@/app/components/${item_id}/${
-    select_comp_index ? "index" : variant
+    select_comp_index === -1 ? variant : "index"
   }";`;
 }, "")}
 
