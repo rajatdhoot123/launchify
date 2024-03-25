@@ -125,7 +125,7 @@ export async function POST(req) {
 
   components.forEach(({ item_id, variant }) => {
     zip.addFile(
-      `src/app/components/${item_id}/index.jsx`,
+      `src/app/components/${item_id}/${variant}.jsx`,
       Buffer.from(
         readFileSync(
           path.join(
