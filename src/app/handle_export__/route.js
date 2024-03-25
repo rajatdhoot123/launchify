@@ -7,11 +7,12 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import { readFileSync } from "fs";
+import { readFileSync, readdir } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
 import {
+  CREATE_FILE_NOT_PRESENT,
   NECESSARY_FILES,
   NECESSARY_FOLDERS,
   SUPPORT_PAGES,
@@ -32,6 +33,12 @@ const getFilePath = (file) => {
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
+
+  readdir(ui_components, (err, files) => {
+    files.forEach((file) => {
+      console.log(file);
+    });
+  });
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
   const {
@@ -63,7 +70,7 @@ export async function POST(req) {
   var zip = new AdmZip();
 
   NECESSARY_FILES.forEach((file) => {
-    zip.addLocalFile(path.join(ui_components, file), getFilePath(file));
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
   SHADCN_UI_FILE.forEach((file) => {
@@ -134,6 +141,10 @@ export async function POST(req) {
         )
       )
     );
+  });
+
+  CREATE_FILE_NOT_PRESENT.forEach(({ path, content }) => {
+    zip.addFile(path, content);
   });
 
   zip.addFile(

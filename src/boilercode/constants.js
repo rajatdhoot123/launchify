@@ -1,10 +1,91 @@
+export const CREATE_FILE_NOT_PRESENT = [
+  {
+    path: ".env.example",
+    content: `
+  #Google Analytics
+  NEXT_PUBLIC_GOOGLE_ANALYTICS=
+  
+  # Next Auth Environment Variables
+  NEXTAUTH_SECRET=
+  NEXTAUTH_URL=
+  GOOGLE_CLIENT_ID=
+  GOOGLE_CLIENT_SECRET=
+  DATABASE_URL=
+  
+  # For magic links
+  EMAIL_FROM=
+  EMAIL_SERVER_USER=
+  EMAIL_SERVER_PASSWORD=
+  EMAIL_SERVER_HOST=
+  EMAIL_SERVER_PORT=
+  
+  #Lemon Squeezy Webhook Secret
+  LEMON_SQUEEZY_WEBHOOK_SECRET=
+  
+  OPEN_AI_KEY=
+`,
+  },
+  {
+    path: ".eslintrc.json",
+    content: `
+{
+  "extends": "next/core-web-vitals",
+  "rules": { "react/no-unescaped-entities": 0 }
+} 
+`,
+  },
+  {
+    path: ".gitignore",
+    content: `
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+
+drizzle 
+
+  `,
+  },
+];
+
 export const NECESSARY_FILES = [
-  ".gitignore",
-  ".eslintrc.json",
   "tailwind.config.js",
   "postcss.config.js",
   "tsconfig.json",
-  ".env.example",
   "next.config.mjs",
   "src/lib/utils.js",
 ];
