@@ -183,7 +183,7 @@ export async function POST(req) {
     } else {
       zip.addLocalFile(
         `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
-        `src/app/components/${item_id}/index.jsx`
+        getFilePath(`src/app/components/${item_id}/index.jsx`)
       );
     }
   });
