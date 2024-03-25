@@ -7,7 +7,7 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import { readFile, readFileSync, promises } from "fs";
+import { readFileSync, promises } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
@@ -168,6 +168,9 @@ export async function POST(req) {
     const select_comp_index = selected_components.findIndex(
       (file) => file.item_id === item_id
     );
+    console.log(select_comp_index, "select_comp_index");
+    console.log(JSON.stringify(components), "Components");
+    console.log(JSON.stringify(selected_components), "selected_components");
     if (select_comp_index !== -1) {
       const string =
         getSubstringBetweenCodeTags(
@@ -181,6 +184,10 @@ export async function POST(req) {
         }),
       });
     } else {
+      console.log(
+        `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
+        "In else"
+      );
       zip.addLocalFile(
         `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
         getFilePath(`src/app/components/${item_id}/index.jsx`)
