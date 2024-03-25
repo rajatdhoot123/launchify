@@ -2,7 +2,7 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const generateRootPage = ({ components, copywriting_components }) => {
+const generateRootPage = ({ components, copywriting_components = [] }) => {
   return `
 
 ${components.reduce((acc, { item_id, variant }) => {
