@@ -33,9 +33,13 @@ You take tailwind jsx code from the user and write the best copywriting for user
 - Don't remove "use client" from the file if it was present.
 - Add the icon or images from the pixabay or unsplash and use the alt text as "icon" or "image" respectively.
 - Don't add any comments by yourself.
-
-Do not include markdown "\`\`\`" or "\`\`\`jsx" at the start or end.
-`
+- Don't capitalization jsx code.
+- Don't add any extra info by yourself.
+- Don't explain the code, just generate the code block itself.
+- Don't add any prefix like 'Here's an example of'
+- Don't omit any code from the provided code.
+- Wrap the jsx code in <code></code> tags.
+`;
 
 // # Working from wireframes
 

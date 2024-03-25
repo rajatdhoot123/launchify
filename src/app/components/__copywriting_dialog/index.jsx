@@ -49,7 +49,7 @@ const CopyWritingDialog = ({
 
   const handleGenerate = () => {
     handleExportWithCopywriting({
-      components: modify_components(Object.keys(active_component)),
+      selected_components: modify_components(Object.keys(active_component)),
       open_ai_key,
       open_ai_prompt,
     });
@@ -70,7 +70,8 @@ const CopyWritingDialog = ({
           {title}
         </DialogDescription>
         <div className="w-full overflow-scroll p-5 space-y-4">
-          <div>
+          <p className="text-sm font-semibold">Currently in beta output will be unstable</p>
+          {/* <div>
             <Label htmlFor="open_ai">Open Ai Key</Label>
             <Input
               value={open_ai_key}
@@ -86,7 +87,7 @@ const CopyWritingDialog = ({
               id="open_ai"
               placeholder="Enter Open Ai Key"
             />
-          </div>
+          </div> */}
           <div>
             <Label htmlFor="use_case">Enter Your Use Case</Label>
             <Textarea

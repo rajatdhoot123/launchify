@@ -8,35 +8,30 @@ export async function updateCopywriting({
   use_case: string;
   apiKey: string;
   jsx_code: string;
-  // theme?: string;
 }) {
   const messages: GPT4VCompletionRequest["messages"] = [
     {
       role: "system",
       content: OPEN_AI_SYSTEM_PROMPT_UPDATE_COPY_WRITING,
     },
-    {
-      role: "user",
-      content: [],
-    },
   ];
 
-  const userContent = messages[1].content as Exclude<MessageContent, string>;
+  // const userContent = messages[1].content as Exclude<MessageContent, string>;
 
   // Add the strings of text
 
-  userContent.push({
-    type: "text",
-    text: `Update copy wiring with this use case: ${use_case}`,
+  messages.push({
+    role: "assistant",
+    content: `JSX code with default copy writing: ${jsx_code}`,
   });
 
-  userContent.push({
-    type: "text",
-    text: `JSX code with default copy writing: ${jsx_code}`,
+  messages.push({
+    role: "user",
+    content: `Update copy writing with this use case: ${use_case}`,
   });
 
   const body: GPT4VCompletionRequest = {
-    model: "gpt-4-1106-preview",
+    model: "mixtral-8x7b-32768",
     max_tokens: 4096,
     temperature: 0,
     messages,
@@ -45,14 +40,17 @@ export async function updateCopywriting({
   let json = null;
 
   try {
-    const resp = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(body),
-    });
+    const resp = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
     json = await resp.json();
   } catch (e) {
     return { error: e.message };
@@ -81,7 +79,15 @@ type MessageContent =
     )[];
 
 export type GPT4VCompletionRequest = {
-  model: "gpt-4-vision-preview" | "gpt-4" | "gpt-4-1106-preview";
+  response_format?: {
+    type: "json_object";
+  };
+  model:
+    | "gpt-4-vision-preview"
+    | "gpt-4"
+    | "gpt-4-1106-preview"
+    | "mixtral-8x7b-32768"
+    | "llama2-70b-4096";
   messages: {
     role: "system" | "user" | "assistant" | "function";
     content: MessageContent;
