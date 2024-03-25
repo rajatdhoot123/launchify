@@ -54,13 +54,15 @@ export async function POST(req) {
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
   const {
-    selected_components,
+    copywriting_components,
     components,
     ga_id = "",
     crisp_id = "",
     premium_features = {},
     pages = {},
   } = body;
+
+  console.log(JSON.stringify(body), "Body");
 
   const session = await getServerSession(AUTH_OPTIONS);
 
@@ -141,7 +143,7 @@ export async function POST(req) {
     zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
-  const all_file = selected_components.map(async (file) => {
+  const all_file = copywriting_components.map(async (file) => {
     return promises.readFile(
       `src/app/components/${file.item_id}/${file.variant}.jsx`,
       "utf8"
@@ -164,13 +166,11 @@ export async function POST(req) {
 
   const add_file_with_copywriting = [];
 
-  components.forEach(async ({ item_id, variant }) => {
-    const select_comp_index = selected_components.findIndex(
+  components.forEach(({ item_id, variant }) => {
+    console.log({ copywriting_components });
+    const select_comp_index = copywriting_components.findIndex(
       (file) => file.item_id === item_id
     );
-    console.log(select_comp_index, "select_comp_index");
-    console.log(JSON.stringify(components), "Components");
-    console.log(JSON.stringify(selected_components), "selected_components");
     if (select_comp_index !== -1) {
       const string =
         getSubstringBetweenCodeTags(
@@ -184,10 +184,7 @@ export async function POST(req) {
         }),
       });
     } else {
-      console.log(
-        `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
-        "In else"
-      );
+      console.log("Not found", ui_components);
       zip.addLocalFile(
         `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
         getFilePath(`src/app/components/${item_id}/index.jsx`)

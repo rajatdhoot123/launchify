@@ -334,7 +334,7 @@ function Editor() {
           crisp_id: state.crisp_id,
           pages: state.pages,
           premium_features: state.premium_features,
-          selected_components,
+          copywriting_components: selected_components,
           components: modify_components(puck_data.current.content),
         }),
       });
