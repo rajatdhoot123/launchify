@@ -7,78 +7,65 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import fs from "fs";
+import { readFile, readFileSync, promises } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
-import { updateCopywriting } from "../api/code-generation__/update-copywriting";
+
+function getSubstringBetweenCodeTags(str) {
+  // Regular expression to match content between <code> and </code>, including newlines
+  const regex = /<code>([\s\S]*?)<\/code>/;
+
+  // Use match() method to find matches
+  const match = str.match(regex);
+
+  // Check if a match is found
+  if (match && match[1]) {
+    // Return the first captured group, which is the content inside <code></code>
+    return match[1];
+  } else {
+    // Return null or an appropriate value if no match is found
+    return null;
+  }
+}
+
 import {
-  formatComponentPath,
-  removeBackticksAndJSX,
-} from "@/app/utils__/helper";
+  NECESSARY_FILES,
+  NECESSARY_FOLDERS,
+  SUPPORT_PAGES,
+  MARKDOWN_PAGES,
+  DATABASE_FILES,
+  LEMON_SQUEEZY_FILES,
+  STRIPE_FILES,
+  NEXT_AUTH_FILES,
+  SHADCN_UI_FILE,
+  SHADCN_UI_FOLDER,
+} from "@/boilercode/constants";
+import { updateCopywriting } from "../api/code-generation__/update-copywriting";
+import { Client } from "@upstash/qstash";
 
-const DATABASE_FILES = [
-  "src/lib/database/db.js",
-  "src/lib/database/schema.js",
-  "src/lib/database",
-  "drizzle.config.js",
-];
+const qstashClient = new Client({
+  token: process.env.QSTASH_TOKEN,
+});
 
-const NEXT_AUTH_FILES = [
-  "src/app/auth/EmailSignIn.js",
-  "src/app/auth/GoogleSignIn.js",
-  "src/app/auth/LoginButton.js",
-  "src/app/auth/authenticated/page.js",
-  "src/app/auth/authenticated",
-  "src/app/auth/signin/page.js",
-  "src/app/auth/signin",
-  "src/app/auth",
-  "src/app/nextauth/provider.js",
-  "src/app/nextauth",
-  "src/app/api/auth",
-  "src/app/api/auth/[...nextauth]/route.ts",
-  "src/app/api/auth/[...nextauth]/authOptions.ts",
-  "src/app/api/auth/[...nextauth]",
-];
-
-const SUPPORT_PAGES = [
-  "src/app/(markdown)/terms-condition/page.mdx",
-  "src/app/(markdown)/privacy-policy/page.mdx",
-];
+const getFilePath = (file) => {
+  return file.split("/").length > 1
+    ? file.split("/").slice(0, -1).join("/")
+    : undefined;
+};
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
   const {
+    selected_components,
     components,
     ga_id = "",
     crisp_id = "",
-    premium_features,
-    pages = [],
+    premium_features = {},
+    pages = {},
   } = body;
-
-  // mergeCode({ apiKey: process.env.OPEN_AI_KEY , html_code: , jsx_code: });
-
-  const is_next_auth = premium_features.find(
-    ({ item_id }) => item_id === "next_auth"
-  )?.selected;
-
-  const is_database = premium_features.find(
-    ({ item_id }) => item_id === "database"
-  )?.selected;
-  const packageJson = JSON.parse(fs.readFileSync(package_json_path, "utf-8"));
-
-  delete packageJson.dependencies["axios"];
-  delete packageJson.dependencies["@craftjs/core"];
-  // Remove a dependency based on a condition
-  if (!(is_database && is_next_auth)) {
-    delete packageJson.dependencies["drizzle-orm"];
-    delete packageJson.devDependencies["drizzle-kit"];
-    delete packageJson.scripts["postinstall"];
-    delete packageJson.scripts["drizzle:push"];
-    delete packageJson.scripts["introspect"];
-  }
 
   const session = await getServerSession(AUTH_OPTIONS);
 
@@ -96,74 +83,124 @@ export async function POST(req) {
     );
   }
 
-  const zip = new AdmZip();
+  const packageJson = JSON.parse(readFileSync(package_json_path, "utf-8"));
 
-  const file_to_add = components.map(({ item_id, variant }) => {
-    return `src/app/components/${item_id}/${variant}.jsx`;
+  var zip = new AdmZip();
+
+  NECESSARY_FILES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
-  const all_copy_writing = await Promise.all(
-    file_to_add.map(async (file) => {
-      const data = fs.readFileSync(file, "utf8");
-      return {
-        name: file,
-        data: await updateCopywriting({
-          use_case: "ecommerce website which sells cloths",
-          jsx_code: data,
-          apiKey: process.env.OPEN_AI_KEY,
-        }),
-      };
-    }, {})
+  SHADCN_UI_FILE.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  SHADCN_UI_FOLDER.forEach((folder) => {
+    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+  });
+
+  NECESSARY_FOLDERS.forEach((folder) => {
+    zip.addLocalFolder(`${ui_components}/${folder}`, folder);
+  });
+
+  if (
+    premium_features.next_auth ||
+    premium_features.stripe ||
+    premium_features.lemon_squeezy ||
+    premium_features.database
+  ) {
+    DATABASE_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  if (premium_features.lemon_squeezy) {
+    LEMON_SQUEEZY_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  if (premium_features.stripe) {
+    STRIPE_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  if (premium_features.next_auth) {
+    NEXT_AUTH_FILES.forEach((file) => {
+      zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    });
+  }
+
+  SUPPORT_PAGES.forEach((file) => {
+    if (!pages["privacy-policy"] && file.includes("privacy-policy")) {
+      return;
+    }
+    if (!pages["terms-condition"] && file.includes("terms-condition")) {
+      return;
+    }
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  MARKDOWN_PAGES.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  const all_file = selected_components.map(async (file) => {
+    return promises.readFile(
+      `src/app/components/${file.item_id}/${file.variant}.jsx`,
+      "utf8"
+    );
+  }, {});
+
+  const get_all_files = await Promise.all(all_file);
+
+  const files_with_copywriting = get_all_files.map((file, index) => {
+    return updateCopywriting({
+      use_case: body.use_case,
+      jsx_code: file,
+      apiKey: body.api_key,
+    });
+  });
+
+  const files_with_copywriting_result = await Promise.all(
+    files_with_copywriting
   );
 
-  const pages_to_add = pages
-    .filter((page) => page.selected)
-    .map((item) => `src/app/(markdown)/${item.item_id}/page.mdx`);
-
-  zip.addLocalFolder(ui_components, "", (file) => {
-    if (SUPPORT_PAGES.includes(file)) {
-      return pages_to_add.includes(file);
+  components.forEach(async ({ item_id, variant }) => {
+    const select_comp_index = selected_components.findIndex(
+      (file) => file.item_id === item_id
+    );
+    if (select_comp_index !== -1) {
+      const string = getSubstringBetweenCodeTags(
+        files_with_copywriting_result[select_comp_index].choices[0].message
+          .content
+      );
+      zip.addFile(
+        `src/app/components/${item_id}/index.jsx`,
+        Buffer.from(
+          await prettier.format(string, {
+            parser: "babel",
+          })
+        )
+      );
+    } else {
+      zip.addLocalFile(
+        `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
+        `src/app/components/${item_id}/index.jsx`
+      );
     }
-    if (DATABASE_FILES.includes(file)) {
-      if (!is_premium_user) {
-        return false;
-      }
-      if (is_database || is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (NEXT_AUTH_FILES.includes(file)) {
-      if (!is_premium_user) {
-        return false;
-      }
-      if (is_next_auth) {
-        return true;
-      }
-      return false;
-    }
-    if (file.startsWith("src/app/components")) {
-      if (file_to_add.includes(file)) {
-        return true;
-      }
-      return false;
-    }
-    if (file.includes("__")) {
-      return false;
-    }
-
-    if (file.includes("/api/chat") || file.includes("/api/retrieval")) {
-      return false;
-    }
-
-    return true;
   });
 
   zip.addFile(
     "src/app/layout.js",
     Buffer.from(
       await prettier.format(
-        generateLayout({ ga_id, next_auth: is_next_auth, crisp_id }),
+        generateLayout({
+          ga_id,
+          next_auth: premium_features.next_auth,
+          crisp_id,
+        }),
         {
           parser: "babel",
         }
@@ -184,29 +221,16 @@ export async function POST(req) {
   zip.addFile(
     ".env.local",
     Buffer.from(`
-${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
-${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
-`)
+  ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
+  ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
+  `)
   );
 
-  await Promise.all(
-    all_copy_writing.map(async ({ name, data }) =>
-      zip.addFile(
-        formatComponentPath(name),
-        Buffer.from(
-          await prettier.format(
-            removeBackticksAndJSX(data.choices[0].message.content),
-            {
-              parser: "babel",
-            }
-          )
-        ),
-        "utf8"
-      )
-    )
+  zip.addFile(
+    "package.json",
+    Buffer.from(JSON.stringify(packageJson, null, 2)),
+    "utf8"
   );
-
-  zip.addFile("package.json", Buffer.from(JSON.stringify(packageJson)), "utf8");
   const zipFileContents = zip.toBuffer();
   const fileName = "uploads.zip";
   const fileType = "application/zip";

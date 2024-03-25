@@ -314,7 +314,7 @@ function Editor() {
   const puck_init = useRef(initialData);
 
   const handleExportWithCopywriting = async ({
-    components,
+    selected_components,
     open_ai_key,
     open_ai_prompt,
   }) => {
@@ -325,39 +325,38 @@ function Editor() {
         event_name: "export_with_copywriting_clicked",
       });
 
-      const jsx_files = await fetch("/api/get-file__", {
+      // const jsx_files = await fetch("/api/get-file__", {
+      //   method: "POST",
+      //   body: JSON.stringify({
+      //     files: components.map(({ variant, item_id }) => ({
+      //       item_id,
+      //       variant,
+      //     })),
+      //   }),
+      // });
+
+      // const jsx_code_response = await jsx_files.json();
+      // const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
+      //   updateCopywriting({
+      //     jsx_code: content,
+      //     use_case: open_ai_prompt,
+      //     apiKey: open_ai_key,
+      //   })
+      // );
+
+      // const result = await Promise.all(open_ai_copy_writing);
+
+      const response = await fetch("/handle_export_with_copy__", {
         method: "POST",
         body: JSON.stringify({
-          files: components.map(({ variant, item_id }) => ({
-            item_id,
-            variant,
-          })),
-        }),
-      });
-
-      const jsx_code_response = await jsx_files.json();
-      const open_ai_copy_writing = jsx_code_response.map(({ key, content }) =>
-        updateCopywriting({
-          jsx_code: content,
           use_case: open_ai_prompt,
-          apiKey: open_ai_key,
-        })
-      );
-
-      const result = await Promise.all(open_ai_copy_writing);
-
-      const response = await fetch("/handle_export_with_copy_from_fe__", {
-        method: "POST",
-        body: JSON.stringify({
+          api_key: open_ai_key,
           ga_id: state.ga_id,
           crisp_id: state.crisp_id,
           pages: state.pages,
           premium_features: state.premium_features,
-          components: result.map(({ choices }, index) => ({
-            file_path: jsx_code_response[index].key,
-            item_id: jsx_code_response[index].item_id,
-            content: choices?.[0]?.message?.content,
-          })),
+          selected_components,
+          components: modify_components(puck_data.current.content),
         }),
       });
       if (response.ok) {

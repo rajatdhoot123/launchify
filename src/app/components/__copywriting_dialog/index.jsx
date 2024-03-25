@@ -49,7 +49,7 @@ const CopyWritingDialog = ({
 
   const handleGenerate = () => {
     handleExportWithCopywriting({
-      components: modify_components(Object.keys(active_component)),
+      selected_components: modify_components(Object.keys(active_component)),
       open_ai_key,
       open_ai_prompt,
     });
