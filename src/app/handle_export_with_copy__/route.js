@@ -62,8 +62,6 @@ export async function POST(req) {
     pages = {},
   } = body;
 
-  console.log(JSON.stringify(body), "Body");
-
   const session = await getServerSession(AUTH_OPTIONS);
 
   const get_user = await db
@@ -145,7 +143,7 @@ export async function POST(req) {
 
   const all_file = copywriting_components.map(async (file) => {
     return promises.readFile(
-      `src/app/components/${file.item_id}/${file.variant}.jsx`,
+      `${ui_components}/src/app/components/${file.item_id}/${file.variant}.jsx`,
       "utf8"
     );
   }, {});
@@ -167,7 +165,6 @@ export async function POST(req) {
   const add_file_with_copywriting = [];
 
   components.forEach(({ item_id, variant }) => {
-    console.log({ copywriting_components });
     const select_comp_index = copywriting_components.findIndex(
       (file) => file.item_id === item_id
     );
@@ -184,7 +181,6 @@ export async function POST(req) {
         }),
       });
     } else {
-      console.log("Not found", ui_components);
       zip.addLocalFile(
         `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
         getFilePath(`src/app/components/${item_id}/index.jsx`)
