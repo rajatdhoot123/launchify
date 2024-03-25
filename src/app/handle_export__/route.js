@@ -63,7 +63,7 @@ export async function POST(req) {
   var zip = new AdmZip();
 
   NECESSARY_FILES.forEach((file) => {
-    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+    zip.addLocalFile(path.join(ui_components, file), getFilePath(file));
   });
 
   SHADCN_UI_FILE.forEach((file) => {
