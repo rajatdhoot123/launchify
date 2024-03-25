@@ -8,7 +8,6 @@ export async function updateCopywriting({
   use_case: string;
   apiKey: string;
   jsx_code: string;
-  // theme?: string;
 }) {
   const messages: GPT4VCompletionRequest["messages"] = [
     {
@@ -80,11 +79,15 @@ type MessageContent =
     )[];
 
 export type GPT4VCompletionRequest = {
+  response_format?: {
+    type: "json_object";
+  };
   model:
     | "gpt-4-vision-preview"
     | "gpt-4"
     | "gpt-4-1106-preview"
-    | "mixtral-8x7b-32768";
+    | "mixtral-8x7b-32768"
+    | "llama2-70b-4096";
   messages: {
     role: "system" | "user" | "assistant" | "function";
     content: MessageContent;

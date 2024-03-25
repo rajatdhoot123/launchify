@@ -42,11 +42,6 @@ import {
   SHADCN_UI_FOLDER,
 } from "@/boilercode/constants";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
-import { Client } from "@upstash/qstash";
-
-const qstashClient = new Client({
-  token: process.env.QSTASH_TOKEN,
-});
 
 const getFilePath = (file) => {
   return file.split("/").length > 1
@@ -167,29 +162,38 @@ export async function POST(req) {
     files_with_copywriting
   );
 
+  const add_file_with_copywriting = [];
+
   components.forEach(async ({ item_id, variant }) => {
     const select_comp_index = selected_components.findIndex(
       (file) => file.item_id === item_id
     );
     if (select_comp_index !== -1) {
-      const string = getSubstringBetweenCodeTags(
-        files_with_copywriting_result[select_comp_index].choices[0].message
-          .content
-      );
-      zip.addFile(
-        `src/app/components/${item_id}/index.jsx`,
-        Buffer.from(
-          await prettier.format(string, {
-            parser: "babel",
-          })
-        )
-      );
+      const string =
+        getSubstringBetweenCodeTags(
+          files_with_copywriting_result?.[select_comp_index]?.choices?.[0]
+            ?.message.content
+        ) || "";
+      add_file_with_copywriting.push({
+        path: `src/app/components/${item_id}/index.jsx`,
+        content: prettier.format(string, {
+          parser: "babel",
+        }),
+      });
     } else {
       zip.addLocalFile(
         `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
         `src/app/components/${item_id}/index.jsx`
       );
     }
+  });
+
+  const copywriting_formatted_string = await Promise.all(
+    add_file_with_copywriting.map(({ content }) => content)
+  );
+
+  copywriting_formatted_string.forEach((string, index) => {
+    zip.addFile(add_file_with_copywriting[index].path, Buffer.from(string));
   });
 
   zip.addFile(

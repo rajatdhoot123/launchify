@@ -35,10 +35,10 @@ You take tailwind jsx code from the user and write the best copywriting for user
 - Don't add any comments by yourself.
 - Don't capitalization jsx code.
 - Don't add any extra info by yourself.
-- Return the code response nothing else.
 - Don't explain the code, just generate the code block itself.
-
-- Wrap the code in <code></code> tags.
+- Don't add any prefix like 'Here's an example of'
+- Don't omit any code from the provided code.
+- Wrap the jsx code in <code></code> tags.
 `;
 
 // # Working from wireframes
