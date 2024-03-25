@@ -215,9 +215,12 @@ export async function POST(req) {
   zip.addFile(
     "src/app/page.js",
     Buffer.from(
-      await prettier.format(generateRootPage({ components }), {
-        parser: "babel",
-      })
+      await prettier.format(
+        generateRootPage({ components, copywriting_components }),
+        {
+          parser: "babel",
+        }
+      )
     ),
     "utf8"
   );
