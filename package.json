@@ -32,6 +32,8 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@stripe/react-stripe-js": "^2.6.2",
+    "@stripe/stripe-js": "^3.1.0",
     "@supabase/supabase-js": "^2.38.4",
     "@types/mdx": "^2.0.10",
     "adm-zip": "^0.5.10",
