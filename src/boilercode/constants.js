@@ -123,7 +123,16 @@ export const SUPPORT_PAGES = [
   "src/app/(markdown)/privacy-policy/page.mdx",
 ];
 
-export const STRIPE_HOSTED_EMBEDDED_PAGE = ["src/app/actions/stripe/index.ts"];
+export const STRIPE_HOSTED_EMBEDDED_PAGE = [
+  "src/app/actions/stripe/index.ts",
+  "src/app/components/stripe/CheckoutForm.jsx",
+  "src/app/components/stripe/contant.ts",
+  "src/app/donate-with-checkout/page.jsx",
+  "src/app/utils/stripe/index.ts",
+  "src/boilercode/constants.js",
+  "src/lib/stripe/client.ts",
+  "src/lib/stripe/server.ts",
+];
 
 export const MARKDOWN_PAGES = [
   "src/markdown.css",
