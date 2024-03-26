@@ -116,20 +116,18 @@ export const LEMON_SQUEEZY_FILES = [
   "src/app/api/lemon-squeezy/webhook/route.ts",
 ];
 
-export const STRIPE_FILES = ["src/app/api/stripe/webhook/route.ts"];
-
 export const SUPPORT_PAGES = [
   "src/app/(markdown)/terms-condition/page.mdx",
   "src/app/(markdown)/privacy-policy/page.mdx",
 ];
 
 export const STRIPE_HOSTED_EMBEDDED_PAGE = [
+  "src/app/api/stripe/webhook/route.ts",
   "src/app/actions/stripe/index.ts",
   "src/app/components/stripe/CheckoutForm.jsx",
   "src/app/components/stripe/contant.ts",
-  "src/app/donate-with-checkout/page.jsx",
+  "src/app/stripe-with-checkout/page.jsx",
   "src/app/utils/stripe/index.ts",
-  "src/boilercode/constants.js",
   "src/lib/stripe/client.ts",
   "src/lib/stripe/server.ts",
 ];

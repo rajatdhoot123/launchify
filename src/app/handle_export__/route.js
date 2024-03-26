@@ -19,10 +19,10 @@ import {
   MARKDOWN_PAGES,
   DATABASE_FILES,
   LEMON_SQUEEZY_FILES,
-  STRIPE_FILES,
   NEXT_AUTH_FILES,
   SHADCN_UI_FILE,
   SHADCN_UI_FOLDER,
+  STRIPE_HOSTED_EMBEDDED_PAGE,
 } from "@/boilercode/constants";
 
 const getFilePath = (file) => {
@@ -97,14 +97,14 @@ export async function POST(req) {
     });
   }
 
-  if (premium_features.stripe) {
-    STRIPE_FILES.forEach((file) => {
+  if (premium_features.next_auth) {
+    NEXT_AUTH_FILES.forEach((file) => {
       zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
     });
   }
 
-  if (premium_features.next_auth) {
-    NEXT_AUTH_FILES.forEach((file) => {
+  if (premium_features.stripe_custom_checkout) {
+    STRIPE_HOSTED_EMBEDDED_PAGE.forEach((file) => {
       zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
     });
   }

@@ -227,9 +227,9 @@ export const INTEGRATIONS = [
     title: "Lemon Squeezy Webhooks",
   },
   {
-    item_id: "stripe",
+    item_id: "stripe_custom_checkout",
     selected: false,
-    title: "Stripe Webhooks",
+    title: "Stripe Payment Page + Webhook",
   },
 ];
 
