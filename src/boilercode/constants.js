@@ -123,6 +123,8 @@ export const SUPPORT_PAGES = [
   "src/app/(markdown)/privacy-policy/page.mdx",
 ];
 
+export const STRIPE_HOSTED_EMBEDDED_PAGE = ["src/app/actions/stripe/index.ts"];
+
 export const MARKDOWN_PAGES = [
   "src/markdown.css",
   "src/mdx-components.tsx",

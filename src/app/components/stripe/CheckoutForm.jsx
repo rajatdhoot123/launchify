@@ -10,6 +10,7 @@ import getStripe from "@/lib/stripe/client";
 import { formatAmountForDisplay } from "@/app/utils/stripe";
 import { createCheckoutSession } from "@/app/actions/stripe";
 import { AMOUNT_STEP, CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from "./contant";
+import { Button } from "@/components/ui/button";
 
 export default function CheckoutForm(props) {
   const [loading] = useState(false);
@@ -38,7 +39,7 @@ export default function CheckoutForm(props) {
       <form action={formAction}>
         <input type="hidden" name="uiMode" value={props.uiMode} />
         <label>
-          Custom donation amount ({formatAmountForDisplay(MIN_AMOUNT, CURRENCY)}-
+          Custom amount to pay ({formatAmountForDisplay(MIN_AMOUNT, CURRENCY)}-
           {formatAmountForDisplay(MAX_AMOUNT, CURRENCY)}):
           <input
             type="range"
@@ -65,15 +66,14 @@ export default function CheckoutForm(props) {
           <div className="card-number">
             4242<span></span>4242<span></span>4242<span></span>4242
           </div>
-          .
         </div>
-        <button
+        <Button
           className="checkout-style-background"
           type="submit"
           disabled={loading}
         >
           Donate {formatAmountForDisplay(input.customDonation, CURRENCY)}
-        </button>
+        </Button>
       </form>
       {clientSecret ? (
         <EmbeddedCheckoutProvider
