@@ -1,3 +1,18 @@
+export const COLORS = [
+  { name: "Yello", hex: "#FAEA73" },
+  { name: "Off White", hex: "#6D7D93" },
+  { name: "Paste", hex: "#CCEFF6" },
+  { name: "Deep Pink", hex: "#F7CEDC" },
+  { name: "Light Green", hex: "#E6FFD7" },
+];
+
+export const TESTINOMIAL_COLORS = [
+  { name: "Yello", hex: "#FAEA73" },
+  { name: "Paste", hex: "#CCEFF6" },
+  { name: "Deep Pink", hex: "#F7CEDC" },
+  { name: "Light Green", hex: "#E6FFD7" },
+];
+
 export const BUILD_FEATURES = [
   {
     title: "Landing Page Builder",
