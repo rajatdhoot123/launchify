@@ -37,26 +37,33 @@ const TESTINOMIALS = [
 
 const Testinomials = () => {
   return (
-    <div className="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 space-y-6">
-      {TESTINOMIALS.map((testimonial, index) => (
-        <div
-          className="aspect-auto break-inside-avoid rounded-md p-5 space-y-4"
-          style={{
-            backgroundColor:
-              TESTINOMIAL_COLORS[Math.floor(Math.random() * TESTINOMIAL_COLORS.length)].hex,
-          }}
-          key={testimonial.x_handle}
-        >
-          <div className="flex items-center">
-            <div className="h-12 w-12 bg-red-500 rounded-full"></div>
-            <div className="ml-2">
-              <div>{testimonial.name}</div>
-              <div>{testimonial.x_handle}</div>
-            </div>
-          </div>
-          <div>{testimonial.message}</div>
+    <div className="gap-12 flex flex-col">
+      <div className="md:w-[550px] mx-auto text-center">
+        <div className="md:text-4xl text-2xl font-semibold">
+          Our beloved clients share their Sharp experience
         </div>
-      ))}
+      </div>
+      <div className="columns-1 gap-5 sm:columns-2 sm:gap-8 md:columns-3 space-y-6">
+        {TESTINOMIALS.map((testimonial, index) => (
+          <div
+            className="aspect-auto break-inside-avoid rounded-md p-5 space-y-4"
+            style={{
+              backgroundColor:
+                TESTINOMIAL_COLORS[index % TESTINOMIAL_COLORS.length].hex,
+            }}
+            key={testimonial.x_handle}
+          >
+            <div className="flex items-center">
+              <div className="h-12 w-12 bg-red-500 rounded-full"></div>
+              <div className="ml-2">
+                <div>{testimonial.name}</div>
+                <div>{testimonial.x_handle}</div>
+              </div>
+            </div>
+            <div>{testimonial.message}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

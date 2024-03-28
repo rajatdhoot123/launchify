@@ -1,9 +1,8 @@
 import Navbar from "@/app/landingcomponent/navbar/variant-2";
 import Hero from "@/app/landingcomponent/hero/variant-1";
 import Pricing from "@/app/landingcomponent/pricing/variant-2";
-import Testimonials from "@/app/landingcomponent/testimonials/variant-2";
+import Testimonials from "@/app/landingcomponent/testimonials";
 import BuildFeature from "@/app/landingcomponent/build";
-import Commingsoon from "@/app/landingcomponent/commingsoon/variant-1";
 import Features from "@/app/landingcomponent/features";
 import Footer from "@/app/landingcomponent/footer/variant-3";
 
@@ -22,7 +21,7 @@ export default async function Home() {
   return (
     <>
       <div className="w-full overflow-scroll space-y-40">
-        <section className="mx-auto container">
+        <section id="hero" className="mx-auto container">
           <Hero />
         </section>
         <section className="container mx-auto">
@@ -40,19 +39,18 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="container mx-auto">
+        <section id="features" className="container mx-auto">
           <Features />
         </section>
-        <section className="container mx-auto">
+        <section id="boilerplate" className="container mx-auto">
           <BuildFeature />
         </section>
-        <section className="container mx-auto">
+        <section id="pricing" className="container mx-auto">
           <Pricing />
         </section>
         <section className="container mx-auto">
           <Testimonials />
         </section>
-        <Commingsoon />
         <Footer />
       </div>
     </>

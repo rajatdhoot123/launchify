@@ -7,9 +7,9 @@ export const COLORS = [
 ];
 
 export const TESTINOMIAL_COLORS = [
-  { name: "Yello", hex: "#FAEA73" },
   { name: "Paste", hex: "#CCEFF6" },
   { name: "Deep Pink", hex: "#F7CEDC" },
+  { name: "Yello", hex: "#FAEA73" },
   { name: "Light Green", hex: "#E6FFD7" },
 ];
 

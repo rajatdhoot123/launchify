@@ -1,4 +1,4 @@
-const BG_COLOR = ["#cceff6"];
+import { TESTINOMIAL_COLORS } from "../constant";
 
 const FEATURES = [
   {
@@ -6,7 +6,7 @@ const FEATURES = [
       <svg
         stroke="currentColor"
         fill="currentColor"
-        stroke-width="0"
+        strokeWidth="0"
         viewBox="0 0 24 24"
         height="1em"
         width="1em"
@@ -25,10 +25,10 @@ const FEATURES = [
       <svg
         stroke="currentColor"
         fill="none"
-        stroke-width="2"
+        strokeWidth="2"
         viewBox="0 0 24 24"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         height="1em"
         width="1em"
         xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ const FEATURES = [
       <svg
         stroke="currentColor"
         fill="currentColor"
-        stroke-width="0"
+        strokeWidth="0"
         viewBox="0 0 640 512"
         height="1em"
         width="1em"
@@ -72,7 +72,14 @@ const Features = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         {FEATURES.map((feature, index) => (
-          <div key={index} className="bg-[#cceff6] p-5 rounded-md space-y-2">
+          <div
+            key={index}
+            style={{
+              backgroundColor:
+                TESTINOMIAL_COLORS[index % TESTINOMIAL_COLORS.length].hex,
+            }}
+            className=" p-5 rounded-md space-y-2"
+          >
             <h2 className="text-lg font-semibold flex items-center">
               <span>{feature.icon}</span>
               <span className="ml-2">{feature.title}</span>

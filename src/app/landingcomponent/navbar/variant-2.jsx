@@ -2,41 +2,60 @@ import { Button } from "@/components/ui/button";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import React from "react";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
     <header className="flex items-center justify-between p-5">
-      <a href="/#">
+      <Link href="/">
         <img src="/logo.png" alt="logo" className="h-12 w-12" />
-      </a>
+      </Link>
 
       <ul className="hidden md:block">
-        <Button variant="link">Pricing</Button>
-        <Button variant="link">Testinomials</Button>
-        <Button variant="link">Faq</Button>
-        <Button variant="link">Whats Included</Button>
+        <Button asChild variant="link">
+          <Link href="#pricing">Pricing</Link>
+        </Button>
+        <Button asChild variant="link">
+          <Link href="#testinomials">Testinomials</Link>
+        </Button>
+        <Button asChild variant="link">
+          <Link href="#faqs">Faq</Link>
+        </Button>
+        <Button variant="link" asChild>
+          <Link href="#boilerplate">Whats Included</Link>
+        </Button>
       </ul>
 
       <div className="flex items-center">
-        <Button variant="link" href="/#">
-          Sign in
+        <Button variant="link">
+          <Link href="/auth__/signin">Sign in</Link>
         </Button>
-        <Button href="/#">Sign up</Button>
-        <div className="z-10 relative md:hidden">
+        <Button>
+          <Link href="/auth__/signin">Sign up</Link>
+        </Button>
+        {/* <div className="z-10 relative md:hidden">
           <Drawer>
             <DrawerTrigger>
               <HamburgerMenuIcon className="ml-2" />
             </DrawerTrigger>
             <DrawerContent>
               <div className="p-5 flex flex-col">
-                <Button variant="link">Home</Button>
-                <Button variant="link">Payment</Button>
-                <Button variant="link">About</Button>
-                <Button variant="link">Blog</Button>
+                <Button asChild variant="link">
+                  <Link href="#pricing">Pricing</Link>
+                </Button>
+                <Button asChild variant="link">
+                  <Link href="#testinomials">Testinomials</Link>
+                </Button>
+                <Button asChild variant="link">
+                  <Link href="#faqs">Faq</Link>
+                </Button>
+                <Button variant="link" asChild>
+                  <Link href="#boilerplate">Whats Included</Link>
+                </Button>
               </div>
             </DrawerContent>
           </Drawer>
-        </div>
+        </div> */}
       </div>
     </header>
   );

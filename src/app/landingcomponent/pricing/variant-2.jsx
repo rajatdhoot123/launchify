@@ -12,7 +12,7 @@ const Pricing = () => {
             Save hours of repetitive code, build fast, make $$$ !
           </p>
         </div>
-        <div className="bg-[#FFF9F3] shadow-[5px_5px_0px_0px_#080a47] border-2 border-[#080a47] container rounded-md items-center grid md:grid-cols-3 grid-cols-1 p-6">
+        <div className="bg-[#FFF9F3] shadow-[5px_5px_0px_0px_#080a47] border-2 border-[#080a47] container rounded-md items-center grid md:grid-cols-3 grid-cols-1 p-6 gap-6">
           <div className="col-span-2 space-y-4 text-center">
             <div className="font-medium text-xl">Lifetime Access</div>
             <div className="text-7xl">$59</div>
