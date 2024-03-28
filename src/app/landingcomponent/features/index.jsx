@@ -18,7 +18,7 @@ const FEATURES = [
     ),
     title: "Drag & Drop Builder",
     description:
-      "🚀 Create a stunning landing page in minutes, not hours. Our AI-powered builder helps you craft a compelling message and choose the perfect integrations for your campaign.",
+      "🚀 Use the drag-and-drop builder for landing page, leverage AI for copywriting, & choose required integrations.",
   },
   {
     icon: (
@@ -58,7 +58,7 @@ const FEATURES = [
     ),
     title: "Production Ready",
     description:
-      "🚀 Launch your campaign with confidence. Our platform ensures your landing page is optimized for conversion, loaded with the right integrations, and ready to drive revenue for your business.",
+      "🚀 Launch your app with confidence. Our platform ensures your landing page is optimized for conversion, loaded with the right integrations, and ready to drive revenue for your business.",
   },
 ];
 
@@ -67,7 +67,7 @@ const Features = () => {
     <div className="space-y-12">
       <div className="md:w-[550px] gap-12 flex flex-col items-center text-center mx-auto">
         <div className="md:text-4xl text-2xl font-semibold">
-          Build your app instantly.launch faster, make 💸
+          Build your app instantly.<br />Launch faster, make 💸
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -84,7 +84,7 @@ const Features = () => {
               <span>{feature.icon}</span>
               <span className="ml-2">{feature.title}</span>
             </h2>
-            <p className="text-sm">{feature.description}</p>
+            <p className="text-sm leading-6">{feature.description}</p>
           </div>
         ))}
       </div>

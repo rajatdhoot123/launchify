@@ -1,10 +1,10 @@
-import Navbar from "@/app/landingcomponent/navbar/variant-2";
 import Hero from "@/app/landingcomponent/hero/variant-1";
-import Pricing from "@/app/landingcomponent/pricing/variant-2";
+import Pricing from "@/app/landingcomponent/pricing";
 import Testimonials from "@/app/landingcomponent/testimonials";
 import BuildFeature from "@/app/landingcomponent/build";
 import Features from "@/app/landingcomponent/features";
 import Footer from "@/app/landingcomponent/footer/variant-3";
+import Faqs from "@/app/landingcomponent/faq"
 
 const TIME_SAVING = [
   "+ 6 hrs landing page design",
@@ -20,7 +20,7 @@ const TIME_SAVING = [
 export default async function Home() {
   return (
     <>
-      <div className="w-full overflow-scroll space-y-40">
+      <div className="w-full overflow-scroll md:space-y-40 space-y-20">
         <section id="hero" className="mx-auto container">
           <Hero />
         </section>
@@ -48,7 +48,10 @@ export default async function Home() {
         <section id="pricing" className="container mx-auto">
           <Pricing />
         </section>
-        <section className="container mx-auto">
+        <section id="faqs" className="container mx-auto">
+          <Faqs />
+        </section>
+        <section id="testinomials" className="container mx-auto">
           <Testimonials />
         </section>
         <Footer />

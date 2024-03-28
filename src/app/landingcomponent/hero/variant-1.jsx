@@ -6,6 +6,7 @@ const Video = () => {
     <div className="relative">
       <ShadesGreen />
       <video
+        muted
         src="/landing_page.mp4"
         autoPlay
         controls
@@ -19,26 +20,26 @@ const Video = () => {
 export default function Hero() {
   return (
     <>
-      <div className="flex flex-col items-center justify-center text-center gap-12 relative md:pt-24 pt-12">
-        <div className="md:w-[550px] w-[380px] gap-12 flex flex-col items-center">
+      <div className="flex flex-col items-center justify-center text-center gap-24 relative md:pt-24 pt-12">
+        <div className="md:w-[750px] w-[380px] gap-10 flex flex-col items-center">
           <div className="border-2 inline-block border-black rounded-3xl p-3 px-5 text-[#3A38B7] font-semibold">
             Not your "Typical Boilerplate" anymore
           </div>
-          <div className="md:text-5xl text-3xl font-bold">
+          <div className="md:text-7xl text-5xl font-medium">
             Ship 🚀 your Startup in Days, not Weeks
           </div>
           <div>
-            <div className="text-black text-opacity-60">
+            <div className="text-black text-opacity-60 text-lg md:text-xl">
               Prebuilt UI components, ready-to-use NextJS boilerplate codes & AI
               integration to make your app{" "}
               <span className="font-bold">Production ready</span>
             </div>
           </div>
           <div className="md:flex space-y-6 md:space-y-0">
-            <button className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3">
-              Start Building For Free
-            </button>
-            <button className=" rounded-3xl h-12 flex items-center ml-5 space-x-1">
+            <Link href="/editor__" className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3">
+              Start Building
+            </Link>
+            <button className=" rounded-3xl h-12 flex items-center md:ml-5 space-x-1">
               <span className="bg-[#F480D4] p-2 rounded-full h-8 w-8 flex justify-center">
                 <svg
                   className="text-white"

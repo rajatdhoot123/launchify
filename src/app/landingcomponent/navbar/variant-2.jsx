@@ -6,22 +6,22 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <header className="flex items-center justify-between p-5">
+    <header className="flex items-center justify-around p-5">
       <Link href="/">
         <img src="/logo.png" alt="logo" className="h-12 w-12" />
       </Link>
 
       <ul className="hidden md:block">
-        <Button asChild variant="link">
+        <Button className="text-lg" asChild variant="link">
           <Link href="#pricing">Pricing</Link>
         </Button>
-        <Button asChild variant="link">
+        <Button className="text-lg" asChild variant="link">
           <Link href="#testinomials">Testinomials</Link>
         </Button>
-        <Button asChild variant="link">
+        <Button className="text-lg" asChild variant="link">
           <Link href="#faqs">Faq</Link>
         </Button>
-        <Button variant="link" asChild>
+        <Button className="text-lg" asChild variant="link">
           <Link href="#boilerplate">Whats Included</Link>
         </Button>
       </ul>

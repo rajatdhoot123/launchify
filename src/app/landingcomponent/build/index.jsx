@@ -12,13 +12,13 @@ const BuildFeature = () => {
         {BUILD_FEATURES.map((build_feature, index) => (
           <div
             key={index}
-            className="bg-[#FFF9F3] shadow-[5px_5px_0px_0px_#080a47] border-2 border-[#080a47] container rounded-md p-5"
+            className="bg-[#FFF9F3] shadow-[5px_5px_0px_0px_#080a47] border-2 border-[#080a47] container rounded-md p-5 space-y-4"
           >
             <h2 className="text-lg font-semibold flex items-center">
               <span>{build_feature.icon}</span>
               <span className="ml-2">{build_feature.title}</span>
             </h2>
-            <ul className="ml-2">
+            <ul className="ml-6 list-disc space-y-2">
               {build_feature.features.map((feature, index) => (
                 <li key={feature}>{feature}</li>
               ))}

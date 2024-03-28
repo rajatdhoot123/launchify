@@ -79,3 +79,37 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 4+ hours",
   },
 ];
+
+
+export const FAQS = [
+  {
+    title: "What exactly do I get?",
+    content:
+      "The NextJS starter provides you with all the necessary boilerplate code to operate an online business, including payment systems, a database, login functionality, a blog, UI components, and more. The repo is available in Javascript, utilizing the Nextjs /app router.,",
+  },
+  {
+    title: "Can I still use it if my tech stack is different?",
+    content:
+      "Absolutely, as long as you're comfortable with React & NextJS. The libraries are independent. You can opt for SendGrid over Mailgun, LemonSqueezy instead of Stripe, or Postgres instead of MongoDB, for instance.",
+  },
+  {
+    title: "Is this a website template?",
+    content:
+      "It offers more than just a template. You can reuse sections to build your site quickly, such as a pricing section, an FAQ, or even an entire blog. It also includes UI components like buttons, modals, popovers, and more. Furthermore, the NextJS starter comes with essential tools for running an online business—payment processing, payment, SEO, etc., ",
+  },
+  {
+    title: "Are there any additional costs?",
+    content:
+      "Numerous hosting platforms, like Vercel, allow you to host a project for free (front-end + back-end), and MongoDB/Supabase offer free tiers—enabling you to launch your first app for $0/month. If you use Magic Link sign-ups, you'll spend $1 per 1,000 users.,",
+  },
+  {
+    title: "How often is the boilercode updated?",
+    content:
+      " We frequently update the boilerplate for all our projects, so it's updated regularly.,",
+  },
+  {
+    title: "Can I get a refund?",
+    content:
+      "Once you gain access to the repo, the code becomes yours indefinitely, making it non-refundable.",
+  },
+];
