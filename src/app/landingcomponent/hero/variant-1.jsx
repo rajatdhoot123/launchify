@@ -19,7 +19,7 @@ const Video = () => {
 export default function Hero() {
   return (
     <>
-      <section className="container mx-auto flex flex-col items-center justify-center text-center gap-12  md:py-24 py-12 relative">
+      <div className="flex flex-col items-center justify-center text-center gap-12 relative md:pt-24 pt-12">
         <div className="md:w-[550px] w-[380px] gap-12 flex flex-col items-center">
           <div className="border-2 inline-block border-black rounded-3xl p-3 px-5 text-[#3A38B7] font-semibold">
             Not your "Typical Boilerplate" anymore
@@ -56,7 +56,7 @@ export default function Hero() {
           </div>
         </div>
         <Video />
-      </section>
+      </div>
     </>
   );
 }

@@ -1,7 +1,38 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { BUILD_FEATURES } from "../constant";
 
 const Pricing = () => {
+  return (
+    <div>
+      <div className="md:w-8/12 gap-12 flex flex-col items-center mx-auto">
+        <div className="space-y-4 text-center">
+          <div className="md:text-4xl text-2xl font-semibold">Pricing</div>
+          <p className="md:text-xl text-lg">
+            Save hours of repetitive code, build fast, make $$$ !
+          </p>
+        </div>
+        <div className="bg-[#FFF9F3] shadow-[5px_5px_0px_0px_#080a47] border-2 border-[#080a47] container rounded-md items-center grid md:grid-cols-3 grid-cols-1 p-6">
+          <div className="col-span-2 space-y-4 text-center">
+            <div className="font-medium text-xl">Lifetime Access</div>
+            <div className="text-7xl">$59</div>
+            <div className="font-xl font-medium">
+              Pay once. Build <span className="font-bold">unlimited </span>
+              projects
+            </div>
+            <button className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3">
+              Start Building
+            </button>
+          </div>
+          <div>
+            {BUILD_FEATURES.map((feature) => (
+              <li key={feature.title}>{feature.title}</li>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
   return (
     <div className="container mx-auto px-4 py-24" id="pricing">
       <header className="text-center mb-16">

@@ -2,8 +2,9 @@ import Navbar from "@/app/landingcomponent/navbar/variant-2";
 import Hero from "@/app/landingcomponent/hero/variant-1";
 import Pricing from "@/app/landingcomponent/pricing/variant-2";
 import Testimonials from "@/app/landingcomponent/testimonials/variant-2";
-import Cards from "@/app/landingcomponent/cards/variant-3";
+import BuildFeature from "@/app/landingcomponent/build";
 import Commingsoon from "@/app/landingcomponent/commingsoon/variant-1";
+import Features from "@/app/landingcomponent/features";
 import Footer from "@/app/landingcomponent/footer/variant-3";
 
 const TIME_SAVING = [
@@ -20,9 +21,11 @@ const TIME_SAVING = [
 export default async function Home() {
   return (
     <>
-      <div className="w-full overflow-scroll space-y-12">
-        <Hero />
-        <div className="p-5">
+      <div className="w-full overflow-scroll space-y-40">
+        <section className="mx-auto container">
+          <Hero />
+        </section>
+        <section className="container mx-auto">
           <div className="bg-[#FFF9F3] shadow-[5px_5px_0px_0px_#080a47] border-2 border-[#080a47] container rounded-md md:w-[560px] text-center">
             <div className="p-5 space-y-6">
               <div className="text-2xl font-semibold">
@@ -35,20 +38,20 @@ export default async function Home() {
               </ul>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div>
-          <section className="container mx-auto flex flex-col items-center justify-center text-center gap-12  md:py-24 py-12 relative">
-            <div className="md:w-[550px] w-[380px] gap-12 flex flex-col items-center">
-              <div className="md:text-4xl text-2xl font-bold">
-                Build your app instantly.launch faster, make 💸
-              </div>
-            </div>
-          </section>
-        </div>
-        <Pricing />
-        <Testimonials />
-        <Cards />
+        <section className="container mx-auto">
+          <Features />
+        </section>
+        <section className="container mx-auto">
+          <BuildFeature />
+        </section>
+        <section className="container mx-auto">
+          <Pricing />
+        </section>
+        <section className="container mx-auto">
+          <Testimonials />
+        </section>
         <Commingsoon />
         <Footer />
       </div>
