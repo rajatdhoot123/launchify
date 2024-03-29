@@ -1,8 +1,13 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 import React from "react";
 import Link from "next/link";
+import { useConfig } from "@/app/__context/ConfigContext";
 
 const Navbar = () => {
+  const { session } = useConfig();
+
   return (
     <header className="flex items-center justify-around p-5">
       <Link href="/">
@@ -25,12 +30,23 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center">
-        <Button variant="link">
-          <Link href="/auth__/signin">Sign in</Link>
-        </Button>
-        <Button>
-          <Link href="/auth__/signin">Sign up</Link>
-        </Button>
+        {session?.user?.name ? (
+          <>
+            {/* <div className="font-semibold">{`Hey ${session?.user?.name}`}</div> */}
+            <Button onClick={signOut} variant="link">
+              Sign out
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button variant="link">
+              <Link href="/auth__/signin">Sign in</Link>
+            </Button>
+            <Button>
+              <Link href="/auth__/signin">Sign up</Link>
+            </Button>
+          </>
+        )}
         {/* <div className="z-10 relative md:hidden">
           <Drawer>
             <DrawerTrigger>

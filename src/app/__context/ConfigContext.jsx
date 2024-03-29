@@ -1,17 +1,24 @@
 "use client";
 
-import { useContext, createContext, useMemo, useReducer } from "react";
+import {
+  useContext,
+  createContext,
+  useMemo,
+  useReducer,
+  useEffect,
+} from "react";
 
 export const SET_USER = "SET_USER";
 
 export const initialState = {
   is_active: false,
+  session: null,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, preferredLang: action.lang };
+      return { ...state };
     default:
       return state;
   }
@@ -29,6 +36,14 @@ const ConfigProvider = ({ children, initialState }) => {
     }),
     [state]
   );
+
+  useEffect(() => {
+    if (state?.session?.user) {
+      window?.posthog?.identify(state.session.user.email, state.session.user);
+    } else {
+      window?.posthog?.reset();
+    }
+  }, [state.session]);
 
   return (
     <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>

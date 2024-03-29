@@ -85,7 +85,10 @@ export default async function RootLayout({ children }) {
         <Providers themes={["pink", "light", "dark"]}>
           <NextAuthProvider>
             <ConfigProvider
-              initialState={{ is_active: current_user?.is_active ?? false }}
+              initialState={{
+                is_active: current_user?.is_active ?? false,
+                session: session ?? null,
+              }}
             >
               <NavBar session={session} />
               {children}
