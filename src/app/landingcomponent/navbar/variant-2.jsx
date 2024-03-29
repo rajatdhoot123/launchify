@@ -1,11 +1,21 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useConfig } from "@/app/__context/ConfigContext";
+import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const { setTheme } = useTheme();
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname === "/") setTheme("light"); //set your theme here after component mounts
+  }, [pathname, setTheme]);
+
   const { session } = useConfig();
 
   return (
