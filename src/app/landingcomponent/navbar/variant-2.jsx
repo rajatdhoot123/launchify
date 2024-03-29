@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import React from "react";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -15,9 +13,9 @@ const Navbar = () => {
         <Button className="text-lg" asChild variant="link">
           <Link href="#pricing">Pricing</Link>
         </Button>
-        <Button className="text-lg" asChild variant="link">
+        {/* <Button className="text-lg" asChild variant="link">
           <Link href="#testinomials">Testinomials</Link>
-        </Button>
+        </Button> */}
         <Button className="text-lg" asChild variant="link">
           <Link href="#faqs">Faq</Link>
         </Button>

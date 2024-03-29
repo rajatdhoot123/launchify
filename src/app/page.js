@@ -7,12 +7,15 @@ import Footer from "@/app/landingcomponent/footer/variant-3";
 import Faqs from "@/app/landingcomponent/faq"
 
 const TIME_SAVING = [
-  "+ 6 hrs landing page design",
+  "+ 8 hrs landing page design",
+  "+ 4 hrs database drizzle setup",
+  "+ 4 hrs stipe webhook + custom payment setup",
   "+ 2 hrs to handle Lemonsqueezy webhooks",
   "+ 2 hrs for SEO",
   "+ 4 hrs for auth setup",
   "+ 4 hrs for database setup",
-  "+4 hrs for mdx blogs setup ",
+  "+ 4 hrs for mdx setup ",
+  "+ 1 hr for GA + crisp setup ",
   "+ ∞ hrs overthinking...",
   "= 22+ hours of headaches",
 ];
@@ -51,9 +54,9 @@ export default async function Home() {
         <section id="faqs" className="container mx-auto">
           <Faqs />
         </section>
-        <section id="testinomials" className="container mx-auto">
+        {/* <section id="testinomials" className="container mx-auto">
           <Testimonials />
-        </section>
+        </section> */}
         <Footer />
       </div>
     </>

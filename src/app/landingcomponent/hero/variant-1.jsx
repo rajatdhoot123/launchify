@@ -36,8 +36,11 @@ export default function Hero() {
             </div>
           </div>
           <div className="md:flex space-y-6 md:space-y-0">
-            <Link href="/editor__" className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3">
-              Start Building
+            <Link
+              href="/editor__"
+              className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3"
+            >
+              Start Building With Drag & Drop
             </Link>
             <button className=" rounded-3xl h-12 flex items-center md:ml-5 space-x-1">
               <span className="bg-[#F480D4] p-2 rounded-full h-8 w-8 flex justify-center">
