@@ -40,6 +40,7 @@ export async function POST(req) {
     components,
     ga_id = "",
     crisp_id = "",
+    post_hog = "",
     premium_features = {},
     pages = {},
   } = body;
@@ -147,6 +148,7 @@ export async function POST(req) {
     Buffer.from(
       await prettier.format(
         generateLayout({
+          post_hog,
           ga_id,
           next_auth: premium_features.next_auth,
           crisp_id,
@@ -173,6 +175,7 @@ export async function POST(req) {
     Buffer.from(`
   ${ga_id ? `NEXT_PUBLIC_GOOGLE_ANALYTICS=${ga_id}` : ""}
   ${crisp_id ? `NEXT_PUBLIC_CRISP_SUPPORT=${crisp_id}` : ""}
+  ${post_hog ? `NEXT_PUBLIC_POST_HOG=${post_hog}` : ""}
   `)
   );
 

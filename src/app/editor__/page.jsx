@@ -80,6 +80,7 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
       {}
     ),
     crisp_id: "",
+    post_hog: "",
     pages: PAGES.reduce((acc, fe) => ({ ...acc, [fe.item_id]: false }), {}),
   });
   const [isOpen, setIsOpen] = useState({ integrations: false, page: false });
@@ -128,6 +129,20 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
                   type="text"
                   value={state.ga_id}
                   placeholder="Enter GA Id"
+                />
+              </div>
+              <div>
+                <Label htmlFor="email">Posthog</Label>
+                <Input
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      post_hog: e.target.value,
+                    }))
+                  }
+                  type="text"
+                  value={state.post_hog}
+                  placeholder="Enter Posthog key"
                 />
               </div>
               <div>
@@ -331,6 +346,7 @@ function Editor() {
           use_case: open_ai_prompt,
           api_key: open_ai_key,
           ga_id: state.ga_id,
+          post_hog: state.post_hog,
           crisp_id: state.crisp_id,
           pages: state.pages,
           premium_features: state.premium_features,
@@ -408,6 +424,7 @@ function Editor() {
       const response = await fetch("/handle_export__", {
         method: "POST",
         body: JSON.stringify({
+          post_hog: state.post_hog,
           ga_id: state.ga_id,
           crisp_id: state.crisp_id,
           pages: state.pages,
