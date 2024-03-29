@@ -1,0 +1,127 @@
+export const COLORS = [
+  { name: "Yello", hex: "#FAEA73" },
+  { name: "Off White", hex: "#6D7D93" },
+  { name: "Paste", hex: "#CCEFF6" },
+  { name: "Deep Pink", hex: "#F7CEDC" },
+  { name: "Light Green", hex: "#E6FFD7" },
+];
+
+export const TESTINOMIAL_COLORS = [
+  { name: "Paste", hex: "#CCEFF6" },
+  { name: "Deep Pink", hex: "#F7CEDC" },
+  { name: "Yello", hex: "#FAEA73" },
+  { name: "Light Green", hex: "#E6FFD7" },
+];
+
+export const BUILD_FEATURES = [
+  {
+    title: "Landing Page Builder",
+    features: [
+      "Drag & drop landing page builder with Ai copywriting support",
+      "Ready to use templates &  dark mode support",
+    ],
+    time_saved: "Time saved: 8+ hours",
+  },
+  {
+    title: "Database Drizzle ORM",
+    features: [
+      "Drizzle ORM Setup",
+      "Connect to any database",
+      "Authentication Schema",
+    ],
+    time_saved: "Time saved: 4+ hours",
+  },
+  {
+    icon: null,
+    title: "Payment Gateway",
+    features: [
+      "Create checkout sessions (Stripe)",
+      "Manage webhooks for subscriptions and one-time payments (Stripe & Lemonsqueezy)",
+    ],
+    time_saved: "Time saved: 2+ hours",
+  },
+  {
+    title: "User Authentication",
+    features: [
+      "Enable authentication with Magic Link and Google Auth",
+      "Integrate various authentication methods, including NextAuth",
+    ],
+    time_saved: "Time saved: 4+ hours",
+  },
+  {
+    title: "Analytics",
+    features: [
+      "Integrate Google Analytics for tracking and analyzing data effectively.",
+      "Posthog Analytics coming soon",
+    ],
+    time_saved: "Time saved: 1+ hours",
+  },
+  {
+    title: "Customer Support",
+    features: [
+      "Integrate Crisp for efficient customer support",
+      "More integrations for customer support coming soon",
+    ],
+    time_saved: "Time saved: 0.5+ hours",
+  },
+  {
+    title: "Blogs",
+    features: [
+      "Integrate MDx with customizable styling for blogs.",
+      "Set up Notion to blog conversion upon request.",
+    ],
+    time_saved: "Time saved: 4+ hours",
+  },
+  {
+    title: "Style",
+    features: [
+      "Shadcn UI Components with Tailwind CSS Setup",
+      "A Landing Page Builder",
+      "Multi Theme Support",
+      "Responsive Design",
+    ],
+    time_saved: "Time saved: 4+ hours",
+  },
+  {
+    title: "Extra",
+    features: [
+      "GA Integration",
+      "Crisp Chat Integration",
+      "Terms & Privacy Page",
+    ],
+    time_saved: "Time saved: 4+ hours",
+  },
+];
+
+export const FAQS = [
+  {
+    title: "What exactly do I get?",
+    content:
+      "The NextJS starter provides you with all the necessary boilerplate code to operate an online business, including payment systems, a database, login functionality, a blog, UI components, and more. The repo is available in Javascript, utilizing the Nextjs /app router.,",
+  },
+  {
+    title: "Can I still use it if my tech stack is different?",
+    content:
+      "Absolutely, as long as you're comfortable with React & NextJS. The libraries are independent. You can opt for SendGrid over Mailgun, LemonSqueezy instead of Stripe, or Postgres instead of MongoDB, for instance.",
+  },
+  {
+    title: "Is this a website template?",
+    content:
+      "It offers more than just a template. You can reuse sections to build your site quickly, such as a pricing section, an FAQ, or even an entire blog. It also includes UI components like buttons, modals, popovers, and more. Furthermore, the NextJS starter comes with essential tools for running an online business—payment processing, payment, SEO, etc., ",
+  },
+  {
+    title: "Are there any additional costs?",
+    content:
+      "Numerous hosting platforms, like Vercel, allow you to host a project for free (front-end + back-end), and MongoDB/Supabase offer free tiers—enabling you to launch your first app for $0/month. If you use Magic Link sign-ups, you'll spend $1 per 1,000 users.,",
+  },
+  {
+    title: "How often is the boilercode updated?",
+    content:
+      " We frequently update the boilerplate for all our projects, so it's updated regularly.,",
+  },
+  {
+    title: "Can I get a refund?",
+    content:
+      "Once you gain access to the repo, the code becomes yours indefinitely, making it non-refundable.",
+  },
+];

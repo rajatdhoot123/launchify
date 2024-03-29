@@ -1,18 +1,18 @@
-import { Inter } from "next/font/google";
 import "@/app/styles/globals.css";
 import { Providers } from "@/app/styles/next-theme";
 import Script from "next/script";
 import NextAuthProvider from "@/app/nextauth/provider";
 import { getServerSession } from "next-auth";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import NavBar from "@/app/__landingcomponents__/navbar/variant-2";
+import NavBar from "@/app/landingcomponent/navbar/variant-2";
 import { Toaster } from "@/components/ui/toaster";
 import { ConfigProvider } from "@/app/__context/ConfigContext";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
+import { Bricolage_Grotesque } from "next/font/google";
 import { eq } from "drizzle-orm";
 
-const inter = Inter({ subsets: ["latin"] });
+const bricolage_grotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
 export const metadata = {
   metadataBase: new URL("https://www.uiwidgets.store"),
@@ -73,7 +73,7 @@ export default async function RootLayout({ children }) {
           </Script>
         </>
       )}
-      <body className={inter.className}>
+      <body className={bricolage_grotesque.className}>
         <Providers themes={["pink", "light", "dark"]}>
           <NextAuthProvider>
             <ConfigProvider

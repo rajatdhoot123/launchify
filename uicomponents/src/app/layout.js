@@ -5,7 +5,7 @@ import Script from "next/script";
 import NextAuthProvider from "@/app/nextauth/provider";
 import { getServerSession } from "next-auth";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import NavBar from "@/app/__landingcomponents__/navbar/variant-2";
+import NavBar from "@/app/landingcomponent/navbar/variant-2";
 import { Toaster } from "@/components/ui/toaster";
 import { ConfigProvider } from "@/app/__context/ConfigContext";
 import { db } from "@/lib/database/db";
