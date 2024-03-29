@@ -12,9 +12,9 @@ export const VA_360_LINK_HOST = {
 }[env];
 
 export const UI_WIDGET_LINK_HOST = {
-  production: "blog.uiwidgets.store",
+  production: "blog.boilercode.app",
   preview: `link---${process.env.NEXT_PUBLIC_VERCEL_URL}`,
-  development: "uiwidgets-blog.localhost:3000",
+  development: "boildercode-blog.localhost:3000",
 }[env];
 
 export const APP_HOST = {

@@ -365,7 +365,7 @@ const Floater = ({
           <p>PRO Features</p>
           <Button variant="link">
             <a
-              href="https://boilercode.app?utm_source=uiwidgets"
+              href="https://boilercode.app?utm_source=boilercode"
               target="_blank"
             >
               Boilercode App

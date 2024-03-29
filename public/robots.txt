@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.uiwidgets.store
+Host: https://www.boilercode.app
 
 # Sitemaps
-Sitemap: https://www.uiwidgets.store/sitemap.xml
+Sitemap: https://www.boilercode.app/sitemap.xml

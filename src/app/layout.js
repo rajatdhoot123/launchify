@@ -15,16 +15,16 @@ import { eq } from "drizzle-orm";
 const bricolage_grotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: new URL("https://www.uiwidgets.store"),
+  metadataBase: new URL("https://www.boilercode.app"),
   title: {
     default:
-      "Tailwind and Next.js UI Components for Speedy Web Development - UIWidgets.store",
+      "Tailwind and Next.js UI Components for Speedy Web Development - boilercode.app",
   },
   description:
     "Get started quickly with our UI components for Tailwind and Next.js. Streamline your web development and build stunning applications with our pre-configured templates.",
   openGraph: {
     title:
-      "Tailwind and Next.js UI Components for Speedy Web Development - UIWidgets.store",
+      "Tailwind and Next.js UI Components for Speedy Web Development - boilercode.app",
     description:
       "Supercharge your web development with our Tailwind and Next.js UI components. Create responsive and stylish web applications faster and more efficiently.",
   },

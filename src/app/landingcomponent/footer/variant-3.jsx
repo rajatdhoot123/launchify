@@ -6,7 +6,7 @@ const Footer = () => {
       </div>
 
       <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-        UiWidgets by{" "}
+        Boilercode by{" "}
         <a href="http://www.kwiktwik.com"> KwikTwik Technologies PVT LTD </a>{" "}
       </p>
 
