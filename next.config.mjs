@@ -13,5 +13,17 @@ const withMDX = nextMDX({
 });
 
 export default withMDX({
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+    ];
+  },
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 });
