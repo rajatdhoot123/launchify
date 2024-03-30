@@ -161,8 +161,9 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
                 />
               </div>
               <div>
-                <Label htmlFor="email">Twak To</Label>
+                <Label htmlFor="twak_to_id">Twak To</Label>
                 <Input
+                  id="twak_to_id"
                   onChange={(e) =>
                     setState((prev) => ({
                       ...prev,
@@ -358,6 +359,7 @@ function Editor() {
       const response = await fetch("/handle_export_with_copy__", {
         method: "POST",
         body: JSON.stringify({
+          twak_to_id: state.twak_to_id,
           use_case: open_ai_prompt,
           api_key: open_ai_key,
           ga_id: state.ga_id,
@@ -439,6 +441,7 @@ function Editor() {
       const response = await fetch("/handle_export__", {
         method: "POST",
         body: JSON.stringify({
+          twak_to_id: state.twak_to_id,
           post_hog: state.post_hog,
           ga_id: state.ga_id,
           crisp_id: state.crisp_id,
