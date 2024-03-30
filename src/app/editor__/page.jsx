@@ -81,6 +81,7 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
     ),
     crisp_id: "",
     post_hog: "",
+    twak_to_id: "",
     pages: PAGES.reduce((acc, fe) => ({ ...acc, [fe.item_id]: false }), {}),
   });
   const [isOpen, setIsOpen] = useState({ integrations: false, page: false });
@@ -157,6 +158,20 @@ const NextBoilerPlate = forwardRef((props, state_ref) => {
                   type="text"
                   value={state.crisp_id}
                   placeholder="Enter Crisp Id"
+                />
+              </div>
+              <div>
+                <Label htmlFor="email">Twak To</Label>
+                <Input
+                  onChange={(e) =>
+                    setState((prev) => ({
+                      ...prev,
+                      twak_to_id: e.target.value,
+                    }))
+                  }
+                  type="text"
+                  value={state.twak_to_id}
+                  placeholder="Enter Twak to Id"
                 />
               </div>
               {INTEGRATIONS.map((feature) => (

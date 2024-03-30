@@ -3,12 +3,13 @@ const generateLayout = ({
   next_auth,
   post_hog = "",
   crisp_id = "",
+  twak_to_id,
 }) => {
   return `
 import { Inter } from "next/font/google";
 import "@/app/styles/globals.css";
 import { Providers } from "@/app/styles/next-theme";
-${ga_id || crisp_id || post_hog ? `import Script from "next/script"` : ""}
+${ga_id || crisp_id || post_hog || twak_to_id ? `import Script from "next/script"` : ""}
 ${next_auth ? `import NextAuthProvider from "@/app/nextauth/provider"` : ""}
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,6 +26,23 @@ export default function RootLayout({ children }) {
       crisp_id
         ? `<Script id="crisp_support_id">
         {\`window.$crisp=[];window.CRISP_WEBSITE_ID="\${process.env.NEXT_PUBLIC_CRISP_SUPPORT}";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();\`}
+      </Script>`
+        : ""
+    }
+    ${
+      twak_to_id
+        ? ` <Script id="twak_to">
+        {\`
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+          (function(){
+          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+          s1.async=true;
+          s1.src='https://embed.tawk.to/\${process.env.NEXT_PUBLIC_TWAK_TO}/1hq6q6gv3';
+          s1.charset='UTF-8';
+          s1.setAttribute('crossorigin','*');
+          s0.parentNode.insertBefore(s1,s0);
+          })();
+        \`}
       </Script>`
         : ""
     }
