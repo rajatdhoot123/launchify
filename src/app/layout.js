@@ -9,10 +9,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { ConfigProvider } from "@/app/__context/ConfigContext";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Inter } from "next/font/google";
 import { eq } from "drizzle-orm";
 
-const bricolage_grotesque = Bricolage_Grotesque({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   metadataBase: new URL("https://www.boilercode.app"),
@@ -96,7 +96,7 @@ export default async function RootLayout({ children }) {
           </Script>
         </>
       )}
-      <body className={bricolage_grotesque.className}>
+      <body className={inter.className}>
         <Providers themes={["pink", "light", "dark"]}>
           <NextAuthProvider>
             <ConfigProvider

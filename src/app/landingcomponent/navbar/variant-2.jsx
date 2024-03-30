@@ -18,6 +18,7 @@ const Navbar = () => {
 
   const { session } = useConfig();
 
+  if (pathname.startsWith("/iframe__")) return null;
   return (
     <header className="flex items-center justify-around p-5">
       <Link href="/">

@@ -4,7 +4,8 @@ import Testimonials from "@/app/landingcomponent/testimonials";
 import BuildFeature from "@/app/landingcomponent/build";
 import Features from "@/app/landingcomponent/features";
 import Footer from "@/app/landingcomponent/footer/variant-3";
-import Faqs from "@/app/landingcomponent/faq"
+import Faqs from "@/app/landingcomponent/faq";
+import { Bricolage_Grotesque } from "next/font/google";
 
 const TIME_SAVING = [
   "+ 8 hrs landing page design",
@@ -20,10 +21,14 @@ const TIME_SAVING = [
   "= 22+ hours of headaches",
 ];
 
+const bricolage_grotesque = Bricolage_Grotesque({ subsets: ["latin"] });
+
 export default async function Home() {
   return (
     <>
-      <div className="w-full overflow-scroll md:space-y-40 space-y-20">
+      <div
+        className={`w-full overflow-scroll md:space-y-40 space-y-20 ${bricolage_grotesque.className}`}
+      >
         <section id="hero" className="mx-auto container">
           <Hero />
         </section>
