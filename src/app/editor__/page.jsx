@@ -621,10 +621,17 @@ function Editor() {
               );
             },
             componentItem: ({ children }) => {
-              const [name, index] =
+              const [comp_name, index] =
                 children?.props?.children?.props?.children?.[0]?.props?.children?.split(
                   "-"
                 );
+
+              const selectedComponent = COMPONENTS_ARRAY.find(
+                ({ name }) => name === comp_name
+              );
+
+              const RenderComponent = selectedComponent.components[index - 1];
+              <RenderComponent />;
 
               return (
                 <div className="mb-4">
@@ -635,12 +642,9 @@ function Editor() {
                         side="right"
                         className="w-[340px] h-[196px] overflow-hidden"
                       >
-                        {/* <AspectRatio ratio={16 / 9} className="bg-muted "> */}
-                        <iframe
-                          className="frame"
-                          src={`/iframe__/${name}/${index}`}
-                        ></iframe>
-                        {/* </AspectRatio> */}
+                        <div className="frame">
+                          <RenderComponent />
+                        </div>
                       </HoverCardContent>
                     </HoverCardPortal>
                   </HoverCard>
