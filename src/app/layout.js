@@ -58,6 +58,21 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      {process.env.NEXT_PUBLIC_TWAK_TO && (
+        <Script id="post-hog">
+          {`
+            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+            (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/${process.env.NEXT_PUBLIC_TWAK_TO}/1hq6q6gv3';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+            })();
+          `}
+        </Script>
+      )}
       {process.env.NEXT_PUBLIC_POST_HOG && (
         <Script id="post-hog">
           {`  
