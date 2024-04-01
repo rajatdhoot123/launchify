@@ -77,7 +77,7 @@ export default function Pricing() {
               Professional Suite
             </h3>
             <div className="mt-4 text-center ">
-              <span className="text-4xl font-bold">$59</span>/ month
+              <span className="text-4xl font-bold">$57</span>/ month
             </div>
             <ul className="mt-4 space-y-2">
               <li className="flex items-center">
