@@ -18,7 +18,7 @@ const TIME_SAVING = [
   "+ 4 hrs for mdx setup ",
   "+ 1 hr for GA + crisp setup ",
   "+ ∞ hrs overthinking...",
-  "= 22+ hours of headaches",
+  "= 33+ hours of headaches",
 ];
 
 const bricolage_grotesque = Bricolage_Grotesque({ subsets: ["latin"] });
