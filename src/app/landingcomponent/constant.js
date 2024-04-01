@@ -15,6 +15,7 @@ export const TESTINOMIAL_COLORS = [
 
 export const BUILD_FEATURES = [
   {
+    icons: ["/builder.png"],
     title: "Landing Page Builder",
     features: [
       "Drag & drop landing page builder with Ai copywriting support",
@@ -69,6 +70,7 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 0.5+ hours",
   },
   {
+    icons: ["/mdx.png"],
     title: "Blogs",
     features: [
       "Integrate MDx with customizable styling for blogs.",
@@ -90,9 +92,9 @@ export const BUILD_FEATURES = [
   {
     title: "Extra",
     features: [
-      "GA Integration",
-      "Crisp Chat Integration",
+      "AI Copy Writing",
       "Terms & Privacy Page",
+      "Lots more feature comming soon"
     ],
     time_saved: "Time saved: 4+ hours",
   },
