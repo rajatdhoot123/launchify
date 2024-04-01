@@ -14,9 +14,17 @@ const BuildFeature = () => {
             key={index}
             className="bg-[#FFF9F3] shadow-[5px_5px_0px_0px_#080a47] border-2 border-[#080a47] container rounded-md p-5 space-y-4"
           >
-            <h2 className="text-lg font-semibold flex items-center">
-              <span>{build_feature.icon}</span>
+            <h2 className="text-lg font-semibold flex items-center justify-between">
               <span className="ml-2">{build_feature.title}</span>
+              <div className="flex space-x-2">
+                {build_feature?.icons?.map((icon) => (
+                  <img
+                    src={icon}
+                    key={icon}
+                    className="h-8 w-8 object-contain rounded-md "
+                  />
+                ))}
+              </div>
             </h2>
             <ul className="ml-6 list-disc space-y-2">
               {build_feature.features.map((feature, index) => (

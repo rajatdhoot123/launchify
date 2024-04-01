@@ -23,6 +23,7 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 8+ hours",
   },
   {
+    icons: ["/drizzle.png"],
     title: "Database Drizzle ORM",
     features: [
       "Drizzle ORM Setup",
@@ -32,7 +33,7 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 4+ hours",
   },
   {
-    icon: null,
+    icons: ["/stripe.webp", "/lemonsqueezy.jpeg"],
     title: "Payment Gateway",
     features: [
       "Create checkout sessions (Stripe)",
@@ -41,6 +42,7 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 2+ hours",
   },
   {
+    icons: ["/next-auth.png"],
     title: "User Authentication",
     features: [
       "Enable authentication with Magic Link and Google Auth",
@@ -49,6 +51,7 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 4+ hours",
   },
   {
+    icons: ["/posthog.png", "/ga.png"],
     title: "Analytics",
     features: [
       "Integrate Google Analytics for tracking and analyzing data effectively.",
@@ -57,6 +60,7 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 1+ hours",
   },
   {
+    icons: ["/crisp.jpeg"],
     title: "Customer Support",
     features: [
       "Integrate Crisp for efficient customer support",
@@ -74,6 +78,7 @@ export const BUILD_FEATURES = [
   },
   {
     title: "Style",
+    icons: ["/tailwind.svg"],
     features: [
       "Shadcn UI Components with Tailwind CSS Setup",
       "A Landing Page Builder",
