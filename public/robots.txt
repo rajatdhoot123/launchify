@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.boilercode.app
+Host: https://www.launchify.club
 
 # Sitemaps
-Sitemap: https://www.boilercode.app/sitemap.xml
+Sitemap: https://www.launchify.club/sitemap.xml

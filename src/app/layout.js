@@ -15,7 +15,7 @@ import { eq } from "drizzle-orm";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  metadataBase: new URL("https://www.boilercode.app"),
+  metadataBase: new URL("https://www.launchify.club"),
   title: {
     default:
       "Tailwind and Next.js UI Components for Speedy Web Development - boilercode.app",
