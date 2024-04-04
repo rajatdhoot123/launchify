@@ -27,6 +27,9 @@ const Navbar = () => {
 
       <ul className="hidden md:block">
         <Button className="text-lg" asChild variant="link">
+          <Link target="_blank" href="https://templates.launchify.club?utm_source=launchify">Templates</Link>
+        </Button>
+        <Button className="text-lg" asChild variant="link">
           <Link href="#pricing">Pricing</Link>
         </Button>
         {/* <Button className="text-lg" asChild variant="link">
