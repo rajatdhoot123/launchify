@@ -1,4 +1,4 @@
-import Navbar from "@/app/landingcomponent/navbar/variant-2";
+import Navbar from "@/app/landingcomponent/navbar";
 import Hero from "@/app/landingcomponents/hero/variant-1";
 import Pricing from "@/app/__landingcomponents__/pricing/variant-2";
 import Testimonials from "@/app/__landingcomponents__/testimonials/variant-2";

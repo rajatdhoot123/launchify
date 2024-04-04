@@ -1,5 +1,5 @@
 import "../../markdown.css";
-import NavBar from "@/app/landingcomponent/navbar/variant-2";
+import NavBar from "@/app/landingcomponent/navbar";
 import Footer from "@/app/landingcomponent/footer/variant-3";
 const MarkdownLayout = ({ children }) => {
   return (
