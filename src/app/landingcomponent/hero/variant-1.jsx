@@ -7,7 +7,7 @@ const Video = () => {
       <ShadesGreen />
       <video
         muted
-        src="https://iln1ivdwb2kwetjm.public.blob.vercel-storage.com/landing_page-tUr0NeifMtzJNURnSCowU02zE3aCv6.mp4"
+        src="https://dfs98oe0smqfo.cloudfront.net/launchify/landing_page.mp4"
         autoPlay
         controls
         className="rounded-xl md:w-8/12 w-full aspect-video mx-auto relative z-10"
