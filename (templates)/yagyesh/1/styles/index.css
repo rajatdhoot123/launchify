@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text-dark {
+  color: #d3e763;
+}
+
+.bg-green {
+  background: #d3e763;
+}
+
+.border-green {
+  @apply border border-[#D3E763];
+}
+
+.border-gray {
+  border: 1px solid #f2f2f2;
+}
+
+.dark-gradient {
+  background: linear-gradient(
+    89.8deg,
+    rgba(255, 255, 255, 0) 7.11%,
+    rgba(255, 255, 255, 0.185) 117.23%
+  );
+}
+
+.gray-gradient {
+  background: #f9f9f9;
+  background: -moz-linear-gradient(157.25deg, #252525 3.62%, #101010 88.02%);
+  background: -webkit-linear-gradient(157.25deg, #252525 3.62%, #101010 88.02%);
+  background: linear-gradient(157.25deg, #252525 3.62%, #101010 88.02%);
+}
+
+/* absolute */
+.absolute-v-middle {
+  @apply absolute top-[50%] bottom-[50%] translate-y-[-50%];
+}
+.absolute-h-middle {
+  @apply absolute left-[50%] right-[50%] translate-x-[-50%];
+}
+
+/* card */
+.card {
+  @apply flex flex-col gap-5 border-[0.5px] border-[#3e3e3e] rounded-xl px-8 py-5;
+}
+
+.card-features {
+  @apply flex flex-col gap-5;
+}
+
+.card-features .feature {
+  @apply flex gap-2 items-center;
+}
+
+.card-header {
+  @apply flex flex-col gap-3;
+}
