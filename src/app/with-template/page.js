@@ -1,12 +1,16 @@
+"use client";
 import { WEBSITES_TEMPLATES } from "@/boilercode/constants";
 import Link from "next/link";
 import NextBoilerPlate from "../components/integtrations";
+import { useRef } from "react";
 
 const WithTemplate = () => {
+  const state_ref = useRef({});
+
   return (
     <div className="container mx-auto py-12 flex gap-6">
       <div className="w-80 flex-shrink-0">
-        <NextBoilerPlate integrations={true} />
+        <NextBoilerPlate ref={state_ref} integrations={true} />
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-8 gap-6">
         {WEBSITES_TEMPLATES.map((website) => (
