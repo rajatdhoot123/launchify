@@ -9,7 +9,7 @@ import { ToastAction } from "@/components/ui/toast";
 const WithTemplate = () => {
   const state_ref = useRef({});
 
-  const handleExport = async ({ components }) => {
+  const handleExport = async ({ id }) => {
     const state = state_ref.current;
     logEvent("export_clicked", {
       event_name: "export_clicked",
@@ -25,7 +25,7 @@ const WithTemplate = () => {
           crisp_id: state.crisp_id,
           pages: state.pages,
           premium_features: state.premium_features,
-          components: components,
+          template: id,
         }),
       });
 
@@ -115,7 +115,7 @@ const WithTemplate = () => {
               </div>
             </Link>
             <Button
-              onClick={() => handleExport(website.id)}
+              onClick={() => handleExport({ id: website.id })}
               className="w-full mt-5"
             >
               Export

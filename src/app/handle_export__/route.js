@@ -37,7 +37,8 @@ export async function POST(req) {
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
   const {
-    components,
+    template = null,
+    components = [],
     ga_id = "",
     twak_to_id = "",
     crisp_id = "",
