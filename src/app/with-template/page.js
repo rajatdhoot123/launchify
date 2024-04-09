@@ -1,12 +1,20 @@
 import { WEBSITES_TEMPLATES } from "@/boilercode/constants";
 import Link from "next/link";
+import NextBoilerPlate from "../components/integtrations";
 
 const WithTemplate = () => {
   return (
-    <div className="container mx-auto py-12">
+    <div className="container mx-auto py-12 flex gap-6">
+      <div className="w-80 flex-shrink-0">
+        <NextBoilerPlate integrations={true} />
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-8 gap-6">
         {WEBSITES_TEMPLATES.map((website) => (
-          <Link target="_blank" href={`https://templates.launchify.club/${website.link}`} key={website.name}>
+          <Link
+            target="_blank"
+            href={`https://templates.launchify.club/${website.link}`}
+            key={website.name}
+          >
             <div className="space-y-2">
               <div className="border-2 rounded-lg">
                 {website.image.map((image) => (
