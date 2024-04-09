@@ -35,14 +35,21 @@ export default function Hero() {
               <span className="font-bold">Production ready</span>
             </div>
           </div>
-          <div className="md:flex space-y-6 md:space-y-0">
+          <div className="md:flex space-y-6 md:space-y-0 md:space-x-6">
             <Link
               href="/editor__"
-              className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3"
+              className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
             >
               Start Building With Drag & Drop
             </Link>
-            <button className=" rounded-3xl h-12 flex items-center md:ml-5 space-x-1">
+            <Link
+              href="/with-template"
+              className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
+            >
+              Start With Next JS Templates
+            </Link>
+          </div>
+          {/* <button className=" rounded-3xl h-12 flex items-center md:ml-5 space-x-1">
               <span className="bg-[#F480D4] p-2 rounded-full h-8 w-8 flex justify-center">
                 <svg
                   className="text-white"
@@ -56,8 +63,7 @@ export default function Hero() {
                 </svg>
               </span>
               <span>Watch Demo</span>
-            </button>
-          </div>
+            </button> */}
         </div>
         <Video />
       </div>

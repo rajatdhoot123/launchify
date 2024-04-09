@@ -139,3 +139,36 @@ export const MARKDOWN_PAGES = [
 ];
 
 export const SITE_MAP_FILES = ["next-sitemap.config.js"];
+
+export const WEBSITES_TEMPLATES = [
+  {
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/mayur/1",
+    image: ["/images/mayur/1-a.png", "/images/mayur/1-b.png"],
+  },
+  {
+    type: "Portfolio",
+    author: "Jayesh",
+    link: "/jayesh/1",
+    image: ["/images/jayesh/1-a.png", "/images/jayesh/1-b.png"],
+  },
+  {
+    type: "Landing Page",
+    author: "Yagyesh",
+    link: "/yagyesh/1",
+    image: ["/images/yagyesh/1-a.png", "/images/yagyesh/1-b.png"],
+  },
+  {
+    type: "Landing Page",
+    author: "Yagyesh",
+    link: "/yagyesh/2",
+    image: ["/images/yagyesh/2-a.png", "/images/yagyesh/2-b.png"],
+  },
+  {
+    type: "Landing Page",
+    author: "Rajat",
+    link: "/rajat/1",
+    image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
+  },
+];
