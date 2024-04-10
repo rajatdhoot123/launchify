@@ -182,6 +182,11 @@ export const WEBSITES_TEMPLATES = [
     type: "Landing Page",
     author: "Rajat",
     link: "/53",
+    dependencies: {
+      "framer-motion": "^11.0.25",
+      "react-slick": "^0.30.2",
+      "slick-carousel": "^1.8.1",
+    },
     image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
   },
   {
