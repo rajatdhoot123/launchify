@@ -23,6 +23,7 @@ import {
   SHADCN_UI_FILE,
   SHADCN_UI_FOLDER,
   STRIPE_HOSTED_EMBEDDED_PAGE,
+  SITE_MAP_FILES,
 } from "@/boilercode/constants";
 
 const getFilePath = (file) => {
@@ -33,11 +34,14 @@ const getFilePath = (file) => {
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
+  const template_path = path.join(process.cwd(), "templates");
 
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
   const {
-    components,
+    dependencies = {},
+    template = null,
+    components = [],
     ga_id = "",
     twak_to_id = "",
     crisp_id = "",
@@ -47,6 +51,13 @@ export async function POST(req) {
   } = body;
 
   const session = await getServerSession(AUTH_OPTIONS);
+
+  if (!session) {
+    return NextResponse.json(
+      { message: "Subscribe to export" },
+      { status: 403 }
+    );
+  }
 
   const get_user = await db
     .select()
@@ -66,11 +77,17 @@ export async function POST(req) {
 
   var zip = new AdmZip();
 
-  NECESSARY_FILES.forEach((file) => {
+  NECESSARY_FILES.filter((f) =>
+    template && f === "tailwind.config.js" ? false : true
+  ).forEach((file) => {
     zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
   SHADCN_UI_FILE.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  SITE_MAP_FILES.forEach((file) => {
     zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
@@ -149,6 +166,7 @@ export async function POST(req) {
     Buffer.from(
       await prettier.format(
         generateLayout({
+          template,
           twak_to_id,
           post_hog,
           ga_id,
@@ -162,15 +180,17 @@ export async function POST(req) {
     )
   );
 
-  zip.addFile(
-    "src/app/page.js",
-    Buffer.from(
-      await prettier.format(generateRootPage({ components }), {
-        parser: "babel",
-      })
-    ),
-    "utf8"
-  );
+  if (!template) {
+    zip.addFile(
+      "src/app/page.js",
+      Buffer.from(
+        await prettier.format(generateRootPage({ components }), {
+          parser: "babel",
+        })
+      ),
+      "utf8"
+    );
+  }
 
   zip.addFile(
     ".env.local",
@@ -182,9 +202,22 @@ export async function POST(req) {
   `)
   );
 
+  if (template) {
+    zip.addLocalFolder(`${template_path}/${template}`, `src/app`);
+  }
+
   zip.addFile(
     "package.json",
-    Buffer.from(JSON.stringify(packageJson, null, 2)),
+    Buffer.from(
+      JSON.stringify(
+        {
+          ...packageJson,
+          dependencies: { ...packageJson.dependencies, ...dependencies },
+        },
+        null,
+        2
+      )
+    ),
     "utf8"
   );
   const zipFileContents = zip.toBuffer();

@@ -139,3 +139,52 @@ export const MARKDOWN_PAGES = [
 ];
 
 export const SITE_MAP_FILES = ["next-sitemap.config.js"];
+
+export const WEBSITES_TEMPLATES = [
+  {
+    id: 51,
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/mayur/1",
+    image: ["/images/mayur/1-a.png", "/images/mayur/1-b.png"],
+  },
+  {
+    id: 51,
+    dependencies: {
+      "framer-motion": "^11.0.25",
+      "react-slick": "^0.30.2",
+      "slick-carousel": "^1.8.1",
+    },
+    type: "Portfolio",
+    author: "Jayesh",
+    link: "/51",
+    image: ["/images/jayesh/1-a.png", "/images/jayesh/1-b.png"],
+  },
+  {
+    id: 3,
+    type: "Landing Page",
+    author: "Yagyesh",
+    link: "/yagyesh/1",
+    image: ["/images/yagyesh/1-a.png", "/images/yagyesh/1-b.png"],
+  },
+  {
+    id: 4,
+    type: "Landing Page",
+    author: "Yagyesh",
+    link: "/yagyesh/2",
+    image: ["/images/yagyesh/2-a.png", "/images/yagyesh/2-b.png"],
+  },
+  {
+    id: 5,
+    type: "Landing Page",
+    author: "Rajat",
+    link: "/rajat/1",
+    image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
+  },
+  {
+    type: "Landing Page",
+    author: "Jayesh",
+    link: "/7",
+    image: ["/images/jayesh/2-a.png", "/images/jayesh/2-b.png"],
+  },
+];
