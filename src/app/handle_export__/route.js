@@ -39,6 +39,7 @@ export async function POST(req) {
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
   const {
+    dependencies = {},
     template = null,
     components = [],
     ga_id = "",
@@ -200,7 +201,16 @@ export async function POST(req) {
 
   zip.addFile(
     "package.json",
-    Buffer.from(JSON.stringify(packageJson, null, 2)),
+    Buffer.from(
+      JSON.stringify(
+        {
+          ...packageJson,
+          dependencies: { ...packageJson.dependencies, ...dependencies },
+        },
+        null,
+        2
+      )
+    ),
     "utf8"
   );
   const zipFileContents = zip.toBuffer();

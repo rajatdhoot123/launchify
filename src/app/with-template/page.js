@@ -10,7 +10,7 @@ import { logEvent } from "@/app/utils__/events";
 const WithTemplate = () => {
   const state_ref = useRef({});
 
-  const handleExport = async ({ id }) => {
+  const handleExport = async ({ id, dependencies = {} }) => {
     const state = state_ref.current;
     logEvent("export_clicked", {
       event_name: "export_clicked",
@@ -27,6 +27,7 @@ const WithTemplate = () => {
           pages: state.pages,
           premium_features: state.premium_features,
           template: id,
+          dependencies,
         }),
       });
 
@@ -116,7 +117,7 @@ const WithTemplate = () => {
               </div>
             </Link>
             <Button
-              onClick={() => handleExport({ id: website.id })}
+              onClick={() => handleExport(website)}
               className="w-full mt-5"
             >
               Export
