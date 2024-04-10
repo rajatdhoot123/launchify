@@ -1,4 +1,5 @@
 const generateLayout = ({
+  template = null,
   ga_id = "",
   next_auth,
   post_hog = "",
@@ -7,9 +8,13 @@ const generateLayout = ({
 }) => {
   return `
 import { Inter } from "next/font/google";
-import "@/app/styles/globals.css";
+${!template ? `import "@/app/styles/globals.css";` : ""}
 import { Providers } from "@/app/styles/next-theme";
-${ga_id || crisp_id || post_hog || twak_to_id ? `import Script from "next/script"` : ""}
+${
+  ga_id || crisp_id || post_hog || twak_to_id
+    ? `import Script from "next/script"`
+    : ""
+}
 ${next_auth ? `import NextAuthProvider from "@/app/nextauth/provider"` : ""}
 
 const inter = Inter({ subsets: ["latin"] });

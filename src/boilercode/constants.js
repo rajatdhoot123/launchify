@@ -142,14 +142,14 @@ export const SITE_MAP_FILES = ["next-sitemap.config.js"];
 
 export const WEBSITES_TEMPLATES = [
   {
-    id: 1,
+    id: 51,
     type: "Landing Page",
     author: "Mayur",
     link: "/mayur/1",
     image: ["/images/mayur/1-a.png", "/images/mayur/1-b.png"],
   },
   {
-    id: 2,
+    id: 51,
     type: "Portfolio",
     author: "Jayesh",
     link: "/jayesh/1",

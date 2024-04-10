@@ -23,6 +23,7 @@ import {
   SHADCN_UI_FILE,
   SHADCN_UI_FOLDER,
   STRIPE_HOSTED_EMBEDDED_PAGE,
+  SITE_MAP_FILES,
 } from "@/boilercode/constants";
 
 const getFilePath = (file) => {
@@ -68,7 +69,9 @@ export async function POST(req) {
 
   var zip = new AdmZip();
 
-  NECESSARY_FILES.forEach((file) => {
+  NECESSARY_FILES.filter((f) =>
+    template && f === "tailwind.config.js" ? false : true
+  ).forEach((file) => {
     zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
@@ -155,6 +158,7 @@ export async function POST(req) {
     Buffer.from(
       await prettier.format(
         generateLayout({
+          template,
           twak_to_id,
           post_hog,
           ga_id,
@@ -191,7 +195,7 @@ export async function POST(req) {
   );
 
   if (template) {
-    zip.addLocalFolder(`${template_path}/1`, `src/app`);
+    zip.addLocalFolder(`${template_path}/${template}`, `src/app`);
   }
 
   zip.addFile(
