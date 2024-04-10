@@ -5,6 +5,7 @@ import NextBoilerPlate from "../components/integtrations";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
+import { logEvent } from "@/app/utils__/events";
 
 const WithTemplate = () => {
   const state_ref = useRef({});

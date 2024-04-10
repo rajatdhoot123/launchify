@@ -33,6 +33,7 @@ const getFilePath = (file) => {
 
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
+  const template_path = path.join(process.cwd(), "templates");
 
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
@@ -72,6 +73,10 @@ export async function POST(req) {
   });
 
   SHADCN_UI_FILE.forEach((file) => {
+    zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
+  });
+
+  SITE_MAP_FILES.forEach((file) => {
     zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
@@ -163,15 +168,17 @@ export async function POST(req) {
     )
   );
 
-  zip.addFile(
-    "src/app/page.js",
-    Buffer.from(
-      await prettier.format(generateRootPage({ components }), {
-        parser: "babel",
-      })
-    ),
-    "utf8"
-  );
+  if (!template) {
+    zip.addFile(
+      "src/app/page.js",
+      Buffer.from(
+        await prettier.format(generateRootPage({ components }), {
+          parser: "babel",
+        })
+      ),
+      "utf8"
+    );
+  }
 
   zip.addFile(
     ".env.local",
@@ -182,6 +189,10 @@ export async function POST(req) {
   ${twak_to_id ? `NEXT_PUBLIC_TWAK_TO=${twak_to_id}` : ""}
   `)
   );
+
+  if (template) {
+    zip.addLocalFolder(`${template_path}/1`, `src/app`);
+  }
 
   zip.addFile(
     "package.json",
