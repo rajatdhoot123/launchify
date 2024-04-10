@@ -76,11 +76,11 @@ const WithTemplate = () => {
   };
 
   return (
-    <div className="container mx-auto py-12 gap-6">
-      <div className="w-80 flex-shrink-0 fixed left-0 pl-6">
+    <div className="py-12">
+      <div className="w-80 flex-shrink-0 fixed left-0 pl-5">
         <NextBoilerPlate ref={state_ref} integrations={true} />
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-8 gap-6 ml-64">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-8 gap-6 ml-80 px-5">
         {WEBSITES_TEMPLATES.map((website) => (
           <div className="border p-5 rounded-md" key={website.name}>
             <Link
