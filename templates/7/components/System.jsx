@@ -1,6 +1,5 @@
 import React from "react";
 import eff1 from "../assets/images/efficient-left.png";
-import "../styles/index.css";
 const System = () => {
   return (
     <div className="lg:px-16 sm:px-8  px-6">

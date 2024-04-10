@@ -1,5 +1,4 @@
 "use client";
-import "../styles/index.css";
 import Testimonial from "./Testimonial";
 import Slider from "react-slick";
 import Image from "../images/testimonial-image.svg";

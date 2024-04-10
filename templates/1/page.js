@@ -1,5 +1,4 @@
 import React from 'react'
-import './styles/index.css'
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import Pricing from './components/Pricing/Pricing';

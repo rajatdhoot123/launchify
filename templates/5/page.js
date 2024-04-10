@@ -8,7 +8,6 @@ import Pricing from './components/Pricing/Pricing'
 import JoinBanner from './components/Banner/JoinBanner'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
-import './styles/index.css'
 // import Circle from './components/Circle'
 
 const page = () => {

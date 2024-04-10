@@ -1,6 +1,6 @@
 import React from "react";
 import { Poppins, Sora } from "next/font/google";
-import "./styles/index.css";
+import "./styles/globals.css";
 
 const sora = Sora({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],

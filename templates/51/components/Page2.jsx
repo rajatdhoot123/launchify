@@ -1,4 +1,3 @@
-import "../styles/index.css";
 import bg2 from "../images/page2-bg-object.png";
 import img1 from "../images/page2-img1.svg";
 import img2 from "../images/page2-img2.svg";

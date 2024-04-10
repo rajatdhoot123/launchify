@@ -1,3 +1,5 @@
+import "./styles/globals.css";
+
 const Layout = ({ children }) => {
   return (
     <html lang="en">
