@@ -142,10 +142,10 @@ export const SITE_MAP_FILES = ["next-sitemap.config.js"];
 
 export const WEBSITES_TEMPLATES = [
   {
-    id: 51,
+    id: 52,
     type: "Landing Page",
     author: "Mayur",
-    link: "/mayur/1",
+    link: "/52",
     image: ["/images/mayur/1-a.png", "/images/mayur/1-b.png"],
   },
   {
@@ -161,27 +161,31 @@ export const WEBSITES_TEMPLATES = [
     image: ["/images/jayesh/1-a.png", "/images/jayesh/1-b.png"],
   },
   {
-    id: 3,
+    id: 1,
     type: "Landing Page",
     author: "Yagyesh",
-    link: "/yagyesh/1",
+    link: "/1",
     image: ["/images/yagyesh/1-a.png", "/images/yagyesh/1-b.png"],
-  },
-  {
-    id: 4,
-    type: "Landing Page",
-    author: "Yagyesh",
-    link: "/yagyesh/2",
-    image: ["/images/yagyesh/2-a.png", "/images/yagyesh/2-b.png"],
   },
   {
     id: 5,
     type: "Landing Page",
+    author: "Yagyesh",
+    link: "/5",
+    dependencies: {
+      "framer-motion": "^11.0.25",
+    },
+    image: ["/images/yagyesh/2-a.png", "/images/yagyesh/2-b.png"],
+  },
+  {
+    id: 53,
+    type: "Landing Page",
     author: "Rajat",
-    link: "/rajat/1",
+    link: "/53",
     image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
   },
   {
+    id: 7,
     type: "Landing Page",
     author: "Jayesh",
     link: "/7",
