@@ -161,25 +161,6 @@ export async function POST(req) {
     zip.addFile(path, content);
   });
 
-  zip.addFile(
-    "src/app/layout.js",
-    Buffer.from(
-      await prettier.format(
-        generateLayout({
-          template,
-          twak_to_id,
-          post_hog,
-          ga_id,
-          next_auth: premium_features.next_auth,
-          crisp_id,
-        }),
-        {
-          parser: "babel",
-        }
-      )
-    )
-  );
-
   if (!template) {
     zip.addFile(
       "src/app/page.js",
@@ -205,6 +186,25 @@ export async function POST(req) {
   if (template) {
     zip.addLocalFolder(`${template_path}/${template}`, `src/app`);
   }
+
+  zip.addFile(
+    "src/app/layout.js",
+    Buffer.from(
+      await prettier.format(
+        generateLayout({
+          template,
+          twak_to_id,
+          post_hog,
+          ga_id,
+          next_auth: premium_features.next_auth,
+          crisp_id,
+        }),
+        {
+          parser: "babel",
+        }
+      )
+    )
+  );
 
   zip.addFile(
     "package.json",
