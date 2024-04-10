@@ -8,7 +8,7 @@ const generateLayout = ({
 }) => {
   return `
 import { Inter } from "next/font/google";
-${!template ? `import "@/app/styles/globals.css";` : ""}
+import "@/app/styles/globals.css";
 import { Providers } from "@/app/styles/next-theme";
 ${
   ga_id || crisp_id || post_hog || twak_to_id
