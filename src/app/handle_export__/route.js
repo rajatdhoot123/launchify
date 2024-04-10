@@ -52,6 +52,13 @@ export async function POST(req) {
 
   const session = await getServerSession(AUTH_OPTIONS);
 
+  if (!session) {
+    return NextResponse.json(
+      { message: "Subscribe to export" },
+      { status: 403 }
+    );
+  }
+
   const get_user = await db
     .select()
     .from(subscriptions)

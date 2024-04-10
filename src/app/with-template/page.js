@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { logEvent } from "@/app/utils__/events";
+import { toast } from "@/components/ui/use-toast";
 
 const WithTemplate = () => {
   const state_ref = useRef({});
