@@ -59,7 +59,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       {process.env.NEXT_PUBLIC_TWAK_TO && (
-        <Script id="post-hog">
+        <Script id="twak">
           {`
             var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
             (function(){

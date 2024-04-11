@@ -1,5 +1,4 @@
 const generateLayout = ({
-  template = null,
   ga_id = "",
   next_auth,
   post_hog = "",
