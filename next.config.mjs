@@ -16,6 +16,14 @@ export default withMDX({
   async rewrites() {
     return [
       {
+        source: "/blog",
+        destination: "https://blogs-theta-six.vercel.app/blog/blog.va360.club",
+      },
+      {
+        source: "/blog/:path*",
+        destination: "https://blogs-theta-six.vercel.app/blog/:path*",
+      },
+      {
         source: "/ingest/static/:path*",
         destination: "https://us-assets.i.posthog.com/static/:path*",
       },
