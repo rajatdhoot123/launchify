@@ -24,6 +24,10 @@ export default withMDX({
         destination: "https://blogs-theta-six.vercel.app/blog/:path*",
       },
       {
+        source: "/blog/blog-sitemap.xml",
+        destination: "https://blogs-theta-six.vercel.app/blog/blog.launchify.club/sitemap.xml",
+      },
+      {
         source: "/ingest/static/:path*",
         destination: "https://us-assets.i.posthog.com/static/:path*",
       },
