@@ -17,7 +17,7 @@ export default withMDX({
     return [
       {
         source: "/blog",
-        destination: "https://blogs-theta-six.vercel.app/blog/blog.va360.club",
+        destination: "https://blogs-theta-six.vercel.app/blog/blog.launchify.club",
       },
       {
         source: "/blog/:path*",
