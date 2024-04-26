@@ -27,7 +27,12 @@ const Navbar = () => {
 
       <ul className="hidden md:block">
         <Button className="text-lg" asChild variant="link">
-          <Link target="_blank" href="https://templates.launchify.club?utm_source=launchify">Templates</Link>
+          <Link
+            target="_blank"
+            href="https://templates.launchify.club?utm_source=launchify"
+          >
+            Templates
+          </Link>
         </Button>
         <Button className="text-lg" asChild variant="link">
           <Link href="#pricing">Pricing</Link>
@@ -44,7 +49,7 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center">
-        {session?.user?.name ? (
+        {session?.user?.email ? (
           <>
             {/* <div className="font-semibold">{`Hey ${session?.user?.name}`}</div> */}
             <Button onClick={signOut} variant="link">
