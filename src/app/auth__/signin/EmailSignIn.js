@@ -1,9 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const EmailSingIn = () => {
+  const router = useRouter();
+  const { status } = useSession();
   async function onSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -11,6 +15,13 @@ const EmailSingIn = () => {
 
     await signIn("email", { email });
   }
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/");
+    }
+  }, [router, status]);
+
   return (
     <form onSubmit={onSubmit}>
       <div className="mb-4" data-id="9">
