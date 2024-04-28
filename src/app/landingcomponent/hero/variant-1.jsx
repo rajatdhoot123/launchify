@@ -49,6 +49,15 @@ export default function Hero() {
               Start With Next JS Templates
             </Link>
           </div>
+          <Link
+            target="_blank"
+            href="https://github.com/rajatdhoot123/nextjs-blog-cli"
+            className="border-2 p-2 rounded-md"
+          >
+            To integrate blog with your app, you can use our open source
+            package&nbsp;
+            <span className="font-bold">NextJS Blog CLI</span>
+          </Link>
           {/* <button className=" rounded-3xl h-12 flex items-center md:ml-5 space-x-1">
               <span className="bg-[#F480D4] p-2 rounded-full h-8 w-8 flex justify-center">
                 <svg
