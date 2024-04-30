@@ -20,7 +20,7 @@ const Pricing = () => {
                 79 user left
               </div>
             </div>
-            <div className="text-7xl">$57</div>
+            <div className="text-7xl">$107</div>
             <div className="font-xl font-medium">
               Pay once. Build <span className="font-bold">unlimited </span>
               projects
