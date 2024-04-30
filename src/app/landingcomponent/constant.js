@@ -129,6 +129,6 @@ export const FAQS = [
   {
     title: "Can I get a refund?",
     content:
-      "Once you gain access to the repo, the code becomes yours indefinitely, making it non-refundable.",
+      "Once you gain access to the code, the code becomes yours indefinitely, making it non-refundable.",
   },
 ];
