@@ -1,0 +1,33 @@
+@config "./tailwindcss.config.js";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --pricingbg : #F4F4F4;
+    --pricingbtn : #121A21;
+
+}
+
+@media(prefers-color-scheme :dark){
+    :root{
+        --pricingbg:#333333;
+        --pricingbtn: #f4f4f4; 
+    }
+}
+
+
+.bg2{
+    background-image: url(../assets/images/Section2/bg2.png);
+}
+
+.bg3{
+    background-image: url(../assets/images/Section2/bg3.png);
+}
+.bg1{
+    background-image: url(../assets/images/Section2/bg1.png);
+}
+
+.bg4{
+    background-image: url(../assets/images/Section2/bg4.png);
+}

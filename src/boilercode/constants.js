@@ -216,4 +216,14 @@ export const WEBSITES_TEMPLATES = [
     },
     image: ["/images/44/44-1.png", "/images/44/44-2.png"],
   },
+  {
+    id: 24,
+    type: "Landing Page",
+    author: "Jayesh",
+    link: "/24",
+    dependencies: {
+      "react-icons": "^5.0.1",
+    },
+    image: ["/images/24/a.png", "/images/24/b.png"],
+  },
 ];
