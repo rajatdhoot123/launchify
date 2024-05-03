@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Link as LinkScroll } from "react-scroll";
 import ButtonOutline from "./misc/ButtonOutline";
 import LogoVPN from "../images/Logo.svg";
-
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
@@ -28,9 +26,9 @@ const Header = () => {
             <img src={LogoVPN.src} className="h-8 w-auto" />
           </div>
           <ul className="hidden lg:flex col-start-4 col-end-8 text-black-500  items-center">
-            <LinkScroll
+            <Link
               activeClass="active"
-              to="about"
+              href="about"
               spy={true}
               smooth={true}
               duration={1000}
@@ -45,10 +43,10 @@ const Header = () => {
               }
             >
               About
-            </LinkScroll>
-            <LinkScroll
+            </Link>
+            <Link
               activeClass="active"
-              to="feature"
+              href="feature"
               spy={true}
               smooth={true}
               duration={1000}
@@ -63,10 +61,10 @@ const Header = () => {
               }
             >
               Feature
-            </LinkScroll>
-            <LinkScroll
+            </Link>
+            <Link
               activeClass="active"
-              to="pricing"
+              href="pricing"
               spy={true}
               smooth={true}
               duration={1000}
@@ -81,10 +79,10 @@ const Header = () => {
               }
             >
               Pricing
-            </LinkScroll>
-            <LinkScroll
+            </Link>
+            <Link
               activeClass="active"
-              to="testimoni"
+              href="testimoni"
               spy={true}
               smooth={true}
               duration={1000}
@@ -99,7 +97,7 @@ const Header = () => {
               }
             >
               Testimonial
-            </LinkScroll>
+            </Link>
           </ul>
           <div className="col-start-10 col-end-12 font-medium flex justify-end items-center">
             <Link
@@ -117,9 +115,9 @@ const Header = () => {
       <nav className="fixed lg:hidden bottom-0 left-0 right-0 z-20 px-4 sm:px-8 shadow-t ">
         <div className="bg-white-500 sm:px-3">
           <ul className="flex w-full justify-between items-center text-black-500">
-            <LinkScroll
+            <Link
               activeClass="active"
-              to="about"
+              href="about"
               spy={true}
               smooth={true}
               duration={1000}
@@ -148,10 +146,10 @@ const Header = () => {
                 />
               </svg>
               About
-            </LinkScroll>
-            <LinkScroll
+            </Link>
+            <Link
               activeClass="active"
-              to="feature"
+              href="feature"
               spy={true}
               smooth={true}
               duration={1000}
@@ -180,10 +178,10 @@ const Header = () => {
                 />
               </svg>
               Feature
-            </LinkScroll>
-            <LinkScroll
+            </Link>
+            <Link
               activeClass="active"
-              to="pricing"
+              href="pricing"
               spy={true}
               smooth={true}
               duration={1000}
@@ -212,10 +210,10 @@ const Header = () => {
                 />
               </svg>
               Pricing
-            </LinkScroll>
-            <LinkScroll
+            </Link>
+            <Link
               activeClass="active"
-              to="testimoni"
+              href="testimoni"
               spy={true}
               smooth={true}
               duration={1000}
@@ -244,7 +242,7 @@ const Header = () => {
                 />
               </svg>
               Testimonial
-            </LinkScroll>
+            </Link>
           </ul>
         </div>
       </nav>

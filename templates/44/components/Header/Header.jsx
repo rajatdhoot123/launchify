@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import MenuIcon from "../../assets/icons/header/manu.svg";
 import Logo from "../../assets/icons/header/logo.svg";
