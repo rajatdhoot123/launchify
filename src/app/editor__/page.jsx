@@ -13,7 +13,7 @@ import NextBoilerPlate from "@/app/components/integtrations";
 import { COMPONENTS_ARRAY } from "@/app/constants__/floater";
 import ThemeSelector from "@/app/components/__theme_selector";
 import { LoginDialog } from "@/app/components/__login_dialog/login";
-import ViewDemo from "@/app/components/__view_demo";
+import ViewDemo from "@/app/components/view_demo";
 import {  useEffect, useReducer, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
