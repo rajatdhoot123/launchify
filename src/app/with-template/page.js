@@ -94,6 +94,7 @@ const WithTemplate = () => {
                 <div className="border-2 rounded-lg">
                   {website.image.map((image) => (
                     <img
+                      loading="lazy"
                       key={image}
                       className="object-contain"
                       src={`https://templates.launchify.club${image}`}
