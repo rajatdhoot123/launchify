@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import UI from "../../assets/images/base/ui.svg";
+import UI from "../../assets/images/base/ui.webp";
 import AI from "../../assets/images/base/ai.svg";
 
 const Base = () => {
