@@ -2,16 +2,19 @@
 import { WEBSITES_TEMPLATES } from "@/boilercode/constants";
 import Link from "next/link";
 import NextBoilerPlate from "../components/integtrations";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { logEvent } from "@/app/utils__/events";
 import { toast } from "@/components/ui/use-toast";
+import Loader from "@/app/components/__loader/loader";
 
 const WithTemplate = () => {
   const state_ref = useRef({});
+  const [loader, setLoader] = useState({});
 
   const handleExport = async ({ id, dependencies = {} }) => {
+    setLoader((prev) => ({ ...prev, [id]: true }));
     const state = state_ref.current;
     logEvent("export_clicked", {
       event_name: "export_clicked",
@@ -43,7 +46,9 @@ const WithTemplate = () => {
       } else {
         throw response;
       }
+      setLoader((prev) => ({ ...prev, [id]: false }));
     } catch (error) {
+      setLoader((prev) => ({ ...prev, [id]: false }));
       if (error instanceof Response) {
         const { message } = await error.json();
 
@@ -122,7 +127,8 @@ const WithTemplate = () => {
               onClick={() => handleExport(website)}
               className="w-full mt-5"
             >
-              Export
+              {loader[website.id] && <Loader />}
+              &nbsp;&nbsp;Export
             </Button>
           </div>
         ))}
