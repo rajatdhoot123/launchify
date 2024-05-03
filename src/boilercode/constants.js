@@ -214,7 +214,7 @@ export const WEBSITES_TEMPLATES = [
     dependencies: {
       "react-icons": "^5.0.1",
     },
-    image: ["/images/44/44-1.png", "/images/44/44-2.png"],
+    image: ["/images/44/a.png", "/images/44/b.png"],
   },
   {
     id: 24,

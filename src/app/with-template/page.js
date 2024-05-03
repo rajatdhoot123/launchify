@@ -96,7 +96,7 @@ const WithTemplate = () => {
                     <img
                       key={image}
                       className="object-contain"
-                      src={`https://templates.launchify.club/${image}`}
+                      src={`https://templates.launchify.club${image}`}
                       alt={website.type}
                       width={400}
                       height={200}
