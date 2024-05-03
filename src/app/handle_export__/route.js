@@ -74,7 +74,8 @@ export async function POST(req) {
   }
 
   const packageJson = JSON.parse(readFileSync(package_json_path, "utf-8"));
-
+  delete packageJson.dependencies["@measured/puck"];
+  delete packageJson.dependencies["nodemailer"];
   var zip = new AdmZip();
 
   NECESSARY_FILES.filter((f) =>
