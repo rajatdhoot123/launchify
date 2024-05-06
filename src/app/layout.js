@@ -11,6 +11,7 @@ import { db } from "@/lib/database/db";
 import { subscriptions, templates } from "@/lib/database/schema";
 import { Inter } from "next/font/google";
 import { eq } from "drizzle-orm";
+import { AI } from "./(ai)/action";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -99,20 +100,21 @@ export default async function RootLayout({ children }) {
         </>
       )}
       <body className={inter.className}>
-        <Providers themes={["pink", "light", "dark"]}>
-          <NextAuthProvider>
-            <ConfigProvider
-              initialState={{
-                is_active: current_user?.is_active ?? false,
-                paid_templates: paid_templates,
-                session: session ?? null,
-              }}
-            >
-              <NavBar session={session} />
-              {children}
-            </ConfigProvider>
-          </NextAuthProvider>
-        </Providers>
+        <AI>
+          <Providers themes={["pink", "light", "dark"]}>
+            <NextAuthProvider>
+              <ConfigProvider
+                initialState={{
+                  is_active: current_user?.is_active ?? false,
+                  session: session ?? null,
+                }}
+              >
+                <NavBar session={session} />
+                {children}
+              </ConfigProvider>
+            </NextAuthProvider>
+          </Providers>
+        </AI>
         <Toaster />
       </body>
     </html>
