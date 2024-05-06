@@ -34,7 +34,7 @@ import Footer1 from "@/app/components/footer/variant-1";
 import Footer2 from "@/app/components/footer/variant-2";
 import Footer3 from "@/app/components/footer/variant-3";
 import Footer4 from "@/app/components/footer/variant-4";
-import CommingSoon1 from "@/app/components/commingsoon/variant-1";
+import WaitList1 from "@/app/components/waitlist/variant-1";
 import Animated1 from "@/app/components/animatedcards/variant-1";
 import Contactus1 from "@/app/components/contactus/variant-1";
 import Contactus2 from "@/app/components/contactus/variant-2";
@@ -120,7 +120,7 @@ const CARDS = {
 };
 
 const COMMING_SOON = {
-  "variant-1": CommingSoon1,
+  "variant-1": WaitList1,
 };
 
 const ANIMATED_CARDS = {
@@ -174,7 +174,7 @@ export const COMPONENTS_ARRAY = [
     components: Object.values(LOGIN),
   },
   {
-    name: "commingsoon",
+    name: "waitlist",
     components: Object.values(COMMING_SOON),
   },
 
@@ -314,7 +314,7 @@ export const FLOATER_SELECT = [
     selected: "variant-6",
   },
   {
-    item_id: "commingsoon",
+    item_id: "waitlist",
     variants: COMMING_SOON,
     title: "Commingsoon",
     selected: "variant-1",
