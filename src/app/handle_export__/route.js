@@ -7,7 +7,7 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
@@ -156,6 +156,13 @@ export async function POST(req) {
         )
       )
     );
+
+    if (existsSync(`${ui_components}/src/app/components/${item_id}/actions`)) {
+      zip.addLocalFolder(
+        `${ui_components}/src/app/components/${item_id}/actions`,
+        `src/app/components/${item_id}/actions`
+      );
+    }
   });
 
   CREATE_FILE_NOT_PRESENT.forEach(({ path, content }) => {
