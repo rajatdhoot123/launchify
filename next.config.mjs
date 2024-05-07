@@ -27,11 +27,11 @@ export default withMDX({
       {
         source: "/extension",
         destination:
-          "https://extension-rajatdhoots-projects.vercel.app/extension",
+          "https://extension.launchify.club/extension",
       },
       {
         source: "/extension/:path*",
-        destination: "https://extension-rajatdhoots-projects.vercel.app/extension/:path*",
+        destination: "https://extension.launchify.club/extension/:path*",
       },
       {
         source: "/blog/blog-sitemap.xml",
