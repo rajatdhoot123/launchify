@@ -17,15 +17,26 @@ export default withMDX({
     return [
       {
         source: "/blog",
-        destination: "https://blogs-theta-six.vercel.app/blog/blog.launchify.club",
+        destination:
+          "https://blogs-theta-six.vercel.app/blog/blog.launchify.club",
       },
       {
         source: "/blog/:path*",
         destination: "https://blogs-theta-six.vercel.app/blog/:path*",
       },
       {
+        source: "/extension",
+        destination:
+          "https://extension-rajatdhoots-projects.vercel.app/extension",
+      },
+      {
+        source: "/extension/:path*",
+        destination: "https://extension-rajatdhoots-projects.vercel.app/extension/:path*",
+      },
+      {
         source: "/blog/blog-sitemap.xml",
-        destination: "https://blogs-theta-six.vercel.app/blog/blog.launchify.club/sitemap.xml",
+        destination:
+          "https://blogs-theta-six.vercel.app/blog/blog.launchify.club/sitemap.xml",
       },
       {
         source: "/ingest/static/:path*",
