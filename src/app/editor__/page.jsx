@@ -14,7 +14,7 @@ import { COMPONENTS_ARRAY } from "@/app/constants__/floater";
 import ThemeSelector from "@/app/components/__theme_selector";
 import { LoginDialog } from "@/app/components/__login_dialog/login";
 import ViewDemo from "@/app/components/view_demo";
-import {  useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { logEvent } from "../utils__/events";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
@@ -414,9 +414,23 @@ function Editor() {
               const RenderComponent = selectedComponent.components[index - 1];
               <RenderComponent />;
 
+              const libs = selectedComponent?.lib ?? [];
               return (
-                <div className="mb-4">
-                  <HoverCard className="z-[999] relative">
+                <div className="mb-4 relative">
+                  <div className="absolute -top-3 right-0">
+                    {libs.map((lib) => (
+                      <a
+                        target="_blank"
+                        title="Loops Email"
+                        href={lib.link}
+                        className="text-xs font-bold text-primary bg-background px-2 border"
+                        key={lib.link}
+                      >
+                        {lib.title}
+                      </a>
+                    ))}
+                  </div>
+                  <HoverCard className="z-[999]">
                     <HoverCardTrigger>{children}</HoverCardTrigger>
                     <HoverCardPortal>
                       <HoverCardContent

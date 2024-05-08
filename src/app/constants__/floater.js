@@ -176,6 +176,7 @@ export const COMPONENTS_ARRAY = [
   {
     name: "waitlist",
     components: Object.values(COMMING_SOON),
+    lib: [{ title: "Loops", link: "https://loops.so" }],
   },
 
   {
