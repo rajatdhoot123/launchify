@@ -9,7 +9,7 @@ const Hero = () => {
             alt="Hero"
             className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
             height="550"
-            src="https://placekitten.com/g/800/500"
+            src="https://source.unsplash.com/random/800x500?taxi"
             width="550"
           />
           <div className="flex flex-col justify-center space-y-4 w-full">
