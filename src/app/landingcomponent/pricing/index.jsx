@@ -16,9 +16,9 @@ const Pricing = () => {
           <div className="col-span-2 space-y-4 text-center">
             <div className="relative">
               <div className="font-medium text-xl">Lifetime Access</div>
-              <div className="border inline p-1 px-3 rounded-md bg-black text-white border-black/50 text-xs font-bold ">
+              {/* <div className="border inline p-1 px-3 rounded-md bg-black text-white border-black/50 text-xs font-bold ">
                 41 user left
-              </div>
+              </div> */}
             </div>
             <div className="text-7xl">$107</div>
             <div className="font-xl font-medium">
@@ -50,7 +50,7 @@ const Pricing = () => {
                       <path d="M80 416a64 64 0 0 0 64 64h92a4 4 0 0 0 4-4V292a4 4 0 0 0-4-4H88a8 8 0 0 0-8 8zm160-164V144h32v108a4 4 0 0 0 4 4h140a47.93 47.93 0 0 0 16-2.75A48.09 48.09 0 0 0 464 208v-16a48 48 0 0 0-48-48h-40.54a2 2 0 0 1-1.7-3A72 72 0 0 0 256 58.82 72 72 0 0 0 138.24 141a2 2 0 0 1-1.7 3H96a48 48 0 0 0-48 48v16a48.09 48.09 0 0 0 32 45.25A47.93 47.93 0 0 0 96 256h140a4 4 0 0 0 4-4zm32-148a40 40 0 1 1 40 40h-40zm-74.86-39.9A40 40 0 0 1 240 104v40h-40a40 40 0 0 1-2.86-79.89zM276 480h92a64 64 0 0 0 64-64V296a8 8 0 0 0-8-8H276a4 4 0 0 0-4 4v184a4 4 0 0 0 4 4z"></path>
                     </svg>
                   </span>
-                  For next 50 users
+                  For next 37 users
                 </small>
               </div>
             </div>

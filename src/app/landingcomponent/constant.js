@@ -90,11 +90,17 @@ export const BUILD_FEATURES = [
     time_saved: "Time saved: 4+ hours",
   },
   {
+    title: "Waitlist Page",
+    icons: ["/loops.png"],
+    features: ["Drag and drop waitlist page with loops email integration"],
+    time_saved: "Time saved: 2+ hours",
+  },
+  {
     title: "Extra",
     features: [
       "AI Copy Writing",
       "Terms & Privacy Page",
-      "Lots more feature comming soon"
+      "Lots more feature comming soon",
     ],
     time_saved: "Time saved: 4+ hours",
   },
