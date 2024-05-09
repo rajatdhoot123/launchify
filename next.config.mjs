@@ -13,6 +13,11 @@ const withMDX = nextMDX({
 });
 
 export default withMDX({
+  experimental: {
+    serverActions: {
+      allowedOrigins: "extension.launchify.club"
+    }
+  },
   async rewrites() {
     return [
       {
