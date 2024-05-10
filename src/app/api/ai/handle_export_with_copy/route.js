@@ -2,8 +2,8 @@
 import AdmZip from "adm-zip";
 import { NextResponse } from "next/server";
 import path from "path";
-import generateLayout from "../utils__/generateLayout";
-import generateRootPage from "../utils__/generateRootPage";
+import generateLayout from "@/app/utils__/generateLayout";
+import generateRootPage from "@/app/utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
@@ -40,8 +40,8 @@ import {
   SHADCN_UI_FILE,
   SHADCN_UI_FOLDER,
 } from "@/boilercode/constants";
-import { updateCopywriting } from "../api/code-generation__/update-copywriting";
-import { updateItemId } from "../utils__/helper";
+import { updateCopywriting } from "@/app/api/code-generation__/update-copywriting";
+import { updateItemId } from "@/app/utils__/helper";
 
 const getFilePath = (file) => {
   return file.split("/").length > 1

@@ -137,7 +137,7 @@ function Editor() {
         event_name: "export_with_copywriting_clicked",
       });
 
-      const response = await fetch("/api/handle_export_with_copy", {
+      const response = await fetch("/api/ai/handle_export_with_copy", {
         method: "POST",
         body: JSON.stringify({
           twak_to_id: state.twak_to_id,

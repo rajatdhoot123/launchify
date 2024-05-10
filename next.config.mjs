@@ -16,8 +16,8 @@ export default withMDX({
   async rewrites() {
     return [
       {
-        source: "/api/:path*",
-        destination: `https://api.launchify.club/api/:path*/`,
+        source: "/api/ai/:path*",
+        destination: `https://api.launchify.club/api/ai/:path*/`,
       },
       {
         source: "/blog/sitemap.xml",
