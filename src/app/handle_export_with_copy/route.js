@@ -76,14 +76,7 @@ export async function POST(req) {
   if (!is_premium_user) {
     return NextResponse.json(
       { message: "Subscribe to export" },
-      {
-        status: 403,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
+      { status: 403 }
     );
   }
 
@@ -267,9 +260,6 @@ export async function POST(req) {
     // Create a new NextResponse for the file with the given stream from the disk
     status: 200, //STATUS 200: HTTP - Ok
     headers: new Headers({
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
       //Headers
       "content-disposition": `attachment; filename=${path.basename(fileName)}`, //State that this is a file attachment
       "content-type": fileType,
