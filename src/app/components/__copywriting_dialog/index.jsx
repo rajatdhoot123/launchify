@@ -12,7 +12,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 const modify_components = (content) => {
   return content.reduce((acc, current) => {
@@ -70,7 +70,9 @@ const CopyWritingDialog = ({
           {title}
         </DialogDescription>
         <div className="w-full overflow-scroll p-5 space-y-4">
-          <p className="text-sm font-semibold">Currently in beta output will be unstable</p>
+          <p className="text-sm font-semibold">
+            Currently in beta output will be unstable
+          </p>
           {/* <div>
             <Label htmlFor="open_ai">Open Ai Key</Label>
             <Input

@@ -31,7 +31,7 @@ export async function updateCopywriting({
   });
 
   const body: GPT4VCompletionRequest = {
-    model: "mixtral-8x7b-32768",
+    model: "llama3-70b-8192",
     max_tokens: 4096,
     temperature: 0,
     messages,
@@ -53,6 +53,7 @@ export async function updateCopywriting({
     );
     json = await resp.json();
   } catch (e) {
+    console.log(e);
     return { error: e.message };
   }
 
@@ -87,6 +88,7 @@ export type GPT4VCompletionRequest = {
     | "gpt-4"
     | "gpt-4-1106-preview"
     | "mixtral-8x7b-32768"
+    | "llama3-70b-8192"
     | "llama2-70b-4096";
   messages: {
     role: "system" | "user" | "assistant" | "function";

@@ -44,8 +44,22 @@ export function formatComponentPath(inputPath) {
   return formattedPath;
 }
 
-
-
 export function isMobile(userAgent) {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    userAgent
+  );
+}
+
+export function updateItemId(arr) {
+  const itemCount = {};
+  return arr.map((item) => {
+    const key = item.key;
+    if (!itemCount[key]) itemCount[key] = 0;
+    itemCount[key]++;
+
+    return {
+      ...item,
+      updated_item_id: `${key}${itemCount[key] > 1 ? itemCount[key] : ""}`,
+    };
+  });
 }

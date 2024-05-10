@@ -12,21 +12,11 @@ import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
 
-function getSubstringBetweenCodeTags(str) {
-  // Regular expression to match content between <code> and </code>, including newlines
-  const regex = /<code>([\s\S]*?)<\/code>/;
-
-  // Use match() method to find matches
-  const match = str.match(regex);
-
-  // Check if a match is found
-  if (match && match[1]) {
-    // Return the first captured group, which is the content inside <code></code>
-    return match[1];
-  } else {
-    // Return null or an appropriate value if no match is found
-    return null;
-  }
+function getSubstringBetweenCodeTags(code) {
+  const jsxStart = code.indexOf("```jsx");
+  const jsxEnd = code.indexOf("```", jsxStart + 1);
+  const jsxCode = code.substring(jsxStart + 5, jsxEnd);
+  return jsxCode.trim();
 }
 
 import {
@@ -42,6 +32,7 @@ import {
   SHADCN_UI_FOLDER,
 } from "@/boilercode/constants";
 import { updateCopywriting } from "../api/code-generation__/update-copywriting";
+import { updateItemId } from "../utils__/helper";
 
 const getFilePath = (file) => {
   return file.split("/").length > 1
@@ -166,16 +157,18 @@ export async function POST(req) {
 
   const add_file_with_copywriting = [];
 
-  components.forEach(({ item_id, variant }) => {
+  updateItemId(components).forEach(({ item_id, variant }) => {
     const select_comp_index = copywriting_components.findIndex(
       (file) => file.item_id === item_id
     );
+
     if (select_comp_index !== -1) {
       const string =
         getSubstringBetweenCodeTags(
           files_with_copywriting_result?.[select_comp_index]?.choices?.[0]
             ?.message.content
         ) || "";
+
       add_file_with_copywriting.push({
         path: `src/app/components/${item_id}/index.jsx`,
         content: prettier.format(string, {
@@ -186,6 +179,13 @@ export async function POST(req) {
       zip.addLocalFile(
         `${ui_components}/src/app/components/${item_id}/${variant}.jsx`,
         getFilePath(`src/app/components/${item_id}/index.jsx`)
+      );
+    }
+
+    if (existsSync(`${ui_components}/src/app/components/${item_id}/actions`)) {
+      zip.addLocalFolder(
+        `${ui_components}/src/app/components/${item_id}/actions`,
+        `src/app/components/${item_id}/actions`
       );
     }
   });

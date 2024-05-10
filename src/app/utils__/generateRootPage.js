@@ -1,19 +1,7 @@
+import { updateItemId } from "./helper";
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function updateItemId(arr) {
-  const itemCount = {};
-  return arr.map((item) => {
-    const key = item.key;
-    if (!itemCount[key]) itemCount[key] = 0;
-    itemCount[key]++;
-
-    return {
-      ...item,
-      updated_item_id: `${key}${itemCount[key] > 1 ? itemCount[key] : ""}`,
-    };
-  });
 }
 
 const generateRootPage = ({ components, copywriting_components = [] }) => {
