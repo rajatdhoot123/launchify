@@ -18,7 +18,6 @@ function getUniqueElementsByKey(array, key) {
     const keyValue = item[key];
 
     if (!seen.has(keyValue)) {
-      console.log(keyValue, key, "in if");
       seen.add(keyValue);
       return true;
     }
