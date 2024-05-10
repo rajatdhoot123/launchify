@@ -37,6 +37,11 @@ export default withMDX({
   async rewrites() {
     return [
       {
+        source: "/handle_export_on_server",
+        destination:
+          "https://api.launchify.club/handle_export_on_server",
+      },
+      {
         source: "/blog/sitemap.xml",
         destination:
           "https://blogs-theta-six.vercel.app/blog/blog.launchify.club/sitemap.xml",

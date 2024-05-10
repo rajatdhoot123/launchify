@@ -137,25 +137,22 @@ function Editor() {
         event_name: "export_with_copywriting_clicked",
       });
 
-      const response = await fetch(
-        "https://api.launchify.club/handle_export_with_copy",
-        {
-          credentials: "include",
-          method: "POST",
-          body: JSON.stringify({
-            twak_to_id: state.twak_to_id,
-            use_case: open_ai_prompt,
-            api_key: open_ai_key,
-            ga_id: state.ga_id,
-            post_hog: state.post_hog,
-            crisp_id: state.crisp_id,
-            pages: state.pages,
-            premium_features: state.premium_features,
-            copywriting_components: selected_components,
-            components: modify_components(puck_data.current.content),
-          }),
-        }
-      );
+      const response = await fetch("/handle_export_with_copy", {
+        credentials: "include",
+        method: "POST",
+        body: JSON.stringify({
+          twak_to_id: state.twak_to_id,
+          use_case: open_ai_prompt,
+          api_key: open_ai_key,
+          ga_id: state.ga_id,
+          post_hog: state.post_hog,
+          crisp_id: state.crisp_id,
+          pages: state.pages,
+          premium_features: state.premium_features,
+          copywriting_components: selected_components,
+          components: modify_components(puck_data.current.content),
+        }),
+      });
       if (response.ok) {
         const res_blob = await response.blob();
         const url = window.URL.createObjectURL(res_blob);
