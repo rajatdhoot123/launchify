@@ -16,10 +16,6 @@ export default withMDX({
   async rewrites() {
     return [
       {
-        source: "/api/ai/:path*",
-        destination: `https://api.launchify.club/api/ai/:path*/`,
-      },
-      {
         source: "/blog/sitemap.xml",
         destination:
           "https://blogs-theta-six.vercel.app/blog/blog.launchify.club/sitemap.xml",
