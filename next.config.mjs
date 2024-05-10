@@ -15,11 +15,16 @@ const withMDX = nextMDX({
 export default withMDX({
   experimental: {
     serverActions: {
-      allowedOrigins: "extension.launchify.club"
-    }
+      allowedOrigins: "extension.launchify.club",
+    },
   },
   async rewrites() {
     return [
+      {
+        source: "/blog/sitemap.xml",
+        destination:
+          "https://blogs-theta-six.vercel.app/blog/blog.launchify.club/sitemap.xml",
+      },
       {
         source: "/blog",
         destination:
@@ -31,8 +36,7 @@ export default withMDX({
       },
       {
         source: "/extension",
-        destination:
-          "https://extension.launchify.club/extension",
+        destination: "https://extension.launchify.club/extension",
       },
       {
         source: "/extension/:path*",
