@@ -116,7 +116,7 @@ const WithTemplate = () => {
                     <div className="flex flex-col">
                       <span>{website.type}</span>
                       <span className="text-black text-opacity-65 font-semibold text-sm">
-                        {`Author: ${website.author}`}
+                        {`Developed by: ${website.author}`}
                       </span>
                     </div>
                   </div>
