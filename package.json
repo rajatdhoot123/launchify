@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.3.17",
+    "@langchain/groq": "^0.0.9",
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
     "@measured/puck": "^0.14.2",
@@ -42,7 +43,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.30.10",
-    "langchain": "^0.0.183",
+    "langchain": "^0.1.36",
     "next": "^14.2.3",
     "next-auth": "^4.24.7",
     "next-sitemap": "^4.2.3",

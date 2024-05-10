@@ -7,16 +7,25 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import { readFileSync, promises } from "fs";
+import { readFileSync, promises, existsSync } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
 
 function getSubstringBetweenCodeTags(code) {
-  const jsxStart = code.indexOf("```jsx");
-  const jsxEnd = code.indexOf("```", jsxStart + 1);
-  const jsxCode = code.substring(jsxStart + 5, jsxEnd);
-  return jsxCode.trim();
+  // Regular expression to find text between <code> and </code> tags
+  const regex = /<code>(.*?)<\/code>/s;
+
+  // Using match to find the first match in the string
+  const match = code.match(regex);
+
+  // Check if there is a match
+  if (match) {
+    // Return the extracted text (without the <code> tags)
+    return match[1];
+  } else {
+    return null; // Return null if no <code> tags are found
+  }
 }
 
 import {
@@ -165,8 +174,7 @@ export async function POST(req) {
     if (select_comp_index !== -1) {
       const string =
         getSubstringBetweenCodeTags(
-          files_with_copywriting_result?.[select_comp_index]?.choices?.[0]
-            ?.message.content
+          files_with_copywriting_result[select_comp_index]
         ) || "";
 
       add_file_with_copywriting.push({

@@ -25,8 +25,12 @@ Do not include markdown "\`\`\`" or "\`\`\`jsx" at the start or end.
 `;
 
 export const OPEN_AI_SYSTEM_PROMPT_UPDATE_COPY_WRITING = `
-You are a skilled copywriter with expertise in web content optimization. Your task involves enhancing the text within a website's JSX code to boost user engagement and interaction. I will provide the JSX code containing text elements that need optimization.
-
+You are a skilled copywriter with expertise in web content optimization. Your task involves enhancing the text within a website's JSX code to boost user engagement and interaction. I will provide the JSX code containing text elements that need optimization and user case to update the copywriting according to it.
+-----
+{jsx_code}
+-----
+{use_case}
+-----
 Your objective is to rewrite or rephrase the text to make it engaging, compelling, and persuasive, ensuring it aligns with the website's content and objectives.
 
 Follow these guidelines for text optimization:
@@ -39,6 +43,11 @@ Follow these guidelines for text optimization:
 6. Ensure the text remains consistent with the website's overall messaging and branding.
 
 After optimizing, output the updated JSX code with the improved text elements, ensuring no other parts of the code are modified except the text elements designated for optimization.
+
+Output Instructions:
+- Don't add any prefix or suffix to the requested output.
+- Return the JSX code with updated copywriting enclosed between <code></code> tags.
+- Don't add any info what you have done in output.
 `;
 
 // # Working from wireframes

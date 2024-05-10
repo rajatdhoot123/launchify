@@ -12,6 +12,23 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
+function getUniqueElementsByKey(array, key) {
+  const seen = new Set();
+  const filter_array = array.filter((item) => {
+    const keyValue = item[key];
+
+    if (!seen.has(keyValue)) {
+      console.log(keyValue, key, "in if");
+      seen.add(keyValue);
+      return true;
+    }
+
+    return false;
+  });
+
+  return filter_array;
+}
+
 import { useState } from "react";
 
 const modify_components = (content) => {
@@ -107,21 +124,23 @@ const CopyWritingDialog = ({
             />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {(data?.content ?? []).map(({ type }) => (
-              <div className="items-center flex space-x-2" key={type}>
-                <Checkbox
-                  id={type}
-                  onCheckedChange={(val) =>
-                    set_active_components((prev) => ({
-                      ...prev,
-                      [type]: val,
-                    }))
-                  }
-                  checked={active_component[type]}
-                />
-                <Label htmlFor={type}>{type}</Label>
-              </div>
-            ))}
+            {getUniqueElementsByKey(data?.content ?? [], "type").map(
+              ({ type }) => (
+                <div className="items-center flex space-x-2" key={type}>
+                  <Checkbox
+                    id={type}
+                    onCheckedChange={(val) =>
+                      set_active_components((prev) => ({
+                        ...prev,
+                        [type]: val,
+                      }))
+                    }
+                    checked={active_component[type]}
+                  />
+                  <Label htmlFor={type}>{type}</Label>
+                </div>
+              )
+            )}
           </div>
         </div>
         <div className="flex justify-end space-x-2">
