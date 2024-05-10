@@ -37,7 +37,7 @@ export default function Hero() {
           </div>
           <div className="md:flex space-y-6 md:space-y-0 md:space-x-6">
             <Link
-              href="/editor__"
+              href="/editor"
               className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
             >
               Start Building With Drag & Drop

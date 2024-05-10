@@ -10,7 +10,7 @@ export default function GoogleButton() {
   return (
     <Button
       className="w-full"
-      onClick={() => signIn("google", { callbackUrl: "/editor__" })}
+      onClick={() => signIn("google", { callbackUrl: "/editor" })}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

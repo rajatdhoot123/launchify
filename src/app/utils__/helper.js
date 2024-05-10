@@ -43,3 +43,9 @@ export function formatComponentPath(inputPath) {
 
   return formattedPath;
 }
+
+
+
+export function isMobile(userAgent) {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+}
