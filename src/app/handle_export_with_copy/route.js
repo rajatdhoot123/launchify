@@ -53,6 +53,7 @@ export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
+
   const {
     copywriting_components,
     components,
@@ -65,6 +66,13 @@ export async function POST(req) {
   } = body;
 
   const session = await getServerSession(AUTH_OPTIONS);
+
+  if (!session) {
+    return NextResponse.json(
+      { message: "Invalid Session" },
+      { status: 403 }
+    );
+  }
 
   const get_user = await db
     .select()
