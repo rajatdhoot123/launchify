@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       return {
         item_id,
         variant,
-        key: `src/app/components/${item_id}/${variant}.jsx`,
+        path: `src/app/components/${item_id}/${variant}.jsx`,
         content: data,
       };
     }, {})

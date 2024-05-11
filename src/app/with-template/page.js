@@ -21,7 +21,7 @@ const WithTemplate = () => {
     });
 
     try {
-      const response = await fetch("/handle_export__", {
+      const response = await fetch("/handle_export", {
         method: "POST",
         body: JSON.stringify({
           twak_to_id: state.twak_to_id,

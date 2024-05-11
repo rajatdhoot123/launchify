@@ -26,6 +26,22 @@ import {
   SITE_MAP_FILES,
 } from "@/boilercode/constants";
 
+function getSubstringBetweenCodeTags(code) {
+  // Regular expression to find text between <code> and </code> tags
+  const regex = /<code>(.*?)<\/code>/s;
+
+  // Using match to find the first match in the string
+  const match = code.match(regex);
+
+  // Check if there is a match
+  if (match) {
+    // Return the extracted text (without the <code> tags)
+    return match[1];
+  } else {
+    return null; // Return null if no <code> tags are found
+  }
+}
+
 const getFilePath = (file) => {
   return file.split("/").length > 1
     ? file.split("/").slice(0, -1).join("/")
@@ -46,6 +62,7 @@ export async function POST(req) {
     twak_to_id = "",
     crisp_id = "",
     post_hog = "",
+    copywriting_components = [],
     premium_features = {},
     pages = {},
   } = body;
@@ -228,6 +245,17 @@ export async function POST(req) {
     ),
     "utf8"
   );
+
+  console.log({ copywriting_components });
+
+  copywriting_components.forEach(({ ai_content, path }) => {
+    console.log({ ai_content:getSubstringBetweenCodeTags(ai_content), path });
+    zip.addFile(
+      path,
+      Buffer.from(getSubstringBetweenCodeTags(ai_content)),
+      "utf8"
+    );
+  });
   const zipFileContents = zip.toBuffer();
   const fileName = "uploads.zip";
   const fileType = "application/zip";

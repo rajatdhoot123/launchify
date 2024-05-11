@@ -11,6 +11,20 @@ import { readFileSync, promises, existsSync } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
+import {
+  NECESSARY_FILES,
+  NECESSARY_FOLDERS,
+  SUPPORT_PAGES,
+  MARKDOWN_PAGES,
+  DATABASE_FILES,
+  LEMON_SQUEEZY_FILES,
+  NEXT_AUTH_FILES,
+  STRIPE_HOSTED_EMBEDDED_PAGE,
+  SHADCN_UI_FILE,
+  SHADCN_UI_FOLDER,
+} from "@/boilercode/constants";
+import { updateCopywriting } from "../api/code-generation__/update-copywriting";
+import { updateItemId } from "../utils__/helper";
 
 function getSubstringBetweenCodeTags(code) {
   // Regular expression to find text between <code> and </code> tags
@@ -27,21 +41,6 @@ function getSubstringBetweenCodeTags(code) {
     return null; // Return null if no <code> tags are found
   }
 }
-
-import {
-  NECESSARY_FILES,
-  NECESSARY_FOLDERS,
-  SUPPORT_PAGES,
-  MARKDOWN_PAGES,
-  DATABASE_FILES,
-  LEMON_SQUEEZY_FILES,
-  NEXT_AUTH_FILES,
-  STRIPE_HOSTED_EMBEDDED_PAGE,
-  SHADCN_UI_FILE,
-  SHADCN_UI_FOLDER,
-} from "@/boilercode/constants";
-import { updateCopywriting } from "../api/code-generation__/update-copywriting";
-import { updateItemId } from "../utils__/helper";
 
 const getFilePath = (file) => {
   return file.split("/").length > 1
@@ -68,10 +67,7 @@ export async function POST(req) {
   const session = await getServerSession(AUTH_OPTIONS);
 
   if (!session) {
-    return NextResponse.json(
-      { message: "Invalid Session" },
-      { status: 403 }
-    );
+    return NextResponse.json({ message: "Invalid Session" }, { status: 403 });
   }
 
   const get_user = await db

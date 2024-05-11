@@ -137,7 +137,30 @@ function Editor() {
         event_name: "export_with_copywriting_clicked",
       });
 
-      const response = await fetch("/handle_export_on_server", {
+      const files = await fetch("/api/get-files", {
+        method: "POST",
+        body: JSON.stringify({ files: selected_components }),
+      });
+      const files_arr = await files.json();
+
+      const fileFromAI = files_arr.map((file) =>
+        updateCopywriting({
+          jsx_code: file.content,
+          use_case: open_ai_prompt,
+          apiKey: "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",
+        })
+      );
+
+      const filesWithCopywriting = await Promise.all(fileFromAI);
+
+      const modifiedWithCode = filesWithCopywriting.map((file, index) => {
+        return {
+          ...files_arr[index],
+          ai_content: file,
+        };
+      });
+
+      const response = await fetch("/handle_export", {
         credentials: "include",
         method: "POST",
         body: JSON.stringify({
@@ -149,7 +172,7 @@ function Editor() {
           crisp_id: state.crisp_id,
           pages: state.pages,
           premium_features: state.premium_features,
-          copywriting_components: selected_components,
+          copywriting_components: modifiedWithCode,
           components: modify_components(puck_data.current.content),
         }),
       });
@@ -220,7 +243,7 @@ function Editor() {
     });
 
     try {
-      const response = await fetch("/handle_export__", {
+      const response = await fetch("/handle_export", {
         method: "POST",
         body: JSON.stringify({
           twak_to_id: state.twak_to_id,
