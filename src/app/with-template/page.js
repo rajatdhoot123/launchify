@@ -97,7 +97,10 @@ const WithTemplate = () => {
             .map(({ product_id }) => +product_id)
             .includes(+website.id);
           return (
-            <div className="border p-5 rounded-md flex flex-col justify-between" key={website.name}>
+            <div
+              className="border p-5 rounded-md flex flex-col justify-between"
+              key={website.name}
+            >
               <Link
                 target="_blank"
                 href={`https://templates.launchify.club/${website.link}`}
@@ -133,11 +136,7 @@ const WithTemplate = () => {
 
               {is_paid ? (
                 <Button
-                  disabled={
-                    !paid_templates
-                      .map(({ product_id }) => +product_id)
-                      .includes(+website.id)
-                  }
+                  disabled={!is_paid}
                   onClick={() => handleExport(website)}
                   className="w-full mt-5"
                 >
