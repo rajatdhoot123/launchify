@@ -246,8 +246,6 @@ export async function POST(req) {
     "utf8"
   );
 
-  console.log({ copywriting_components });
-
   copywriting_components.forEach(({ ai_content, path }) => {
     zip.addFile(
       path,

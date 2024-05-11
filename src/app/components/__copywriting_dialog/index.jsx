@@ -91,9 +91,15 @@ const CopyWritingDialog = ({
           {title}
         </DialogDescription>
         <div className="w-full overflow-scroll p-5 space-y-4">
-          <p className="text-sm font-semibold">
-            Currently in beta output will be unstable
-          </p>
+          <div>
+            <p className="text-sm font-semibold">
+              Currently in beta output will be unstable
+            </p>
+            <div className="text-xs text-gray-600 my-0">
+              We don't store your API keys. We use them to generate content for
+              you.
+            </div>
+          </div>
           <div>
             <Label htmlFor="open_ai">Open Ai Key</Label>
             <Input
