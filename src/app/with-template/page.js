@@ -9,8 +9,10 @@ import { logEvent } from "@/app/utils__/events";
 import { toast } from "@/components/ui/use-toast";
 import Loader from "@/app/components/__loader/loader";
 import CheckoutForm from "@/app/stripe/CheckoutForm";
+import { useConfig } from "../__context/ConfigContext";
 
 const WithTemplate = () => {
+  const { paid_templates } = useConfig();
   const state_ref = useRef({});
   const [loader, setLoader] = useState({});
 
@@ -90,50 +92,64 @@ const WithTemplate = () => {
         <NextBoilerPlate ref={state_ref} integrations={true} />
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-8 gap-6 sm:ml-80 px-5">
-        {WEBSITES_TEMPLATES.map((website) => (
-          <div className="border p-5 rounded-md" key={website.name}>
-            <Link
-              target="_blank"
-              href={`https://templates.launchify.club/${website.link}`}
-            >
-              <div className="space-y-2">
-                <div className="border-2 rounded-lg">
-                  {website.image.map((image) => (
-                    <img
-                      loading="lazy"
-                      key={image}
-                      className="object-contain"
-                      src={`https://templates.launchify.club${image}`}
-                      alt={website.type}
-                      width={400}
-                      height={200}
-                    />
-                  ))}
-                </div>
-                <div>
-                  <h3>{website.name}</h3>
-                  <p>{website.description}</p>
+        {WEBSITES_TEMPLATES.map((website) => {
+          const is_paid = paid_templates
+            .map(({ product_id }) => +product_id)
+            .includes(+website.id);
+          return (
+            <div className="border p-5 rounded-md flex flex-col justify-between" key={website.name}>
+              <Link
+                target="_blank"
+                href={`https://templates.launchify.club/${website.link}`}
+              >
+                <div className="space-y-2">
+                  <div className="border-2 rounded-lg">
+                    {website.image.map((image) => (
+                      <img
+                        loading="lazy"
+                        key={image}
+                        className="object-contain"
+                        src={`https://templates.launchify.club${image}`}
+                        alt={website.type}
+                        width={400}
+                        height={200}
+                      />
+                    ))}
+                  </div>
                   <div>
-                    <div className="flex flex-col">
-                      <span>{website.type}</span>
-                      <span className="text-black text-opacity-65 font-semibold text-sm">
-                        {`Developed by: ${website.author}`}
-                      </span>
+                    <h3>{website.name}</h3>
+                    <p>{website.description}</p>
+                    <div>
+                      <div className="flex flex-col">
+                        <span>{website.type}</span>
+                        <span className="text-black text-opacity-65 font-semibold text-sm">
+                          {`Developed by: ${website.author}`}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-            <Button
-              onClick={() => handleExport(website)}
-              className="w-full mt-5"
-            >
-              {loader[website.id] && <Loader />}
-              &nbsp;&nbsp;Export
-            </Button>
-            <CheckoutForm templateId={website.id} uiMode="hosted" />
-          </div>
-        ))}
+              </Link>
+
+              {is_paid ? (
+                <Button
+                  disabled={
+                    !paid_templates
+                      .map(({ product_id }) => +product_id)
+                      .includes(+website.id)
+                  }
+                  onClick={() => handleExport(website)}
+                  className="w-full mt-5"
+                >
+                  {loader[website.id] && <Loader />}
+                  &nbsp;&nbsp;Export
+                </Button>
+              ) : (
+                <CheckoutForm templateId={website.id} uiMode="hosted" />
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
