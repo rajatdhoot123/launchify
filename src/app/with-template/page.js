@@ -8,6 +8,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { logEvent } from "@/app/utils__/events";
 import { toast } from "@/components/ui/use-toast";
 import Loader from "@/app/components/__loader/loader";
+import CheckoutForm from "@/app/stripe/CheckoutForm";
 
 const WithTemplate = () => {
   const state_ref = useRef({});
@@ -130,6 +131,7 @@ const WithTemplate = () => {
               {loader[website.id] && <Loader />}
               &nbsp;&nbsp;Export
             </Button>
+            <CheckoutForm uiMode="hosted" />
           </div>
         ))}
       </div>
