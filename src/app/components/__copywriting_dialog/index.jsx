@@ -50,7 +50,8 @@ const CopyWritingDialog = ({
   state,
   is_open,
 }) => {
-  const [{ open_ai_key, open_ai_prompt }, set_open_ai] = useState(state);
+  const [{ open_ai_key, groq_ai_key, open_ai_prompt }, set_open_ai] =
+    useState(state);
   const [active_component, set_active_components] = useState({});
 
   const handleClose = () => {
@@ -58,6 +59,7 @@ const CopyWritingDialog = ({
       type: "CLOSE_COPWRITING_MODAL",
       payload: {
         open_ai_key,
+        groq_ai_key,
         open_ai_prompt,
       },
     });
@@ -67,16 +69,19 @@ const CopyWritingDialog = ({
     handleExportWithCopywriting({
       selected_components: modify_components(Object.keys(active_component)),
       open_ai_key,
+      groq_ai_key,
       open_ai_prompt,
     });
     dispatch({
       type: "CLOSE_COPWRITING_MODAL",
       payload: {
         open_ai_key,
+        groq_ai_key,
         open_ai_prompt,
       },
     });
   };
+
   return (
     <Dialog open={is_open}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -86,10 +91,16 @@ const CopyWritingDialog = ({
           {title}
         </DialogDescription>
         <div className="w-full overflow-scroll p-5 space-y-4">
-          <p className="text-sm font-semibold">
-            Currently in beta output will be unstable
-          </p>
-          {/* <div>
+          <div>
+            <p className="text-sm font-semibold">
+              Currently in beta output will be unstable
+            </p>
+            <div className="text-xs text-gray-600 my-0">
+              We don't store your API keys. We use them to generate content for
+              you.
+            </div>
+          </div>
+          <div>
             <Label htmlFor="open_ai">Open Ai Key</Label>
             <Input
               value={open_ai_key}
@@ -105,7 +116,24 @@ const CopyWritingDialog = ({
               id="open_ai"
               placeholder="Enter Open Ai Key"
             />
-          </div> */}
+          </div>
+          <div>
+            <Label htmlFor="groq_ai_key">Groq Ai Key</Label>
+            <Input
+              value={groq_ai_key}
+              name="groq_ai_key"
+              onChange={(e) => {
+                set_open_ai((prev) => ({
+                  ...prev,
+                  groq_ai_key: e.target.value,
+                }));
+              }}
+              className="mt-2"
+              type="text"
+              id="groq_ai_key"
+              placeholder="Enter Groq Ai Key"
+            />
+          </div>
           <div>
             <Label htmlFor="use_case">Enter Your Use Case</Label>
             <Textarea
