@@ -131,7 +131,7 @@ const WithTemplate = () => {
               {loader[website.id] && <Loader />}
               &nbsp;&nbsp;Export
             </Button>
-            <CheckoutForm uiMode="hosted" />
+            <CheckoutForm templateId={website.id} uiMode="hosted" />
           </div>
         ))}
       </div>

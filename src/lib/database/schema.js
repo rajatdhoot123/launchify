@@ -7,6 +7,7 @@ import {
   primaryKey,
   integer,
   jsonb,
+  numeric,
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", {
@@ -53,6 +54,16 @@ export const subscriptions = pgTable("subscriptions", {
   email_id: text("email_id").notNull(),
   is_active: boolean("is_active").notNull(),
   product_id: boolean("product_id").notNull(),
+  meta: jsonb("meta").notNull(),
+});
+
+export const templates = pgTable("templates", {
+  id: serial("id").primaryKey(),
+  created_at: timestamp("created_at"),
+  email_id: text("email_id").notNull(),
+  is_active: boolean("is_active").notNull(),
+  product_id: boolean("product_id").notNull(),
+  price: numeric("price").notNull(),
   meta: jsonb("meta").notNull(),
 });
 

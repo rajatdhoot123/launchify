@@ -20,13 +20,19 @@ export async function createCheckoutSession(
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.create({
       mode: "payment",
-      submit_type: "donate",
+      submit_type: "pay",
+      metadata: {
+        template_id: data.get("template_id") as string,
+      },
       line_items: [
         {
           quantity: 1,
           price_data: {
             currency: CURRENCY,
             product_data: {
+              metadata: {
+                template_id: data.get("template_id") as string,
+              },
               name: "Buy Your Template",
             },
             unit_amount: formatAmountForStripe(

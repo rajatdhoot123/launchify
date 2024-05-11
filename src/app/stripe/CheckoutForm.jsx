@@ -38,6 +38,7 @@ export default function CheckoutForm(props) {
     <>
       <form action={formAction}>
         <input type="hidden" name="uiMode" value={props.uiMode} />
+        <input type="hidden" name="template_id" value={props.templateId} />
         <label className="flex flex-col justify-center items-center my-2">
           <input
             type="range"
