@@ -137,7 +137,7 @@ function Editor() {
         event_name: "export_with_copywriting_clicked",
       });
 
-      const response = await fetch("/handle_export_with_copy", {
+      const response = await fetch("/handle_export_on_server", {
         credentials: "include",
         method: "POST",
         body: JSON.stringify({

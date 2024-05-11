@@ -17,7 +17,7 @@ export default withMDX({
     return [
       {
         // matching all API routes
-        source: "/handle_export_with_copy",
+        source: "/handle_export_on_server",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
