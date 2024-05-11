@@ -249,7 +249,6 @@ export async function POST(req) {
   console.log({ copywriting_components });
 
   copywriting_components.forEach(({ ai_content, path }) => {
-    console.log({ ai_content:getSubstringBetweenCodeTags(ai_content), path });
     zip.addFile(
       path,
       Buffer.from(getSubstringBetweenCodeTags(ai_content)),

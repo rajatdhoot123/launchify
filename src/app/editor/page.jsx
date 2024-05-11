@@ -111,6 +111,7 @@ function Editor() {
   const user = session?.user?.email;
   const [state, dispatch] = useReducer(reducer, {
     open_ai_key: "",
+    groq_ai_key: "",
     open_ai_prompt: "",
     is_copywriting_active: false,
   });
@@ -128,6 +129,7 @@ function Editor() {
   const handleExportWithCopywriting = async ({
     selected_components,
     open_ai_key,
+    groq_ai_key,
     open_ai_prompt,
   }) => {
     const state = state_ref.current;
@@ -147,7 +149,8 @@ function Editor() {
         updateCopywriting({
           jsx_code: file.content,
           use_case: open_ai_prompt,
-          apiKey: "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",
+          open_ai_key: open_ai_key,
+          groq_ai_key: groq_ai_key,
         })
       );
 
@@ -166,7 +169,8 @@ function Editor() {
         body: JSON.stringify({
           twak_to_id: state.twak_to_id,
           use_case: open_ai_prompt,
-          api_key: open_ai_key,
+          // open_ai_key: open_ai_key,
+          // groq_ai_key: groq_ai_key,
           ga_id: state.ga_id,
           post_hog: state.post_hog,
           crisp_id: state.crisp_id,
