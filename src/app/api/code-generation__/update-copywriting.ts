@@ -4,7 +4,7 @@ import { ChatGroq } from "@langchain/groq";
 import { RunnableSequence } from "@langchain/core/runnables";
 import { StructuredOutputParser } from "langchain/output_parsers";
 import { PromptTemplate } from "@langchain/core/prompts";
-import { OpenAI } from "@langchain/openai";
+import { ChatOpenAI } from "@langchain/openai";
 
 const parser = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -45,7 +45,8 @@ const updateCopywritingWithOpenAi = async ({
   jsx_code,
   open_ai_key = "",
 }) => {
-  const model = new OpenAI({
+  const model = new ChatOpenAI({
+    model: "gpt-4-turbo",
     temperature: 0,
     apiKey: open_ai_key,
   });
@@ -60,7 +61,7 @@ const updateCopywritingWithOpenAi = async ({
     jsx_code: jsx_code,
   });
 
-  return response;
+  return response.content;
 };
 
 export const updateCopywriting = async ({

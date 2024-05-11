@@ -81,6 +81,7 @@ const CopyWritingDialog = ({
       },
     });
   };
+
   return (
     <Dialog open={is_open}>
       <DialogTrigger asChild>{children}</DialogTrigger>
