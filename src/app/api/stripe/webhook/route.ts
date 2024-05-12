@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 import { NextRequest } from "next/server";
 import { headers } from "next/headers";
+import { db } from "@/lib/database/db";
+import { templates } from "@/lib/database/schema";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -45,28 +47,26 @@ async function handleStripeWebhook(body: any) {
   const stripe_invoice = body.data?.object?.invoice;
   const type = body.type;
 
-  // console.log everything above REMOVE BEFORE PRODUCTION.
-  console.log("mode --->", mode);
-  console.log("webhook type --->", type);
-  console.log("id --->", id);
-  console.log("obj --->", obj);
-  console.log("stat --->", stat);
-  console.log("status --->", status);
-  console.log("payment_intent --->", payment_intent);
-  console.log("subId --->", subId);
-  console.log("stripeInvoiceId --->", stripeInvoiceId);
-  console.log("user --->", user);
-  console.log("meta --->", meta);
-  console.log("stripe_invoice --->", stripe_invoice);
-
   // Switch on the event type.
   switch (type) {
-    /*
-     * =~~~~~~~~~~~~~~~~~~~~~~~=
-     * Session Expired.
-     * =~~~~~~~~~~~~~~~~~~~~~~~=
-     * This is the webhook that is fired when a session expires.
-     */
+    case "checkout.session.completed":
+      try {
+        await db.insert(templates).values({
+          meta: body,
+          product_id: body.data.object.metadata.template_id,
+          price: body.data.object.amount_total,
+          email_id: body.data.object.customer_details.email,
+          is_active: true,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      return new Response(
+        JSON.stringify({ message: "Checkout Session Completed!" }),
+        {
+          status: 200,
+        }
+      );
     case "checkout.session.expired":
       // logic to handle expired sessions.
 
@@ -317,6 +317,7 @@ async function POST(request: NextRequest) {
     // Verify the webhook signature
     try {
       const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
       if (!stripeWebhookSecret) {
         throw new Error("STRIPE_WEBHOOK_SECRET not set");
       }

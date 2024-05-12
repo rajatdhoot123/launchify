@@ -9,7 +9,7 @@ import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import { existsSync, readFileSync } from "fs";
 import { db } from "@/lib/database/db";
-import { subscriptions } from "@/lib/database/schema";
+import { subscriptions, templates } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
 import {
   CREATE_FILE_NOT_PRESENT,
@@ -82,6 +82,21 @@ export async function POST(req) {
     .where(eq(subscriptions.email_id, session?.user?.email));
 
   const is_premium_user = get_user.find((user) => user.is_active);
+
+  if (template) {
+    const paid_template = await db
+      .select()
+      .from(templates)
+      .where(eq(templates.email_id, session?.user?.email));
+
+    if (!paid_template.find((tem) =>  +tem.product_id === +template)) {
+
+      return NextResponse.json(
+        { message: "Subscribe to export" },
+        { status: 403 }
+      );
+    }
+  }
 
   if (!is_premium_user) {
     return NextResponse.json(

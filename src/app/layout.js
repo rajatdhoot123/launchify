@@ -8,7 +8,7 @@ import NavBar from "@/app/landingcomponent/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { ConfigProvider } from "@/app/__context/ConfigContext";
 import { db } from "@/lib/database/db";
-import { subscriptions } from "@/lib/database/schema";
+import { subscriptions, templates } from "@/lib/database/schema";
 import { Inter } from "next/font/google";
 import { eq } from "drizzle-orm";
 
@@ -47,12 +47,14 @@ export default async function RootLayout({ children }) {
   const user = session?.user?.email ?? null;
 
   let current_user = null;
+  let paid_templates = [];
   if (user) {
-    const get_user = await db
-      .select()
-      .from(subscriptions)
-      .where(eq(subscriptions.email_id, user));
+    const [get_user, get_templates] = await Promise.all([
+      db.select().from(subscriptions).where(eq(subscriptions.email_id, user)),
+      db.select().from(templates).where(eq(templates.email_id, user)),
+    ]);
 
+    paid_templates = get_templates;
     current_user = get_user.find((u) => u.email_id === user);
   }
 
@@ -102,6 +104,7 @@ export default async function RootLayout({ children }) {
             <ConfigProvider
               initialState={{
                 is_active: current_user?.is_active ?? false,
+                paid_templates: paid_templates,
                 session: session ?? null,
               }}
             >

@@ -13,6 +13,7 @@ export const SET_USER = "SET_USER";
 export const initialState = {
   is_active: false,
   session: null,
+  paid_templates: [],
 };
 
 const reducer = (state, action) => {
