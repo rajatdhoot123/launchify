@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 export default function CheckoutForm(props) {
   const [loading] = useState(false);
   const [input, setInput] = useState({
-    template_price: Math.round(MAX_AMOUNT / AMOUNT_STEP),
+    template_price: Math.round((MAX_AMOUNT / AMOUNT_STEP) / 3),
   });
   const [clientSecret, setClientSecret] = useState(null);
 

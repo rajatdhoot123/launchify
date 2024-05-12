@@ -2,11 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
-import { usePathname } from "next/navigation";
 
 export default function GoogleButton() {
-  const pathname = usePathname();
-
   return (
     <Button
       className="w-full"
