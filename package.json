@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
-    "postinstall": "npm run introspect",
     "introspect": "drizzle-kit introspect:pg",
     "drizzle:push": "drizzle-kit push:pg"
   },
