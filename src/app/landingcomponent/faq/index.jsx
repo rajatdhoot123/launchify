@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { FAQS } from "../constant";
 
-const FaqAccordion = () => {
+const FaqAccordion = ({ faqs }) => {
   const [expanded, setExpanded] = useState({ 0: true });
 
   return (
@@ -12,7 +11,7 @@ const FaqAccordion = () => {
       {/* Accordion component */}
       <div className="divide-y">
         {/* Accordion item 1 */}
-        {FAQS.map(({ title, content }, index) => (
+        {faqs.map(({ title, content }, index) => (
           <div key={`${title}-${index}`} className="py-2">
             <h2>
               <button

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BUILD_FEATURES } from "../constant";
 
-const Pricing = () => {
+const Pricing = ({ features, price, paymanetLink = "" }) => {
   return (
     <div>
       <div className="md:w-8/12 gap-12 flex flex-col items-center mx-auto">
@@ -20,14 +20,14 @@ const Pricing = () => {
                 41 user left
               </div> */}
             </div>
-            <div className="text-7xl">$107</div>
+            <div className="text-7xl">{price}</div>
             <div className="font-xl font-medium">
               Pay once. Build <span className="font-bold">unlimited </span>
               projects
             </div>
             <div>
               <Link
-                href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0"
+                href={paymanetLink}
                 className="bg-[#3A30BA] text-white rounded-3xl px-12 py-3 inline-block"
               >
                 Get Lifetime Access
@@ -56,7 +56,7 @@ const Pricing = () => {
             </div>
           </div>
           <div>
-            {BUILD_FEATURES.map((feature) => (
+            {features.map((feature) => (
               <li key={feature.title}>{feature.title}</li>
             ))}
           </div>

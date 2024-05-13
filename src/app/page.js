@@ -6,6 +6,7 @@ import Features from "@/app/landingcomponent/features";
 import Footer from "@/app/landingcomponent/footer/variant-3";
 import Faqs from "@/app/landingcomponent/faq";
 import { Bricolage_Grotesque } from "next/font/google";
+import { BUILD_FEATURES, FAQS } from "./landingcomponent/constant";
 
 const TIME_SAVING = [
   "+ 8 hrs landing page design",
@@ -51,13 +52,17 @@ export default async function Home() {
           <Features />
         </section>
         <section id="boilerplate" className="container mx-auto">
-          <BuildFeature />
+          <BuildFeature features={BUILD_FEATURES} />
         </section>
         <section id="pricing" className="container mx-auto">
-          <Pricing />
+          <Pricing
+            paymanetLink="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4"
+            price="107$"
+            features={BUILD_FEATURES}
+          />
         </section>
         <section id="faqs" className="container mx-auto">
-          <Faqs />
+          <Faqs faqs={FAQS} />
         </section>
         {/* <section id="testinomials" className="container mx-auto">
           <Testimonials />

@@ -13,6 +13,35 @@ export const TESTINOMIAL_COLORS = [
   { name: "Light Green", hex: "#E6FFD7" },
 ];
 
+export const EXTENSION_BUILD_FEATURE = [
+  // {
+  //   icons: ["/"],
+  //   title: "Content script Sidebar",
+  //   features: ["Build a sidebar to provide additional functionality"],
+  // },
+  {
+    icons: ["/extension/popup.svg"],
+    title: "Popup",
+    features: [
+      "Users can click on your extension to open a popup and interact with it.",
+    ],
+  },
+  {
+    icons: ["/extension/sidepanel.svg"],
+    title: "Native side panel",
+    features: [
+      "Use chrome's native side panel to provide a custom functionality.",
+    ],
+  },
+  {
+    icons: ["/extension/content-script.svg"],
+    title: "Inject content script to a web page",
+    features: [
+      "Inject content scripts and let your users interact with your extension within the parent web page.",
+    ],
+  },
+];
+
 export const BUILD_FEATURES = [
   {
     icons: ["/builder.png"],
@@ -106,6 +135,32 @@ export const BUILD_FEATURES = [
   },
 ];
 
+export const EXTENSION_FAQS = [
+  {
+    title: "What exactly do I get?",
+    content:
+      "You get access to a download codebase which contains the boilerplate code. There is code for content script side bar, native sidepanel, popup and injecting content script.",
+  },
+  {
+    title: "Will I get support with chrome web store submissions?",
+    content:
+      "I will try my best to address any questions over meet or over email hello@kwiktwik.com",
+  },
+  {
+    title: "Javascript or Typescript?",
+    content: "Currently only Javascript is supported",
+  },
+  {
+    title: "Can I get a refund?",
+    content:
+      "Once you gain access to the code, the code becomes yours indefinitely, making it non-refundable.",
+  },
+  {
+    title: "Are updates included with the purchase?",
+    content: "Yes, all future updates are included with your purchase.",
+  },
+];
+
 export const FAQS = [
   {
     title: "What exactly do I get?",
@@ -136,5 +191,9 @@ export const FAQS = [
     title: "Can I get a refund?",
     content:
       "Once you gain access to the code, the code becomes yours indefinitely, making it non-refundable.",
+  },
+  {
+    title: "Are updates included with the purchase?",
+    content: "Yes, all future updates are included with your purchase.",
   },
 ];

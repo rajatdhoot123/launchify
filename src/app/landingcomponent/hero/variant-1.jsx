@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Minutes from "./minutes";
 import { ShadesGreen, ShadeRed } from "./shades";
 const Video = () => {
   return (
@@ -17,21 +16,27 @@ const Video = () => {
   );
 };
 
-export default function Hero() {
+export default function Hero({ source = "" }) {
+  const isExtension = source === "extension";
   return (
     <>
       <div className="flex flex-col items-center justify-center text-center gap-24 relative md:pt-24 pt-12">
         <div className="md:w-[750px] w-[380px] gap-10 flex flex-col items-center">
-          <div className="border-2 inline-block border-black rounded-3xl p-3 px-5 text-[#3A38B7] font-semibold">
-            Not your "Typical Boilerplate" anymore
-          </div>
+          {!isExtension && (
+            <div className="border-2 inline-block border-black rounded-3xl p-3 px-5 text-[#3A38B7] font-semibold">
+              Not your "Typical Boilerplate" anymore
+            </div>
+          )}
           <div className="md:text-7xl text-5xl font-medium">
-            Ship 🚀 your Startup in Days, not Weeks
+            Ship 🚀 your {isExtension ? "Extension" : "Startup"} in Days, not
+            Weeks
           </div>
           <div>
             <div className="text-black text-opacity-60 text-lg md:text-xl">
-              Prebuilt UI components, ready-to-use NextJS boilerplate codes & AI
-              integration to make your app{" "}
+              {isExtension
+                ? "Start developing your chrome extension with modern tools like ReactJS, TailwindCSS. Want to build a Side Bar, Side Panel, inject content scripts or a popup? we have them all covered"
+                : "Prebuilt UI components, ready-to-use NextJS boilerplate codes & AI integration to make your app"}
+
               <span className="font-bold">Production ready</span>
             </div>
           </div>
@@ -49,15 +54,17 @@ export default function Hero() {
               Start With Next JS Templates
             </Link>
           </div>
-          <Link
-            href="/"
-            className="bg-[#f480d4] text-white rounded-3xl px-5 py-3 block relative"
-          >
-            <span className="absolute -top-5 -left-10 -rotate-12 text-black font-semibold">
-              Comming Soon
-            </span>
-            <div>Start With Chrome Extension Boilerplate</div>
-          </Link>
+          {!isExtension && (
+            <Link
+              href="/"
+              className="bg-[#f480d4] text-white rounded-3xl px-5 py-3 block relative"
+            >
+              <span className="absolute -top-5 -left-10 -rotate-12 text-black font-semibold">
+                Comming Soon
+              </span>
+              <div>Start With Chrome Extension Boilerplate</div>
+            </Link>
+          )}
 
           <Link
             target="_blank"
