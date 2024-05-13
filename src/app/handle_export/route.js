@@ -89,8 +89,7 @@ export async function POST(req) {
       .from(templates)
       .where(eq(templates.email_id, session?.user?.email));
 
-    if (!paid_template.find((tem) =>  +tem.product_id === +template)) {
-
+    if (!paid_template.find((tem) => +tem.product_id === +template)) {
       return NextResponse.json(
         { message: "Subscribe to export" },
         { status: 403 }
