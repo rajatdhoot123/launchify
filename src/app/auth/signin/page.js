@@ -41,10 +41,10 @@ export default async function SignIn() {
         {Object.entries(resp).map(([key, value]) => {
           switch (key) {
             case "google":
-              return <GoogleSignIn />;
+              return <GoogleSignIn key={key} />;
             case "email":
               return (
-                <Fragment>
+                <Fragment key={key}>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                     Get a magic link sent to your email
                   </p>
