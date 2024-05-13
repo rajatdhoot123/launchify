@@ -37,7 +37,7 @@ export default function Hero({ source = "" }) {
                 ? "Start developing your chrome extension with modern tools like ReactJS, TailwindCSS. Want to build a Side Bar, Side Panel, inject content scripts or a popup? we have them all covered"
                 : "Prebuilt UI components, ready-to-use NextJS boilerplate codes & AI integration to make your app"}
 
-              <span className="font-bold">Production ready</span>
+              <span className="font-bold">&nbsp;Production ready</span>
             </div>
           </div>
           <div className="md:flex space-y-6 md:space-y-0 md:space-x-6">
@@ -59,7 +59,7 @@ export default function Hero({ source = "" }) {
               href="/"
               className="bg-[#f480d4] text-white rounded-3xl px-5 py-3 block relative"
             >
-              <span className="absolute -top-5 -left-10 -rotate-12 text-black font-semibold">
+              <span className="absolute -top-3 left-1/2 -rotate-2 transform -translate-x-1/2 rounded-md px-2 font-semibold bg-[#3A30BA] text-white">
                 Comming Soon
               </span>
               <div>Start With Chrome Extension Boilerplate</div>
