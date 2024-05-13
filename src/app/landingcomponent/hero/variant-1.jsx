@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ShadesGreen, ShadeRed } from "./shades";
+import { DownloadExtension } from "./download";
 const Video = () => {
   return (
     <div className="relative">
@@ -54,7 +55,7 @@ export default function Hero({ source = "" }) {
               Start With Next JS Templates
             </Link>
           </div>
-          {!isExtension && (
+          {!isExtension ? (
             <Link
               href="/"
               className="bg-[#f480d4] text-white rounded-3xl px-5 py-3 block relative"
@@ -64,6 +65,8 @@ export default function Hero({ source = "" }) {
               </span>
               <div>Start With Chrome Extension Boilerplate</div>
             </Link>
+          ) : (
+            <DownloadExtension />
           )}
 
           <Link
