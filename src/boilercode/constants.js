@@ -104,7 +104,6 @@ export const DATABASE_FILES = [
 export const NEXT_AUTH_FILES = [
   "src/app/auth/EmailSignIn.js",
   "src/app/auth/GoogleSignIn.js",
-  "src/app/auth/LoginButton.js",
   "src/app/auth/authenticated/page.js",
   "src/app/auth/signin/page.js",
   "src/app/nextauth/provider.js",

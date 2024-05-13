@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import EmailSignIn from "@/app/auth__/signin/EmailSignIn";
+import EmailSignIn from "@/app/auth/EmailSignIn";
 
 export function LoginDialog({ text }) {
   return (

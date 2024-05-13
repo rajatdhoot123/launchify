@@ -59,10 +59,10 @@ const Navbar = () => {
         ) : (
           <>
             <Button variant="link">
-              <Link href="/auth__/signin">Sign in</Link>
+              <Link href="/auth/signin">Sign in</Link>
             </Button>
             <Button>
-              <Link href="/auth__/signin">Sign up</Link>
+              <Link href="/auth/signin">Sign up</Link>
             </Button>
           </>
         )}
