@@ -50,6 +50,16 @@ export default function Hero() {
             </Link>
           </div>
           <Link
+            href="/"
+            className="bg-[#f480d4] text-white rounded-3xl px-5 py-3 block relative"
+          >
+            <span className="absolute -top-5 -left-10 -rotate-12 text-black font-semibold">
+              Comming Soon
+            </span>
+            <div>Start With Chrome Extension Boilerplate</div>
+          </Link>
+
+          <Link
             target="_blank"
             href="https://github.com/rajatdhoot123/nextjs-blog-cli"
             className="border-2 p-2 rounded-md"
