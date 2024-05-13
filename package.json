@@ -34,6 +34,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@stripe/react-stripe-js": "^2.7.0",
     "@stripe/stripe-js": "^3.3.0",
+    "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.43.0",
     "@types/mdx": "^2.0.13",
     "adm-zip": "^0.5.12",

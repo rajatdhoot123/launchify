@@ -34,10 +34,6 @@ export default withMDX({
         destination: "https://extension.launchify.club/extension",
       },
       {
-        source: "/extension/:path*",
-        destination: "https://extension.launchify.club/extension/:path*",
-      },
-      {
         source: "/blog/blog-sitemap.xml",
         destination:
           "https://blogs-theta-six.vercel.app/blog/blog.launchify.club/sitemap.xml",
