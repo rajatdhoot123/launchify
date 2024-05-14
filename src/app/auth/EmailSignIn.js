@@ -8,7 +8,7 @@ export default function EmailSignIn() {
   const handleSubmit = async (event) => {
     const email = event.target[0].value;
     event.preventDefault();
-    await signIn("email", { email });
+    await signIn("email", { email, callbackUrl: "/" });
   };
   return (
     <form onSubmit={handleSubmit}>
