@@ -1,40 +1,197 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+const PRODUCTS = [
+  {
+    title: "Web Apps",
+    list: [
+      {
+        title: "Launchify",
+        link: "https:// www.launchify.club?utm_soruce=launchify",
+      },
+      { title: "VA360", link: "https://www.va360.club?utm_soruce=launchify" },
+    ],
+  },
+  {
+    title: "Extensions",
+    list: [
+      {
+        title: "Screenshot to Code",
+        link: "https://chromewebstore.google.com/detail/screenshot-to-code/hjbpcilippgfjenlgigmpgfmookfohag?utm_soruce=launchify",
+      },
+      {
+        title: "Launchify",
+        link: "https://chromewebstore.google.com/detail/launchify/peflongejpeiohocbimfcedepdphkohk?utm_soruce=launchify",
+      },
+    ],
+  },
+];
+
 const Footer = () => {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="flex justify-center text-teal-600">
-        <img src="/logo.png" className="h-12 w-12" />
+    <div className="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
+      <div className="lg:grid lg:grid-cols-2">
+        <div className="py-8 border-b border-gray-100 lg:order-last lg:border-b-0 lg:border-l lg:py-16 lg:pl-16">
+          <div className="block text-primary lg:hidden">
+            <div className="flex items-center">
+              <img src="/logo.png" className="h-12 w-12" />
+              <div className="text-2xl ml-2">Launchify</div>
+            </div>
+          </div>
+
+          <div className="mt-8 space-y-4 lg:mt-0">
+            <span className="hidden w-10 h-1 text-primary/70 rounded lg:block"></span>
+
+            <div>
+              <h2 className="text-2xl font-medium ">Connet with us</h2>
+
+              {/* <p className="max-w-lg mt-4 text-gray-500">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Veritatis, harum deserunt nesciunt praesentium, repellendus eum
+                perspiciatis ratione pariatur a aperiam eius numquam doloribus
+                asperiores sunt.
+              </p> */}
+            </div>
+
+            <div>
+              <a href="mailto:hello@kwiktwik.com">hello@kwiktwik.com</a>
+            </div>
+            {/* <form className="w-full mt-6">
+              <label htmlFor="UserEmail" className="sr-only">
+                {" "}
+                Email{" "}
+              </label>
+
+              <div className="rounded-md sm:flex sm:items-center sm:gap-4">
+                <Input
+                  type="email"
+                  id="UserEmail"
+                  placeholder="john@rhcp.com"
+                />
+
+                <Button>Sign Up</Button>
+              </div>
+            </form> */}
+          </div>
+        </div>
+
+        <div className="py-8 lg:py-16 lg:pr-16">
+          <div className="hidden text-primary lg:block">
+            <div className="flex items-center">
+              <img src="/logo.png" className="h-12 w-12" />
+              <div className="text-2xl ml-2">Launchify</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 mt-8 sm:grid-cols-3">
+            <div>
+              <p className="font-medium ">Products</p>
+
+              {PRODUCTS.map((product) => (
+                <nav
+                  key={product.title}
+                  aria-label={product.title}
+                  className="mt-2"
+                >
+                  <div className="font-semibold">{product.title}</div>
+                  <ul className="space-y-2 text-sm">
+                    {product.list.map((product) => (
+                      <li key={product.link}>
+                        <a
+                          target="_blank"
+                          href={product.link}
+                          className="transition hover:opacity-75"
+                        >
+                          {product.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              ))}
+            </div>
+            {/* 
+            <div>
+              <p className="font-medium ">Company</p>
+
+              <nav aria-label="Footer Navigation - Company" className="mt-6">
+                <ul className="space-y-4 text-sm">
+                  <li>
+                    <a href="#" className="  transition hover:opacity-75">
+                      About
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" className="  transition hover:opacity-75">
+                      Meet the Team
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" className="  transition hover:opacity-75">
+                      Accounts Review
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div> */}
+
+            <div>
+              <p className="font-medium ">Helpful Links</p>
+
+              <nav aria-label="Footer Navigation - Company" className="mt-2">
+                <ul className="space-y-4 text-sm">
+                  <li>
+                    <a
+                      href="mailto:hello@kwiktwik.com"
+                      className="  transition hover:opacity-75"
+                    >
+                      Contact
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="/#faqs" className="  transition hover:opacity-75">
+                      FAQs
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div className="pt-8 mt-8 border-t border-gray-100">
+            <nav aria-label="Footer Navigation - Support">
+              <ul className="flex flex-wrap gap-4 text-xs">
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://www.kwiktwik.com/terms-and-condition"
+                    className="text-gray-500 transition hover:opacity-75"
+                  >
+                    Terms &amp; Conditions
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    target="_blank"
+                    href="https://www.kwiktwik.com/privacy-policy"
+                    className="text-gray-500 transition hover:opacity-75"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <p className="mt-8 text-xs text-gray-500">
+              © 2024. Kwiktwik. All rights reserved.
+            </p>
+          </div>
+        </div>
       </div>
-
-      <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-        Boilercode by{" "}
-        <a href="http://www.kwiktwik.com"> KwikTwik Technologies PVT LTD </a>{" "}
-      </p>
-
-      <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-        Follow us on social media for the freshest updates and exclusive
-        content. Your journey with us is just beginning.
-      </p>
-
-      <ul className="mt-12 flex justify-center gap-6 md:gap-8">
-        <li>
-          <a
-            href="https://twitter.com/yeskhush_5"
-            rel="noreferrer"
-            target="_blank"
-            className="  transition hover: /75"
-          >
-            <span className="sr-only">Twitter</span>
-            <svg
-              className="h-6 w-6"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-            </svg>
-          </a>
-        </li>
-      </ul>
     </div>
   );
 };
