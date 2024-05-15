@@ -240,6 +240,65 @@ function Editor() {
     setPuckLoaded(true);
   }, []);
 
+  const handleComponentExport = async ({ components }) => {
+    logEvent("export_component_clicked", {
+      event_name: "export_component_clicked",
+    });
+
+    try {
+      const response = await fetch("/handle_export/components", {
+        method: "POST",
+        body: JSON.stringify({
+          components: components,
+        }),
+      });
+
+      if (response.ok) {
+        const res_blob = await response.blob();
+        const url = window.URL.createObjectURL(res_blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "uicomponents";
+        link.click();
+        window.URL.revokeObjectURL(url);
+      } else {
+        throw response;
+      }
+    } catch (error) {
+      if (error instanceof Response) {
+        const { message } = await error.json();
+
+        switch (error.status) {
+          case 403:
+            toast({
+              title: "Something went wrong",
+              description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
+            });
+          /* ... */
+          default:
+            toast({
+              title: error.statusText,
+              description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
+            });
+        }
+      }
+    }
+  };
+
   const handleExport = async ({ components }) => {
     const state = state_ref.current;
     logEvent("export_clicked", {
@@ -443,9 +502,20 @@ function Editor() {
               <RenderComponent />;
 
               const libs = selectedComponent?.lib ?? [];
+
               return (
                 <div className="relative">
-                  <button className="absolute z-10 right-10 top-1/2 -translate-y-1/2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleComponentExport({
+                        components: [
+                          { variant: `variant-${index}`, item_id: comp_name },
+                        ],
+                      });
+                    }}
+                    className="absolute p-2 right-8 z-20 top-1/2 -translate-y-1/2"
+                  >
                     <svg
                       stroke="currentColor"
                       fill="currentColor"
