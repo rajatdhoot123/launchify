@@ -24,6 +24,7 @@ import {
   SHADCN_UI_FOLDER,
   STRIPE_HOSTED_EMBEDDED_PAGE,
   SITE_MAP_FILES,
+  WEBSITES_TEMPLATES,
 } from "@/boilercode/constants";
 
 function getSubstringBetweenCodeTags(code) {
@@ -83,7 +84,11 @@ export async function POST(req) {
 
   const is_premium_user = get_user.find((user) => user.is_active);
 
-  if (template) {
+  const free_templates = WEBSITES_TEMPLATES.map(({ isPaid, id }) =>
+    isPaid === false ? id : null
+  ).filter(Boolean);
+
+  if (template && !free_templates.includes(template)) {
     const paid_template = await db
       .select()
       .from(templates)

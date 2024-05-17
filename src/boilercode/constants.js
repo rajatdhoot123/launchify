@@ -142,6 +142,7 @@ export const SITE_MAP_FILES = ["next-sitemap.config.js"];
 export const WEBSITES_TEMPLATES = [
   {
     id: 1,
+    isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
     link: "/1",
@@ -149,6 +150,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 5,
+    isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
     link: "/5",
@@ -159,6 +161,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 7,
+    isPaid: true,
     type: "Landing Page",
     author: "Jayesh",
     link: "/7",
@@ -166,6 +169,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 23,
+    isPaid: false,
     type: "Landing Page",
     author: "Jayesh",
     link: "/23",
@@ -176,6 +180,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 24,
+    isPaid: true,
     type: "Landing Page",
     author: "Jayesh",
     link: "/24",
@@ -186,6 +191,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 28,
+    isPaid: false,
     type: "Landing Page",
     author: "Yagyesh",
     link: "/28",
@@ -196,6 +202,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 29,
+    isPaid: true,
     type: "Landing Page",
     author: "Mayur",
     link: "/29",
@@ -203,6 +210,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 31,
+    isPaid: true,
     type: "Landing Page",
     author: "Jayesh",
     link: "/31",
@@ -213,6 +221,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 33,
+    isPaid: false,
     type: "Landing Page",
     author: "Mayur",
     link: "/33",
@@ -220,6 +229,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 35,
+    isPaid: true,
     type: "Landing Page",
     author: "Mayur",
     link: "/35",
@@ -227,6 +237,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 38,
+    isPaid: true,
     type: "Landing Page",
     author: "Mayur",
     link: "/38",
@@ -234,6 +245,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 44,
+    isPaid: false,
     type: "Landing Page",
     author: "Mayur",
     link: "/44",
@@ -244,6 +256,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 46,
+    isPaid: true,
     type: "Landing Page",
     author: "Mayur",
     link: "/46",
@@ -254,6 +267,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 47,
+    isPaid: true,
     type: "Landing Page",
     author: "Mayur",
     link: "/47",
@@ -261,6 +275,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 50,
+    isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
     link: "/50",
@@ -272,6 +287,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 51,
+    isPaid: true,
     dependencies: {
       "framer-motion": "^11.0.25",
       "react-slick": "^0.30.2",
@@ -284,6 +300,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 51,
+    isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
     link: "/37",
@@ -295,6 +312,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 52,
+    isPaid: false,
     type: "Landing Page",
     author: "Mayur",
     link: "/52",
@@ -302,6 +320,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 53,
+    isPaid: true,
     type: "Landing Page",
     author: "Rajat",
     link: "/53",

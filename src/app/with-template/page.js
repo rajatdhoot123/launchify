@@ -93,9 +93,11 @@ const WithTemplate = () => {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-8 gap-6 sm:ml-80 px-5">
         {WEBSITES_TEMPLATES.map((website) => {
-          const is_paid = paid_templates
-            .map(({ product_id }) => +product_id)
-            .includes(+website.id);
+          const is_paid = !website.isPaid
+            ? true
+            : paid_templates
+                .map(({ product_id }) => +product_id)
+                .includes(+website.id);
           return (
             <div
               className="border p-5 rounded-md flex flex-col justify-between"
