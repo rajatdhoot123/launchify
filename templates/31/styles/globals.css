@@ -1,0 +1,33 @@
+@config "./tailwindcss.config.js";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --bannerbg : #F4F4F4;
+    --darkbg: #333333;
+    --light : rgba(0, 0, 0, 0.5);
+    background-color: white;
+    color: black;
+    --blue:rgba(49, 78, 231, 1);
+}
+
+@media(prefers-color-scheme:dark){
+    :root{
+        --bannerbg:#333333;
+        --light: rgba(255, 255, 255, 0.5); 
+        background-color: black;
+        color: white;
+    }
+}
+
+.ai{
+    background-image: url('../assets/images/Section2/ai.png');
+}
+.calender{
+    background-image: url('../assets/images/Section2/calender.png');
+}
+.section2{
+    background-image: url('../assets/images/Section2/bg.png');
+
+}

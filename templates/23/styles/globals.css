@@ -1,0 +1,30 @@
+@config "./tailwindcss.config.js";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --bannerbg : #F4F4F4;
+    --darkbg: #333333;
+    --light : #626262;
+    background-color: white;
+    color: black;
+}
+
+@media(prefers-color-scheme:dark){
+    :root{
+        --bannerbg:#333333;
+        --light: #f4f4f4; 
+        background-color: black;
+        color: white;
+    }
+}
+
+.productivity{
+    background-image: url('../assets/images/Hero/bg-productivity.png');
+}
+
+
+.section2{
+    background-image: url('../assets/images/Section2/bg.png');
+}

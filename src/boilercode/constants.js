@@ -141,25 +141,6 @@ export const SITE_MAP_FILES = ["next-sitemap.config.js"];
 
 export const WEBSITES_TEMPLATES = [
   {
-    id: 52,
-    type: "Landing Page",
-    author: "Mayur",
-    link: "/52",
-    image: ["/images/mayur/1-a.png", "/images/mayur/1-b.png"],
-  },
-  {
-    id: 51,
-    dependencies: {
-      "framer-motion": "^11.0.25",
-      "react-slick": "^0.30.2",
-      "slick-carousel": "^1.8.1",
-    },
-    type: "Portfolio",
-    author: "Jayesh",
-    link: "/51",
-    image: ["/images/jayesh/1-a.png", "/images/jayesh/1-b.png"],
-  },
-  {
     id: 1,
     type: "Landing Page",
     author: "Yagyesh",
@@ -177,23 +158,31 @@ export const WEBSITES_TEMPLATES = [
     image: ["/images/yagyesh/2-a.png", "/images/yagyesh/2-b.png"],
   },
   {
-    id: 53,
-    type: "Landing Page",
-    author: "Rajat",
-    link: "/53",
-    dependencies: {
-      "framer-motion": "^11.0.25",
-      "react-slick": "^0.30.2",
-      "slick-carousel": "^1.8.1",
-    },
-    image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
-  },
-  {
     id: 7,
     type: "Landing Page",
     author: "Jayesh",
     link: "/7",
     image: ["/images/jayesh/2-a.png", "/images/jayesh/2-b.png"],
+  },
+  {
+    id: 23,
+    type: "Landing Page",
+    author: "Jayesh",
+    link: "/23",
+    dependencies: {
+      "react-icons": "^5.0.1",
+    },
+    image: ["/images/23/a.png", "/images/23/b.png"],
+  },
+  {
+    id: 24,
+    type: "Landing Page",
+    author: "Jayesh",
+    link: "/24",
+    dependencies: {
+      "react-icons": "^5.0.1",
+    },
+    image: ["/images/24/a.png", "/images/24/b.png"],
   },
   {
     id: 28,
@@ -206,9 +195,47 @@ export const WEBSITES_TEMPLATES = [
     image: ["/images/28/a.png", "/images/28/b.png"],
   },
   {
-    id: 44,
+    id: 29,
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/29",
+    image: ["/images/29/a.png", "/images/29/b.png"],
+  },
+  {
+    id: 31,
     type: "Landing Page",
     author: "Jayesh",
+    link: "/31",
+    dependencies: {
+      "react-icons": "^5.0.1",
+    },
+    image: ["/images/31/a.png", "/images/31/b.png"],
+  },
+  {
+    id: 33,
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/33",
+    image: ["/images/33/a.png", "/images/33/b.png"],
+  },
+  {
+    id: 35,
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/35",
+    image: ["/images/35/a.png", "/images/35/b.png"],
+  },
+  {
+    id: 38,
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/38",
+    image: ["/images/mayur/2-a.png", "/images/mayur/2-b.png"],
+  },
+  {
+    id: 44,
+    type: "Landing Page",
+    author: "Mayur",
     link: "/44",
     dependencies: {
       "react-icons": "^5.0.1",
@@ -216,13 +243,68 @@ export const WEBSITES_TEMPLATES = [
     image: ["/images/44/a.png", "/images/44/b.png"],
   },
   {
-    id: 24,
+    id: 46,
     type: "Landing Page",
-    author: "Jayesh",
-    link: "/24",
+    author: "Mayur",
+    link: "/46",
     dependencies: {
       "react-icons": "^5.0.1",
     },
-    image: ["/images/24/a.png", "/images/24/b.png"],
+    image: ["/images/46/a.png", "/images/46/b.png"],
+  },
+  {
+    id: 47,
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/47",
+    image: ["/images/47/a.png", "/images/47/b.png"],
+  },
+  {
+    id: 50,
+    type: "Landing Page",
+    author: "Yagyesh",
+    link: "/50",
+    dependencies: {
+      "react-slick": "^0.30.2",
+      "slick-carousel": "^1.8.1",
+    },
+    image: ["/images/yagyesh/3-a.png", "/images/yagyesh/3-b.png"],
+  },
+  {
+    id: 51,
+    dependencies: {
+      "framer-motion": "^11.0.25",
+      "react-slick": "^0.30.2",
+      "slick-carousel": "^1.8.1",
+    },
+    type: "Portfolio",
+    author: "Jayesh",
+    link: "/51",
+    image: ["/images/jayesh/1-a.png", "/images/jayesh/1-b.png"],
+  },
+  {
+    id: 51,
+    type: "Landing Page",
+    author: "Yagyesh",
+    link: "/37",
+    dependencies: {
+      "react-slick": "^0.30.2",
+      "slick-carousel": "^1.8.1",
+    },
+    image: ["/images/yagyesh/4-a.png", "/images/yagyesh/4-b.png"],
+  },
+  {
+    id: 52,
+    type: "Landing Page",
+    author: "Mayur",
+    link: "/52",
+    image: ["/images/mayur/1-a.png", "/images/mayur/1-b.png"],
+  },
+  {
+    id: 53,
+    type: "Landing Page",
+    author: "Rajat",
+    link: "/53",
+    image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
   },
 ];
