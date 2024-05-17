@@ -100,9 +100,14 @@ const WithTemplate = () => {
                 .includes(+website.id);
           return (
             <div
-              className="border p-5 rounded-md flex flex-col justify-between"
+              className="border p-5 rounded-md flex flex-col justify-between relative"
               key={website.name}
             >
+              {!website.isPaid && (
+                <div className="absolute z-20 top-0 left-0 text-xs bg-primary text-white rounded-sm px-1 py-1">
+                  Free with Launchify
+                </div>
+              )}
               <Link
                 target="_blank"
                 href={`https://templates.launchify.club/${website.link}`}
