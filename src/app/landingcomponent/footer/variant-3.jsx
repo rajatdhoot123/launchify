@@ -23,6 +23,10 @@ const PRODUCTS = [
         title: "Launchify",
         link: "https://chromewebstore.google.com/detail/launchify/peflongejpeiohocbimfcedepdphkohk?utm_soruce=launchify",
       },
+      {
+        title: "Tweetify",
+        link: "https://chromewebstore.google.com/detail/tweetify/dochhfmjdfbjejlajmpiimpgibocdfhj?utm_soruce=launchify",
+      },
     ],
   },
 ];
