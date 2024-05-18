@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: [
-      "https://www.launchify.club/sitemap.xml",
+      "https://www.launchify.club/new-sitemaps/sitemap.xml",
       "https://www.launchify.club/blog/sitemap.xml",
     ],
   };
