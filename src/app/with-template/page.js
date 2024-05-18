@@ -110,7 +110,7 @@ const WithTemplate = () => {
               )}
               <Link
                 target="_blank"
-                href={`https://templates.launchify.club/${website.link}`}
+                href={`https://templates.launchify.club${website.link}`}
               >
                 <div className="space-y-2">
                   <div className="border-2 rounded-lg">
