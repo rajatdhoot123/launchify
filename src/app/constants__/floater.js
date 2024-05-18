@@ -43,6 +43,7 @@ import Login2 from "@/app/components/login/variant-2";
 import Faq1 from "@/app/components/faq/variant-1";
 import About1 from "@/app/components/about/variant-1";
 import Feature1 from "@/app/components/featureservice/variant-1";
+import AnimatedComp1 from "@/app/components/animated/variant-1.jsx";
 
 const NAVBAR = {
   "variant-1": Navbar1,
@@ -127,6 +128,10 @@ const ANIMATED_CARDS = {
   "variant-1": Animated1,
 };
 
+const ANIMATED_COMPS = {
+  "variant-1": AnimatedComp1,
+};
+
 const CONTACT_US = {
   "variant-1": Contactus1,
   "variant-2": Contactus2,
@@ -151,6 +156,10 @@ export const COMPONENTS_ARRAY = [
   {
     name: "table",
     components: Object.values(TABLE),
+  },
+  {
+    name: "animated",
+    components: Object.values(ANIMATED_COMPS),
   },
   {
     name: "pricing",
@@ -343,6 +352,12 @@ export const FLOATER_SELECT = [
     item_id: "animatedcards",
     variants: ANIMATED_CARDS,
     title: "Animated",
+    selected: "variant-1",
+  },
+  {
+    item_id: "animated",
+    variants: ANIMATED_COMPS,
+    title: "Animated Components",
     selected: "variant-1",
   },
 ];
