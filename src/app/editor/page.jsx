@@ -23,6 +23,7 @@ import Loader from "@/app/components/__loader/loader";
 import { Button } from "@/components/ui/button";
 import { useConfig } from "@/app/__context/ConfigContext";
 import Link from "next/link";
+import CodeDialog from "../components/__dialog";
 
 // Describe the initial data
 const initialData = {
@@ -240,65 +241,6 @@ function Editor() {
     setPuckLoaded(true);
   }, []);
 
-  const handleComponentExport = async ({ components }) => {
-    logEvent("export_component_clicked", {
-      event_name: "export_component_clicked",
-    });
-
-    try {
-      const response = await fetch("/handle_export/components", {
-        method: "POST",
-        body: JSON.stringify({
-          components: components,
-        }),
-      });
-
-      if (response.ok) {
-        const res_blob = await response.blob();
-        const url = window.URL.createObjectURL(res_blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "uicomponents";
-        link.click();
-        window.URL.revokeObjectURL(url);
-      } else {
-        throw response;
-      }
-    } catch (error) {
-      if (error instanceof Response) {
-        const { message } = await error.json();
-
-        switch (error.status) {
-          case 403:
-            toast({
-              title: "Something went wrong",
-              description: message,
-              action: (
-                <ToastAction altText="Buy Now">
-                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
-                    Subscribe Now
-                  </Link>
-                </ToastAction>
-              ),
-            });
-          /* ... */
-          default:
-            toast({
-              title: error.statusText,
-              description: message,
-              action: (
-                <ToastAction altText="Buy Now">
-                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
-                    Subscribe Now
-                  </Link>
-                </ToastAction>
-              ),
-            });
-        }
-      }
-    }
-  };
-
   const handleExport = async ({ components }) => {
     const state = state_ref.current;
     logEvent("export_clicked", {
@@ -505,34 +447,30 @@ function Editor() {
 
               return (
                 <div className="relative">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleComponentExport({
-                        components: [
-                          { variant: `variant-${index}`, item_id: comp_name },
-                        ],
-                      });
-                    }}
-                    className="absolute p-2 right-8 z-20 top-1/2 -translate-y-1/2"
-                  >
-                    <svg
-                      stroke="currentColor"
-                      fill="currentColor"
-                      stroke-width="0"
-                      viewBox="0 0 24 24"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
+                  <div className="absolute p-2 right-8 z-20 top-1/2 -translate-y-1/2">
+                    <CodeDialog
+                      data={[
+                        { variant: `variant-${index}`, item_id: comp_name },
+                      ]}
                     >
-                      <g id="Export">
-                        <g>
-                          <path d="M5.552,20.968a2.577,2.577,0,0,1-2.5-2.73c-.012-2.153,0-4.306,0-6.459a.5.5,0,0,1,1,0c0,2.2-.032,4.4,0,6.6.016,1.107.848,1.589,1.838,1.589H18.353A1.546,1.546,0,0,0,19.825,19a3.023,3.023,0,0,0,.1-1.061V11.779h0a.5.5,0,0,1,1,0c0,2.224.085,4.465,0,6.687a2.567,2.567,0,0,1-2.67,2.5Z"></path>
-                          <path d="M12.337,3.176a.455.455,0,0,0-.311-.138c-.015,0-.028,0-.043-.006s-.027,0-.041.006a.457.457,0,0,0-.312.138L7.961,6.845a.5.5,0,0,0,.707.707l2.816-2.815V15.479a.5.5,0,0,0,1,0V4.737L15.3,7.552a.5.5,0,0,0,.707-.707Z"></path>
+                      <svg
+                        stroke="currentColor"
+                        fill="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 24 24"
+                        height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g id="Export">
+                          <g>
+                            <path d="M5.552,20.968a2.577,2.577,0,0,1-2.5-2.73c-.012-2.153,0-4.306,0-6.459a.5.5,0,0,1,1,0c0,2.2-.032,4.4,0,6.6.016,1.107.848,1.589,1.838,1.589H18.353A1.546,1.546,0,0,0,19.825,19a3.023,3.023,0,0,0,.1-1.061V11.779h0a.5.5,0,0,1,1,0c0,2.224.085,4.465,0,6.687a2.567,2.567,0,0,1-2.67,2.5Z"></path>
+                            <path d="M12.337,3.176a.455.455,0,0,0-.311-.138c-.015,0-.028,0-.043-.006s-.027,0-.041.006a.457.457,0,0,0-.312.138L7.961,6.845a.5.5,0,0,0,.707.707l2.816-2.815V15.479a.5.5,0,0,0,1,0V4.737L15.3,7.552a.5.5,0,0,0,.707-.707Z"></path>
+                          </g>
                         </g>
-                      </g>
-                    </svg>
-                  </button>
+                      </svg>
+                    </CodeDialog>
+                  </div>
                   <div className="mb-4 relative">
                     <div className="absolute -top-3 right-0">
                       {libs.map((lib) => (

@@ -4,7 +4,7 @@ import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
-import AdmZip from "adm-zip";
+// import AdmZip from "adm-zip";
 import path from "path";
 import { existsSync, readFileSync } from "fs";
 
@@ -43,41 +43,35 @@ export async function POST(req) {
     );
   }
 
-  var zip = new AdmZip();
+  // var zip = new AdmZip();
+
+  const files = [];
 
   components.forEach(({ item_id, variant }) => {
-    zip.addFile(
-      `src/app/components/${item_id}/${variant}.jsx`,
-      Buffer.from(
-        readFileSync(
-          path.join(
-            ui_components,
-            `src/app/components/${item_id}/${variant}.jsx`
-          ),
-          "utf-8"
-        )
-      )
-    );
-
+    let actions = "";
     if (existsSync(`${ui_components}/src/app/components/${item_id}/actions`)) {
-      zip.addLocalFolder(
-        `${ui_components}/src/app/components/${item_id}/actions`,
-        `src/app/components/${item_id}/actions`
+      actions = readFileSync(
+        path.join(ui_components, `/src/app/components/${item_id}/actions`)
       );
     }
+    files.push({
+      path: `src/app/components/${item_id}/${variant}.jsx`,
+      file: readFileSync(
+        path.join(
+          ui_components,
+          `src/app/components/${item_id}/${variant}.jsx`
+        ),
+        "utf-8"
+      ),
+      actions,
+    });
   });
 
-  const zipFileContents = zip.toBuffer();
-  const fileName = "uploads.zip";
-  const fileType = "application/zip";
-
-  return new NextResponse(zipFileContents, {
-    // Create a new NextResponse for the file with the given stream from the disk
-    status: 200, //STATUS 200: HTTP - Ok
-    headers: new Headers({
-      //Headers
-      "content-disposition": `attachment; filename=${path.basename(fileName)}`, //State that this is a file attachment
-      "content-type": fileType,
-    }),
-  });
+  return NextResponse.json(
+    { files },
+    {
+      // Create a new NextResponse for the file with the given stream from the disk
+      status: 200, //STATUS 200: HTTP - Ok
+    }
+  );
 }

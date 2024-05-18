@@ -1,3 +1,4 @@
+import { logEvent } from "@/app/utils__/events";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,7 +10,10 @@ import {
   DialogClose,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
+import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 
 function format(html) {
   var tab = "\t";
@@ -31,31 +35,97 @@ function format(html) {
   return result.substring(1, result.length - 3);
 }
 
-const DialogComponent = ({ children, handleShowCode, title }) => {
-  const [code, setCode] = useState("");
-  useEffect(() => {
-    setCode(format(handleShowCode()));
-  }, [handleShowCode]);
+const CodeDialog = ({ children, title, handleCode, data }) => {
+  const [code, setCode] = useState({ path: "", file: "", actions: "" });
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleComponentExport = useCallback(async () => {
+    logEvent("export_component_clicked", {
+      event_name: "export_component_clicked",
+    });
+
+    try {
+      const response = await fetch("/handle_export/components", {
+        method: "POST",
+        body: JSON.stringify({
+          components: data,
+        }),
+      });
+
+      if (response.ok) {
+        const res = await response.json();
+
+        setCode(res.files[0]);
+      } else {
+        throw response;
+      }
+    } catch (error) {
+      if (error instanceof Response) {
+        const { message } = await error.json();
+
+        switch (error.status) {
+          case 403:
+            toast({
+              title: "Something went wrong",
+              description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
+            });
+          /* ... */
+          default:
+            toast({
+              title: error.statusText,
+              description: message,
+              action: (
+                <ToastAction altText="Buy Now">
+                  <Link href="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4?media=0">
+                    Subscribe Now
+                  </Link>
+                </ToastAction>
+              ),
+            });
+        }
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (isOpen) {
+      (async () => {
+        if (isOpen) {
+          const response = await handleComponentExport();
+        }
+      })();
+    }
+  }, [handleCode, handleComponentExport, isOpen]);
   const handleCopy = () => {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(code);
+      navigator.clipboard.writeText(code.file);
     } else {
       alert(text);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(state) => {
+        setIsOpen(state);
+      }}
+    >
       <DialogTrigger>{children}</DialogTrigger>
-      <DialogContent >
+      <DialogContent className="max-w-[800px]">
         <DialogHeader>
           <DialogTitle>Code</DialogTitle>
-          <DialogDescription>{`${title} Component Code`}</DialogDescription>
+          <DialogDescription>{code?.path}</DialogDescription>
         </DialogHeader>
 
         <div className="max-h-[60vh] bg-black w-full overflow-scroll p-5">
-          <code className="whitespace-pre text-white">{code}</code>
+          <code className="whitespace-pre text-white">{code.file}</code>
         </div>
 
         <DialogFooter className="sm:justify-start">
@@ -73,4 +143,4 @@ const DialogComponent = ({ children, handleShowCode, title }) => {
   );
 };
 
-export default DialogComponent;
+export default CodeDialog;
