@@ -142,6 +142,7 @@ export const SITE_MAP_FILES = ["next-sitemap.config.js"];
 export const WEBSITES_TEMPLATES = [
   {
     id: 1,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
@@ -150,6 +151,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 5,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
@@ -161,6 +163,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 7,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Jayesh",
@@ -169,6 +172,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 23,
+    isOpenSource: false,
     isPaid: false,
     type: "Landing Page",
     author: "Jayesh",
@@ -180,6 +184,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 24,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Jayesh",
@@ -191,6 +196,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 28,
+    isOpenSource: false,
     isPaid: false,
     type: "Landing Page",
     author: "Yagyesh",
@@ -202,6 +208,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 29,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Mayur",
@@ -210,6 +217,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 31,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Jayesh",
@@ -221,6 +229,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 33,
+    isOpenSource: false,
     isPaid: false,
     type: "Landing Page",
     author: "Mayur",
@@ -229,6 +238,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 35,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Mayur",
@@ -237,6 +247,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 38,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Mayur",
@@ -245,6 +256,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 44,
+    isOpenSource: false,
     isPaid: false,
     type: "Landing Page",
     author: "Mayur",
@@ -256,6 +268,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 46,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Mayur",
@@ -267,6 +280,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 47,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Mayur",
@@ -275,6 +289,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 50,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
@@ -287,6 +302,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 51,
+    isOpenSource: false,
     isPaid: true,
     dependencies: {
       "framer-motion": "^11.0.25",
@@ -300,6 +316,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 51,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Yagyesh",
@@ -312,6 +329,7 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 52,
+    isOpenSource: false,
     isPaid: false,
     type: "Landing Page",
     author: "Mayur",
@@ -320,10 +338,31 @@ export const WEBSITES_TEMPLATES = [
   },
   {
     id: 53,
+    isOpenSource: false,
     isPaid: true,
     type: "Landing Page",
     author: "Rajat",
     link: "/53",
     image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
+  },
+  {
+    id: 54,
+    isPaid: false,
+    isOpenSource: true,
+    dependencies: {
+      "react-icons": "^5.0.1",
+      "framer-motion": "^11.0.25",
+      "@react-email/components": "^0.0.17",
+      "@react-email/tailwind": "^0.0.16",
+      clsx: "^2.1.1",
+      "react-hot-toast": "^2.4.1",
+      "react-vertical-timeline-component": "^3.6.0",
+      resend: "^3.2.0",
+    },
+    type: "Landing Page",
+    author: "ByteGrad",
+    link: "/54",
+    github: ["https://github.com/ByteGrad/portfolio-website"],
+    image: ["/images/54/a.png", "/images/54/b.png"],
   },
 ];
