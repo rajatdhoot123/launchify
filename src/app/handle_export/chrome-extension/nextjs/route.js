@@ -68,31 +68,7 @@ export async function GET(req) {
     "utf8"
   );
 
-  zip.addFile(
-    "/src/app/extension/page.js",
-    Buffer.from(
-      await prettier.format(
-        `
-      export default function Home() {
-        return (
-          <>
-            <div className="w-full overflow-scroll space-y-12">
-           <div>Welcome to chrome extension</div>
-            </div>
-          </>
-        );
-      };
-      
-      `,
-        {
-          parser: "babel",
-        }
-      ),
-      "utf8"
-    )
-  );
-
-  const extension_path = path.join(process.cwd(), "src/app/(extension)");
+  const extension_path = path.join(process.cwd(), "extension-boilerplate");
   const app_path = path.join(process.cwd(), "/src");
 
   zip.addLocalFolder(`${extension_path}`, "/src/app");
