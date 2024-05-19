@@ -4,7 +4,7 @@ const generateLayout = ({
   post_hog = "",
   crisp_id = "",
   twak_to_id,
-}) => {
+} = {}) => {
   return `
 import { Inter } from "next/font/google";
 import "@/app/styles/globals.css";

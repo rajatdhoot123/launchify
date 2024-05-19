@@ -9,7 +9,9 @@ export async function GET(request) {
   const code = searchParams.get("code");
 
   const redirect_origin =
-    `https://${header_list.get("x-forwarded-host")}` || origin;
+    process.env.NODE_ENV === "development"
+      ? origin
+      : `https://${header_list.get("x-forwarded-host")}` || origin;
   // if "next" is in param, use it as the redirect URL
   const next = searchParams.get("next") ?? "/";
 
