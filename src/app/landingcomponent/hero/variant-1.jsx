@@ -57,12 +57,9 @@ export default function Hero({ source = "" }) {
           </div>
           {!isExtension ? (
             <Link
-              href="/"
-              className="bg-[#f480d4] text-white rounded-3xl px-5 py-3 block relative"
+              href="/extension"
+              className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
             >
-              <span className="absolute -top-3 left-1/2 -rotate-2 transform -translate-x-1/2 rounded-md px-2 font-semibold bg-[#3A30BA] text-white">
-                Comming Soon
-              </span>
               <div>Start With Chrome Extension Boilerplate</div>
             </Link>
           ) : (
