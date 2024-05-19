@@ -1,3 +1,4 @@
+"use client"
 const MarqueeComponent = ({ isReverse }) => {
   return (
     <div
