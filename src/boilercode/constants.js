@@ -343,7 +343,7 @@ export const WEBSITES_TEMPLATES = [
     type: "Landing Page",
     author: "Rajat",
     link: "/53",
-    image: ["/images/rajat/1-a.png", "/images/rajat/1-b.png"],
+    image: ["/images/53/a.png", "/images/53/b.png"],
   },
   {
     id: 54,
