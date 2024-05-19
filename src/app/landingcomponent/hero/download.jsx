@@ -27,7 +27,7 @@ export const DownloadExtension = () => {
         const url = window.URL.createObjectURL(res_blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "chrome-extension";
+        link.download = "extension-nextjs";
         link.click();
         window.URL.revokeObjectURL(url);
       } else {
