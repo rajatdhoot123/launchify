@@ -215,6 +215,7 @@ export const COMPONENTS_ARRAY = [
     type: "page",
     path: ["@/app/ai/chatbot/page"],
     components: Object.values(CHATBOT),
+    lib: [{ title: "Vercel AI", link: "https://sdk.vercel.ai/docs/" }],
   },
 ];
 
