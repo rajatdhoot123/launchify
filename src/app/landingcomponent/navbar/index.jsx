@@ -20,7 +20,7 @@ const Navbar = () => {
 
   if (pathname.startsWith("/iframe__")) return null;
   return (
-    <header className="flex items-center justify-around p-5">
+    <header className="flex items-center justify-around h-20">
       <Link href="/">
         <img src="/logo.png" alt="logo" className="h-12 w-12" />
       </Link>
