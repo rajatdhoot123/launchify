@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useActions, useUIState } from "ai/rsc";
 
-export default function Blog() {
+export default function Chatbot() {
   const { submitMessage } = useActions();
   const [messages, setMessages] = useUIState();
 

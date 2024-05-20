@@ -149,12 +149,6 @@ export async function POST(req) {
     });
   }
 
-  if (premium_features.vercel_ai_sdk) {
-    AI_FILES.forEach((folder) => {
-      zip.addLocalFolder(`${folder}`, `${getFilePath(folder)}/ai`);
-    });
-  }
-
   if (premium_features.lemon_squeezy) {
     LEMON_SQUEEZY_FILES.forEach((file) => {
       zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
@@ -188,18 +182,24 @@ export async function POST(req) {
   });
 
   components.forEach(({ item_id, variant }) => {
-    zip.addFile(
-      `src/app/components/${item_id}/${variant}.jsx`,
-      Buffer.from(
-        readFileSync(
-          path.join(
-            ui_components,
-            `src/app/components/${item_id}/${variant}.jsx`
-          ),
-          "utf-8"
+    if (item_id === "chatbot") {
+      AI_FILES.forEach((folder) => {
+        zip.addLocalFolder(`${folder}`, `${getFilePath(folder)}/ai`);
+      });
+    } else {
+      zip.addFile(
+        `src/app/components/${item_id}/${variant}.jsx`,
+        Buffer.from(
+          readFileSync(
+            path.join(
+              ui_components,
+              `src/app/components/${item_id}/${variant}.jsx`
+            ),
+            "utf-8"
+          )
         )
-      )
-    );
+      );
+    }
 
     if (existsSync(`${ui_components}/src/app/components/${item_id}/actions`)) {
       zip.addLocalFolder(
@@ -244,7 +244,7 @@ export async function POST(req) {
     Buffer.from(
       await prettier.format(
         generateLayout({
-          vercel_ai_sdk: premium_features.vercel_ai_sdk,
+          vercel_ai_sdk: components.find((comp) => comp.item_id === "chatbot"),
           template,
           twak_to_id,
           post_hog,

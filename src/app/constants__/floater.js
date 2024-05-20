@@ -44,6 +44,7 @@ import Faq1 from "@/app/components/faq/variant-1";
 import About1 from "@/app/components/about/variant-1";
 import Feature1 from "@/app/components/featureservice/variant-1";
 import AnimatedComp1 from "@/app/components/animated/variant-1.jsx";
+import ChatBot1 from "@/app/ai/chatbot/page";
 
 const NAVBAR = {
   "variant-1": Navbar1,
@@ -52,6 +53,10 @@ const NAVBAR = {
 
 const FEATURE_SERVICE = {
   "variant-1": Feature1,
+};
+
+const CHATBOT = {
+  "variant-1": ChatBot1,
 };
 
 const ABOUT = {
@@ -205,6 +210,12 @@ export const COMPONENTS_ARRAY = [
     name: "animatedcard",
     components: Object.values(ANIMATED_CARDS),
   },
+  {
+    name: "chatbot",
+    type: "page",
+    path: ["@/app/ai/chatbot/page"],
+    components: Object.values(CHATBOT),
+  },
 ];
 
 export const PREMIUM_FEATURES = [
@@ -240,11 +251,6 @@ export const INTEGRATIONS = [
     item_id: "stripe_custom_checkout",
     selected: false,
     title: "Stripe Payment Page + Webhook",
-  },
-  {
-    item_id: "vercel_ai_sdk",
-    selected: false,
-    title: "Vercel AI SDK",
   },
 ];
 
@@ -320,49 +326,6 @@ export const FLOATER_SELECT = [
     item_id: "faq",
     variants: FAQ,
     title: "Faq",
-    selected: "variant-1",
-  },
-  {
-    item_id: "cards",
-    variants: CARDS,
-    title: "Card",
-    selected: "variant-6",
-  },
-  {
-    item_id: "waitlist",
-    variants: COMMING_SOON,
-    title: "Commingsoon",
-    selected: "variant-1",
-  },
-  {
-    item_id: "contactus",
-    variants: CONTACT_US,
-    title: "Contact Us",
-    selected: "variant-2",
-  },
-  {
-    item_id: "footer",
-    variants: FOOTER,
-    title: "Footer",
-    selected: "variant-4",
-  },
-
-  // {
-  //   item_id: "randomcards",
-  //   variants: RANDOMCARD,
-  //   title: "Random Card",
-  //   selected: "variant-2",
-  // },
-  {
-    item_id: "animatedcards",
-    variants: ANIMATED_CARDS,
-    title: "Animated",
-    selected: "variant-1",
-  },
-  {
-    item_id: "animated",
-    variants: ANIMATED_COMPS,
-    title: "Animated Components",
     selected: "variant-1",
   },
 ];
