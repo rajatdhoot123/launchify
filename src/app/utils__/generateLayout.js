@@ -1,6 +1,14 @@
 const PROVIDER_MAPPING = {
-  next_auth: { alias: "NextAuthProvider", path: "@/app/nextauth/provider" },
-  vercel_ai_sdk: { alias: "AI", path: "@/app/ai/actions" },
+  next_auth: {
+    alias: "NextAuthProvider",
+    path: "@/app/nextauth/provider",
+    default_import: true,
+  },
+  vercel_ai_sdk: {
+    alias: "AI",
+    path: "@/app/ai/action",
+    default_import: false,
+  },
 };
 
 function generateChild(providerArray) {
@@ -20,9 +28,11 @@ function generateImport(providerArray) {
     (acc, provider) =>
       provider.value
         ? `${acc}
-import ${PROVIDER_MAPPING[provider.key].alias} from "${
-            PROVIDER_MAPPING[provider.key].path
-          }"
+import ${
+            PROVIDER_MAPPING[provider.key].default_import
+              ? PROVIDER_MAPPING[provider.key].alias
+              : `{ ${PROVIDER_MAPPING[provider.key].alias} }`
+          } from "${PROVIDER_MAPPING[provider.key].path}"
 `
         : acc,
     ""
