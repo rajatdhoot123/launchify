@@ -150,8 +150,8 @@ export async function POST(req) {
   }
 
   if (premium_features.vercel_ai_sdk) {
-    AI_FILES.forEach((file) => {
-      zip.addLocalFile(`${src_path}/${file}`, getFilePath(file));
+    AI_FILES.forEach((folder) => {
+      zip.addLocalFolder(`${folder}`, `${getFilePath(folder)}/ai`);
     });
   }
 

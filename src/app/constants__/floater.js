@@ -241,6 +241,11 @@ export const INTEGRATIONS = [
     selected: false,
     title: "Stripe Payment Page + Webhook",
   },
+  {
+    item_id: "vercel_ai_sdk",
+    selected: false,
+    title: "Vercel AI SDK",
+  },
 ];
 
 export const PAGES = [
