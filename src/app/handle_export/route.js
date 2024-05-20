@@ -244,6 +244,7 @@ export async function POST(req) {
     Buffer.from(
       await prettier.format(
         generateLayout({
+          vercel_ai_sdk: premium_features.vercel_ai_sdk,
           template,
           twak_to_id,
           post_hog,

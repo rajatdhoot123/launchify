@@ -1,10 +1,47 @@
+const PROVIDER_MAPPING = {
+  next_auth: { alias: "NextAuthProvider", path: "@/app/nextauth/provider" },
+  vercel_ai_sdk: { alias: "AI", path: "@/app/ai/actions" },
+};
+
+function generateChild(providerArray) {
+  return providerArray.reduce(
+    (acc, provider) =>
+      provider.value
+        ? `<${PROVIDER_MAPPING[provider.key].alias}>${acc}</${
+            PROVIDER_MAPPING[provider.key].alias
+          }>`
+        : acc,
+    "{children}"
+  );
+}
+
+function generateImport(providerArray) {
+  return providerArray.reduce(
+    (acc, provider) =>
+      provider.value
+        ? `${acc}
+import ${PROVIDER_MAPPING[provider.key].alias} from "${
+            PROVIDER_MAPPING[provider.key].path
+          }"
+`
+        : acc,
+    ""
+  );
+}
+
 const generateLayout = ({
   ga_id = "",
   next_auth,
   post_hog = "",
   crisp_id = "",
   twak_to_id,
+  vercel_ai_sdk = false,
 } = {}) => {
+  const providers_array = [
+    { key: "next_auth", value: next_auth },
+    { key: "vercel_ai_sdk", value: vercel_ai_sdk },
+  ];
+
   return `
 import { Inter } from "next/font/google";
 import "@/app/styles/globals.css";
@@ -14,7 +51,7 @@ ${
     ? `import Script from "next/script"`
     : ""
 }
-${next_auth ? `import NextAuthProvider from "@/app/nextauth/provider"` : ""}
+${generateImport(providers_array)}
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -81,11 +118,7 @@ export default function RootLayout({ children }) {
     }
       <body className={inter.className}>
       <Providers>
-      ${
-        next_auth
-          ? "<NextAuthProvider>{children}</NextAuthProvider>"
-          : "{children}"
-      }
+      ${generateChild(providers_array)}
       </Providers>
       </body>
     </html>
