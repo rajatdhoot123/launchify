@@ -11,7 +11,7 @@ import { db } from "@/lib/database/db";
 import { subscriptions, templates } from "@/lib/database/schema";
 import { Inter } from "next/font/google";
 import { eq } from "drizzle-orm";
-import { AI } from "./(ai)/action";
+import { AI } from "./ai/action";
 
 const inter = Inter({ subsets: ["latin"] });
 

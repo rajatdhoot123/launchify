@@ -27,7 +27,7 @@ export default function Blog() {
   return (
     <div className="h-[calc(100svh_-_5rem)]">
       <div className="h-full flex flex-col justify-between space-y-5 p-5">
-        <div className="flex-1 h-full overflow-scroll border">
+        <div className="flex-1 h-full overflow-scroll border rounded-md">
           <ul>
             {messages.map((message) => (
               <li
