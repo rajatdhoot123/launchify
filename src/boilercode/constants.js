@@ -137,6 +137,8 @@ export const MARKDOWN_PAGES = [
   "src/app/(markdown)/layout.jsx",
 ];
 
+export const AI_FILES = ["src/app/ai"];
+
 export const SITE_MAP_FILES = ["next-sitemap.config.js"];
 
 export const WEBSITES_TEMPLATES = [

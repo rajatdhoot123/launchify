@@ -5,7 +5,9 @@ function capitalizeFirstLetter(string) {
 }
 
 const generateRootPage = ({ components, copywriting_components = [] }) => {
-  const modified_component = updateItemId(components);
+  const modified_component = updateItemId(components).filter(
+    (items) => items.item_id !== "chatbot"
+  );
 
   return `
 

@@ -12,6 +12,7 @@
     "drizzle:push": "drizzle-kit push:pg"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.9",
     "@auth/drizzle-adapter": "^0.3.17",
     "@langchain/groq": "^0.0.9",
     "@mdx-js/loader": "^3.0.1",
@@ -38,7 +39,7 @@
     "@supabase/supabase-js": "^2.43.0",
     "@types/mdx": "^2.0.13",
     "adm-zip": "^0.5.12",
-    "ai": "^2.2.37",
+    "ai": "^3.1.1",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

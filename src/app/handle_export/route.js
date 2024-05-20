@@ -20,6 +20,7 @@ import {
   DATABASE_FILES,
   LEMON_SQUEEZY_FILES,
   NEXT_AUTH_FILES,
+  AI_FILES,
   SHADCN_UI_FILE,
   SHADCN_UI_FOLDER,
   STRIPE_HOSTED_EMBEDDED_PAGE,
@@ -52,6 +53,7 @@ const getFilePath = (file) => {
 export async function POST(req) {
   const ui_components = path.join(process.cwd(), "uicomponents");
   const template_path = path.join(process.cwd(), "templates");
+  const src_path = path.join(process.cwd(), "src");
 
   const package_json_path = path.join(process.cwd(), "package.json");
   const body = await req.json();
@@ -180,18 +182,24 @@ export async function POST(req) {
   });
 
   components.forEach(({ item_id, variant }) => {
-    zip.addFile(
-      `src/app/components/${item_id}/${variant}.jsx`,
-      Buffer.from(
-        readFileSync(
-          path.join(
-            ui_components,
-            `src/app/components/${item_id}/${variant}.jsx`
-          ),
-          "utf-8"
+    if (item_id === "chatbot") {
+      AI_FILES.forEach((folder) => {
+        zip.addLocalFolder(`${folder}`, `${getFilePath(folder)}/ai`);
+      });
+    } else {
+      zip.addFile(
+        `src/app/components/${item_id}/${variant}.jsx`,
+        Buffer.from(
+          readFileSync(
+            path.join(
+              ui_components,
+              `src/app/components/${item_id}/${variant}.jsx`
+            ),
+            "utf-8"
+          )
         )
-      )
-    );
+      );
+    }
 
     if (existsSync(`${ui_components}/src/app/components/${item_id}/actions`)) {
       zip.addLocalFolder(
@@ -236,6 +244,7 @@ export async function POST(req) {
     Buffer.from(
       await prettier.format(
         generateLayout({
+          vercel_ai_sdk: components.find((comp) => comp.item_id === "chatbot"),
           template,
           twak_to_id,
           post_hog,

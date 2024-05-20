@@ -441,7 +441,6 @@ function Editor() {
               );
 
               const RenderComponent = selectedComponent.components[index - 1];
-              <RenderComponent />;
 
               const libs = selectedComponent?.lib ?? [];
 
