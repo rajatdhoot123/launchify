@@ -184,7 +184,10 @@ export async function POST(req) {
   components.forEach(({ item_id, variant }) => {
     if (item_id === "chatbot") {
       AI_FILES.forEach((folder) => {
-        zip.addLocalFolder(`${folder}`, `${getFilePath(folder)}/ai`);
+        zip.addLocalFolder(
+          `${ui_components}/${folder}`,
+          `${getFilePath(folder)}/ai`
+        );
       });
     } else {
       zip.addFile(
