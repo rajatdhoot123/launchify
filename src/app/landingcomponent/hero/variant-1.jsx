@@ -41,20 +41,22 @@ export default function Hero({ source = "" }) {
               <span className="font-bold">&nbsp;Production ready</span>
             </div>
           </div>
-          <div className="md:flex space-y-6 md:space-y-0 md:space-x-6">
-            <Link
-              href="/editor"
-              className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
-            >
-              Start Building With Drag & Drop
-            </Link>
-            <Link
-              href="/with-template"
-              className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
-            >
-              Start With Next JS Templates
-            </Link>
-          </div>
+          {!isExtension && (
+            <div className="md:flex space-y-6 md:space-y-0 md:space-x-6">
+              <Link
+                href="/editor"
+                className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
+              >
+                Start Building With Drag & Drop
+              </Link>
+              <Link
+                href="/with-template"
+                className="bg-[#3A30BA] text-white rounded-3xl px-5 py-3 block"
+              >
+                Start With Next JS Templates
+              </Link>
+            </div>
+          )}
           {!isExtension ? (
             <Link
               href="/extension"
@@ -66,15 +68,17 @@ export default function Hero({ source = "" }) {
             <DownloadExtension />
           )}
 
-          <Link
-            target="_blank"
-            href="https://github.com/rajatdhoot123/nextjs-blog-cli"
-            className="border-2 p-2 rounded-md"
-          >
-            To integrate blog with your app, you can use our open source
-            package&nbsp;
-            <span className="font-bold">NextJS Blog CLI</span>
-          </Link>
+          {!isExtension && (
+            <Link
+              target="_blank"
+              href="https://github.com/rajatdhoot123/nextjs-blog-cli"
+              className="border-2 p-2 rounded-md"
+            >
+              To integrate blog with your app, you can use our open source
+              package&nbsp;
+              <span className="font-bold">NextJS Blog CLI</span>
+            </Link>
+          )}
           {/* <button className=" rounded-3xl h-12 flex items-center md:ml-5 space-x-1">
               <span className="bg-[#F480D4] p-2 rounded-full h-8 w-8 flex justify-center">
                 <svg
