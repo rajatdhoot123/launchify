@@ -96,7 +96,7 @@ const WithTemplate = () => {
           const is_paid = !website.isPaid
             ? true
             : paid_templates
-                .map(({ product_id }) => +product_id)
+                ?.map(({ product_id }) => +product_id)
                 .includes(+website.id);
           return (
             <div
