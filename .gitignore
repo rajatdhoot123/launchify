@@ -37,3 +37,5 @@ next-env.d.ts
 
 
 drizzle
+# Sentry Config File
+.env.sentry-build-plugin
