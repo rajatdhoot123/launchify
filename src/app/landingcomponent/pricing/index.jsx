@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BUILD_FEATURES } from "../constant";
 
 const Pricing = ({ features, price, paymanetLink = "" }) => {
   return (
@@ -55,11 +53,29 @@ const Pricing = ({ features, price, paymanetLink = "" }) => {
               </div>
             </div>
           </div>
-          <div>
+          <ul className="list-disc">
             {features.map((feature) => (
-              <li key={feature.title}>{feature.title}</li>
+              <>
+                <li key={feature.title}>
+                  <span>{feature.title}</span>
+                  {feature.data && (
+                    <div className="space-y-1 ml-2">
+                      {feature.data.map((el) => (
+                        <a
+                          className="block text-sm font-semibold"
+                          key={el.link}
+                          target="_blank"
+                          href={el.link}
+                        >
+                          {el.title}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </li>
+              </>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </div>

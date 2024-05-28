@@ -35,6 +35,8 @@ const Features = ({ features, source }) => {
         {features.map((feature, index) => {
           return (
             <ConditionalLink link={feature.link} key={index}>
+              {feature?.tags &&
+                feature.tags.map((tag) => <div key={tag} className="bg-amber-600 inline text-white p-1 rounded-lg relative top-2 -left-1">{tag}</div>)}
               <div
                 style={{
                   backgroundColor:

@@ -25,6 +25,32 @@ const TIME_SAVING = [
   "= 33+ hours of headaches",
 ];
 
+const EXTENSIONS_TEMPLATES = [
+  {
+    tags: ["Free with Launchify"],
+    icon: <img className="h-16 w-16 p-1" src="/logo.png" />,
+    link: "https://links.kwiktwik.com/launchify",
+    title: "Launcify Extension",
+    description:
+      "A demo Chrome extension that showcases the power of our boilerplate code",
+  },
+  {
+    tags: ["Free with Launchify"],
+    link: "https://links.kwiktwik.com/tweet",
+    icon: <img className="h-16 w-16 p-1" src="/tweetify.png" />,
+    title: "Tweetify - Tweet writer & scraper",
+    description:
+      "Tweetify helps you write five times better tweets with custom agents and scrape tweets and threads for multiple use cases.",
+  },
+  {
+    tags: ["Free with Launchify"],
+    link: "https://links.kwiktwik.com/img2code",
+    icon: <img className="h-16 w-16 p-1" src="/screen_shot_to_code.png" />,
+    title: "Screenshot to Code",
+    description: "A extension which convert screenshots to React tailwind code",
+  },
+];
+
 const bricolage_grotesque = Bricolage_Grotesque({ subsets: ["latin"] });
 const Extension = () => {
   return (
@@ -50,32 +76,7 @@ const Extension = () => {
       </section> */}
 
       <section id="features" className="container mx-auto">
-        <Features
-          source="extension"
-          features={[
-            {
-              icon: <img className="h-16 w-16 p-1" src="/logo.png" />,
-              link: "https://links.kwiktwik.com/launchify",
-              title: "Launcify Extension",
-              description:
-                "A demo Chrome extension that showcases the power of our boilerplate code",
-            },
-            {
-              link: "https://links.kwiktwik.com/tweet",
-              icon: <img className="h-16 w-16 p-1"  src="/tweetify.png" />,
-              title: "Tweetify - Tweet writer & scraper",
-              description:
-                "Tweetify helps you write five times better tweets with custom agents and scrape tweets and threads for multiple use cases.",
-            },
-            {
-              link: "https://links.kwiktwik.com/img2code",
-              icon: <img className="h-16 w-16 p-1" src="/screen_shot_to_code.png" />,
-              title: "Screenshot to Code",
-              description:
-                "A extension which convert screenshots to React tailwind code",
-            },
-          ]}
-        />
+        <Features source="extension" features={EXTENSIONS_TEMPLATES} />
       </section>
       <section id="boilerplate" className="container mx-auto">
         <BuildFeature features={EXTENSION_BUILD_FEATURE} />
@@ -94,6 +95,7 @@ const Extension = () => {
               title: "Authentication (Supabase)",
             },
             { title: "Lifetime updates" },
+            { title: "Multiple templates", data: EXTENSIONS_TEMPLATES },
           ]}
         />
       </section>
