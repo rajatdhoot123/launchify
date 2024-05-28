@@ -49,9 +49,34 @@ const Extension = () => {
         </div>
       </section> */}
 
-      {/* <section id="features" className="container mx-auto">
-        <Features />
-      </section> */}
+      <section id="features" className="container mx-auto">
+        <Features
+          source="extension"
+          features={[
+            {
+              icon: <img className="h-16 w-16 p-1" src="/logo.png" />,
+              link: "https://links.kwiktwik.com/launchify",
+              title: "Launcify Extension",
+              description:
+                "A demo Chrome extension that showcases the power of our boilerplate code",
+            },
+            {
+              link: "https://links.kwiktwik.com/tweet",
+              icon: <img className="h-16 w-16 p-1"  src="/tweetify.png" />,
+              title: "Tweetify - Tweet writer & scraper",
+              description:
+                "Tweetify helps you write five times better tweets with custom agents and scrape tweets and threads for multiple use cases.",
+            },
+            {
+              link: "https://links.kwiktwik.com/img2code",
+              icon: <img className="h-16 w-16 p-1" src="/screen_shot_to_code.png" />,
+              title: "Screenshot to Code",
+              description:
+                "A extension which convert screenshots to React tailwind code",
+            },
+          ]}
+        />
+      </section>
       <section id="boilerplate" className="container mx-auto">
         <BuildFeature features={EXTENSION_BUILD_FEATURE} />
       </section>
