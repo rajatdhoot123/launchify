@@ -54,7 +54,7 @@ const Extension = () => {
           source="extension"
           features={[
             {
-              icon: <img className="h-16 w-16" src="/logo.png" />,
+              icon: <img className="h-16 w-16 p-1" src="/logo.png" />,
               link: "https://links.kwiktwik.com/launchify",
               title: "Launcify Extension",
               description:
@@ -62,14 +62,14 @@ const Extension = () => {
             },
             {
               link: "https://links.kwiktwik.com/tweet",
-              icon: <img className="h-16 w-16"  src="/tweetify.png" />,
+              icon: <img className="h-16 w-16 p-1"  src="/tweetify.png" />,
               title: "Tweetify - Tweet writer & scraper",
               description:
                 "Tweetify helps you write five times better tweets with custom agents and scrape tweets and threads for multiple use cases.",
             },
             {
               link: "https://links.kwiktwik.com/img2code",
-              icon: <img className="h-24 w-24" src="/screen-to-code.png" />,
+              icon: <img className="h-16 w-16 p-1" src="/screen_shot_to_code.png" />,
               title: "Screenshot to Code",
               description:
                 "A extension which convert screenshots to React tailwind code",
