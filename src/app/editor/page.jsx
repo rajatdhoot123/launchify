@@ -231,6 +231,9 @@ function Editor() {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      window?.Tawk_API?.hideWidget();
+    }
     if (typeof localStorage !== "undefined") {
       setPuckLoaded(true);
       const puck_data = JSON.parse(localStorage.getItem("puck_state"));
@@ -239,6 +242,12 @@ function Editor() {
       }
     }
     setPuckLoaded(true);
+
+    return () => {
+      if (typeof window !== "undefined") {
+        window?.Tawk_API?.showWidget();
+      }
+    };
   }, []);
 
   const handleExport = async ({ components }) => {
