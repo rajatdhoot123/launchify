@@ -231,7 +231,7 @@ function Editor() {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window?.Tawk_API) {
       window?.Tawk_API?.hideWidget();
     }
     if (typeof localStorage !== "undefined") {
@@ -244,7 +244,7 @@ function Editor() {
     setPuckLoaded(true);
 
     return () => {
-      if (typeof window !== "undefined") {
+      if (typeof window !== "undefined" && window?.Tawk_API) {
         window?.Tawk_API?.showWidget();
       }
     };
