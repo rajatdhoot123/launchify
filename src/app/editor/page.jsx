@@ -24,6 +24,35 @@ import { Button } from "@/components/ui/button";
 import { useConfig } from "@/app/__context/ConfigContext";
 import Link from "next/link";
 import CodeDialog from "../components/__dialog";
+import { v4 } from "uuid";
+
+function getRandomValuesFromObject(obj) {
+  const groups = {};
+
+  // Grouping similar types together
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const baseKey = key.split("-")[0];
+      if (!groups[baseKey]) {
+        groups[baseKey] = [];
+      }
+      groups[baseKey].push({ key, value: obj[key] });
+    }
+  }
+
+  const randomValues = {};
+
+  // Picking a random value from each group with more than one type
+  for (const group in groups) {
+    if (groups[group].length > 1) {
+      const randomIndex = Math.floor(Math.random() * groups[group].length);
+      const randomItem = groups[group][randomIndex];
+      randomValues[randomItem.key] = randomItem.value;
+    }
+  }
+
+  return randomValues;
+}
 
 // Describe the initial data
 const initialData = {
@@ -106,7 +135,6 @@ const config = {
 // Render Puck editor
 function Editor() {
   const { toast } = useToast();
-  const { is_active } = useConfig();
   const [isPuckLoaded, setPuckLoaded] = useState(false);
   const { data: session } = useSession();
   const user = session?.user?.email;
@@ -334,6 +362,24 @@ function Editor() {
     }
   };
 
+  const randomize = () => {
+    logEvent("randomize_clicked", {
+      event_name: "randomize_clicked",
+    });
+    const keys = getRandomValuesFromObject(config.components);
+    localStorage.setItem(
+      "puck_state",
+      JSON.stringify({
+        ...initialData,
+        content: Object.keys(keys).map((key) => ({
+          type: key,
+          props: { id: `${key}-${v4()}` },
+        })),
+      })
+    );
+    window.location.reload();
+  };
+
   return (
     <>
       <ViewDemo onClose={() => set_modal(false)} isOpen={modal_is_open}>
@@ -349,13 +395,6 @@ function Editor() {
           }}
           overrides={{
             header: () => {
-              // return Children.map(
-              //   children,
-              //   (child) => console.log(child) || child
-              // );
-
-              // return children
-
               return (
                 <div className="w-screen h-16 flex items-center justify-between drop-shadow-2xl px-6 bg-background">
                   <div className="w-1/3">
@@ -364,23 +403,24 @@ function Editor() {
                         {user}
                       </span>
                     )}
-                    {/* <Button
-                    onClick={() => {
-                      console.log("Called");
-                      puck_dispatch({
-                        type: "setUi",
-                        ui: {
-                          leftSideBarVisible: false,
-                          rightSideBarVisible: false,
-                        },
-                      });
-                    }}
-                  >
-                    Hide Sidebar
-                  </Button> */}
                   </div>
-                  <div className="text-center w-1/3">
-                    Drag a page component from the left menu here to begin
+                  <div className="text-center w-1/3 flex items-center">
+                    <Button onClick={randomize}>
+                      <span>Create one click</span>
+                      <svg
+                        className="h-6 w-6 ml-2"
+                        stroke="currentColor"
+                        fill="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 32 32"
+                        height="1em"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M 23 3 L 23 7 L 18.40625 7 L 18.125 7.5 L 14.5 13.96875 L 10.59375 7 L 4 7 L 4 9 L 9.40625 9 L 13.34375 16 L 9.40625 23 L 4 23 L 4 25 L 10.59375 25 L 19.59375 9 L 23 9 L 23 13 L 28 8 Z M 16.78125 18 L 15.625 20.0625 L 18.40625 25 L 23 25 L 23 29 L 28 24 L 23 19 L 23 23 L 19.59375 23 Z"></path>
+                      </svg>
+                    </Button>
+                    <span className="pl-5 border-l-2 ml-5"> Drag and Drop</span>
                   </div>
                   <div className="space-x-6 flex items-center w-1/3 justify-end">
                     {!user ? (
