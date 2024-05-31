@@ -232,7 +232,11 @@ function Editor() {
 
   useEffect(() => {
     if (typeof window !== "undefined" && window?.Tawk_API) {
-      window?.Tawk_API?.hideWidget();
+      try {
+        window?.Tawk_API?.hideWidget();
+      } catch (err) {
+        console.log(err);
+      }
     }
     if (typeof localStorage !== "undefined") {
       setPuckLoaded(true);
@@ -245,7 +249,11 @@ function Editor() {
 
     return () => {
       if (typeof window !== "undefined" && window?.Tawk_API) {
-        window?.Tawk_API?.showWidget();
+        try {
+          window?.Tawk_API?.showWidget();
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
   }, []);
