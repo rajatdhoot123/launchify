@@ -261,7 +261,9 @@ function Editor() {
   useEffect(() => {
     if (typeof window !== "undefined" && window?.Tawk_API) {
       try {
-        window?.Tawk_API?.hideWidget();
+        window.Tawk_API.onLoad = function () {
+          window.Tawk_API.hideWidget();
+        };
       } catch (err) {
         console.log(err);
       }
@@ -278,7 +280,9 @@ function Editor() {
     return () => {
       if (typeof window !== "undefined" && window?.Tawk_API) {
         try {
-          window?.Tawk_API?.showWidget();
+          window.Tawk_API.onLoad = function () {
+            window.Tawk_API.showWidget();
+          };
         } catch (err) {
           console.log(err);
         }
@@ -411,7 +415,7 @@ function Editor() {
                         className="h-6 w-6 ml-2"
                         stroke="currentColor"
                         fill="currentColor"
-                        stroke-width="0"
+                        strokeWidth="0"
                         viewBox="0 0 32 32"
                         height="1em"
                         width="1em"
@@ -512,7 +516,7 @@ function Editor() {
                       <svg
                         stroke="currentColor"
                         fill="currentColor"
-                        stroke-width="0"
+                        strokeWidth="0"
                         viewBox="0 0 24 24"
                         height="1em"
                         width="1em"
