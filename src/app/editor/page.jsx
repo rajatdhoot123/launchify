@@ -26,6 +26,8 @@ import Link from "next/link";
 import CodeDialog from "../components/__dialog";
 import { v4 } from "uuid";
 
+const LOCAL_STORAGE_VERSION = "0.0.1";
+
 function getRandomValuesFromObject(obj) {
   const groups = {};
 
@@ -261,7 +263,7 @@ function Editor() {
     if (typeof localStorage !== "undefined") {
       setPuckLoaded(true);
       const puck_data = JSON.parse(localStorage.getItem("puck_state"));
-      if (puck_data) {
+      if (puck_data && puck_data.version === LOCAL_STORAGE_VERSION) {
         puck_init.current = puck_data;
       }
     }
@@ -372,6 +374,7 @@ function Editor() {
       "puck_state",
       JSON.stringify({
         ...initialData,
+        version: LOCAL_STORAGE_VERSION,
         content: Object.keys(keys).map((key) => ({
           type: key,
           props: { id: `${key}-${v4()}` },
@@ -391,7 +394,10 @@ function Editor() {
           onChange={(data) => {
             puck_data.current = data;
             if (localStorage) {
-              localStorage.setItem("puck_state", JSON.stringify(data));
+              localStorage.setItem(
+                "puck_state",
+                JSON.stringify({ ...data, version: LOCAL_STORAGE_VERSION })
+              );
             }
           }}
           overrides={{

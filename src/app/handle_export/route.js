@@ -201,26 +201,25 @@ export async function POST(req) {
     zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
-  components.forEach(({ export_path }) => {
-    export_path.forEach(async (exportPath) => {
-      const pathType = await checkPathType(
-        path.join(ui_components, exportPath)
+  for await (const component of components) {
+    const { export_path, name } = component;
+    const pathType = await checkPathType(
+      path.join(ui_components, export_path[0])
+    );
+    if (pathType === "file") {
+      zip.addFile(
+        export_path[0],
+        Buffer.from(
+          readFileSync(path.join(ui_components, export_path[0]), "utf-8")
+        )
       );
-      if (pathType === "file") {
-        zip.addFile(
-          exportPath,
-          Buffer.from(
-            readFileSync(path.join(ui_components, exportPath), "utf-8")
-          )
-        );
-      } else if (pathType === "folder") {
-        zip.addLocalFolder(
-          `${ui_components}/${exportPath}`,
-          `${getFilePath(exportPath)}/ai`
-        );
-      }
-    });
-  });
+    } else if (pathType === "folder") {
+      zip.addLocalFolder(
+        `${ui_components}/${export_path[0]}`,
+        `${getFilePath(export_path[0])}/ai`
+      );
+    }
+  }
 
   CREATE_FILE_NOT_PRESENT.forEach(({ path, content }) => {
     zip.addFile(path, content);

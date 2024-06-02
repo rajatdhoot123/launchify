@@ -14,9 +14,9 @@ const generateRootPage = ({ components, copywriting_components = [] }) => {
 ${modified_component
   .filter(({ appearedPreviously }) => !appearedPreviously)
   .reduce((acc, { updatedName, export_path }) => {
-    return `${acc} \n import ${capitalizeFirstLetter(updatedName)} from "${
-      export_path[0]
-    }";`;
+    return `${acc} \n import ${capitalizeFirstLetter(
+      updatedName
+    )} from "${export_path[0].replace("src", "@")}";`;
   }, "")}
 
 export default function Home() {
