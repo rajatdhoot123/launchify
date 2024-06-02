@@ -17,7 +17,6 @@ import Testimonials2 from "@/app/components/testimonials/variant-2";
 import Table1 from "@/app/components/table/variant-1";
 import Table2 from "@/app/components/table/variant-2";
 import Table3 from "@/app/components/table/variant-3";
-import Card1 from "@/app/components/cards/variant-1";
 import Card2 from "@/app/components/cards/variant-2";
 import Card3 from "@/app/components/cards/variant-3";
 import Card4 from "@/app/components/cards/variant-4";
@@ -112,7 +111,6 @@ const FAQ = {
 };
 
 const CARDS = {
-  "variant-1": Card1,
   "variant-2": Card2,
   "variant-3": Card3,
   "variant-4": Card4,
