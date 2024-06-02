@@ -119,7 +119,7 @@ export default async function Home() {
         <section id="pricing" className="container mx-auto">
           <Pricing
             paymanetLink="https://shop.boilercode.app/checkout/buy/f2c1375e-6435-4c93-991c-3d7ad763a5b4"
-            price="107$"
+            price="57$"
             features={BUILD_FEATURES}
           />
         </section>
