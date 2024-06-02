@@ -7,7 +7,7 @@ import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
 import { getServerSession } from "next-auth/next";
 import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readFileSync, promises as fsPromise } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions, templates } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
@@ -27,6 +27,26 @@ import {
   SITE_MAP_FILES,
   WEBSITES_TEMPLATES,
 } from "@/boilercode/constants";
+
+async function checkPathType(filePath) {
+  try {
+    const stats = await fsPromise.lstat(filePath);
+
+    if (stats.isFile()) {
+      return "file";
+    } else if (stats.isDirectory()) {
+      return "folder";
+    } else {
+      return "other";
+    }
+  } catch (error) {
+    if (error.code === "ENOENT") {
+      return "does not exist";
+    } else {
+      throw error;
+    }
+  }
+}
 
 function getSubstringBetweenCodeTags(code) {
   // Regular expression to find text between <code> and </code> tags
@@ -181,35 +201,25 @@ export async function POST(req) {
     zip.addLocalFile(`${ui_components}/${file}`, getFilePath(file));
   });
 
-  components.forEach(({ item_id, variant }) => {
-    if (item_id === "chatbot") {
-      AI_FILES.forEach((folder) => {
-        zip.addLocalFolder(
-          `${ui_components}/${folder}`,
-          `${getFilePath(folder)}/ai`
-        );
-      });
-    } else {
-      zip.addFile(
-        `src/app/components/${item_id}/${variant}.jsx`,
-        Buffer.from(
-          readFileSync(
-            path.join(
-              ui_components,
-              `src/app/components/${item_id}/${variant}.jsx`
-            ),
-            "utf-8"
+  components.forEach(({ export_path }) => {
+    export_path.forEach(async (exportPath) => {
+      const pathType = await checkPathType(
+        path.join(ui_components, exportPath)
+      );
+      if (pathType === "file") {
+        zip.addFile(
+          exportPath,
+          Buffer.from(
+            readFileSync(path.join(ui_components, exportPath), "utf-8")
           )
-        )
-      );
-    }
-
-    if (existsSync(`${ui_components}/src/app/components/${item_id}/actions`)) {
-      zip.addLocalFolder(
-        `${ui_components}/src/app/components/${item_id}/actions`,
-        `src/app/components/${item_id}/actions`
-      );
-    }
+        );
+      } else if (pathType === "folder") {
+        zip.addLocalFolder(
+          `${ui_components}/${exportPath}`,
+          `${getFilePath(exportPath)}/ai`
+        );
+      }
+    });
   });
 
   CREATE_FILE_NOT_PRESENT.forEach(({ path, content }) => {

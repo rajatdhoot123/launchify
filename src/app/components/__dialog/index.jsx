@@ -35,7 +35,7 @@ function format(html) {
   return result.substring(1, result.length - 3);
 }
 
-const CodeDialog = ({ children, title, handleCode, data }) => {
+const CodeDialog = ({ children, handleCode, data }) => {
   const [code, setCode] = useState({ path: "", file: "", actions: "" });
   const [isOpen, setIsOpen] = useState(false);
 
@@ -48,7 +48,7 @@ const CodeDialog = ({ children, title, handleCode, data }) => {
       const response = await fetch("/handle_export/components", {
         method: "POST",
         body: JSON.stringify({
-          components: data,
+          data,
         }),
       });
 

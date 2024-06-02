@@ -11,23 +11,20 @@ const generateRootPage = ({ components, copywriting_components = [] }) => {
 
   return `
 
-${modified_component.reduce((acc, { item_id, variant, updated_item_id }) => {
-  const select_comp_index = copywriting_components.findIndex(
-    (file) => file.item_id === item_id
-  );
-  return `${acc} \n import ${capitalizeFirstLetter(
-    updated_item_id
-  )} from "@/app/components/${item_id}/${
-    select_comp_index === -1 ? variant : "index"
-  }";`;
-}, "")}
+${modified_component
+  .filter(({ appearedPreviously }) => !appearedPreviously)
+  .reduce((acc, { updatedName, export_path }) => {
+    return `${acc} \n import ${capitalizeFirstLetter(updatedName)} from "${
+      export_path[0]
+    }";`;
+  }, "")}
 
 export default function Home() {
       return (
         <>
           <div className="w-full overflow-scroll space-y-12">
-          ${modified_component.reduce((acc, { updated_item_id }) => {
-            return `${acc} \n <${capitalizeFirstLetter(updated_item_id)} />`;
+          ${modified_component.reduce((acc, { updatedName }) => {
+            return `${acc} \n <${capitalizeFirstLetter(updatedName)} />`;
           }, "")}
           </div>
         </>

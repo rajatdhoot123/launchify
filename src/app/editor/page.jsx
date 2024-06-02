@@ -72,16 +72,6 @@ const reducer = (state, action) => {
   }
 };
 
-const modify_components = (content) => {
-  return content.reduce((acc, current) => {
-    const [item_id, variant] = current.type.split("-");
-    return [
-      ...acc,
-      { item_id: item_id, variant: `variant-${variant}`, key: item_id },
-    ];
-  }, []);
-};
-
 const config = {
   categories: {
     ...COMPONENTS_ARRAY.reduce(
@@ -89,7 +79,7 @@ const config = {
         ...acc,
         [current.name]: {
           components: current.components.map(
-            (currentComp, index) => `${current.name}-${index + 1}`
+            (currentComp, index) => currentComp.name
           ),
         },
       }),
@@ -101,9 +91,9 @@ const config = {
       (acc, current) => ({
         ...acc,
         ...current.components.reduce(
-          (compAcc, CurrentComp, index) => ({
+          (compAcc, { name, comp: CurrentComp }) => ({
             ...compAcc,
-            [`${current.name}-${index + 1}`]: {
+            [name]: {
               fields: {
                 params: {
                   type: "object",
@@ -206,7 +196,7 @@ function Editor() {
           pages: state.pages,
           premium_features: state.premium_features,
           copywriting_components: modifiedWithCode,
-          components: modify_components(puck_data.current.content),
+          components: puck_data.current.content,
         }),
       });
       if (response.ok) {
@@ -296,6 +286,23 @@ function Editor() {
       event_name: "export_clicked",
     });
 
+    const export_components = components.content.reduce((acc, { type }) => {
+      const filteredComponents = COMPONENTS_ARRAY.flatMap(({ components }) =>
+        components
+          .map(({ name, export_path }) => {
+            if (name === type) {
+              return {
+                export_path,
+                name,
+              };
+            }
+            return null;
+          })
+          .filter(Boolean)
+      );
+      return acc.concat(filteredComponents);
+    }, []);
+
     try {
       const response = await fetch("/handle_export", {
         method: "POST",
@@ -306,7 +313,7 @@ function Editor() {
           crisp_id: state.crisp_id,
           pages: state.pages,
           premium_features: state.premium_features,
-          components: components,
+          components: export_components,
         }),
       });
 
@@ -353,16 +360,6 @@ function Editor() {
             });
         }
       }
-    }
-  };
-
-  const save = async (data) => {
-    const components = modify_components(data.content);
-
-    try {
-      await handleExport({ components });
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -467,9 +464,7 @@ function Editor() {
                         disabled={loader.export}
                         onClick={() =>
                           handleExport({
-                            components: modify_components(
-                              puck_data.current.content
-                            ),
+                            components: puck_data.current,
                           })
                         }
                         className="cursor-pointer"
@@ -492,27 +487,31 @@ function Editor() {
               );
             },
             componentItem: ({ children }) => {
-              const [comp_name, index] =
-                children?.props?.children?.props?.children?.[0]?.props?.children?.split(
-                  "-"
-                );
+              const child =
+                children?.props?.children?.props?.children?.[0]?.props
+                  ?.children;
 
-              const selectedComponent = COMPONENTS_ARRAY.find(
-                ({ name }) => name === comp_name
+              const selectedComponent = COMPONENTS_ARRAY.reduce(
+                (acc, { components }) => {
+                  const selected_child = components.find(
+                    ({ name }) => name === child
+                  );
+                  if (selected_child) {
+                    return selected_child;
+                  }
+                  return acc;
+                },
+                {}
               );
 
-              const RenderComponent = selectedComponent.components[index - 1];
+              const RenderComponent = selectedComponent.comp;
 
               const libs = selectedComponent?.lib ?? [];
 
               return (
                 <div className="relative">
                   <div className="absolute p-2 right-8 z-20 top-1/2 -translate-y-1/2">
-                    <CodeDialog
-                      data={[
-                        { variant: `variant-${index}`, item_id: comp_name },
-                      ]}
-                    >
+                    <CodeDialog data={selectedComponent.export_path}>
                       <svg
                         stroke="currentColor"
                         fill="currentColor"
@@ -576,7 +575,6 @@ function Editor() {
           headerTitle="Drag a page component from the left menu here to begin"
           config={config}
           data={puck_init.current}
-          onPublish={save}
         />
       )}
     </>

@@ -33,10 +33,10 @@ export async function POST(req) {
   }
 
   const body = await req.json();
-  const { components = [] } = body;
+  const { data } = body;
   const ui_components = path.join(process.cwd(), "uicomponents");
 
-  if (!components.length) {
+  if (!data.length) {
     return NextResponse.json(
       { message: "No component selected" },
       { status: 400 }
@@ -47,26 +47,16 @@ export async function POST(req) {
 
   const files = [];
 
-  components.forEach(({ item_id, variant }) => {
-    let actions = "";
-    if (existsSync(`${ui_components}/src/app/components/${item_id}/actions`)) {
-      actions = readFileSync(
-        path.join(ui_components, `/src/app/components/${item_id}/actions`)
-      );
+  data.forEach((filePath) => {
+    if (existsSync(`${ui_components}${filePath}`)) {
+      files.push({
+        path: filePath,
+        file: readFileSync(path.join(ui_components, filePath), "utf-8"),
+      });
     }
-    files.push({
-      path: `src/app/components/${item_id}/${variant}.jsx`,
-      file: readFileSync(
-        path.join(
-          ui_components,
-          `src/app/components/${item_id}/${variant}.jsx`
-        ),
-        "utf-8"
-      ),
-      actions,
-    });
   });
 
+  console.log(files);
   return NextResponse.json(
     { files },
     {

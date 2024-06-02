@@ -50,16 +50,15 @@ export function isMobile(userAgent) {
   );
 }
 
-export function updateItemId(arr) {
-  const itemCount = {};
-  return arr.map((item) => {
-    const key = item.key;
-    if (!itemCount[key]) itemCount[key] = 0;
-    itemCount[key]++;
-
+export function updateItemId(objects) {
+  const seenNames = new Set();
+  return objects.map((obj) => {
+    const hasAppeared = seenNames.has(obj.name);
+    seenNames.add(obj.name);
     return {
-      ...item,
-      updated_item_id: `${key}${itemCount[key] > 1 ? itemCount[key] : ""}`,
+      ...obj,
+      updatedName: obj.name.replace("-", ""),
+      appearedPreviously: hasAppeared,
     };
   });
 }
