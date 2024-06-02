@@ -4,9 +4,11 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+const EXCLUDED = ["chatbot-1"];
+
 const generateRootPage = ({ components, copywriting_components = [] }) => {
   const modified_component = updateItemId(components).filter(
-    (items) => items.item_id !== "chatbot"
+    ({ name }) => !EXCLUDED.includes(name)
   );
 
   return `

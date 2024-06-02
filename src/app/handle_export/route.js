@@ -256,7 +256,7 @@ export async function POST(req) {
     Buffer.from(
       await prettier.format(
         generateLayout({
-          vercel_ai_sdk: components.find((comp) => comp.item_id === "chatbot"),
+          vercel_ai_sdk: components.find(({ name }) => name === "chatbot-1"),
           template,
           twak_to_id,
           post_hog,

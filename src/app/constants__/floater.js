@@ -450,7 +450,7 @@ export const COMPONENTS_ARRAY = [
       {
         name: "chatbot-1",
         comp: ChatBot1,
-        export_path: ["src/app/ai/chatbot"],
+        export_path: ["src/app/ai"],
       },
     ],
     lib: [{ title: "Vercel AI", link: "https://sdk.vercel.ai/docs/" }],
