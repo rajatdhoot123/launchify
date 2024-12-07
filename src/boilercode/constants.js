@@ -109,6 +109,7 @@ export const NEXT_AUTH_FILES = [
   "src/app/nextauth/provider.js",
   "src/app/api/auth/[...nextauth]/route.ts",
   "src/app/api/auth/[...nextauth]/authOptions.ts",
+  "src/auth.ts",
 ];
 
 export const LEMON_SQUEEZY_FILES = [

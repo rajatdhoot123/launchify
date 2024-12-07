@@ -29,7 +29,7 @@ const Pricing = () => {
           role="tablist"
           aria-orientation="horizontal"
           className="inline-flex h-10 items-center justify-center rounded-md p-1 text-primary space-x-2 mb-4 outline-none"
-          tabindex="0"
+          tabIndex="0"
           data-orientation="horizontal"
         >
           <button
@@ -40,7 +40,7 @@ const Pricing = () => {
             data-state="active"
             id="radix-:Rjbqbqda:-trigger-month"
             className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 w-fit text-sm bg-primary/5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-transparent disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
-            tabindex="0"
+            tabIndex="0"
             data-orientation="horizontal"
             data-radix-collection-item=""
           >
@@ -54,7 +54,7 @@ const Pricing = () => {
             data-state="inactive"
             id="radix-:Rjbqbqda:-trigger-year"
             className="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 w-fit text-sm bg-primary/5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-transparent disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
-            tabindex="-1"
+            tabIndex="-1"
             data-orientation="horizontal"
             data-radix-collection-item=""
           >
@@ -67,7 +67,7 @@ const Pricing = () => {
           role="tabpanel"
           aria-labelledby="radix-:Rjbqbqda:-trigger-month"
           id="radix-:Rjbqbqda:-content-month"
-          tabindex="0"
+          tabIndex="0"
           className="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 grid md:grid-flow-col grid-flow-row justify-center gap-6 items-stretch"
         >
           <div className="rounded-lg border bg-card text-card-foreground w-full max-w-full my-4 shadow-lg flex flex-col justify-between relative md:w-[640px] md:max-w-[640px]">
@@ -400,7 +400,7 @@ const Pricing = () => {
           role="tabpanel"
           aria-labelledby="radix-:Rjbqbqda:-trigger-year"
           id="radix-:Rjbqbqda:-content-year"
-          tabindex="0"
+          tabIndex="0"
           className="ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 grid md:grid-flow-col grid-flow-row justify-center gap-6 items-stretch"
           hidden=""
         ></div>
