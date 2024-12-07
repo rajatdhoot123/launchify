@@ -194,6 +194,9 @@ importers:
       remark-gfm:
         specifier: ^4.0.0
         version: 4.0.0
+      remark-parse:
+        specifier: ^11.0.0
+        version: 11.0.0
       slugify:
         specifier: ^1.6.6
         version: 1.6.6
