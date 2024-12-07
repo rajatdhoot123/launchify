@@ -1,6 +1,5 @@
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth"
 import { NextRequest, NextResponse } from "next/server";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import { codeGenerate } from "./code-generate";
 
 export async function POST(req: NextRequest) {
@@ -18,7 +17,7 @@ export async function POST(req: NextRequest) {
     previousPreviews;
   } = await req.json();
 
-  const session = await getServerSession(AUTH_OPTIONS);
+  const session = await auth()
 
   const is_premium_user = ["rajatdhoot123@gmail.com"].find(
     (puser) => puser === session?.user?.email

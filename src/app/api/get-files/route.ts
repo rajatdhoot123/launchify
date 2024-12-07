@@ -1,6 +1,5 @@
-import { getServerSession } from "next-auth";
+import { auth } from "@/auth"
 import { NextRequest, NextResponse } from "next/server";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
 import fs from "fs";
 import { join } from "path";
 export async function POST(req: NextRequest) {
@@ -10,7 +9,7 @@ export async function POST(req: NextRequest) {
     files: Array<string>;
   } = await req.json();
 
-  const session = await getServerSession(AUTH_OPTIONS);
+  const session = await auth()
 
   if (!session?.user) {
     return NextResponse.json(

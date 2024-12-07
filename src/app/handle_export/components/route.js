@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
+import { auth } from "@/auth"
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import { eq } from "drizzle-orm";
@@ -9,7 +8,7 @@ import path from "path";
 import { existsSync, readFileSync } from "fs";
 
 export async function POST(req) {
-  const session = await getServerSession(AUTH_OPTIONS);
+  const session = await auth()
 
   if (!session) {
     return NextResponse.json(

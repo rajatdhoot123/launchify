@@ -1,8 +1,7 @@
-import { getServerSession } from "next-auth/next";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
+import { auth } from "@/auth";
 
 const ServerSideAuth = async () => {
-  const session = await getServerSession(AUTH_OPTIONS);
+  const session = await auth();
 
   return (
     <div className="px-44 text-center p-12">

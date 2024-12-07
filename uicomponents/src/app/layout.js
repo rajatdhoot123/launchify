@@ -3,8 +3,7 @@ import "@/app/styles/globals.css";
 import { Providers } from "@/app/styles/next-theme";
 import Script from "next/script";
 import NextAuthProvider from "@/app/nextauth/provider";
-import { getServerSession } from "next-auth";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
+import { auth } from "@/auth"
 import NavBar from "@/app/landingcomponent/navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { ConfigProvider } from "@/app/__context/ConfigContext";
@@ -42,7 +41,7 @@ export const viewport = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(AUTH_OPTIONS);
+  const session = await auth()
 
   const user = session?.user?.email ?? null;
 
