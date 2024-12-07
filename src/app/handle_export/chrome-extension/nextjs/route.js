@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
+import { auth } from "@/auth"
 import { db } from "@/lib/database/db";
 import { subscriptions } from "@/lib/database/schema";
 import AdmZip from "adm-zip";
@@ -18,7 +17,7 @@ const getFilePath = (file) => {
 };
 
 export async function GET(req) {
-  const session = await getServerSession(AUTH_OPTIONS);
+  const session = await auth()
 
   if (!session) {
     return NextResponse.json(

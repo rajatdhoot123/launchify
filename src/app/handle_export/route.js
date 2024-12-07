@@ -5,8 +5,7 @@ import path from "path";
 import generateLayout from "../utils__/generateLayout";
 import generateRootPage from "../utils__/generateRootPage";
 import * as prettier from "prettier";
-import { getServerSession } from "next-auth/next";
-import { AUTH_OPTIONS } from "@/app/api/auth/[...nextauth]/authOptions";
+import { auth } from "@/auth";
 import { existsSync, readFileSync, promises as fsPromise } from "fs";
 import { db } from "@/lib/database/db";
 import { subscriptions, templates } from "@/lib/database/schema";
@@ -91,7 +90,7 @@ export async function POST(req) {
     pages = {},
   } = body;
 
-  const session = await getServerSession(AUTH_OPTIONS);
+  const session = await auth();
 
   if (!session) {
     return NextResponse.json(
